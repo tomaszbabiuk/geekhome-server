@@ -1,0 +1,1 @@
+java -Djava.library.path=..\lib-native -Dfile.encoding=UTF-8 -Dlog4j.configurationFile=log4j2.xml -classpath output\geekhome.libraries-1.0-SNAPSHOT-jar-with-dependencies.jar;output\geekhome.jar com.geekhome.Main
