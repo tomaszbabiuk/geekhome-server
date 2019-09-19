@@ -1,0 +1,42 @@
+﻿<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddDevicesMessage -->
+<!-- @Controls\PortsInfo.htm false false false false false true false false -->
+
+<script id="extafreeblindstemplate" type="text/x-jquery-tmpl">
+    <!-- @Controls\ExtaFreeCrudList.htm #extafreeblinddetailsdialog EXF.GetExtaFreeBlinds() RES:EXF:ExtaFreeBlinds -->
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifyextafreeblinddialog RES:EXF:AddExtaFreeBlind -->
+    </div>
+</script>
+
+<div data-role="page" id="extafreeblindsindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:EXF:ExtaFreeBlinds -->
+    </h1>
+  </div>
+  <div data-role="content" id="extafreeblindscontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#extafreeblindsindex').on('pagecreate', function (event) {
+        if (!HM.HasTogglePorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#extafreeblindscontent');
+        } else if (CORE.CanAddDevices()) {
+            jQuery(jQuery("#extafreeblindstemplate").tmpl()).appendTo("#extafreeblindscontent");
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#extafreeblindscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/extafreeblinds.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/extafreeblinds.htm -->
+<!-- @Dialogs\ModifyExtaFreeBlind.htm -->
+<!-- @Dialogs\ExtaFreeCrudDetails.htm extafreeblinddetails #modifyextafreeblinddialog RemoveExtaFreeBlind.post EXF.FindExtaFreeBlind RES:EXF:ExtaFreeBlind RES:EXF:ExtaFreeBlindDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/extafreeblinds.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

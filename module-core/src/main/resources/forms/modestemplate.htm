@@ -1,0 +1,11 @@
+﻿<script id="$p0modestemplate" type="text/x-jquery-tmpl">
+    {{if CORE.GetModes().length>0}}
+        <fieldset data-role="controlgroup">
+	        <legend><!-- @RES:C:Modes -->:</legend>
+            {{each CORE.GetModes}}
+	            <input type="checkbox" name="modesids" id="$p0mode-${Name.UniqueId}" value="${Name.UniqueId}" class="custom"/>
+	            <label for="$p0mode-${Name.UniqueId}">${Name.Name}</label>
+            {{/each}}
+        </fieldset>
+    {{/if}}
+</script>

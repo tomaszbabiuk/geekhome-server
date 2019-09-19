@@ -1,0 +1,30 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="dateconditionstemplate" type="text/x-jquery-tmpl">
+  <!-- @Controls\CoreCrudList.htm #dateconditiondetailsdialog CORE.GetDateConditions() RES:C:DateConditions -->
+  <div>
+    <!-- @Controls\PageTransferButton.htm #modifydateconditiondialog RES:C:AddDateCondition -->
+  </div>
+</script>
+
+<div data-role="page" id="dateconditionsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:DateConditions --></h1>
+    </div>
+    <div data-role="content" id="dateconditionscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#dateconditionsindex').on('pagecreate', function (event) {
+        jQuery(jQuery('#dateconditionstemplate').tmpl()).appendTo('#dateconditionscontent');
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/dateconditions.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/dateconditions.htm -->
+<!-- @Dialogs\ModifyDateCondition.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm dateconditiondetails #modifydateconditiondialog RemoveDateCondition.post CORE.FindDateCondition RES:C:DateCondition RES:C:DateConditionDetails -->
+<!-- @Controls\MasterFooter.htm -->

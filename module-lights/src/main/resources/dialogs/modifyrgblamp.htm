@@ -1,0 +1,69 @@
+﻿<!-- @Forms\NamedAnalogOutputPortsTemplate.htm modifyrgblampred redportid RES:LIGHTS:RedChannelPort -->
+<!-- @Forms\NamedAnalogOutputPortsTemplate.htm modifyrgblampgreen greenportid RES:LIGHTS:GreenChannelPort -->
+<!-- @Forms\NamedAnalogOutputPortsTemplate.htm modifyrgblampblue blueportid RES:LIGHTS:BlueChannelPort -->
+<!-- @Forms\RoomTemplate.htm modifyrgblamp -->
+
+<div data-role="dialog" id="modifyrgblampdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:LIGHTS:RgbLamp -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyRgbLamp.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyrgblampname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyrgblampdescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifyrgblampredportcontent"></div>
+            <div data-role="fieldcontain" id="modifyrgblampgreenportcontent"></div>
+            <div data-role="fieldcontain" id="modifyrgblampblueportcontent"></div>
+            <div data-role="fieldcontain" id="modifyrgblamproomcontent"></div>
+            <!-- @Forms\RgbField.htm modifydimmedlamppreset1 preset1 RES:C:Preset1 -->
+            <!-- @Forms\RgbField.htm modifydimmedlamppreset2 preset2 RES:C:Preset2 -->
+            <!-- @Forms\RgbField.htm modifydimmedlamppreset3 preset3 RES:C:Preset3 -->
+            <!-- @Forms\RgbField.htm modifydimmedlamppreset4 preset4 RES:C:Preset4 -->
+            <!-- @Forms\HiddenField.htm modifyrgblampid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:OK -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            function setupColorPreset(presetSettingId, selector) {
+                CheckAutomationSetting(presetSettingId, function (data) {
+                    if (data != null) {
+                        jQuery(selector).val(data.Result);
+                    }
+                });
+            }
+
+            jQuery('#modifyrgblampdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyrgblampredportcontent').html(jQuery('#modifyrgblampredporttemplate').tmpl());
+                jQuery('#modifyrgblampgreenportcontent').html(jQuery('#modifyrgblampgreenporttemplate').tmpl());
+                jQuery('#modifyrgblampblueportcontent').html(jQuery('#modifyrgblampblueporttemplate').tmpl());
+                jQuery('#modifyrgblamproomcontent').html(jQuery('#modifyrgblamproomtemplate').tmpl());
+
+                var rgbLamp = LIGHTS.FindRgbLamp(args.param);
+
+                var name = (rgbLamp != null) ? rgbLamp.Name.Name : '';
+                var description = (rgbLamp != null) ? rgbLamp.Name.Description : '';
+                var uniqueId = (rgbLamp != null) ? rgbLamp.Name.UniqueId : '';
+                var redPortId = (rgbLamp != null) ? rgbLamp.RedPortId : '';
+                var greenPortId = (rgbLamp != null) ? rgbLamp.GreenPortId : '';
+                var bluePortId = (rgbLamp != null) ? rgbLamp.BluePortId : '';
+                var roomId = (rgbLamp != null) ? rgbLamp.RoomId : '';
+
+                jQuery('#modifyrgblampdialog [name=name]').val(name);
+                jQuery('#modifyrgblampdialog [name=description]').val(description);
+                jQuery('#modifyrgblampdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyrgblampdialog [name=redportid]').val(redPortId);
+                jQuery('#modifyrgblampdialog [name=greenportid]').val(greenPortId);
+                jQuery('#modifyrgblampdialog [name=blueportid]').val(bluePortId);
+                jQuery('#modifyrgblampdialog [name=roomid]').val(roomId);
+
+                setupColorPreset(uniqueId + '_1', '#modifyrgblampdialog [name=preset1]')
+                setupColorPreset(uniqueId + '_2', '#modifyrgblampdialog [name=preset2]')
+                setupColorPreset(uniqueId + '_3', '#modifyrgblampdialog [name=preset3]')
+                setupColorPreset(uniqueId + '_4', '#modifyrgblampdialog [name=preset4]')
+
+                jQuery('#modifyrgblampdialog form').validate();
+            });           
+        </script>
+    </div>
+</div>

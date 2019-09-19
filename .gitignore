@@ -1,0 +1,10 @@
+*.iml
+library-*/target
+module-*/target/
+module-*/.idea/
+final-geekhome/logs/
+logs/
+build/output/
+build/to-obfuscate/
+.idea/
+final-geekhome/target/

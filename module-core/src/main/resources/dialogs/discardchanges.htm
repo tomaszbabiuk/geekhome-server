@@ -1,0 +1,24 @@
+<div data-role="dialog" id="discardchangesdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:Discard -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <div id="restartpanel">
+            <p><!-- @RES:C:DiscardInfo --></p>
+            <form action="/config/Discard.post" method="post" data-ajax="false">
+                <!-- @Forms\HiddenField.htm discardchangesreturnurl returnurl -->
+                <!-- @Forms\SubmitButton.htm RES:C:Discard -->
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery('#discardchangesdialog').on('pageshow', function() {
+        jQuery('#discardchangesdialog [name=returnurl]').val('$p0');
+        jQuery('#discardchangesdialog [name=comment]').val('<!-- @RES:C:SampleComment -->');
+        jQuery('#discardchangesdialog form').validate();
+    });
+</script>

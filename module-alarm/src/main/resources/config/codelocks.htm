@@ -1,0 +1,41 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddDevicesMessage -->
+<!-- @Controls\PortsInfo.htm true true false false false false false false -->
+
+
+<script id="codelockstemplate" type="text/x-jquery-tmpl">
+  <!-- @Controls\AlarmCrudList.htm #codelockdetailsdialog ALARM.GetCodeLocks() RES:ALARM:CodeLocks -->
+  <div>
+    <!-- @Controls\PageTransferButton.htm #modifycodelockdialog RES:ALARM:AddCodeLock -->
+  </div>
+</script>
+
+<div data-role="page" id="codelocksindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:ALARM:CodeLocks -->
+    </h1>
+  </div>
+  <div data-role="content" id="codelockscontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#codelocksindex').on('pagecreate', function (event) {
+        if (!(HM.HasDigitalInputPorts() && HM.HasDigitalOutputPorts())) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#codelockscontent');
+        } else if (CORE.CanAddDevices()) {
+            jQuery(jQuery("#codelockstemplate").tmpl()).appendTo("#codelockscontent");
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#codelockscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/codelocks.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/codelocks.htm -->
+<!-- @Dialogs\ModifyCodeLock.htm -->
+<!-- @Dialogs\AlarmCrudDetails.htm codelockdetails #modifycodelockdialog RemoveCodeLock.post ALARM.FindCodeLock RES:ALARM:CodeLock RES:ALARM:CodeLockDetails -->
+<!-- @Controls\MasterFooter.htm -->

@@ -1,0 +1,52 @@
+﻿﻿<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddDevicesMessage -->
+<!-- @Controls\PortsInfo.htm true false false false false false false false -->
+
+<script id="onoffdevicestemplate" type="text/x-jquery-tmpl">
+    {{each AUTO.GetOnOffDevices()}}
+        <ul data-inset="true" data-role="listview" data-split-theme="e">
+            <li data-theme="b">
+                <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#onoffdevicedetailsdialog', { param: '${Name.UniqueId}' })"
+                {{if (typeof IconName !== 'undefined')}} style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 15px; background-size: 32px 32px; padding-left:50px;" {{/if}}>
+                    <!-- @Controls\AutomationProperties.htm -->
+                </a>
+            </li>
+            <!-- @Controls\NamedBlocksFragment.htm on RES:AUTO:BlocksEnablingDevice -->
+        </ul>
+    {{/each}}
+    <div>
+        <!-- @Controls\PageTransferButton.htm #modifyonoffdevicedialog RES:AUTO:AddOnOffDevice -->
+    </div>
+</script>
+
+<div data-role="page" id="onoffdevicesindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:AUTO:OnOffDevices -->
+    </h1>
+  </div>
+  <div data-role="content" id="onoffdevicescontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#onoffdevicesindex').on('pagecreate', function (event) {
+        if (!HM.HasDigitalOutputPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#onoffdevicescontent');
+        } else if (CORE.CanAddDevices()) {
+            jQuery(jQuery("#onoffdevicestemplate").tmpl()).appendTo("#onoffdevicescontent");
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#onoffdevicescontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/onoffdevices.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/onoffdevices.htm -->
+<!-- @Dialogs\ModifyOnOffDevice.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm onoffdevicedetails #modifyonoffdevicedialog RemoveOnOffDevice.post AUTO.FindOnOffDevice RES:AUTO:OnOffDevice RES:AUTO:OnOffDeviceDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/onoffdevices.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

@@ -1,0 +1,38 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:CH:CannotAddComfortmetersMessage -->
+<!-- @Controls\PortsInfo.htm false false false false true false true false -->
+
+<script id="comfortmeterstemplate" type="text/x-jquery-tmpl">
+    <!-- @Controls\HeatingCrudList.htm #comfortmeterdetailsdialog CH.GetComfortmeters() RES:CH:Comfortmeters -->
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifycomfortmeterdialog RES:CH:AddComfortmeter -->
+    </div>
+</script>
+
+<div data-role="page" id="comfortmetersindex">
+    <div data-role="header">
+        <h1><!-- @RES:CH:Comfortmeters --></h1>
+    </div>
+    <div data-role="content" id="comfortmeterscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#comfortmetersindex').on('pagecreate', function (event) {
+        if (!HM.HasTemperaturePorts() && !HM.HasHumidityPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#comfortmeterscontent');
+        } else if (CORE.CanAddDevices()) {
+            jQuery(jQuery('#comfortmeterstemplate').tmpl()).appendTo('#comfortmeterscontent');
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#comfortmeterscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/comfortmeters.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/comfortmeters.htm -->
+<!-- @Dialogs\ModifyComfortmeter.htm -->
+<!-- @Dialogs\HeatingCrudDetails.htm comfortmeterdetails #modifycomfortmeterdialog RemoveComfortmeter.post CH.FindComfortmeter RES:CH:Comfortmeter RES:CH:ComfortmeterDetails -->
+<!-- @Controls\MasterFooter.htm -->

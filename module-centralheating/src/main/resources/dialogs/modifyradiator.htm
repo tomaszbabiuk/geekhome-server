@@ -1,0 +1,66 @@
+<!-- @Forms\RoomTemplate.htm modifyradiator -->
+<!-- @Forms\NamedPortTemplate.htm modifyradiator HM.GetDigitalOutputPorts() actuatorportid RES:CH:ActuatorPort false -->
+<!-- @Forms\NamedThermometerTemplate.htm modifyradiator ambient RES:CH:AmbientThermometer -->
+<!-- @Forms\TemperatureControllerTemplate.htm modifyradiator -->
+
+<div data-role="dialog" id="modifyradiatordialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:CH:Radiator -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyRadiator.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyradiatorname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyradiatordescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifyradiatorroomcontent"></div>
+            <div data-role="fieldcontain" id="modifyradiatorportcontent"></div>
+            <div data-role="fieldcontain" id="modifyradiatorambientthermometercontent"></div>
+            <div data-role="fieldcontain" id="modifyradiatortemperaturecontrollercontent"></div>
+            <!-- @Forms\DurationField.htm modifyradiatoractivationtime activationtime required RES:CH:ActivationTime -->
+            <!-- @Forms\InactiveState.htm modifyradiator -->
+            <!-- @Forms\HiddenField.htm modifyradiatorid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyradiatordialog').on('pagetransfer', function (e, args) {
+                var createMode = args.param == null;
+                jQuery('#modifyradiatorroomcontent').html(jQuery('#modifyradiatorroomtemplate').tmpl());
+                jQuery('#modifyradiatorportcontent').html(jQuery('#modifyradiatorporttemplate').tmpl());
+                jQuery('#modifyradiatorambientthermometercontent').html(jQuery('#modifyradiatorambientthermometertemplate').tmpl());
+                jQuery('#modifyradiatortemperaturecontrollercontent')
+                    .html(jQuery('#modifyradiatortemperaturecontrollertemplate').tmpl( { CreateMode: createMode } ));
+
+                var radiator = CH.FindRadiator(args.param);
+
+                var name = (radiator != null) ? radiator.Name.Name : '';
+                var description = (radiator != null) ? radiator.Name.Description : '';
+                var uniqueId = (radiator != null) ? radiator.Name.UniqueId : '';
+                var actuatorPortId = (radiator != null) ? radiator.ActuatorPortId : '';
+                var inactiveState = (radiator != null) ? radiator.InactiveState : '0';
+                var roomId = (radiator != null) ? radiator.RoomId : '';
+                var ambientThermometerId = (radiator != null) ? radiator.AmbientThermometerId : '';
+                var temperatureControllerId = (radiator != null) ? radiator.TemperatureControllerId : '';
+
+                jQuery('#modifyradiatordialog [name=name]').val(name);
+                jQuery('#modifyradiatordialog [name=description]').val(description);
+                jQuery('#modifyradiatordialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyradiatordialog [name=roomid]').val(roomId);
+                jQuery('#modifyradiatordialog [name=inactivestate]').val(inactiveState);
+                jQuery('#modifyradiatordialog [name=actuatorportid]').val(actuatorPortId);
+                jQuery('#modifyradiatordialog [name=ambientthermometerid]').val(ambientThermometerId);
+                jQuery('#modifyradiatordialog [name=temperaturecontrollerid]').val(temperatureControllerId);
+
+                jQuery('#modifyradiatordialog form').validate();
+            });
+
+            jQuery('#modifyradiatordialog').on('pageaftertransfer', function (e, args) {
+                var radiator = CH.FindRadiator(args.param);
+                var activationTime = (radiator != null) ? radiator.ActivationTime : '00:02:00';
+                jQuery('#modifyradiatordialog [name=activationtime]').val(activationTime);
+                jQuery('[data-role=slider]').slider('refresh');
+                //jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

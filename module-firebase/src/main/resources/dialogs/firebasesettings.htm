@@ -1,0 +1,21 @@
+﻿<div data-role="dialog" id="firebasesettingsdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:FIRE:FirebaseSettings -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyFirebaseSettings.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm firebasesettinghost host required RES:FIRE:Host -->
+            <!-- @Forms\TextField.htm firebasesettingpath path required RES:FIRE:Path -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#firebasesettingsdialog').on('pagetransfer', function (e, args) {
+                jQuery('#firebasesettingsdialog form').validate();
+                jQuery('#firebasesettingsdialog [name=host]').val(CheckAutomationSetting('Firebase.Host').Result);
+                jQuery('#firebasesettingsdialog [name=path]').val(CheckAutomationSetting('Firebase.Path').Result);
+            });
+        </script>
+    </div>
+</div>

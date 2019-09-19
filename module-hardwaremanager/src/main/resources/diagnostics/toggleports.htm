@@ -1,0 +1,86 @@
+<!-- @Controls\MasterHeader.htm -->
+
+<script id="portstemplate" type="text/x-jquery-tmpl">
+    <ul data-inset="true" data-role="listview">
+        <li data-theme="b">
+            <!-- @RES:C:TogglePorts -->
+            <span class="ui-li-count">${HM.GetTogglePorts().length}</span>
+        </li>
+        {{each SortById(HM.GetTogglePorts())}}
+            <li>
+                <div class="ui-grid-a" style="float:right">
+                    <div class="ui-block-a">
+                        <a href="#" onclick="javascript:togglePortOn('${Id}');" data-role="button" style="width:150px">
+                            <span data-portid="${Id}" id="status-on${Id.replace(/:/g,"_")}"><!-- @RES:C:ToggleOn --></span>
+                        </a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a href="#" onclick="javascript:togglePortOff('${Id}');" data-role="button" style="width:150px">
+                            <span data-portid="${Id}" id="status-off${Id.replace(/:/g,"_")}"><!-- @RES:C:ToggleOff --></span>
+                        </a>
+                    </div>
+                </div>
+                <h3>${Id}</h3>
+                {{if MappedTo.length == 0}}
+                    <p><em><!-- @RES:C:NoMappings --></em></p>
+                {{else}}
+                    {{each MappedTo}}
+                        <p>${Name} <span data-deviceid="${UniqueId}" class="devicewait">(<!-- @RES:C:Loading -->...)</span></p>
+                    {{/each}}
+                {{/if}}
+            </li>
+        {{/each}}
+    </ul>
+</script>
+
+<div data-role="page" id="portsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:Diagnostics --> - <!-- @RES:C:TogglePorts --></h1>
+    </div>
+    <div id="content"  class="ui-content">
+        <div data-role="content" id="portscontent"></div>
+    </div>
+    <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    function formatStatusId(id) {
+        return '#status-' + (id + '').replace(/:/g, "_");
+    }
+
+    function togglePortOn(id) {
+        var $sender = jQuery(formatStatusId(id));
+        $.ajax({
+            type: 'GET',
+            url: '/toggleporton.json?id=' + id,
+            dataType: 'json',
+            success: function () {
+                jQuery($sender).html('<!-- @RES:C:ToggleOn -->...');
+            },
+            beforeSend: function () {
+                jQuery($sender).html('<!-- @RES:HM:Toggling -->...');
+            }
+        });
+    }
+
+    function togglePortOff(id) {
+        var $sender = jQuery(formatStatusId(id));
+        $.ajax({
+            type: 'GET',
+            url: '/toggleportoff.json?id=' + id,
+            dataType: 'json',
+            success: function () {
+                jQuery($sender).html('<!-- @RES:C:ToggleOff -->...');
+            },
+            beforeSend: function () {
+                jQuery($sender).html('<!-- @RES:HM:Toggling -->...');
+            }
+        });
+    }
+
+    jQuery('#portsindex').on('pagecreate', function (event) {
+        jQuery(jQuery('#portstemplate').tmpl()).appendTo('#portscontent');
+    });
+</script>
+
+<!-- @Controls\MasterFooter.htm -->

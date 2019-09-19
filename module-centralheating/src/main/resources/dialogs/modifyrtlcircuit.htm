@@ -1,0 +1,77 @@
+<!-- @Forms\RoomTemplate.htm modifyrtlcircuit -->
+<!-- @Forms\NamedPortTemplate.htm modifyrtlcircuit HM.GetDigitalOutputPorts() actuatorportid RES:CH:ActuatorPort false -->
+<!-- @Forms\NamedThermometerTemplate.htm modifyrtlcircuit ambient RES:CH:AmbientThermometer -->
+<!-- @Forms\NamedThermometerTemplate.htm modifyrtlcircuit return RES:CH:ReturnThermometer -->
+<!-- @Forms\TemperatureControllerTemplate.htm modifyrtlcircuit -->
+
+<div data-role="dialog" id="modifyrtlcircuitdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:CH:RtlCircuit -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyRtlCircuit.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyrtlcircuitname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyrtlcircuitdescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifyrtlcircuitroomcontent"></div>
+            <div data-role="fieldcontain" id="modifyrtlcircuitportcontent"></div>
+            <div data-role="fieldcontain" id="modifyrtlcircuitambientthermometercontent"></div>
+            <div data-role="fieldcontain" id="modifyrtlcircuitreturnthermometercontent"></div>
+            <div data-role="fieldcontain" id="modifyrtlcircuittemperaturecontrollercontent"></div>
+            <!-- @Forms\NumberField.htm modifyrtlcircuitminvalue minreturntemperature required RES:CH:MinReturnTemperature 5 -->
+            <!-- @Forms\NumberField.htm modifyrtlcircuitmaxvalue maxreturntemperature required RES:CH:MaxReturnTemperature 35 -->
+            <!-- @Forms\DurationField.htm modifyrtlcircuitactivationtime activationtime required RES:CH:ActivationTime -->
+            <!-- @Forms\InactiveState.htm modifyrtlcircuit -->
+            <!-- @Forms\HiddenField.htm modifyrtlcircuitid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyrtlcircuitdialog').on('pagetransfer', function (e, args) {
+                var createMode = args.param == null;
+                jQuery('#modifyrtlcircuitroomcontent').html(jQuery('#modifyrtlcircuitroomtemplate').tmpl());
+                jQuery('#modifyrtlcircuitportcontent').html(jQuery('#modifyrtlcircuitporttemplate').tmpl());
+                jQuery('#modifyrtlcircuitambientthermometercontent').html(jQuery('#modifyrtlcircuitambientthermometertemplate').tmpl());
+                jQuery('#modifyrtlcircuitreturnthermometercontent').html(jQuery('#modifyrtlcircuitreturnthermometertemplate').tmpl());
+                jQuery('#modifyrtlcircuittemperaturecontrollercontent')
+                    .html(jQuery('#modifyrtlcircuittemperaturecontrollertemplate').tmpl( { CreateMode: createMode } ));
+
+                var rtlCircuit = CH.FindRtlCircuit(args.param);
+
+                var name = (rtlCircuit != null) ? rtlCircuit.Name.Name : '';
+                var description = (rtlCircuit != null) ? rtlCircuit.Name.Description : '';
+                var uniqueId = (rtlCircuit != null) ? rtlCircuit.Name.UniqueId : '';
+                var actuatorPortId = (rtlCircuit != null) ? rtlCircuit.ActuatorPortId : '';
+                var inactiveState = (rtlCircuit != null) ? rtlCircuit.InactiveState : '0';
+                var roomId = (rtlCircuit != null) ? rtlCircuit.RoomId : '';
+                var ambientThermometerId = (rtlCircuit != null) ? rtlCircuit.AmbientThermometerId : '';
+                var returnThermometerId = (rtlCircuit != null) ? rtlCircuit.ReturnThermometerId : '';
+                var minReturnTemperature = (rtlCircuit != null) ? rtlCircuit.MinReturnTemperature : '5';
+                var maxReturnTemperature = (rtlCircuit != null) ? rtlCircuit.MaxReturnTemperature : '35';
+                var temperatureControllerId = (rtlCircuit != null) ? rtlCircuit.TemperatureControllerId : '';
+
+                jQuery('#modifyrtlcircuitdialog [name=name]').val(name);
+                jQuery('#modifyrtlcircuitdialog [name=description]').val(description);
+                jQuery('#modifyrtlcircuitdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyrtlcircuitdialog [name=roomid]').val(roomId);
+                jQuery('#modifyrtlcircuitdialog [name=inactivestate]').val(inactiveState);
+                jQuery('#modifyrtlcircuitdialog [name=actuatorportid]').val(actuatorPortId);
+                jQuery('#modifyrtlcircuitdialog [name=ambientthermometerid]').val(ambientThermometerId);
+                jQuery('#modifyrtlcircuitdialog [name=returnthermometerid]').val(returnThermometerId);
+                jQuery('#modifyrtlcircuitdialog [name=minreturntemperature]').val(minReturnTemperature);
+                jQuery('#modifyrtlcircuitdialog [name=maxreturntemperature]').val(maxReturnTemperature);
+                jQuery('#modifyrtlcircuitdialog [name=temperaturecontrollerid]').val(temperatureControllerId);
+
+                jQuery('#modifyrtlcircuitdialog form').validate();
+            });
+
+            jQuery('#modifyrtlcircuitdialog').on('pageaftertransfer', function (e, args) {
+                var rtlcircuit = CH.FindRtlCircuit(args.param);
+                var activationTime = (rtlcircuit != null) ? rtlcircuit.ActivationTime : '00:02:00';
+                jQuery('#modifyrtlcircuitdialog [name=activationtime]').val(activationTime);
+                jQuery('[data-role=slider]').slider('refresh');
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

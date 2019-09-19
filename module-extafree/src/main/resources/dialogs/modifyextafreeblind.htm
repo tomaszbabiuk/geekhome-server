@@ -1,0 +1,46 @@
+﻿<!-- @Forms\RoomTemplate.htm modifyextafreeblind -->
+<!-- @Forms\NamedPortTemplate.htm modifyextafreeblindup HM.GetTogglePorts() upportid RES:EXF:BlindUpPort false -->
+<!-- @Forms\NamedPortTemplate.htm modifyextafreeblinddown HM.GetTogglePorts() downportid RES:EXF:BlindDownPort false -->
+
+<div data-role="dialog" id="modifyextafreeblinddialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:EXF:ExtaFreeBlind -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyExtaFreeBlind.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyextafreeblindname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyextafreeblinddescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifyextafreeblindroomcontent"></div>
+            <div data-role="fieldcontain" id="modifyextafreeblindupportcontent"></div>
+            <div data-role="fieldcontain" id="modifyextafreeblinddownportcontent"></div>
+            <!-- @Forms\HiddenField.htm modifyextafreeblindid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyextafreeblinddialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyextafreeblindroomcontent').html(jQuery('#modifyextafreeblindroomtemplate').tmpl());
+                jQuery('#modifyextafreeblindupportcontent').html(jQuery('#modifyextafreeblindupporttemplate').tmpl());
+                jQuery('#modifyextafreeblinddownportcontent').html(jQuery('#modifyextafreeblinddownporttemplate').tmpl());
+                jQuery('#modifyextafreeblinddialog form').validate();
+
+                var extafreeblind = EXF.FindExtaFreeBlind(args.param);
+
+                var name = (extafreeblind != null) ? extafreeblind.Name.Name : '';
+                var description = (extafreeblind != null) ? extafreeblind.Name.Description : '';
+                var uniqueId = (extafreeblind != null) ? extafreeblind.Name.UniqueId : '';
+                var roomId = (extafreeblind != null) ? extafreeblind.RoomId : '';
+                var upPortId = (extafreeblind != null) ? extafreeblind.UpPortId : '';
+                var downPortId = (extafreeblind != null) ? extafreeblind.DownPortId : '';
+
+                jQuery('#modifyextafreeblinddialog [name=name]').val(name);
+                jQuery('#modifyextafreeblinddialog [name=description]').val(description);
+                jQuery('#modifyextafreeblinddialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyextafreeblinddialog [name=roomid]').val(roomId);
+                jQuery('#modifyextafreeblinddialog [name=upportid]').val(upPortId);
+                jQuery('#modifyextafreeblinddialog [name=downportid]').val(downPortId);
+            });
+        </script>
+    </div>
+</div>

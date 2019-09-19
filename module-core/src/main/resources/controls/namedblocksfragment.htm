@@ -1,0 +1,18 @@
+<li data-theme="b">
+    <a style="background: url('/css/icons/robot.svg');background-repeat: no-repeat; background-position: 10px 8px; background-size: 24px 24px; padding-left:40px;"
+       class="customlisticon" href="#">$p1</a>
+    <span class="ui-li-count">${CORE.FindBlocksByTarget(Name.UniqueId + '_$p0').length}</span>
+    <a href="javascript:void(0)" onclick="javascript:PageTransfer('#modifyblockdialog', { targetid: '${Name.UniqueId}_$p0', param:null })" data-icon="add">
+        <!-- @RES:C:AddNewBlock -->
+    </a>
+</li>
+{{each SortByPriority(CORE.FindBlocksByTarget(Name.UniqueId + '_$p0'))}}
+<li>
+    <a href="javascript:void(0)" onclick="javascript:PageTransfer('#blockdetailsdialog', { param: '${Name.UniqueId}' })">
+        <h3><!-- @Controls\DescriptiveName.htm --> </h3>
+        {{if ConditionsIds != ''}}
+        <p><strong><!-- @RES:C:Conditions -->: </strong>${CORE.ConditionsIdsToNames(ConditionsIds)} </p>
+        {{/if}}
+    </a>
+</li>
+{{/each}}

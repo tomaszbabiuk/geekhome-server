@@ -1,0 +1,29 @@
+<div data-role="dialog" id="modifytrustedrecipientdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:E:TrustedRecipient -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyTrustedRecipient.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifytrustedrecipientdname name none RES:C:Name -->
+            <!-- @Forms\TextField.htm modifytrustedrecipientemail email required RES:E:EmailAddress -->
+            <!-- @Forms\HiddenField.htm modifytrustedrecipienteuniqueid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    jQuery("#modifytrustedrecipientdialog").on("pagetransfer", function (e, args) {
+        var trustedRecipient = E.FindTrustedRecipient(args.param);
+        var name = (trustedRecipient != null) ? trustedRecipient.Name.Name : '';
+        var email = (trustedRecipient != null) ? trustedRecipient.Name.UniqueId : '';
+        var uniqueId = (trustedRecipient != null) ? trustedRecipient.Name.UniqueId : '';
+
+        jQuery("#modifytrustedrecipientdialog [name=uniqueid]").val(uniqueId);
+        jQuery("#modifytrustedrecipientdialog [name=email]").val(email);
+        jQuery("#modifytrustedrecipientdialog [name=name]").val(name);
+
+        jQuery("#modifytrustedrecipientdialog form").validate();
+    });
+</script>

@@ -1,0 +1,60 @@
+<!-- @Forms\RoomTemplate.htm modifytemperaturecontroller -->
+<!-- @Forms\ModesTemplate.htm modifytemperaturecontroller -->
+
+<div data-role="dialog" id="modifytemperaturecontrollerdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:CH:TemperatureController -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyTemperatureController.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifytemperaturecontrollername name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifytemperaturecontrollerdescription description none RES:C:Description -->
+            <!-- @Forms\DeviceCategory.htm modifytemperaturecontrollerdevicecategory -->
+            <!-- @Forms\NumberField.htm modifytemperaturecontrollerminvalue minvalue required RES:CH:MinValue 5 -->
+            <!-- @Forms\NumberField.htm modifytemperaturecontrollermaxvalue maxvalue required RES:CH:MaxValue 25 -->
+            <!-- @Forms\NumberField.htm modifytemperaturecontrollerinitialvalue initialvalue required RES:CH:InitialValue 20 -->
+            <div data-role="fieldcontain" id="modifytemperaturecontrollerroomcontent"></div>
+            <div data-role="fieldcontain" id="modifytemperaturecontrollermodescontent"></div>
+            <!-- @Forms\HiddenField.htm modifytemperaturecontrollerid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifytemperaturecontrollerdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifytemperaturecontrollerroomcontent').html(jQuery('#modifytemperaturecontrollerroomtemplate').tmpl());
+                jQuery('#modifytemperaturecontrollermodescontent').html(jQuery('#modifytemperaturecontrollermodestemplate').tmpl());
+
+                var temperatureController = CH.FindTemperatureController(args.param);
+
+                var name = (temperatureController != null) ? temperatureController.Name.Name : '';
+                var description = (temperatureController != null) ? temperatureController.Name.Description : '';
+                var uniqueId = (temperatureController != null) ? temperatureController.Name.UniqueId : '';
+                var roomId = (temperatureController != null) ? temperatureController.RoomId : '';
+                var minValue = (temperatureController != null) ? temperatureController.MinValue : '5';
+                var maxValue = (temperatureController != null) ? temperatureController.MaxValue : '25';
+                var initialValue = (temperatureController != null) ? temperatureController.InitialValue : '20';
+                var modesIds = (temperatureController != null) ? temperatureController.ModesIds : '';
+                var deviceCategory = (temperatureController != null) ? temperatureController.DeviceCategory : '1';
+
+                jQuery('#modifytemperaturecontrollerdialog [name=name]').val(name);
+                jQuery('#modifytemperaturecontrollerdialog [name=description]').val(description);
+                jQuery('#modifytemperaturecontrollerdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifytemperaturecontrollerdialog [name=roomid]').val(roomId);
+                jQuery('#modifytemperaturecontrollerdialog [name=minvalue]').val(minValue);
+                jQuery('#modifytemperaturecontrollerdialog [name=maxvalue]').val(maxValue);
+                jQuery('#modifytemperaturecontrollerdialog [name=initialvalue]').val(initialValue);
+                jQuery('#modifytemperaturecontrollerdialog [name=devicecategory]').val(deviceCategory);
+
+                jQuery('input:checkbox').prop('checked', false);
+                var modesIdsSplits = modesIds.split(',');
+                for (var modeIdIndex in modesIdsSplits) {
+                    var modeId = 'modifytemperaturecontrollermode-' + modesIdsSplits[modeIdIndex];
+                    jQuery('#' + modeId).prop('checked', true);
+                }
+
+                jQuery('#modifytemperaturecontrollerdialog form').validate();
+            });
+        </script>
+    </div>
+</div>

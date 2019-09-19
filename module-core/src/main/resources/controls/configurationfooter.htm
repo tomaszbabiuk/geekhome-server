@@ -1,0 +1,32 @@
+<div data-role="footer" data-position="fixed" data-theme="c">
+    <div data-role="navbar" class="custom-nav">
+        <ul>
+            <li><a href="/Dashboard.htm" rel="external" data-icon="custom" class="icon-custom-arrow">
+                <!-- @RES:C:Back -->
+            </a></li>
+            <li><a href="#discardchangesdialog" data-icon="custom" class="icon-custom-restore">
+                <!-- @RES:C:DiscardChanges -->
+            </a></li>
+            <li><a href="#savechangesdialog" data-icon="custom" class="icon-custom-checkmark savechanges">
+                <!-- @RES:C:SaveChanges -->
+            </a></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    jQuery(document).bind('pageinit', function () {
+        checkIfConfigurationIsModified();
+    });
+
+    function checkIfConfigurationIsModified() {
+        GetConfigInfo(function (data) {
+            if (data.IsConfigurationModified) {
+                changeModificationLink();
+            }
+        });
+    }
+
+    function changeModificationLink() {
+        jQuery('.savechanges').removeClass('ui-btn-up-c').addClass('ui-btn-up-b');
+    }
+</script>

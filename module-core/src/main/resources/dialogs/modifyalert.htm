@@ -1,0 +1,41 @@
+<!-- @Forms\AlertServicesTemplate.htm modifyalert -->
+
+<div data-role="dialog" id="modifyalertdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:Alert -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyAlert.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyalertname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyalertdescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifyalertalertservicescontent"></div>
+            <!-- @Forms\HiddenField.htm modifyalertid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyalertdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyalertalertservicescontent').html(jQuery('#modifyalertalertservicestemplate').tmpl());
+
+                var alert = CORE.FindAlert(args.param);
+                var name = (alert != null) ? alert.Name.Name : '';
+                var description = (alert != null) ? alert.Name.Description : '';
+                var uniqueId = (alert != null) ? alert.Name.UniqueId : '';
+                var alertServicesIds = (alert != null) ? alert.AlertServicesIds : '';
+
+                jQuery('#modifyalertname').val(name);
+                jQuery('#modifyalertdescription').val(description);
+                jQuery('#modifyalertid').val(uniqueId);
+
+                var alertServicesIdsSplits = alertServicesIds.split(',');
+                    for (var alertServiceIdIndex in alertServicesIdsSplits) {
+                        var alertServiceId = 'modifyalertalertservice-' + alertServicesIdsSplits[alertServiceIdIndex];
+                        jQuery('#' + alertServiceId).prop('checked', true);
+                    }
+
+                jQuery('#modifyalertdialog form').validate();
+            });
+        </script>
+    </div>
+</div>

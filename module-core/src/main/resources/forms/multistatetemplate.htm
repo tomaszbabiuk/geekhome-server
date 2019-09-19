@@ -1,0 +1,10 @@
+<script id="$p0multistatetemplate" type="text/x-jquery-tmpl">
+    <fieldset data-role="controlgroup" data-mini="true">
+        <legend><!-- @RES:C:DeviceStates -->:</legend>
+        {{each States}}
+            <input type="checkbox" name="statesids" value="${Name.UniqueId}" id="$p0state-${Name.UniqueId}"
+                   class="custom" validate="required:true, minlength:1"  {{if jQuery.inArray(Name.UniqueId,Selected)>=0}}checked{{/if}} />
+            <label for="$p0state-${Name.UniqueId}">${Name.Name}</label>
+        {{/each}}
+    </fieldset>
+</script>

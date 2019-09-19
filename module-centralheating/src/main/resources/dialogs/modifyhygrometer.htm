@@ -1,0 +1,49 @@
+<!-- @Forms\PortTemplate.htm modifyhygrometer HM.GetHumidityPorts() false -->
+<!-- @Forms\RoomTemplate.htm modifyhygrometer -->
+
+<div data-role="dialog" id="modifyhygrometerdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:CH:Hygrometer -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyHygrometer.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyhygrometername name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyhygrometerdescription description none RES:C:Description -->
+            <!-- @Forms\DeviceCategory.htm modifyhygrometerdevicecategory -->
+            <div data-role="fieldcontain" id="modifyhygrometerportcontent"></div>
+            <div data-role="fieldcontain" id="modifyhygrometerroomcontent"></div>
+            <!-- @Forms\HiddenField.htm modifyhygrometerid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyhygrometerdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyhygrometerportcontent').html(jQuery('#modifyhygrometerporttemplate').tmpl());
+                jQuery('#modifyhygrometerroomcontent').html(jQuery('#modifyhygrometerroomtemplate').tmpl());
+
+                var hygrometer = CH.FindHygrometer(args.param);
+
+                var name = (hygrometer != null) ? hygrometer.Name.Name : '';
+                var description = (hygrometer != null) ? hygrometer.Name.Description : '';
+                var uniqueId = (hygrometer != null) ? hygrometer.Name.UniqueId : '';
+                var portId = (hygrometer != null) ? hygrometer.PortId : '';
+                var roomId = (hygrometer != null) ? hygrometer.RoomId : '';
+                var deviceCategory = (hygrometer != null) ? hygrometer.DeviceCategory : '1';
+
+                jQuery('#modifyhygrometerdialog [name=name]').val(name);
+                jQuery('#modifyhygrometerdialog [name=description]').val(description);
+                jQuery('#modifyhygrometerdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyhygrometerdialog [name=portid]').val(portId);
+                jQuery('#modifyhygrometerdialog [name=roomid]').val(roomId);
+                jQuery('#modifyhygrometerdialog [name=devicecategory]').val(deviceCategory);
+
+                jQuery('#modifyhygrometerdialog form').validate();
+            });
+
+            jQuery('#modifyhygrometerdialog').on('pageaftertransfer', function (e, args) {
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

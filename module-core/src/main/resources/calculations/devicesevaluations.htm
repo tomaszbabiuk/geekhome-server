@@ -1,0 +1,83 @@
+﻿<!-- @Controls\MasterHeader.htm -->
+<script id="blockcategoriestemplate" type="text/x-jquery-tmpl">
+{{each BlocksCategories}}
+    <h4><i>${Name}</i></h4>
+    {{if CORE.FindBlocksByTarget($data.Device.Name.UniqueId + '_' + UniqueId).length==0}}
+        <p><em><!-- @RES:C:NoBlocksDefined --></em></p>
+    {{/if}}
+    {{each CORE.FindBlocksByTarget($data.Device.Name.UniqueId + '_' + UniqueId)}}
+    <div class="blockwait ui-body ui-body-c" blockid="${Name.UniqueId}">
+        <h1><!-- @Controls\DescriptiveName.htm --></h1>
+        {{if ConditionsIds != ''}}
+            {{each ConditionsIds.split(',') }}
+                <p>${CORE.ConditionsIdsToNames($value)}: <strong class="conditionwait" conditionid="${$value}"><!-- @RES:C:Wait --></strong></p>
+            {{/each}}
+        {{/if}}
+    </div>
+    {{/each}}
+{{/each}}
+</script>
+<script id="evaluationstemplate" type="text/x-jquery-tmpl">
+    {{if CORE.GetAllBlocksTargetDevices().length == 0}}
+       <em><!-- @RES:C:NoAutomaticallyControlledDevicesDefined --></em>
+    {{else}}
+    <ul data-inset="true" data-role="listview">
+        {{each CORE.GetAllBlocksTargetDevices()}}
+            <li class="devicewait ui-btn-up-c" id="${Name.UniqueId}">
+                <h1><!-- @Controls\DeviceName.htm --></h1>
+                {{tmpl({Device: $value, BlocksCategories: GetBlockCategories(Name.UniqueId)}) '#blockcategoriestemplate'}}
+            </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</script>
+<div data-role="page" id="evaluationsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:DevicesEvaluations --></h1>
+    </div>
+    <div data-role="content">
+        <div id="evaluationscontent">
+        </div>
+    </div>
+    <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+<script type="text/javascript">
+    jQuery('#evaluationsindex').on('pagecreate', function (event) {
+        jQuery('#evaluationscontent').html(jQuery('#evaluationstemplate').tmpl());
+
+        jQuery('.conditionwait').show(function () {
+            var self = this;
+            var id = jQuery(self).attr('conditionid');
+            jQuery(self).removeClass('conditionwait');
+            CheckConditionEvaluation(id, function (data) {
+                var result = data.Result ? '<!-- @RES:C:Passed -->' : '<!-- @RES:C:Failed -->';
+                jQuery(self).html(result);
+            });
+        });
+
+        jQuery('.blockwait').show(function () {
+            var self = this;
+            var id = jQuery(self).attr('blockid');
+            jQuery(self).removeClass('blockwait');
+            CheckBlockEvaluation(id, function (data) {
+                if (data.Result) {
+                    jQuery(self).removeClass('ui-body-c');
+                    jQuery(self).addClass('ui-body-b');
+                }
+            });
+        });
+
+        jQuery('.devicewait').show(function () {
+            var self = this;
+            var id = jQuery(this).attr('id');
+            jQuery(this).removeClass('devicewait');
+            CheckDeviceEvaluation(id, function (data) {
+                if (data.IsSignaled) {
+                    jQuery(self).removeClass('ui-btn-up-c');
+                    jQuery(self).addClass('ui-btn-up-b');
+                }
+            });
+        });
+    });
+</script>
+<!-- @Controls\MasterFooter.htm -->

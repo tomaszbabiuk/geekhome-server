@@ -1,0 +1,13 @@
+<script id="$p0circuitstemplate" type="text/x-jquery-tmpl">
+{{if CH.GetAllCircuits().length }}
+    <fieldset data-role="controlgroup">
+        <legend>
+            <!-- @RES:CH:Circuits -->:
+        </legend>
+        {{each CH.GetAllCircuits()}}
+            <input type="checkbox" name="circuitsids" value="${Name.UniqueId}" id="$p0circuit-${Name.UniqueId}" class="custom" validate="required:true, minlength:1" />
+            <label for="$p0circuit-${Name.UniqueId}"><!-- @Controls\DeviceName.htm --></label>
+        {{/each}}
+    </fieldset>
+{{/if}}
+</script>

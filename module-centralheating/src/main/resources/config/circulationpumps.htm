@@ -1,0 +1,62 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\PortsInfo.htm true false false false false false false false -->
+
+<script id="circulationpumpsinfotemplate" type="text/x-jquery-tmpl">
+    <!-- @RES:CH:CannotAddCirculationPumpsMessage -->
+    <ul>
+        <li>
+            <a href="thermometers.htm" data-inline="true" rel="external">
+                <!-- @RES:CH:Thermometers -->
+            </a>
+        </li>
+    </ul>
+</script>
+
+<script id="circulationpumpstemplate" type="text/x-jquery-tmpl">
+    {{each CH.GetCirculationPumps()}}
+        <ul data-inset="true" data-role="listview" data-split-theme="e">
+            <li data-theme="b">
+                <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#circulationpumpdetailsdialog', { param: '${Name.UniqueId}' })"
+                {{if (typeof IconName !== 'undefined')}} style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 15px; background-size: 32px 32px; padding-left:50px;" {{/if}}>
+                    <!-- @Controls\HeatingProperties.htm -->
+                </a>
+            </li>
+            <!-- @Controls\NamedBlocksFragment.htm on RES:C:BlocksEnablingAutomaticControl -->
+        </ul>
+    {{/each}}
+    <div>
+        <!-- @Controls\PageTransferButton.htm #modifycirculationpumpdialog RES:CH:AddCirculationPump -->
+    </div>
+</script>
+
+<div data-role="page" id="circulationpumpsindex">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:CH:CirculationPumps -->
+        </h1>
+    </div>
+    <div data-role="content" id="circulationpumpscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#circulationpumpsindex').on('pagecreate', function (event) {
+        if (!HM.HasDigitalOutputPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#circulationpumpscontent');
+        } else if (CH.CanAddCirculationPumps()) {
+            jQuery(jQuery("#circulationpumpstemplate").tmpl()).appendTo("#circulationpumpscontent");
+        } else {
+            jQuery(jQuery('#circulationpumpsinfotemplate').tmpl()).appendTo('#circulationpumpscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/circulationpumps.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/circulationpumps.htm -->
+<!-- @Dialogs\ModifyCirculationPump.htm -->
+<!-- @Dialogs\HeatingCrudDetails.htm circulationpumpdetails #modifycirculationpumpdialog RemoveCirculationPump.post CH.FindCirculationPump RES:CH:CirculationPump RES:CH:CirculationPumpDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/circulationpumps.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

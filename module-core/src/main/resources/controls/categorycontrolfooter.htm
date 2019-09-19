@@ -1,0 +1,49 @@
+<div data-role="footer" data-position="fixed" data-theme="c">
+    <div data-role="navbar" class="custom-nav">
+        <ul>
+            <li><a href="/Dashboard.htm" rel="external" data-icon="custom" class="icon-custom-arrow">
+                <!-- @RES:C:Back -->
+            </a></li>
+            <li><a id="category1" rel="external" href="javascript:goToCategory('/automatic/heatingcontrol.htm','<!-- @RES:C:DeviceCategory1.Heating -->')"
+                   data-icon="custom" class="icon-custom-sun">
+                <!-- @RES:C:DeviceCategory1.Heating -->
+            </a></li>
+            <li><a id="category2" rel="external" href="javascript:goToCategory('/automatic/hotwatercontrol.htm','<!-- @RES:C:DeviceCategory2.HotWater -->')"
+                   data-icon="custom" class="icon-custom-faucet">
+                <!-- @RES:C:DeviceCategory2.HotWater -->
+            </a></li>
+            <li><a id="category3" rel="external" href="javascript:goToCategory('/automatic/lockscontrol.htm','<!-- @RES:C:DeviceCategory3.Locks -->')"
+                   data-icon="custom" class="icon-custom-lock">
+                <!-- @RES:C:DeviceCategory3.Locks -->
+            </a></li>
+        </ul>
+        <ul>
+            <li><a id="category4" rel="external" href="javascript:goToCategory('/automatic/lightscontrol.htm','<!-- @RES:C:DeviceCategory4.Lights -->')"
+                   data-icon="custom" class="icon-custom-lightbulb">
+                <!-- @RES:C:DeviceCategory4.Lights -->
+            </a></li>
+            <li><a id="category6" rel="external" href="javascript:goToCategory('/automatic/ventilationcontrol.htm','<!-- @RES:C:DeviceCategory6.Ventilation -->')"
+                   data-icon="custom" class="icon-custom-fan">
+                <!-- @RES:C:DeviceCategory6.Ventilation -->
+            </a></li>
+            <li><a id="category7" rel="external" href="javascript:goToCategory('/automatic/monitoringcontrol.htm','<!-- @RES:C:DeviceCategory7.Monitoring -->')"
+                   data-icon="custom" class="icon-custom-monitoring">
+                <!-- @RES:C:DeviceCategory7.Monitoring -->
+            </a></li>
+            <li><a href="#">&nbsp;</a></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+function goToCategory(href, categoryName) {
+    var message = '<!-- @RES:C:LoadingCategory --> "' + categoryName + '"';
+    jQuery.mobile.loading( 'show', { textVisible: true, theme: 'a',	text: message});
+    location.href = href;
+}
+
+function setControlFooterSelection(category) {
+    var navItemSelector = '#category' + category;
+    jQuery(navItemSelector).removeClass('ui-btn-up-c').addClass('ui-btn-up-b');
+    jQuery(navItemSelector).attr('data-theme','b');
+}
+</script>

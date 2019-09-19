@@ -1,0 +1,91 @@
+<!-- @Controls\MasterHeader.htm -->
+
+<script id="logstemplate" type="text/x-jquery-tmpl">
+    <ul data-role="listview" data-count-theme="c" data-inset="true">
+    {{if Result.length == 0}}
+        <ul data-role="listview" data-count-theme="c" data-inset="true">
+            <li><!-- @RES:C:NoErrors --></li>
+        </ul>
+    {{else}}
+        {{each Result}}
+        <ul data-role="listview" data-count-theme="c" data-inset="true">
+            {{each Logs}}
+                <li {{if Level == 4}}data-theme="b"{{/if}}>
+                <span>
+                    {{if Level < 3}}
+                        <img src="/css/icons/bug.svg" style="float:right" width="28" height="28"/>
+                    {{/if}}
+                    {{if Level == 3}}
+                        <img src="/css/icons/warning.svg" style="float:right" width="28" height="28"/>
+                    {{/if}}
+                    {{if Level == 4}}
+                        <img src="/css/icons/error.svg" style="float:right" width="28" height="28"/>
+                    {{/if}}
+                    {{if (Level == 6)}}
+                        <img src="/css/icons/microchip.svg" style="float:right" width="28" height="28"/>
+                    {{/if}}
+                    {{if (Level == 7)}}
+                        <img src="/css/icons/list.svg" style="float:right" width="28" height="28"/>
+                    {{/if}}
+                </span>
+                {{if (typeof Message !== 'undefined')}}
+                    <h2>${Message}</h2>
+                {{/if}}
+
+                {{if (typeof Source !== 'undefined')}}
+                    <h2>${Source}
+                    {{if Value !== 'undefined'}}
+                        -> ${Value}
+                    {{/if}}
+                    </h2>
+                {{/if}}
+
+                <p>${FormatDateToLocal(Year, Month, Day, Hour, Minute, Second, Millisecond)}</p>
+
+                {{if (typeof Details !== 'undefined')}}
+                    <code>${Details}</code>
+                {{/if}}
+                </li>
+            {{/each}}
+        </ul>
+        {{/each}}
+    {{/if}}
+</script>
+
+<div data-role="page" id="logsindex">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:Errors -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <div class="ui-body ui-body-c">
+            <p><strong><!-- @RES:C:Warning --></strong></p>
+            <p><!-- @RES:C:ViewMayContainUntranslatedTechnicalData --></p>
+        </div>
+        <div id="logscontent">
+        </div>
+        <div>
+            <button data-role="button" data-inline="true" onclick="javascript:refresh();">
+                <!-- @RES:C:Refresh -->
+            </button>
+        </div>
+    </div>
+    <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    function refresh() {
+        GetLastErrors(function(data) {
+            jQuery("#logscontent").html(jQuery("#logstemplate").tmpl(data));
+            jQuery('[data-role=listview]').listview();
+            jQuery('[data-role=button]').button();
+        });
+    }
+
+    jQuery('#logsindex').on('pagecreate', function (event) {
+        refresh();
+    });
+</script>
+
+<!-- @Controls\MasterFooter.htm -->

@@ -1,0 +1,18 @@
+<script id="$p0conditionstemplate" type="text/x-jquery-tmpl">
+    {{if CORE.GetAllConditions().length > 0 }}
+        <label for="$p0conditions" class="select"><!-- @RES:C:Conditions -->:</label>
+        <select name="conditionsids" id="$p0conditions" multiple="multiple" data-native-menu="false" data-icon="grid" data-iconpos="left">
+            <option><!-- @RES:C:SelectConditions --></option>
+            <optgroup label="<!-- @RES:C:Conditions -->:">
+                {{each SortByDescriptiveName(CORE.GetAllConditions())}}
+                    <option value="${Name.UniqueId}" {{if jQuery.inArray(Name.UniqueId, Selected) != -1}}selected{{/if}}>${Name.Name}</option>
+                {{/each}}
+            </optgroup>
+            <optgroup label="<!-- @RES:C:NegatedConditions -->">
+                {{each SortByDescriptiveName(CORE.GetAllConditions())}}
+                    <option value="!${Name.UniqueId}" {{if jQuery.inArray("!"+ Name.UniqueId, Selected) != -1}}selected{{/if}}>!${Name.Name}</option>
+                {{/each}}
+            </optgroup>
+        </select>
+    {{/if}}
+</script>

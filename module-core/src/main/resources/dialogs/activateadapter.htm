@@ -1,0 +1,29 @@
+<div data-role="dialog" id="activateadapterdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:Activate -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <div>
+            <img src="/css/icons/warning.svg" style="float:right" width="50" height="50"/>
+            <strong><!-- @RES:C:Warning --></strong>
+        </div>
+        <p><!-- @RES:C:ActivateAdapterInfo --></p>
+        <form action="/activation/ActivateAdapter.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm activateadaptercode code required RES:C:Code -->
+            <!-- @Forms\HiddenField.htm activateadapterid id -->
+            <!-- @Forms\HiddenField.htm activateadaptersuccessurl successurl -->
+            <!-- @Forms\HiddenField.htm activateadapterfailureurl failureurl -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery('#activateadapterdialog').on('pageshow', function() {
+        jQuery('#activateadapterdialog [name=successurl]').val('$p0');
+        jQuery('#activateadapterdialog [name=failureurl]').val('$p1');
+        jQuery('#activateadapterdialog form').validate();
+    });
+</script>

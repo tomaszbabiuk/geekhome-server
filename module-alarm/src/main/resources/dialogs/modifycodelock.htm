@@ -1,0 +1,51 @@
+<!-- @Forms\RoomTemplate.htm modifycodelock -->
+<!-- @Forms\NamedPortTemplate.htm modifycodelockarming HM.GetDigitalInputPorts() armingportid RES:ALARM:ArmingPort false -->
+<!-- @Forms\NamedPortTemplate.htm modifycodelockstatus HM.GetDigitalOutputPorts() statusportid RES:ALARM:StatusPort false -->
+
+<div data-role="dialog" id="modifycodelockdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:ALARM:CodeLock -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyCodeLock.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifycodelockname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifycodelockdescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifycodelockroomcontent"></div>
+            <div data-role="fieldcontain" id="modifycodelockportcontent"></div>
+            <div data-role="fieldcontain" id="modifycodelockarmingportcontent"></div>
+            <div data-role="fieldcontain" id="modifycodelockstatusportcontent"></div>
+            <!-- @Forms\HiddenField.htm modifycodelockid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifycodelockdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifycodelockroomcontent').html(jQuery('#modifycodelockroomtemplate').tmpl());
+                jQuery('#modifycodelockarmingportcontent').html(jQuery('#modifycodelockarmingporttemplate').tmpl());
+                jQuery('#modifycodelockstatusportcontent').html(jQuery('#modifycodelockstatusporttemplate').tmpl());
+                jQuery('#modifycodelockdialog form').validate();
+
+                var codeLock = ALARM.FindCodeLock(args.param);
+
+                var name = (codeLock != null) ? codeLock.Name.Name : '';
+                var description = (codeLock != null) ? codeLock.Name.Description : '';
+                var uniqueId = (codeLock != null) ? codeLock.Name.UniqueId : '';
+                var armingPortId = (codeLock != null) ? codeLock.ArmingPortId : '';
+                var statusPortId = (codeLock != null) ? codeLock.StatusPortId : '';
+                var roomId = (codeLock != null) ? codeLock.RoomId : '';
+
+                jQuery('#modifycodelockdialog [name=name]').val(name);
+                jQuery('#modifycodelockdialog [name=description]').val(description);
+                jQuery('#modifycodelockdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifycodelockdialog [name=roomid]').val(roomId);
+                jQuery('#modifycodelockdialog [name=armingportid]').val(armingPortId);
+                jQuery('#modifycodelockdialog [name=statusportid]').val(statusPortId);
+            });
+
+            jQuery('#modifycodelockdialog').on('pageaftertransfer', function (e, args) {
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<script id="$p0devicestemplate" type="text/x-jquery-tmpl">
+    {{if $p1.length }}
+        <fieldset data-role="controlgroup">
+	        <legend><!-- @RES:C:Devices -->:</legend>
+            {{each $p1}}
+	            <input type="checkbox" name="devicesids" value="${Name.UniqueId}" id="$p0device-${Name.UniqueId}" class="custom" validate="required:true, minlength:1" />
+	            <label for="$p0device-${Name.UniqueId}"><!-- @Controls\DeviceName.htm --></label>
+            {{/each}}
+        </fieldset>
+    {{/if}}
+</script>

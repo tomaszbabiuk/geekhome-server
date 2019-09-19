@@ -1,0 +1,32 @@
+<div data-role="dialog" id="modifyfloordialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:Floor -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyFloor.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyfloorname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyfloordescription description none RES:C:Description -->
+            <!-- @Forms\FloorIconName.htm modifyfloor -->
+            <!-- @Forms\HiddenField.htm modifyfloorid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    jQuery("#modifyfloordialog").on("pagetransfer", function (e, args) {
+        var floor = CORE.FindFloor(args.param);
+        var name = (floor != null) ? floor.Name.Name : '';
+        var description = (floor != null) ? floor.Name.Description : '';
+        var uniqueId = (floor != null) ? floor.Name.UniqueId : '';
+        var iconName = (floor != null) ? floor.IconName : '';
+
+        jQuery("#modifyfloorname").val(name);
+        jQuery("#modifyfloordescription").val(description);
+        jQuery("#modifyfloorid").val(uniqueId);
+        jQuery("#modifyflooriconname").val(iconName);
+
+        jQuery("#modifyfloordialog form").validate();
+    });
+</script>

@@ -1,0 +1,55 @@
+<!-- @Forms\RoomTemplate.htm modifycirculationpump -->
+<!-- @Forms\PortTemplate.htm modifycirculationpump HM.GetDigitalOutputPorts() false -->
+<!-- @Forms\ThermometerTemplate.htm modifycirculationpump -->
+
+<div data-role="dialog" id="modifycirculationpumpdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:CH:CirculationPump -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyCirculationPump.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifycirculationpumpname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifycirculationpumpdescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifycirculationpumproomcontent"></div>
+            <div data-role="fieldcontain" id="modifycirculationpumpportcontent"></div>
+            <!-- @Forms\DurationField.htm modifycirculationpumpminimumworkingtime minimumworkingtime required RES:C:MinimumWorkingTime -->
+            <div data-role="fieldcontain" id="modifycirculationpumpthermometercontent"></div>
+            <!-- @Forms\HiddenField.htm modifycirculationpumpid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifycirculationpumpdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifycirculationpumproomcontent').html(jQuery('#modifycirculationpumproomtemplate').tmpl());
+                jQuery('#modifycirculationpumpportcontent').html(jQuery('#modifycirculationpumpporttemplate').tmpl());
+                jQuery('#modifycirculationpumpthermometercontent').html(jQuery('#modifycirculationpumpthermometertemplate').tmpl());
+                jQuery('#modifycirculationpumpdialog form').validate();
+
+                var circulationPump = CH.FindCirculationPump(args.param);
+
+                var name = (circulationPump != null) ? circulationPump.Name.Name : '';
+                var description = (circulationPump != null) ? circulationPump.Name.Description : '';
+                var uniqueId = (circulationPump != null) ? circulationPump.Name.UniqueId : '';
+                var portId = (circulationPump != null) ? circulationPump.PortId : '';
+                var roomId = (circulationPump != null) ? circulationPump.RoomId : '';
+                var thermometerId = (circulationPump != null) ? circulationPump.ThermometerId : '';
+
+                jQuery('#modifycirculationpumpname').val(name);
+                jQuery('#modifycirculationpumpdescription').val(description);
+                jQuery('#modifycirculationpumpid').val(uniqueId);
+                jQuery('#modifycirculationpumproom').val(roomId);
+                jQuery('#modifycirculationpumpport').val(portId);
+                jQuery('#modifycirculationpumpthermometer').val(thermometerId);
+            });
+
+            jQuery('#modifycirculationpumpdialog').on('pageaftertransfer', function (e, args) {
+                var circulationPump = CH.FindCirculationPump(args.param);
+                var minimumWorkingTime = (circulationPump != null) ? circulationPump.MinimumWorkingTime : '00:00:20';
+
+                jQuery('#modifycirculationpumpminimumworkingtime').val(minimumWorkingTime);
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div data-role="footer" data-position="fixed" data-theme="c">
+    <div data-role="navbar" class="custom-nav">
+        <ul>
+            <li><a href="/goodbye.htm" rel="external" data-icon="custom" class="icon-custom-arrow">
+                <!-- @RES:C:IDisagree -->
+            </a></li>
+            <li><a href="javascript:agree()" rel="external" data-icon="custom" data-theme="b" class="icon-custom-checkmark">
+                <!-- @RES:C:IAgree -->
+            </a></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    function agree() {
+        ChangeAutomationSetting("System.LicenseAccepted", "1");
+        location.href='/dashboard.htm';
+    }
+</script>

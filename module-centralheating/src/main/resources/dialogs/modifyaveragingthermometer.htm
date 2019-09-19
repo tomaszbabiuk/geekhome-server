@@ -1,0 +1,58 @@
+<!-- @Forms\RoomTemplate.htm modifyaveragingthermometer -->
+<!-- @Forms\ThermometersTemplate.htm modifyaveragingthermometer -->
+
+
+<div data-role="dialog" id="modifyaveragingthermometerdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:CH:AveragingThermometer -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyAveragingThermometer.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyaveragingthermometername name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyaveragingthermometerdescription description none RES:C:Description -->
+            <!-- @Forms\DeviceCategory.htm modifyaveragingthermometerdevicecategory -->
+            <div data-role="fieldcontain" id="modifyaveragingthermometerroomcontent"></div>
+            <div data-role="fieldcontain" id="modifyaveragingthermometerthermometerscontent"></div>
+            <!-- @Forms\HiddenField.htm modifyaveragingthermometerid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyaveragingthermometerdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyaveragingthermometerportcontent').html(jQuery('#modifyaveragingthermometerporttemplate').tmpl());
+                jQuery('#modifyaveragingthermometerroomcontent').html(jQuery('#modifyaveragingthermometerroomtemplate').tmpl());
+                jQuery('#modifyaveragingthermometerthermometerscontent').html(jQuery('#modifyaveragingthermometerthermometerstemplate').tmpl());
+
+                var averagingThermometer = CH.FindAveragingThermometer(args.param);
+
+                var name = (averagingThermometer != null) ? averagingThermometer.Name.Name : '';
+                var description = (averagingThermometer != null) ? averagingThermometer.Name.Description : '';
+                var uniqueId = (averagingThermometer != null) ? averagingThermometer.Name.UniqueId : '';
+                var roomId = (averagingThermometer != null) ? averagingThermometer.RoomId : '';
+                var thermometersIds = (averagingThermometer != null) ? averagingThermometer.ThermometersIds : '';
+                var deviceCategory = (averagingThermometer != null) ? averagingThermometer.DeviceCategory : '1';
+
+                jQuery('#modifyaveragingthermometerdialog [name=name]').val(name);
+                jQuery('#modifyaveragingthermometerdialog [name=description]').val(description);
+                jQuery('#modifyaveragingthermometerdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyaveragingthermometerdialog [name=roomid]').val(roomId);
+                jQuery('#modifyaveragingthermometerdialog [name=devicecategory]').val(deviceCategory);
+
+
+                jQuery('input:checkbox').prop('checked', false);
+                var thermometersIdsSplits = thermometersIds.split(',');
+                for (var thermometerIdIndex in thermometersIdsSplits) {
+                    var thermometerId = 'modifyaveragingthermometerthermometer-' + thermometersIdsSplits[thermometerIdIndex];
+                    jQuery('#' + thermometerId).prop('checked', true);
+                }
+
+                jQuery('#modifyaveragingthermometerdialog form').validate();
+            });
+
+            jQuery('#modifyaveragingthermometerdialog').on('pageaftertransfer', function (e, args) {
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

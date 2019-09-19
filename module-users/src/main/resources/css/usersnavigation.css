@@ -1,0 +1,7 @@
+.icon-custom-people             .ui-icon { background:  url(icons/people.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-girl               .ui-icon { background:  url(icons/man.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-boy                .ui-icon { background:  url(icons/woman.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-man                .ui-icon { background:  url(icons/boy.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-woman              .ui-icon { background:  url(icons/woman.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-installer          .ui-icon { background:  url(icons/installer.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+

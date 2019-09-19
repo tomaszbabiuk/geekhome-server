@@ -1,0 +1,68 @@
+<!-- @Forms\RoomTemplate.htm modifygate -->
+<!-- @Forms\NamedPortTemplate.htm modifygategatecontrol HM.GetDigitalOutputPorts() gatecontrolportid RES:ALARM:GateControlPort false -->
+<!-- @Forms\NamedPortTemplate.htm modifygatemagneticdetector HM.GetDigitalInputPorts() magneticdetectorportid RES:ALARM:MagneticDetectorPort false -->
+
+
+<div data-role="dialog" id="modifygatedialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:ALARM:Gate -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyGate.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifygatename name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifygatedescription description none RES:C:Description -->
+            <!-- @Forms\GateIconName.htm modifygate -->
+            <div data-role="fieldcontain" id="modifygategatecontrolportcontent"></div>
+            <div data-role="fieldcontain" id="modifygatemagneticdetectorportcontent"></div>
+            <div data-role="fieldcontain" id="modifygateroomcontent"></div>
+            <!-- @Forms\NumberField.htm modifygatecode code required RES:C:Code 9999 -->
+            <!-- @Forms\InactiveState.htm modifygate -->
+            <!-- @Forms\DurationField.htm modifygatedelaytime delaytime required RES:C:DelayTime -->
+            <!-- @Forms\HiddenField.htm modifygateid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:OK -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifygatedialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifygategatecontrolportcontent').html(jQuery('#modifygategatecontrolporttemplate').tmpl());
+                jQuery('#modifygatemagneticdetectorportcontent').html(jQuery('#modifygatemagneticdetectorporttemplate').tmpl());
+                jQuery('#modifygateroomcontent').html(jQuery('#modifygateroomtemplate').tmpl());
+                jQuery('#modifymagneticdetectorcontent').html(jQuery('#modifymagneticdetectortemplate').tmpl());
+
+                var gate = ALARM.FindGate(args.param);
+
+                var name = (gate != null) ? gate.Name.Name : '';
+                var description = (gate != null) ? gate.Name.Description : '';
+                var uniqueId = (gate != null) ? gate.Name.UniqueId : '';
+                var iconName = (gate != null) ? gate.IconName : '';
+                var gateControlPortId = (gate != null) ? gate.GateControlPortId : '';
+                var magneticDetectorPortId = (gate != null) ? gate.MagneticDetectorPortId : '';
+                var roomId = (gate != null) ? gate.RoomId : '';
+                var code = (gate != null) ? gate.Code : '9999';
+                var inactiveState = (gate != null) ? gate.InactiveState : '0';
+
+
+                jQuery('#modifygatedialog [name=name]').val(name);
+                jQuery('#modifygatedialog [name=description]').val(description);
+                jQuery('#modifygatedialog [name=iconname]').val(iconName);
+                jQuery('#modifygatedialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifygatedialog [name=gatecontrolportid]').val(gateControlPortId);
+                jQuery('#modifygatedialog [name=magneticdetectorportid]').val(magneticDetectorPortId);
+                jQuery('#modifygatedialog [name=roomid]').val(roomId);
+                jQuery('#modifygatedialog [name=code]').val(code);
+                jQuery('#modifygatedialog [name=inactivestate]').val(inactiveState);
+
+                jQuery('#modifygatedialog form').validate();
+            });
+            
+            jQuery('#modifygatedialog').on('pageaftertransfer', function (e, args) {
+                var gate = ALARM.FindGate(args.param);
+
+                var delayTime = (gate != null) ? gate.DelayTime : '00:00:00';
+
+                jQuery('#modifygatedialog [name=delaytime]').val(delayTime);
+            });
+        </script>
+    </div>
+</div>

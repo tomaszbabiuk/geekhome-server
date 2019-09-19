@@ -1,0 +1,183 @@
+[Version]
+version = 1
+pool = 85
+comment = Zmiany w konfiguracji
+from = 23.08.19 14:04
+
+[Alert]
+alertservicesids = 
+name = Al2
+description = 
+uniqueid = core81
+
+[Alert]
+alertservicesids = 
+name = Al1
+description = 
+uniqueid = core80
+
+[Block]
+conditionsids = core51
+targetid = core81
+name = Nowy blok
+description = 
+uniqueid = core83
+
+[Block]
+conditionsids = core51
+targetid = lights44_preset2
+name = Nowy blok
+description = 
+uniqueid = core53
+
+[Block]
+conditionsids = core49
+targetid = core80
+name = Nowy blok
+description = 
+uniqueid = core82
+
+[Block]
+conditionsids = core49
+targetid = lights44_preset1
+name = Nowy blok
+description = 
+uniqueid = core52
+
+[Block]
+conditionsids = core76
+targetid = auto70_on
+name = Nowy blok
+description = 
+uniqueid = core78
+
+[Block]
+conditionsids = core51
+targetid = lights62_yellow
+name = Nowy blok
+description = 
+uniqueid = core68
+
+[Block]
+conditionsids = core49
+targetid = lights62_white
+name = Nowy blok
+description = 
+uniqueid = core67
+
+[Block]
+conditionsids = core51
+targetid = lights58_preset2
+name = Nowy blok
+description = 
+uniqueid = core65
+
+[Block]
+conditionsids = core49
+targetid = lights58_preset1
+name = Nowy blok
+description = 
+uniqueid = core64
+
+[Floor]
+iconname = house
+name = P1
+description = 
+uniqueid = core10
+
+[Room/Floor = core10]
+iconname = dreams
+name = R1
+description = 
+uniqueid = core34
+
+[KeySwitch]
+hasnonreadonlystates = true
+roomid = core34
+portid = -
+devicecategory = 1
+iconname = trigger
+controltype = 5
+name = Włącz preset 2
+description = 
+uniqueid = core50
+
+[KeySwitch]
+hasnonreadonlystates = true
+roomid = core34
+portid = -
+devicecategory = 4
+iconname = trigger
+controltype = 5
+name = Włącz preset 1
+description = 
+uniqueid = core48
+
+[Geofence]
+iconname = marker_other
+longitude = 40.0
+radius = 10.0
+latitude = 50.0
+name = kraków
+description = 
+uniqueid = core18
+
+[MultistateCondition]
+deviceid = core50
+statesids = on
+delaytime = 00:00:00
+name = Włącz preset 2 - Wł
+description = 
+uniqueid = core51
+
+[MultistateCondition]
+deviceid = core48
+statesids = on
+delaytime = 00:00:00
+name = Włącz preset 1 - Wł
+description = 
+uniqueid = core49
+
+[ValueCondition]
+value = 10.0
+deviceid = heating74
+operator = 0
+hysteresis = 1.0
+name = T1 większe od 10
+description = 
+uniqueid = core76
+
+[Thermometer]
+roomid = core34
+valuetype = 0
+portid = TEMP0
+devicecategory = 1
+iconname = thermometer
+controltype = 0
+name = T1
+description = 
+uniqueid = heating74
+
+[IntensityDevice]
+roomid = core34
+intensitypresetsids = 1,2,3,4
+portid = ANALOG-OUT-1
+devicecategory = 4
+iconname = lightbulb
+controltype = 7
+name = L1
+description = Lampa gdzieś tamrrrrr
+uniqueid = lights44
+
+[OnOffDevice]
+roomid = core34
+hasnonreadonlystates = true
+triggeredmanually = 1
+portid = OUTPUT0
+devicecategory = 1
+iconname = power
+controltype = 7
+name = asdf
+description = asdf
+uniqueid = auto70
+

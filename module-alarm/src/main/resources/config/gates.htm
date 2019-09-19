@@ -1,0 +1,50 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddDevicesMessage -->
+
+<script id="gatestemplate" type="text/x-jquery-tmpl">
+    {{each ALARM.GetGates()}}
+        <ul data-inset="true" data-role="listview" data-split-theme="e">
+            <li data-theme="b">
+                <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#gatedetailsdialog', { param: '${Name.UniqueId}' })"
+                {{if (typeof IconName !== 'undefined')}} style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 15px; background-size: 32px 32px; padding-left:50px;" {{/if}}>
+                    <!-- @Controls\AlarmProperties.htm -->
+                </a>
+            </li>
+            <!-- @Controls\NamedBlocksFragment.htm open RES:ALARM:BlocksOpeningGate -->
+            <!-- @Controls\NamedBlocksFragment.htm close RES:ALARM:BlocksClosingGate -->
+        </ul>
+    {{/each}}
+    <div>
+        <!-- @Controls\PageTransferButton.htm #modifygatedialog RES:ALARM:AddGate -->
+    </div>
+</script>
+
+<div data-role="page" id="gatesindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:ALARM:Gates -->
+    </h1>
+  </div>
+  <div data-role="content" id="gatescontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#gatesindex').on('pagecreate', function (event) {
+        if (CORE.CanAddDevices()) {
+            jQuery(jQuery("#gatestemplate").tmpl()).appendTo("#gatescontent");
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#gatescontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/gates.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/gates.htm -->
+<!-- @Dialogs\ModifyGate.htm -->
+<!-- @Dialogs\AlarmCrudDetails.htm gatedetails #modifygatedialog RemoveGate.post ALARM.FindGate RES:ALARM:Gate RES:ALARM:GateDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/gates.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

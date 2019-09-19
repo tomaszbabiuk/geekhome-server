@@ -1,0 +1,61 @@
+﻿<!-- @Controls\MasterHeader.htm -->
+
+<script type="text/javascript">
+    function formatStatusId(id) {
+        return '#status-' + (id + '').replace(/:/g, "_");
+    }
+
+    function formatOutputValue(state) {
+        if (state) {
+            return "<!-- @RES:C:On -->";
+        }
+        else {
+            return "<!-- @RES:C:Off -->";
+        }
+    }
+
+    function doPortAction(id) {
+        var $sender = jQuery(formatStatusId(id));
+        var loaded = $sender.hasClass('loaded');
+        if (loaded) {
+            toggleOutputPort(id);
+        }
+        else {
+            readDigitalOutputPort(id);
+            $sender.addClass('loaded');
+        }
+    }
+
+    function readDigitalOutputPort(id) {
+        var $sender = jQuery(formatStatusId(id));
+        $.ajax({
+            type: 'GET',
+            url: '/readdigitaloutputport.json?id=' + id,
+            dataType: 'json',
+            success: function (data) {
+                $sender.html(formatOutputValue(data.Result));
+            },
+            beforeSend: function () {
+                $sender.html('<!-- @RES:C:Loading -->...');
+            }
+        });
+    }
+
+    function toggleOutputPort(id) {
+        var $sender = jQuery(formatStatusId(id));
+        $.ajax({
+            type: 'GET',
+            url: '/toggledigitaloutputport.json?id=' + id,
+            dataType: 'json',
+            success: function () {
+                setTimeout('readDigitalOutputPort("' + id + '")', 1000);
+            },
+            beforeSend: function () {
+                jQuery($sender).html('<!-- @RES:HM:Toggling -->...');
+            }
+        });
+    }
+</script>
+
+<!-- @Controls\PortsBase.htm RES:C:DigitalOutputPorts HM.GetDigitalOutputPorts() -->
+<!-- @Controls\MasterFooter.htm -->

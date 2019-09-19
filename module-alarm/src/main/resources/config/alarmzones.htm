@@ -1,0 +1,59 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="alarmzonesinfotemplate" type="text/x-jquery-tmpl">
+<!-- @RES:ALARM:CannotAddAlarmZonesMessage -->
+<ul>
+    <li><a href="roomsandfloors.htm" data-inline="true" rel="external"><!-- @RES:C:RoomsAndFloors --></a></li>
+    <li><a href="alarmsensors.htm" data-inline="true" rel="external"><!-- @RES:ALARM:AlarmSensors --></a></li>
+    <li><a href="magneticdetectors.htm" data-inline="true" rel="external"><!-- @RES:ALARM:MagneticDetectors --></a></li>
+    <li><a href="movementdetectors.htm" data-inline="true" rel="external"><!-- @RES:ALARM:MovementDetectors --></a></li>
+</ul>
+</script>
+
+<script id="alarmzonestemplate" type="text/x-jquery-tmpl">
+    {{each ALARM.GetAlarmZones()}}
+        <ul data-inset="true" data-role="listview" data-split-theme="e">
+            <li data-theme="b">
+                <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#alarmzonedetailsdialog', { param: '${Name.UniqueId}' })"
+                {{if (typeof IconName !== 'undefined')}} style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 15px; background-size: 32px 32px; padding-left:50px;" {{/if}}>
+                    <!-- @Controls\AlarmProperties.htm -->
+                </a>
+            </li>
+            <!-- @Controls\NamedBlocksFragment.htm arm RES:ALARM:BlocksArmingAlarmZone -->
+            <!-- @Controls\NamedBlocksFragment.htm disarm RES:ALARM:BlocksDisarmingAlarmZone -->
+        </ul>
+    {{/each}}
+    <div>
+        <!-- @Controls\PageTransferButton.htm #modifyalarmzonedialog RES:ALARM:AddAlarmZone -->
+    </div>
+</script>
+
+<div data-role="page" id="alarmzonesindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:ALARM:AlarmZones -->
+    </h1>
+  </div>
+  <div data-role="content" id="alarmzonescontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#alarmzonesindex').on('pagecreate', function (event) {
+        if (ALARM.CanAddAlarmZones()) {
+            jQuery(jQuery("#alarmzonestemplate").tmpl()).appendTo("#alarmzonescontent");
+        } else {
+            jQuery(jQuery('#alarmzonesinfotemplate').tmpl()).appendTo('#alarmzonescontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/alarmzones.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/alarmzones.htm -->
+<!-- @Dialogs\ModifyAlarmZone.htm -->
+<!-- @Dialogs\AlarmCrudDetails.htm alarmzonedetails #modifyalarmzonedialog RemoveAlarmZone.post ALARM.FindAlarmZone RES:ALARM:AlarmZone RES:ALARM:AlarmZoneDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/alarmzones.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

@@ -1,0 +1,82 @@
+<!-- @Controls\MasterHeader.htm -->
+<script id="multicontrollersevaluationstemplate" type="text/x-jquery-tmpl">
+    {{if CORE.CountAllMulticontrollers() == 0}}
+       <em><!-- @RES:C:NoMulticontrollersDefined --></em>
+    {{else}}
+    <ul data-inset="true" data-role="listview">
+        {{each CORE.GetAllDevices()}}
+          {{if $value.ControlType==2}}
+            <li>
+                <h3><!-- @Controls\DescriptiveName.htm --></h3>
+                {{if $value.RoomId != undefined}}
+				    <p><strong><!-- @RES:C:Room -->: </strong>${CORE.FindRoom(RoomId).Name.Name}</p>
+                    <p><strong><!-- @RES:C:Floor -->: </strong>${CORE.FindFloorByRoomId(RoomId).Name.Name}</p>
+                {{/if}}
+                {{if $value.RoomsIds != undefined}}
+                    {{if RoomsIds != ''}}<p><strong><!-- @RES:C:Rooms -->: </strong>${CORE.RoomsIdsToNames(RoomsIds)}</p>{{/if}}
+                {{/if}}
+                <p><strong><!-- @RES:C:Default -->: </strong><span class="settingwait" data-id="${Name.UniqueId}" data-initial="${InitialValue}"><!-- @RES:C:Loading --></span></p>
+                <h1 class="ui-li-aside"><!-- @RES:C:Actual -->: <strong class="devicewait" data-id="${Name.UniqueId}"><!-- @RES:C:Loading --></strong></h1>
+                {{if ModesIds != ''}}
+                    {{each ModesIds.split(',')}}
+                        <div class="modewait ui-body ui-body-c" data-id="${$value}">
+                            <h3>${CORE.FindMode($value).Name.Name}</h3>
+                            <span class="ui-li-count"><!-- @RES:C:Priority -->: ${CORE.FindMode($value).Priority}</span>
+                            <p><strong><!-- @RES:C:Setting -->: </strong><span class="settingwait"data-id="${Name.UniqueId + "_" + $value}" data-initial="${InitialValue}"><!-- @RES:C:Loading --></span></p>
+                        </div>
+                    {{/each}}
+                {{/if}}
+            </li>
+          {{/if}}
+        {{/each}}
+    </ul>
+    {{/if}}
+</script>
+<div data-role="page" id="multicontrollersevaluationsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:MulticontrollersEvaluations --></h1>
+    </div>
+    <div data-role="content">
+        <div id="multicontrollersevaluationscontent">
+        </div>
+    </div>
+    <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+<script type="text/javascript">
+    jQuery('#multicontrollersevaluationsindex').on('pagecreate', function (event) {
+        jQuery('#multicontrollersevaluationscontent').html(jQuery('#multicontrollersevaluationstemplate').tmpl());
+        
+        jQuery('.modewait').show(function () {
+            var self = this;
+            var id = jQuery(this).data('id');
+            jQuery(this).removeClass('modewait');
+            CheckModeEvaluation(id, function (data) {
+                if (data.Result) {
+                    jQuery(self).removeClass('ui-body-c');
+                    jQuery(self).addClass('ui-body-b');
+                }
+            });
+        });
+
+        jQuery('.devicewait').show(function () {
+            var self = this;
+            var id = jQuery(self).data('id');
+            jQuery(self).removeClass('devicewait');
+            CheckDeviceEvaluation(id, function (data) {
+                jQuery(self).html(data.InterfaceValue);
+            });
+        });    
+
+        jQuery('.settingwait').show(function () {
+            var self = this;
+            var id = jQuery(self).data('id');
+            var initial = jQuery(self).data('initial');
+            jQuery(self).removeClass('settingwait');
+            CheckAutomationSetting(id, function (data) {
+                var set = (data.Result == "") ? initial : data.Result;
+                jQuery(self).html(set + '°C');
+            });
+        });    
+    });
+</script>
+<!-- @Controls\MasterFooter.htm -->

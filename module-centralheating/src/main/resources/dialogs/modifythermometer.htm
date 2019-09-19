@@ -1,0 +1,49 @@
+<!-- @Forms\PortTemplate.htm modifythermometer HM.GetTemperaturePorts() false -->
+<!-- @Forms\RoomTemplate.htm modifythermometer -->
+
+<div data-role="dialog" id="modifythermometerdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:CH:Thermometer -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyThermometer.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifythermometername name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifythermometerdescription description none RES:C:Description -->
+            <!-- @Forms\DeviceCategory.htm modifythermometerdevicecategory -->
+            <div data-role="fieldcontain" id="modifythermometerportcontent"></div>
+            <div data-role="fieldcontain" id="modifythermometerroomcontent"></div>
+            <!-- @Forms\HiddenField.htm modifythermometerid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifythermometerdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifythermometerportcontent').html(jQuery('#modifythermometerporttemplate').tmpl());
+                jQuery('#modifythermometerroomcontent').html(jQuery('#modifythermometerroomtemplate').tmpl());
+
+                var thermometer = CH.FindThermometer(args.param);
+
+                var name = (thermometer != null) ? thermometer.Name.Name : '';
+                var description = (thermometer != null) ? thermometer.Name.Description : '';
+                var uniqueId = (thermometer != null) ? thermometer.Name.UniqueId : '';
+                var portId = (thermometer != null) ? thermometer.PortId : '';
+                var roomId = (thermometer != null) ? thermometer.RoomId : '';
+                var deviceCategory = (thermometer != null) ? thermometer.DeviceCategory : '1';
+
+                jQuery('#modifythermometerdialog [name=name]').val(name);
+                jQuery('#modifythermometerdialog [name=description]').val(description);
+                jQuery('#modifythermometerdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifythermometerdialog [name=portid]').val(portId);
+                jQuery('#modifythermometerdialog [name=roomid]').val(roomId);
+                jQuery('#modifythermometerdialog [name=devicecategory]').val(deviceCategory);
+
+                jQuery('#modifythermometerdialog form').validate();
+            });
+
+            jQuery('#modifythermometerdialog').on('pageaftertransfer', function (e, args) {
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

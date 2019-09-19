@@ -1,0 +1,11 @@
+<script id="$p0movementdetectorstemplate" type="text/x-jquery-tmpl">
+    {{if ALARM.GetMovementDetectors().length }}
+        <fieldset data-role="controlgroup">
+	        <legend><!-- @RES:ALARM:MovementDetectors -->:</legend>
+            {{each ALARM.GetMovementDetectors()}}
+	            <input type="checkbox" name="movementdetectorsids" value="${Name.UniqueId}" id="$p0movementdetector-${Name.UniqueId}" class="custom" validate="required:true, minlength:1" />
+	            <label for="$p0movementdetector-${Name.UniqueId}"><!-- @Controls\DeviceName.htm --></label>
+            {{/each}}
+        </fieldset>
+    {{/if}}
+</script>

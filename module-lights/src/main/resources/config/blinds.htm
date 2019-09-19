@@ -1,0 +1,53 @@
+﻿<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddDevicesMessage -->
+<!-- @Controls\PortsInfo.htm true false false false false false false false -->
+
+<script id="blindstemplate" type="text/x-jquery-tmpl">
+    {{each LIGHTS.GetBlinds()}}
+    <ul data-inset="true" data-role="listview" data-split-theme="e">
+        <li data-theme="b">
+            <a href="javascript:void(0)" onclick="javascript:PageTransfer('#blinddetailsdialog', { param: '${Name.UniqueId}' })">
+                <!-- @Controls\LightsProperties.htm -->
+            </a>
+        </li>
+        <!-- @Controls\NamedBlocksFragment.htm close RES:LIGHTS:BlocksClosingBlind -->
+        <!-- @Controls\NamedBlocksFragment.htm open RES:LIGHTS:BlocksOpeningBlind -->
+        <!-- @Controls\NamedBlocksFragment.htm comfort RES:LIGHTS:BlocksEnablingComfortPosition -->
+    </ul>
+    {{/each}}
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifyblinddialog RES:LIGHTS:AddBlind -->
+    </div>
+</script>
+
+<div data-role="page" id="blindsindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:LIGHTS:Blinds -->
+    </h1>
+  </div>
+  <div data-role="content" id="blindscontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#blindsindex').on('pagecreate', function (event) {
+        if (!HM.HasDigitalOutputPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#blindscontent');
+        } else if (CORE.CanAddDevices()) {
+            jQuery(jQuery("#blindstemplate").tmpl()).appendTo("#blindscontent");
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#blindscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/blinds.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/blinds.htm -->
+<!-- @Dialogs\ModifyBlind.htm -->
+<!-- @Dialogs\LightsCrudDetails.htm blinddetails #modifyblinddialog RemoveBlind.post LIGHTS.FindBlind RES:LIGHTS:Blind RES:LIGHTS:BlindDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/blinds.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

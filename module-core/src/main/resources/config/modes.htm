@@ -1,0 +1,31 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="modestemplate" type="text/x-jquery-tmpl">
+  <!-- @Controls\CoreCrudListWithBlocks.htm #modedetailsdialog CORE.GetModes() -->
+  <div>
+    <!-- @Controls\PageTransferButton.htm #modifymodedialog RES:C:AddMode -->
+  </div>  
+</script>
+
+<div data-role="page" id="modesindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:Modes --></h1>
+    </div>
+    <div data-role="content" id="modescontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+<script type="text/javascript">
+    jQuery('#modesindex').on('pagecreate', function (event) {
+        jQuery(jQuery('#modestemplate').tmpl()).appendTo('#modescontent');
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/modes.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/modes.htm -->
+<!-- @Dialogs\ModifyMode.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm modedetails #modifymodedialog RemoveMode.post CORE.FindMode RES:C:Mode RES:C:ModeDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/modes.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

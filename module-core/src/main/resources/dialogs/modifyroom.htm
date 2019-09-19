@@ -1,0 +1,35 @@
+﻿<div data-role="dialog" id="modifyroomdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:Room -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyRoom.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyroomname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyroomdescription description none RES:C:Description -->
+            <!-- @Forms\RoomIconName.htm modifyroom -->
+            <!-- @Forms\HiddenField.htm modifyroomfloorid floorid -->
+            <!-- @Forms\HiddenField.htm modifyroomid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    jQuery("#modifyroomdialog").on("pagetransfer", function (e, args) {
+        var room = CORE.FindRoom(args.param);
+        var name = (room != null) ? room.Name.Name : '';
+        var description = (room != null) ? room.Name.Description : '';
+        var uniqueId = (room != null) ? room.Name.UniqueId : '';
+        var iconName = (room != null) ? room.IconName : '';
+
+        jQuery("#modifyroomname").val(name);
+        jQuery("#modifyroomdescription").val(description);
+        jQuery("#modifyroomid").val(uniqueId);
+        jQuery("#modifyroomiconname").val(iconName);
+        var floorId = (args.floorid != null) ? args.floorid : '';
+        jQuery('#modifyroomfloorid').val(args.floorid);
+
+        jQuery("#modifyroomdialog form").validate();
+    });
+</script>

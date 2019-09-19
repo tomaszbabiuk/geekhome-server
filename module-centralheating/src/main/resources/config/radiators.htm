@@ -1,0 +1,51 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\CircuitsInfo.htm RES:CH:CannotAddRadiatorsMessage -->
+<!-- @Controls\PortsInfo.htm true false false false false false false false -->
+
+<script id="radiatorstemplate" type="text/x-jquery-tmpl">
+    {{each CH.GetRadiators()}}
+        <ul data-inset="true" data-role="listview" data-split-theme="e">
+            <li data-theme="b">
+                <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#radiatordetailsdialog', { param: '${Name.UniqueId}' })"
+                {{if (typeof IconName !== 'undefined')}} style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 15px; background-size: 32px 32px; padding-left:50px;" {{/if}}>
+                    <!-- @Controls\HeatingProperties.htm -->
+                </a>
+            </li>
+            <!-- @Controls\NamedBlocksFragment.htm forceon RES:CH:BlocksForcingCircuitToEnable -->
+            <!-- @Controls\NamedBlocksFragment.htm forceoff RES:CH:BlocksForcingCircuitToDisable -->
+        </ul>
+    {{/each}}
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifyradiatordialog RES:CH:AddRadiator -->
+    </div>
+</script>
+<div data-role="page" id="radiatorsindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:CH:Radiators -->
+    </h1>
+  </div>
+  <div data-role="content" id="radiatorscontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+<script type="text/javascript">
+    jQuery('#radiatorsindex').on('pagecreate', function (event) {
+        if (!HM.HasDigitalOutputPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#radiatorscontent');
+        } else if (CH.CanAddCircuits()) {
+            jQuery(jQuery('#radiatorstemplate').tmpl()).appendTo('#radiatorscontent');
+        } else {
+            jQuery(jQuery('#circuitsinfotemplate').tmpl()).appendTo('#radiatorscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/radiators.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/radiators.htm -->
+<!-- @Dialogs\ModifyRadiator.htm -->
+<!-- @Dialogs\HeatingCrudDetails.htm radiatordetails #modifyradiatordialog RemoveRadiator.post CH.FindRadiator RES:CH:Radiator RES:CH:RadiatorDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/radiators.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

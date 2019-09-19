@@ -1,0 +1,34 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddChangeStateCommandsMessage -->
+
+<script id="changestatecommandstemplate" type="text/x-jquery-tmpl">
+  <!-- @Controls\CoreCrudList.htm #changestatecommanddetailsdialog CORE.GetChangeStateCommands() RES:C:ChangeStateCommands -->
+  <div>
+    <!-- @Controls\PageTransferButton.htm #modifychangestatecommanddialog RES:C:AddChangeStateCommand -->
+  </div>
+</script>
+
+<div data-role="page" id="changestatecommandsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:ChangeStateCommands --></h1>
+    </div>
+    <div data-role="content" id="changestatecommandscontent"></div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#changestatecommandsindex').on('pagecreate', function (event) {
+        if (CORE.CanAddChangeStateCommands()) {
+            jQuery(jQuery('#changestatecommandstemplate').tmpl()).appendTo('#changestatecommandscontent');
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#changestatecommandscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/changestatecommands.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/changestatecommands.htm -->
+<!-- @Dialogs\ModifyChangeStateCommand.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm changestatecommanddetails #modifychangestatecommanddialog RemoveChangeStateCommand.post CORE.FindChangeStateCommand RES:C:ChangeStateCommand RES:C:ChangeStateCommandDetails -->
+<!-- @Controls\MasterFooter.htm -->

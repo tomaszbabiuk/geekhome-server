@@ -1,0 +1,74 @@
+﻿<!-- @Forms\RoomTemplate.htm modifyintensitydevice -->
+<!-- @Forms\NamedAnalogOutputPortsTemplate.htm modifyintensitydevice portid RES:C:Port -->
+
+<div data-role="dialog" id="modifyintensitydevicedialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:AUTO:IntensityDevice -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyIntensityDevice.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyintensitydevicename name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyintensitydevicedescription description none RES:C:Description -->
+            <!-- @Forms\OnOffDeviceIconName.htm modifyintensitydevice -->
+            <div data-role="fieldcontain" id="modifyintensitydeviceroomcontent"></div>
+            <div data-role="fieldcontain" id="modifyintensitydeviceportcontent"></div>
+            <!-- @Forms\IntensityField.htm modifyintensitydevicepreset1 preset1 RES:C:Preset1 -->
+            <!-- @Forms\IntensityField.htm modifyintensitydevicepreset2 preset2 RES:C:Preset2 -->
+            <!-- @Forms\IntensityField.htm modifyintensitydevicepreset3 preset3 RES:C:Preset3 -->
+            <!-- @Forms\IntensityField.htm modifyintensitydevicepreset4 preset4 RES:C:Preset4 -->
+            <!-- @Forms\HiddenField.htm modifyintensitydeviceid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            function setupSlider(presetSettingId, selector) {
+                CheckAutomationSetting(presetSettingId, function (data) {
+                    if (data != null) {
+                        jQuery(selector).val(data.Result).slider('refresh');
+                    }
+                });
+            }
+
+            jQuery('#modifyintensitydevicedialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyintensitydeviceroomcontent').html(jQuery('#modifyintensitydeviceroomtemplate').tmpl());
+                jQuery('#modifyintensitydeviceportcontent').html(jQuery('#modifyintensitydeviceporttemplate').tmpl());
+                jQuery('#modifyintensitydevicedialog form').validate();
+
+                var intensityDevice = AUTO.FindIntensityDevice(args.param);
+
+                var name = (intensityDevice != null) ? intensityDevice.Name.Name : '';
+                var description = (intensityDevice != null) ? intensityDevice.Name.Description : '';
+                var uniqueId = (intensityDevice != null) ? intensityDevice.Name.UniqueId : '';
+                var roomId = (intensityDevice != null) ? intensityDevice.RoomId : '';
+                var portId = (intensityDevice != null) ? intensityDevice.PortId : '';
+                var iconName = (intensityDevice != null) ? intensityDevice.IconName : '';
+
+                jQuery('#modifyintensitydevicedialog [name=name]').val(name);
+                jQuery('#modifyintensitydevicedialog [name=description]').val(description);
+                jQuery('#modifyintensitydevicedialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyintensitydevicedialog [name=roomid]').val(roomId);
+                jQuery('#modifyintensitydevicedialog [name=portid]').val(portId);
+                jQuery('#modifyintensitydevicedialog [name=iconname]').val(iconName);
+            });
+
+            jQuery('#modifyintensitydevicedialog').on('pageaftertransfer', function (e, args) {
+                jQuery('[data-role=slider]').slider('refresh');
+
+                var intensityDevice = AUTO.FindIntensityDevice(args.param);
+
+                var id1 = intensityDevice.Name.UniqueId + "_1";
+                setupSlider(id1, '#modifyintensitydevicedialog [name=preset1]');
+
+                var id2 = intensityDevice.Name.UniqueId + "_2";
+                setupSlider(id2, '#modifyintensitydevicedialog [name=preset2]');
+
+                var id3 = intensityDevice.Name.UniqueId + "_3";
+                setupSlider(id3, '#modifyintensitydevicedialog [name=preset3]');
+
+                var id4 = intensityDevice.Name.UniqueId + "_4";
+                setupSlider(id4, '#modifyintensitydevicedialog [name=preset4]');
+            });
+        </script>
+    </div>
+</div>

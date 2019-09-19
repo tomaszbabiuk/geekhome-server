@@ -1,0 +1,15 @@
+<script id="$p0roomstemplate" type="text/x-jquery-tmpl">
+    {{if CORE.GetFloors().length }}
+    <fieldset data-role="controlgroup">
+        <legend>
+          <!-- @RES:C:Rooms -->:
+        </legend>
+        {{each(f, floor) CORE.GetFloors()}}
+          {{each Rooms}}
+            <input type="checkbox" name="roomsids" value="${Name.UniqueId}" id="$p0room-${Name.UniqueId}" class="custom" {{if $p1(Name.UniqueId, ZoneId)}}disabled{{/if}} />
+            <label for="$p0room-${Name.UniqueId}">${floor.Name.Name}/${Name.Name}</label>
+          {{/each}}
+        {{/each}}
+    </fieldset>
+    {{/if}}
+</script>

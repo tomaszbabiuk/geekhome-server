@@ -1,0 +1,35 @@
+<script id="$p0template" type="text/x-jquery-tmpl">
+    <h2>
+        $p4</h2>
+    <div>
+        <div>
+            <!-- @Controls\CoreProperties.htm -->
+        </div>
+        <div id="editremovepanel">
+          <button data-role="button" data-inline="true" floorid="" href="javascript:void(0)" class="disableonpost"
+              onclick="javascript:PageTransfer('$p1', { param: '${Name.UniqueId}' })">
+            <!-- @RES:C:Edit -->
+          </button>
+          <button data-role="button" data-inline="true" href="javascript:void(0)" class="disableonpost"
+              onclick="javascript:jQuery('#editremovepanel .disableonpost').button('disable'); jQuery.post('$p2',{ param: '${Name.UniqueId}' }, function() {  location.href=jQuery.mobile.path.parseUrl(location.href).hrefNoHash })">
+            <!-- @RES:C:Remove -->
+          </button>
+        </div>
+    </div>
+</script>
+<div data-role="dialog" id="$p0dialog">
+    <div data-role="header">
+        <h1>$p5</h1>
+    </div> 
+    <div data-role="content" id="$p0content">
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    jQuery('#$p0dialog').on('pagetransfer', function (e, args) {
+        var target = $p3(args.param);
+        if (target != null) {
+            jQuery('#$p0content').html(jQuery('#$p0template').tmpl(target));
+            AppendDependenciesTo(target.Name.UniqueId, '#$p0content');
+        }
+    });
+</script>

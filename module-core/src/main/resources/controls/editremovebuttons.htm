@@ -1,0 +1,10 @@
+<div id="editremovepanel">
+  <button data-role="button" data-inline="true" floorid="" href="javascript:void(0)" class="disableonpost"
+      onclick="javascript:PageTransfer('$p0', { param: '$p2' })">
+    <!-- @RES:C:Edit -->
+  </button>
+  <button data-role="button" data-inline="true" href="javascript:void(0)" class="disableonpost"
+      onclick="javascript:jQuery('#editremovepanel .disableonpost').button('disable'); jQuery.post('$p1',{ param: '$p2' }, function() {  location.href=jQuery.mobile.path.parseUrl(location.href).hrefNoHash })">
+    <!-- @RES:C:Remove -->
+  </button>
+</div>

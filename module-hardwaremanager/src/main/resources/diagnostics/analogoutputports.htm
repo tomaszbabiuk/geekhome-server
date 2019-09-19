@@ -1,0 +1,95 @@
+<!-- @Controls\MasterHeader.htm -->
+
+<script type="text/javascript">
+    function formatStatusId(id) {
+        return '#status-' + (id + '').replace(/:/g, "_");
+    }
+
+    function doPortAction(id) {
+        var $sender = jQuery(formatStatusId(id));
+        var loaded = $sender.hasClass('loaded');
+        if (loaded) {
+            writeAnalogOutputPort(id, $sender.val());
+        }
+        else {
+            readAnalogOutputPort(id);
+            $sender.addClass('loaded');
+        }
+    }
+
+    function readAnalogOutputPort(id) {
+        var $sender = jQuery(formatStatusId(id));
+        $.ajax({
+            type: 'GET',
+            url: '/readanalogoutputport.json?id=' + id,
+            dataType: 'json',
+            success: function (data) {
+                $sender.val(data.Result);
+                $sender.slider('enable');
+                $sender.slider('refresh');
+                $sender.on('slidestop', function(sender) { 
+                    var $sender = jQuery(this);
+                    var id = $sender.data('portid');
+                    var value = $sender.val();
+                    writeAnalogOutputPort(id, value);
+                });
+            },
+        });
+    }
+
+    function writeAnalogOutputPort(id, value) {
+        var $sender = jQuery(formatStatusId(id));
+        $.ajax('/writeanalogoutputport.json?id=' + id + '&value=' + value);
+    }
+</script>
+
+<script id="portstemplate" type="text/x-jquery-tmpl">
+    <ul data-inset="true" data-role="listview">
+        <li data-theme="b">
+            <!-- @RES:C:AnalogOutputPorts -->
+            <span class="ui-li-count">${HM.GetAnalogOutputPorts().length}</span>
+        </li>
+        {{each SortById(HM.GetAnalogOutputPorts())}}
+            <li>
+                <h3>${Id}</h3>
+                {{if MappedTo.length == 0}}
+                    <p><em><!-- @RES:C:NoMappings --></em></p>
+                {{else}}
+                    {{each MappedTo}}
+                        <p>${Name}</p>
+                    {{/each}}
+                {{/if}}
+                <div>
+                    <input data-highlight="true" data-portid="${Id}" type="range" class="wait" id="status-${Id.replace(/:/g,"_")}" 
+                           min="0" max="255" initialvalue="0" value="0" onclick="javascript:doPortAction('${Id}');"/>
+                </div>
+            </li>
+        {{/each}}
+    </ul>
+</script>
+<div data-role="page" id="portsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:Diagnostics --> - <!-- @RES:C:AnalogOutputPorts --></h1>
+    </div>
+    <div data-role="content" id="portscontent"></div>
+    <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+<script type="text/javascript">
+    jQuery('#portsindex').on('pagecreate', function (event) {
+        jQuery(jQuery('#portstemplate').tmpl()).appendTo('#portscontent');
+    });
+
+    jQuery('#portsindex').on('pageshow', function (event) {
+        jQuery('.wait').each(function () {
+            jQuery(this).slider('disable');
+        });
+
+        jQuery('.wait').each(function () {
+            var portid = jQuery(this).data('portid');
+            jQuery(this).removeClass('wait');
+            doPortAction(portid);
+        });
+    });
+</script>
+
+<!-- @Controls\MasterFooter.htm -->

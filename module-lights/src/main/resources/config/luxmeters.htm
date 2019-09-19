@@ -1,0 +1,38 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:LIGHTS:CannotAddDevicesMessage -->
+<!-- @Controls\PortsInfo.htm false false false false false false false true -->
+
+<script id="luxmeterstemplate" type="text/x-jquery-tmpl">
+    <!-- @Controls\LightsCrudList.htm #luxmeterdetailsdialog LIGHTS.GetLuxmeters() RES:LIGHTS:Luxmeters -->
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifyluxmeterdialog RES:LIGHTS:AddLuxmeter -->
+    </div>
+</script>
+
+<div data-role="page" id="luxmetersindex">
+    <div data-role="header">
+        <h1><!-- @RES:LIGHTS:Luxmeters --></h1>
+    </div>
+    <div data-role="content" id="luxmeterscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#luxmetersindex').on('pagecreate', function (event) {
+        if (!HM.HasLuminosityPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#luxmeterscontent');
+        } else if (CORE.CanAddDevices()) {
+            jQuery(jQuery('#luxmeterstemplate').tmpl()).appendTo('#luxmeterscontent');
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#luxmeterscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/luxmeters.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/luxmeters.htm -->
+<!-- @Dialogs\ModifyLuxmeter.htm -->
+<!-- @Dialogs\LightsCrudDetails.htm luxmeterdetails #modifyluxmeterdialog RemoveLuxmeter.post LIGHTS.FindLuxmeter RES:LIGHTS:Luxmeter RES:LIGHTS:LuxmeterDetails -->
+<!-- @Controls\MasterFooter.htm -->

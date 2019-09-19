@@ -1,0 +1,33 @@
+<script id="$p0devicetemplate" type="text/x-jquery-tmpl">
+    <label for="$p0device" class="select">
+        $p2:</label>
+    <select id="$p0device" name="$p1" data-native-menu="false" validate="required:true, minlength:1">
+        {{if $p3}}
+            <optgroup label="<!-- @RES:C:TemperatureDevices -->">
+                {{each CORE.GetAllValueDevices()}}
+                    {{if ValueType == 0}}
+                        <option value="${Name.UniqueId}"><!-- @Controls\DeviceName.htm --></option>
+                    {{/if}}
+                {{/each}}
+            </optgroup>
+        {{/if}}
+        {{if $p4}}
+            <optgroup label="<!-- @RES:C:HumidityDevices -->">
+                {{each CORE.GetAllValueDevices()}}
+                    {{if ValueType == 1}}
+                        <option value="${Name.UniqueId}"><!-- @Controls\DeviceName.htm --></option>
+                    {{/if}}
+                {{/each}}
+            </optgroup>
+        {{/if}}
+        {{if $p5}}
+            <optgroup label="<!-- @RES:C:LuminosityDevices -->">
+                {{each CORE.GetAllValueDevices()}}
+                    {{if ValueType == 2}}
+                        <option value="${Name.UniqueId}"><!-- @Controls\DeviceName.htm --></option>
+                    {{/if}}
+                {{/each}}
+            </optgroup>
+        {{/if}}
+    </select>
+</script>

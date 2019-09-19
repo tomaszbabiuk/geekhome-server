@@ -1,0 +1,117 @@
+﻿<!-- @Controls\MasterHeader.htm -->
+
+<script id="portstemplate" type="text/x-jquery-tmpl">
+    <ul data-inset="true" data-role="listview">
+        <li data-theme="b">
+            <!-- @RES:EXF:ExtaFreePorts -->
+            <span class="ui-li-count">${EXF.GetXtaaFreePorts().length}</span>
+        </li>
+        {{each SortById(EXF.GetXtaaFreePorts())}}
+            <li>
+                <div class="ui-grid-a" style="float:right">
+                    <div class="ui-block-a">
+                        <a href="#" onclick="javascript:doPairing('${Id}','SRP');" data-role="button" style="width:150px">
+                            <span data-portid="${Id}" id="status-on${Id.replace(/:/g,"_")}"><!-- @RES:EXF:SRPs --></span>
+                        </a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a href="#" onclick="javascript:doPairing('${Id}','ROP');" data-role="button" style="width:150px">
+                            <span data-portid="${Id}" id="status-off${Id.replace(/:/g,"_")}"><!-- @RES:EXF:ROPs --></span>
+                        </a>
+                    </div>
+                </div>
+                <h3>${Id}</h3>
+                {{if MappedTo.length == 0}}
+                    <p><em><!-- @RES:C:NoMappings --></em></p>
+                {{else}}
+                    {{each MappedTo}}
+                        <p>${Name} <span data-deviceid="${UniqueId}" class="devicewait">(<!-- @RES:C:Loading -->...)</span></p>
+                    {{/each}}
+                {{/if}}
+            </li>
+        {{/each}}
+    </ul>
+</script>
+
+<div data-role="page" id="portsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:Diagnostics --> - <!-- @RES:EXF:ExtaFreePairing --></h1>
+    </div>
+    <div id="content"  class="ui-content">
+        <div data-role="content" id="portscontent"></div>
+    </div>
+    <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    function formatStatusId(id) {
+        return '#status-' + (id + '').replace(/:/g, "_");
+    }
+
+    function formatOutputValue(state) {
+        if (state) {
+            return "<!-- @RES:C:On -->";
+        }
+        else {
+            return "<!-- @RES:C:Off -->";
+        }
+    }
+
+    function doPortAction(id) {
+        var $sender = jQuery(formatStatusId(id));
+        $sender.html('<!-- @RES:EXF:Pair -->')
+        var loaded = $sender.hasClass('loaded');
+        if (loaded) {
+            doPairing(id);
+        }
+        else {
+            $sender.addClass('loaded');
+        }
+    }
+
+    function doPairing(id, type) {
+        var $sender = jQuery(formatStatusId(id));
+        $.ajax({
+            type: 'GET',
+            url: '/doextafreepairing.json?id=' + id + '&type=' + type,
+            dataType: 'json',
+            success: function () {
+                jQuery($sender).html('<!-- @RES:EXF:Pair -->');
+            },
+            beforeSend: function () {
+                jQuery($sender).html('<!-- @RES:EXF:Pairing -->...');
+            }
+        });
+    }
+
+    function doLazyLoading() {
+        var itemFound = false;
+        jQuery('.devicewait:first').each(function () {
+            itemFound = true;
+            var $this = jQuery(this);
+            var deviceId = $this.data('deviceid');
+            $this.removeClass('devicewait');
+            $this.addClass('devicedone');
+            CORE.FindDevice(deviceId, function (data) {
+                if (typeof data.RoomId !== 'undefined') {
+                    var room = CORE.FindRoom(data.RoomId);
+                    if (room != null) {
+                        $this.html("(" + CORE.FindRoom(data.RoomId).Name.Name + ")");
+                    } else {
+                        $this.html("");
+                    }
+                }
+            });
+        });
+
+        if (itemFound) {
+            setTimeout('doLazyLoading()', 100);
+        }
+    }
+
+    jQuery('#portsindex').on('pagecreate', function (event) {
+        jQuery(jQuery('#portstemplate').tmpl()).appendTo('#portscontent');
+        setTimeout('doLazyLoading()', 1000);
+    });
+</script>
+<!-- @Controls\MasterFooter.htm -->

@@ -1,0 +1,27 @@
+<div data-role="dialog" id="modifyuserdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:U:User -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyUser.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyusername name required RES:C:Name -->
+            <!-- @Forms\PasswordField.htm changepasswordnewpassword password required RES:U:NewPassword -->
+            <!-- @Forms\HiddenField.htm modifyuserid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyuserdialog').on('pagetransfer', function (e, args) {
+                var user = U.FindUser(args.param);
+                var name = (user != null) ? user.Name.Name : '';
+                var uniqueId = (user != null) ? user.Name.UniqueId : '';
+
+                jQuery('#modifyuserdialog [name=name]').val(name);
+                jQuery('#modifyuserdialog [name=uniqueid]').val(uniqueId);
+
+                jQuery('#modifyuserdialog form').validate();
+            });
+        </script>
+    </div>
+</div>

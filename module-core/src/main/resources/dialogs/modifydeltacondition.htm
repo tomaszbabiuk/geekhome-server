@@ -1,0 +1,98 @@
+<!-- @Forms\EqualityOperatorTemplate.htm modifydeltacondition -->
+<!-- @Forms\ValueDeviceTemplate.htm modifydeltaconditionfirst firstdeviceid RES:C:FirstDevice true true true -->
+<!-- @Forms\ValueDeviceTemplate.htm modifydeltaconditionsecond0 seconddeviceid RES:C:SecondDevice true false false -->
+<!-- @Forms\ValueDeviceTemplate.htm modifydeltaconditionsecond1 seconddeviceid RES:C:SecondDevice false true false -->
+<!-- @Forms\ValueDeviceTemplate.htm modifydeltaconditionsecond2 seconddeviceid RES:C:SecondDevice false false true -->
+
+<div data-role="dialog" id="modifydeltaconditiondialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:DeltaCondition -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyDeltaCondition.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifydeltaconditionname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifydeltaconditiondescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifydeltaconditionfirstdevicecontent"></div>
+            <div data-role="fieldcontain" id="modifydeltaconditionoperatorcontent"></div>
+            <div data-role="fieldcontain" id="modifydeltaconditionsecond0devicecontent"></div>
+            <div data-role="fieldcontain" id="modifydeltaconditionsecond1devicecontent"></div>
+            <div data-role="fieldcontain" id="modifydeltaconditionsecond2devicecontent"></div>
+            <!-- @Forms\NumberField.htm modifydeltaconditiondelta delta required RES:C:Delta 5 -->
+            <!-- @Forms\NumberField.htm modifydeltaconditionhysteresis hysteresis required RES:C:Hysteresis 1 -->
+            <!-- @Forms\HiddenField.htm modifydeltaconditionid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            function adjustToValueType(valueType) {
+                if (valueType == 0) {
+                    jQuery('#modifydeltaconditionsecond0devicecontent').show();
+                } else {
+                    jQuery('#modifydeltaconditionsecond0devicecontent').hide();
+                }
+
+                if (valueType == 1) {
+                    jQuery('#modifydeltaconditionsecond1devicecontent').show();
+                } else {
+                    jQuery('#modifydeltaconditionsecond1devicecontent').hide();
+                }
+
+                if (valueType == 2) {
+                    jQuery('#modifydeltaconditionsecond2devicecontent').show();
+                } else {
+                    jQuery('#modifydeltaconditionsecond2devicecontent').hide();
+                }
+        }
+
+            jQuery('#modifydeltaconditiondialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifydeltaconditionoperatorcontent').html(jQuery('#modifydeltaconditionoperatortemplate').tmpl());
+                jQuery('#modifydeltaconditionfirstdevicecontent').html(jQuery('#modifydeltaconditionfirstdevicetemplate').tmpl());
+                jQuery('#modifydeltaconditionsecond0devicecontent').html(jQuery('#modifydeltaconditionsecond0devicetemplate').tmpl());
+                jQuery('#modifydeltaconditionsecond1devicecontent').html(jQuery('#modifydeltaconditionsecond1devicetemplate').tmpl());
+                jQuery('#modifydeltaconditionsecond2devicecontent').html(jQuery('#modifydeltaconditionsecond2devicetemplate').tmpl());
+
+                var deltaCondition = CORE.FindDeltaCondition(args.param);
+
+                var name = (deltaCondition != null) ? deltaCondition.Name.Name : '';
+                var description = (deltaCondition != null) ? deltaCondition.Name.Description : '';
+                var uniqueId = (deltaCondition != null) ? deltaCondition.Name.UniqueId : '';
+                var firstDeviceId = (deltaCondition != null) ? deltaCondition.FirstDeviceId : '';
+                var secondDeviceId = (deltaCondition != null) ? deltaCondition.SecondDeviceId : '';
+                var delta = (deltaCondition != null) ? deltaCondition.Delta : '';
+                var hysteresis = (deltaCondition != null) ? deltaCondition.Hysteresis : '';
+                var operator = (deltaCondition != null) ? deltaCondition.Operator : '';
+
+                jQuery('#modifydeltaconditiondialog [name=name]').val(name);
+                jQuery('#modifydeltaconditiondialog [name=description]').val(description);
+                jQuery('#modifydeltaconditiondialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifydeltaconditiondialog [name=firstdeviceid]').val(firstDeviceId);
+                jQuery('#modifydeltaconditiondialog [name=seconddeviceid]').val(secondDeviceId);
+                jQuery('#modifydeltaconditiondialog [name=delta]').val(delta);
+                jQuery('#modifydeltaconditiondialog [name=hysteresis]').val(hysteresis);
+                jQuery('#modifydeltaconditiondialog [name=operator]').val(operator);
+
+                jQuery('#modifydeltaconditiondialog form').validate();
+
+                jQuery('#modifydeltaconditionfirstdevice').on('change',function() {
+                    var selectedDeviceId = jQuery(this).val();
+                    CORE.FindDevice(selectedDeviceId, function(data) {
+                        adjustToValueType(data.ValueType);
+                    });
+                });
+
+                if (deltaCondition != null) {
+                    CORE.FindDevice(deltaCondition.FirstDeviceId, function(data) {
+                        adjustToValueType(data.ValueType);
+                    });
+                }
+            });
+
+            jQuery('#modifydeltaconditiondialog').on('pageaftertransfer', function (e, args) {
+                jQuery('#modifydeltaconditionsecond0devicecontent').hide();
+                jQuery('#modifydeltaconditionsecond1devicecontent').hide();
+                jQuery('#modifydeltaconditionsecond2devicecontent').hide();
+            });
+        </script>
+    </div>
+</div>

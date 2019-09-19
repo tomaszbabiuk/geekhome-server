@@ -1,0 +1,59 @@
+<!-- @Forms\PresenceTypeTemplate.htm modifypresencecondition -->
+<!-- @Forms\MovementDetectorsTemplate.htm modifypresencecondition -->
+
+<div data-role="dialog" id="modifypresenceconditiondialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:ALARM:PresenceCondition -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyPresenceCondition.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifypresenceconditionname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifypresenceconditiondescription description none RES:C:Description -->
+            <!-- @Forms\DurationField.htm modifypresenceconditionduration duration required RES:C:Duration -->
+            <!-- @Forms\DurationField.htm modifypresenceconditionsensitivity sensitivity required RES:ALARM:Sensitivity -->
+            <div data-role="fieldcontain" id="modifypresenceconditionmovementdetectorscontent"></div>
+            <div data-role="fieldcontain" id="modifypresenceconditionpresencetypecontent"></div>
+            <!-- @Forms\HiddenField.htm modifypresenceconditionid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:OK -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifypresenceconditiondialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifypresenceconditionpresencetypecontent').html(jQuery('#modifypresenceconditionpresencetypetemplate').tmpl());
+                jQuery('#modifypresenceconditionmovementdetectorscontent').html(jQuery('#modifypresenceconditionmovementdetectorstemplate').tmpl());                                
+                jQuery('#modifypresenceconditiondialog form').validate();
+
+                var presenceCondition = ALARM.FindPresenceCondition(args.param);
+
+                var name = (presenceCondition != null) ? presenceCondition.Name.Name : '';
+                var description = (presenceCondition != null) ? presenceCondition.Name.Description : '';
+                var uniqueId = (presenceCondition != null) ? presenceCondition.Name.UniqueId : '';
+                var presenceType = (presenceCondition != null) ? presenceCondition.PresenceType : '0';
+                var movementDetectorsIds = (presenceCondition != null) ? presenceCondition.MovementDetectorsIds : '';
+
+                jQuery('#modifypresenceconditiondialog [name=name]').val(name);
+                jQuery('#modifypresenceconditiondialog [name=description]').val(description);
+                jQuery('#modifypresenceconditiondialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifypresenceconditiondialog [name=presencetype]').val(presenceType);
+
+                var movementDetectorsIdsSplits = movementDetectorsIds.split(',');
+                for (var movementDetectorIdIndex in movementDetectorsIdsSplits) {
+                    var movementDetectorId = 'modifypresenceconditionmovementdetector-' + movementDetectorsIdsSplits[movementDetectorIdIndex];
+                    jQuery('#' + movementDetectorId).prop('checked', true);
+                }
+            });
+
+            jQuery('#modifypresenceconditiondialog').on('pageaftertransfer', function (e, args) {
+                var presenceCondition = ALARM.FindPresenceCondition(args.param);
+
+                var duration = (presenceCondition != null) ? presenceCondition.Duration : '00:00:15';
+                var sensitivity = (presenceCondition != null) ? presenceCondition.Sensitivity : '00:00:30';
+
+                jQuery("#modifypresenceconditiondialog [name=duration]").val(duration);
+                jQuery("#modifypresenceconditiondialog [name=sensitivity]").val(sensitivity);
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

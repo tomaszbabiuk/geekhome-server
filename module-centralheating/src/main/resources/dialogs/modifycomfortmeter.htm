@@ -1,0 +1,54 @@
+<!-- @Forms\NamedPortTemplate.htm modifycomfortmetertemperature HM.GetTemperaturePorts() temperatureportid RES:CH:TemperaturePort false -->
+<!-- @Forms\NamedPortTemplate.htm modifycomfortmeterhumidity HM.GetHumidityPorts() humidityportid RES:CH:HumidityPort false -->
+<!-- @Forms\RoomTemplate.htm modifycomfortmeter -->
+
+<div data-role="dialog" id="modifycomfortmeterdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:CH:Comfortmeter -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyComfortmeter.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifycomfortmetername name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifycomfortmeterdescription description none RES:C:Description -->
+            <!-- @Forms\DeviceCategory.htm modifycomfortmeterdevicecategory -->
+            <div data-role="fieldcontain" id="modifycomfortmetertemperatureportcontent"></div>
+            <div data-role="fieldcontain" id="modifycomfortmeterhumidityportcontent"></div>
+            <div data-role="fieldcontain" id="modifycomfortmeterroomcontent"></div>
+            <!-- @Forms\HiddenField.htm modifycomfortmeterid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifycomfortmeterdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifycomfortmetertemperatureportcontent').html(jQuery('#modifycomfortmetertemperatureporttemplate').tmpl());
+                jQuery('#modifycomfortmeterhumidityportcontent').html(jQuery('#modifycomfortmeterhumidityporttemplate').tmpl());
+                jQuery('#modifycomfortmeterroomcontent').html(jQuery('#modifycomfortmeterroomtemplate').tmpl());
+
+                var comfortmeter = CH.FindComfortmeter(args.param);
+
+                var name = (comfortmeter != null) ? comfortmeter.Name.Name : '';
+                var description = (comfortmeter != null) ? comfortmeter.Name.Description : '';
+                var uniqueId = (comfortmeter != null) ? comfortmeter.Name.UniqueId : '';
+                var temperaturePortId = (comfortmeter != null) ? comfortmeter.TemperaturePortId : '';
+                var humidityPortId = (comfortmeter != null) ? comfortmeter.HumidityPortId : '';
+                var roomId = (comfortmeter != null) ? comfortmeter.RoomId : '';
+                var deviceCategory = (comfortmeter != null) ? comfortmeter.DeviceCategory : '1';
+
+                jQuery('#modifycomfortmeterdialog [name=name]').val(name);
+                jQuery('#modifycomfortmeterdialog [name=description]').val(description);
+                jQuery('#modifycomfortmeterdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifycomfortmeterdialog [name=temperatureportid]').val(temperaturePortId);
+                jQuery('#modifycomfortmeterdialog [name=humidityportid]').val(humidityPortId);
+                jQuery('#modifycomfortmeterdialog [name=roomid]').val(roomId);
+                jQuery('#modifycomfortmeterdialog [name=devicecategory]').val(deviceCategory);
+
+                jQuery('#modifycomfortmeterdialog form').validate();
+            });
+
+            jQuery('#modifycomfortmeterdialog').on('pageaftertransfer', function (e, args) {
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

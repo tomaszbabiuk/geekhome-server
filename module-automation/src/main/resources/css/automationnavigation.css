@@ -1,0 +1,14 @@
+/* no custom css navs yet */
+.icon-custom-moon           .ui-icon { background:  url(icons/moon.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-smartphone     .ui-icon { background:  url(icons/smartphone.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-leaf           .ui-icon { background:  url(icons/leaf.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-snowflake      .ui-icon { background:  url(icons/snowflake.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-valve          .ui-icon { background:  url(icons/valve.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-impeller       .ui-icon { background:  url(icons/impeller.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-dust           .ui-icon { background:  url(icons/dust.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-speaker        .ui-icon { background:  url(icons/speaker.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-desklamp		.ui-icon { background:  url(icons/desklamp.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-led    		.ui-icon { background:  url(icons/led.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-hanginglamp	.ui-icon { background:  url(icons/hanginglamp.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-standinglamp	.ui-icon { background:  url(icons/standinglamp.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-brightness 	.ui-icon { background:  url(icons/brightness.svg) 50% 50% no-repeat; background-size: 28px 28px; }

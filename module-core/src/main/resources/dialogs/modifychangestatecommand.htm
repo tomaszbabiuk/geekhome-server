@@ -1,0 +1,57 @@
+<!-- @Forms\MultistateDeviceTemplate.htm modifychangestatecommand -->
+<!-- @Forms\StateTemplate.htm modifychangestatecommand -->
+
+<div data-role="dialog" id="modifychangestatecommanddialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:ChangeStateCommand -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyChangeStateCommand.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifychangestatecommandname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifychangestatecommanddescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifychangestatecommanddevicescontent"></div>
+            <div data-role="fieldcontain" id="modifychangestatecommandstatecontent"></div>
+            <!-- @Forms\HiddenField.htm modifychangestatecommandid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifychangestatecommanddialog').on('pagetransfer', function (e, args) {
+                var changeStateCommand = CORE.FindChangeStateCommand(args.param);
+                var multistateDevices = CORE.GetAllNonReadonlyMultistateDevices();
+
+                var name = (changeStateCommand != null) ? changeStateCommand.Name.Name : '';
+                var description = (changeStateCommand != null) ? changeStateCommand.Name.Description : '';
+                var uniqueId = (changeStateCommand != null) ? changeStateCommand.Name.UniqueId : '';
+                var deviceId = (changeStateCommand != null) ? changeStateCommand.DeviceId : multistateDevices[0].Name.UniqueId;
+                var stateId = (changeStateCommand != null) ? changeStateCommand.StateId : '';
+
+                var devicesTemplateData = {
+                    Devices: multistateDevices,
+                    Selected: deviceId
+                };
+                jQuery('#modifychangestatecommanddevicescontent').html(jQuery('#modifychangestatecommanddevicetemplate')
+                    .tmpl(devicesTemplateData));
+
+                jQuery('#modifychangestatecommandstatecontent').html(jQuery('#modifychangestatecommandstatetemplate')
+                    .tmpl({ States: GetDeviceStates(deviceId) }));
+
+                jQuery('#modifychangestatecommandname').val(name);
+                jQuery('#modifychangestatecommanddescription').val(description);
+                jQuery('#modifychangestatecommandid').val(uniqueId);
+
+                jQuery('#modifychangestatecommanddialog form').validate();
+
+                jQuery('#modifychangestatecommanddevice').on('change',function() {
+                    var deviceId = jQuery(this).val();
+
+                    jQuery('#modifychangestatecommandstatecontent').html(jQuery('#modifychangestatecommandstatetemplate')
+                        .tmpl({ States: GetDeviceStates(deviceId) }));
+                    jQuery('#modifychangestatecommandstate').selectmenu();
+                    jQuery("#modifychangestatecommandstatecontent").fieldcontain()
+                });
+            });
+        </script>
+    </div>
+</div>

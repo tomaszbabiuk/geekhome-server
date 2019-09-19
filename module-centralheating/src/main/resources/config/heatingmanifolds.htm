@@ -1,0 +1,57 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<script id="devicesinfotemplate" type="text/x-jquery-tmpl">
+<!-- @RES:CH:CannotAddHeatingManifoldsMessage -->
+<ul>
+    <li><a href="/config/roomsandfloors.htm" data-inline="true" rel="external"><!-- @RES:C:RoomsAndFloors --></a></li>
+    <li><a href="/config/radiators.htm" data-inline="true" rel="external"><!-- @RES:CH:Radiators --></a></li>
+    <li><a href="/config/underfloorcircuits.htm" data-inline="true" rel="external"><!-- @RES:CH:UnderfloorCircuits --></a></li>
+    <li><a href="/config/rtlcircuits.htm" data-inline="true" rel="external"><!-- @RES:CH:RtlCircuits --></a></li>
+</ul>
+</script>
+
+<script id="heatingmanifoldstemplate" type="text/x-jquery-tmpl">
+    {{each CH.GetHeatingManifolds()}}
+        <ul data-inset="true" data-role="listview" data-split-theme="e">
+            <li data-theme="b">
+                <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#heatingmanifolddetailsdialog', { param: '${Name.UniqueId}' })"
+                {{if (typeof IconName !== 'undefined')}} style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 15px; background-size: 32px 32px; padding-left:50px;" {{/if}}>
+                    <!-- @Controls\HeatingProperties.htm -->
+                </a>
+            </li>
+            <!-- @Controls\NamedBlocksFragment.htm on RES:C:BlocksEnablingAutomaticControl -->
+        </ul>
+    {{/each}}
+    <div>
+        <!-- @Controls\PageTransferButton.htm #modifyheatingmanifolddialog RES:CH:AddHeatingManifold -->
+    </div>
+</script>
+
+<div data-role="page" id="heatingmanifoldsindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:CH:HeatingManifolds -->
+    </h1>
+  </div>
+  <div data-role="content" id="heatingmanifoldscontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#heatingmanifoldsindex').on('pagecreate', function (event) {
+        if (CH.CanAddHeatingManifolds()) {
+            jQuery(jQuery("#heatingmanifoldstemplate").tmpl()).appendTo("#heatingmanifoldscontent");
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#heatingmanifoldscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/heatingmanifolds.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/heatingmanifolds.htm -->
+<!-- @Dialogs\ModifyHeatingManifold.htm -->
+<!-- @Dialogs\HeatingCrudDetails.htm heatingmanifolddetails #modifyheatingmanifolddialog RemoveHeatingManifold.post CH.FindHeatingManifold RES:CH:HeatingManifold RES:CH:HeatingManifoldDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/heatingmanifolds.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

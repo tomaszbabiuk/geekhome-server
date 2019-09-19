@@ -1,0 +1,40 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddDevicesMessage -->
+<!-- @Controls\PortsInfo.htm false true false false false false false false -->
+
+<script id="magneticdetectorstemplate" type="text/x-jquery-tmpl">
+    <!-- @Controls\AlarmCrudList.htm #magneticdetectordetailsdialog ALARM.GetMagneticDetectors() RES:ALARM:MagneticDetectors -->
+    <div>
+        <!-- @Controls\PageTransferButton.htm #modifymagneticdetectordialog RES:ALARM:AddMagneticDetector -->
+    </div>
+</script>
+
+<div data-role="page" id="magneticdetectorsindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:ALARM:MagneticDetectors -->
+    </h1>
+  </div>
+  <div data-role="content" id="magneticdetectorscontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#magneticdetectorsindex').on('pagecreate', function (event) {
+        if (!HM.HasDigitalInputPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#magneticdetectorscontent');
+        } else if (CORE.CanAddDevices()) {
+            jQuery(jQuery("#magneticdetectorstemplate").tmpl()).appendTo("#magneticdetectorscontent");
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#magneticdetectorscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/magneticdetectors.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/magneticdetectors.htm -->
+<!-- @Dialogs\ModifyMagneticDetector.htm -->
+<!-- @Dialogs\AlarmCrudDetails.htm magneticdetectordetails #modifymagneticdetectordialog RemoveMagneticDetector.post ALARM.FindMagneticDetector RES:ALARM:MagneticDetector RES:ALARM:MagneticDetectorDetails -->
+<!-- @Controls\MasterFooter.htm -->

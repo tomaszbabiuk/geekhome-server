@@ -1,0 +1,59 @@
+﻿<!-- @Forms\RoomTemplate.htm modifyblind -->
+<!-- @Forms\NamedPortTemplate.htm modifyblindautomaticcontrol HM.GetDigitalOutputPorts() automaticcontrolportid RES:LIGHTS:AutomaticControlPort false -->
+<!-- @Forms\NamedPortTemplate.htm modifyblindmotor HM.GetDigitalOutputPorts() motorportid RES:LIGHTS:MotorPort false -->
+
+<div data-role="dialog" id="modifyblinddialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:LIGHTS:Blind -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyBlind.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyblindname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyblinddescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifyblindroomcontent"></div>
+            <div data-role="fieldcontain" id="modifyblindautomaticcontrolportcontent"></div>
+            <div data-role="fieldcontain" id="modifyblindmotorportcontent"></div>
+            <!-- @Forms\DurationField.htm modifyblindclosingtime closingtime required RES:LIGHTS:ClosingTime -->
+            <!-- @Forms\DurationField.htm modifyblindcomfortsettime comfortsettime required RES:LIGHTS:ComfortSetTime -->
+            <!-- @Forms\HiddenField.htm modifyblindid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyblinddialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyblindroomcontent').html(jQuery('#modifyblindroomtemplate').tmpl());
+                jQuery('#modifyblindautomaticcontrolportcontent').html(jQuery('#modifyblindautomaticcontrolporttemplate').tmpl());
+                jQuery('#modifyblindmotorportcontent').html(jQuery('#modifyblindmotorporttemplate').tmpl());
+                jQuery('#modifyblinddialog form').validate();
+
+                var blind = LIGHTS.FindBlind(args.param);
+
+                var name = (blind != null) ? blind.Name.Name : '';
+                var description = (blind != null) ? blind.Name.Description : '';
+                var uniqueId = (blind != null) ? blind.Name.UniqueId : '';
+                var roomId = (blind != null) ? blind.RoomId : '';
+                var automaticControlPortId = (blind != null) ? blind.AutomaticControlPortId : '';
+                var motorPortId = (blind != null) ? blind.MotorPortId : '';
+
+                jQuery('#modifyblinddialog [name=name]').val(name);
+                jQuery('#modifyblinddialog [name=description]').val(description);
+                jQuery('#modifyblinddialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyblinddialog [name=roomid]').val(roomId);
+                jQuery('#modifyblinddialog [name=automaticcontrolportid]').val(automaticControlPortId);
+                jQuery('#modifyblinddialog [name=motorportid]').val(motorPortId);
+            });
+
+            jQuery('#modifyblinddialog').on('pageaftertransfer', function (e, args) {
+                var blind = LIGHTS.FindBlind(args.param);
+
+                var closingTime = (blind != null) ? blind.ClosingTime : '00:02:00';
+                var comfortSetTime = (blind != null) ? blind.ComfortSetTime : '00:00:15';
+
+                jQuery('#modifyblinddialog [name=closingtime]').val(closingTime);
+                jQuery('#modifyblinddialog [name=comfortsettime]').val(comfortSetTime);
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

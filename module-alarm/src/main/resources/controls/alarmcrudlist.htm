@@ -1,0 +1,14 @@
+<ul data-inset="true" data-role="listview" data-split-theme="e">
+    <li data-theme="b">
+        $p2
+        <span class="ui-li-count">${$p1.length}</span>
+    </li>
+    {{each $p1}}
+    <li>
+        <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('$p0', { param: '${Name.UniqueId}' })"
+        {{if (typeof IconName !== 'undefined')}} style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 15px; background-size: 32px 32px; padding-left:50px;" {{/if}}>
+            <!-- @Controls\AlarmProperties.htm -->
+        </a>
+    </li>
+    {{/each}}
+</ul>

@@ -1,0 +1,34 @@
+<div data-role="dialog" id="modifymodedialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:Mode -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyMode.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifymodename name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifymodedescription description none RES:C:Description -->
+            <!-- @Forms\NumberField.htm modifymodepriority priority required RES:C:Priority 10 -->
+            <!-- @Forms\HiddenField.htm modifymodeid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifymodedialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifymodeblockscontent').html(jQuery('#modifymodeblockstemplate').tmpl());
+                
+                var mode = CORE.FindMode(args.param);
+                var name = (mode != null) ? mode.Name.Name : '';
+                var description = (mode != null) ? mode.Name.Description : '';
+                var uniqueId = (mode != null) ? mode.Name.UniqueId : '';
+                var priority = (mode != null) ? mode.Priority : '10';
+
+                jQuery('#modifymodename').val(name);
+                jQuery('#modifymodedescription').val(description);
+                jQuery('#modifymodeid').val(uniqueId);
+                jQuery('#modifymodepriority').val(priority);
+
+                jQuery('#modifymodedialog form').validate();
+            });
+        </script>
+    </div>
+</div>

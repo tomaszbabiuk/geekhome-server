@@ -1,0 +1,47 @@
+<!-- @Forms\EqualityOperatorTemplate.htm modifythermostatcondition -->
+<!-- @Forms\TemperatureControllerTemplate.htm modifythermostatcondition -->
+<!-- @Forms\ThermometerTemplate.htm modifythermostatcondition -->
+
+<div data-role="dialog" id="modifythermostatconditiondialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:CH:ThermostatCondition -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyThermostatCondition.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifythermostatconditionname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifythermostatconditiondescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifythermostatconditionoperatorcontent"></div>
+            <div data-role="fieldcontain" id="modifythermostatconditionthermometercontent"></div>
+            <div data-role="fieldcontain" id="modifythermostatconditiontemperaturecontrollercontent"></div>
+            <!-- @Forms\HiddenField.htm modifythermostatconditionid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifythermostatconditiondialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifythermostatconditionoperatorcontent').html(jQuery('#modifythermostatconditionoperatortemplate').tmpl());
+                jQuery('#modifythermostatconditionthermometercontent').html(jQuery('#modifythermostatconditionthermometertemplate').tmpl());
+                jQuery('#modifythermostatconditiontemperaturecontrollercontent').html(jQuery('#modifythermostatconditiontemperaturecontrollertemplate').tmpl());
+
+                var thermostatCondition = CH.FindThermostatCondition(args.param);
+
+                var name = (thermostatCondition != null) ? thermostatCondition.Name.Name : '';
+                var description = (thermostatCondition != null) ? thermostatCondition.Name.Description : '';
+                var uniqueId = (thermostatCondition != null) ? thermostatCondition.Name.UniqueId : '';
+                var operator = (thermostatCondition != null) ? thermostatCondition.Operator : '';
+                var thermometerId = (thermostatCondition != null) ? thermostatCondition.ThermometerId : '';
+                var temperatureControllerId = (thermostatCondition != null) ? thermostatCondition.TemperatureControllerId : '';
+
+                jQuery('#modifythermostatconditionname').val(name);
+                jQuery('#modifythermostatconditiondescription').val(description);
+                jQuery('#modifythermostatconditionid').val(uniqueId);
+                jQuery('#modifythermostatconditionoperator').val(operator);
+                jQuery('#modifythermostatconditionthermometer').val(thermometerId);
+                jQuery('#modifythermostatconditiontemperaturecontroller').val(temperatureControllerId);
+
+                jQuery('#modifythermostatconditiondialog form').validate();
+            });
+        </script>
+    </div>
+</div>

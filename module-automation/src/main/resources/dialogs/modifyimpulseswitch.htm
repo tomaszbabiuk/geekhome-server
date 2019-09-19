@@ -1,0 +1,59 @@
+<!-- @Forms\RoomTemplate.htm modifyimpulseswitch -->
+<!-- @Forms\PortTemplate.htm modifyimpulseswitch HM.GetDigitalInputPorts() true -->
+
+<div data-role="dialog" id="modifyimpulseswitchdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:AUTO:ImpulseSwitch -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyImpulseSwitch.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyimpulseswitchname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyimpulseswitchdescription description none RES:C:Description -->
+            <!-- @Forms\DeviceCategory.htm modifyimpulseswitchdevicecategory -->
+            <!-- @Forms\DurationField.htm modifyimpulseswitchimpulsetime impulsetime required RES:AUTO:ImpulseTime -->
+            <div data-role="fieldcontain" id="modifyimpulseswitchroomcontent"></div>
+            <div data-role="fieldcontain" id="modifyimpulseswitchportcontent"></div>
+            <!-- @Forms\HiddenField.htm modifyimpulseswitchid uniqueid -->
+            <!-- @Forms\CreateMultistateCondition.htm -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyimpulseswitchdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyimpulseswitchroomcontent').html(jQuery('#modifyimpulseswitchroomtemplate').tmpl());
+                jQuery('#modifyimpulseswitchportcontent').html(jQuery('#modifyimpulseswitchporttemplate').tmpl());
+
+                var impulseSwitch = AUTO.FindImpulseSwitch(args.param);
+                if (impulseSwitch != null) {
+                    jQuery("#createmultistatecondition").hide();
+                }
+
+                var name = (impulseSwitch != null) ? impulseSwitch.Name.Name : '';
+                var description = (impulseSwitch != null) ? impulseSwitch.Name.Description : '';
+                var uniqueId = (impulseSwitch != null) ? impulseSwitch.Name.UniqueId : '';
+                var roomId = (impulseSwitch != null) ? impulseSwitch.RoomId : '';
+                var portId = (impulseSwitch != null) ? impulseSwitch.PortId : '';
+                var deviceCategory = (impulseSwitch != null) ? impulseSwitch.DeviceCategory : '1';
+
+
+                jQuery('#modifyimpulseswitchdialog [name=name]').val(name);
+                jQuery('#modifyimpulseswitchdialog [name=description]').val(description);
+                jQuery('#modifyimpulseswitchdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyimpulseswitchdialog [name=roomid]').val(roomId);
+                jQuery('#modifyimpulseswitchdialog [name=portid]').val(portId);
+                jQuery('#modifyimpulseswitchdialog [name=devicecategory]').val(deviceCategory);
+
+                jQuery('#modifyimpulseswitchdialog form').validate();
+            });
+
+            jQuery('#modifyimpulseswitchdialog').on('pageaftertransfer', function (e, args) {
+                var impulseSwitch = AUTO.FindImpulseSwitch(args.param);
+
+                var impulseTime = (impulseSwitch != null) ? impulseSwitch.ImpulseTime : '00:00:02';
+
+                jQuery('#modifyimpulseswitchdialog [name=impulsetime]').val(impulseTime);
+            });
+        </script>
+    </div>
+</div>

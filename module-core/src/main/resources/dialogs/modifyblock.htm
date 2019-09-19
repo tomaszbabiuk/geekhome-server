@@ -1,0 +1,44 @@
+﻿<!-- @Forms\ConditionsTemplate.htm modifyblock -->
+
+<div data-role="dialog" id="modifyblockdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:Block -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyBlock.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyblockname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyblockdescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifyblockconditionscontent"></div>
+            <!-- @Forms\HiddenField.htm modifyblockid uniqueid -->
+            <!-- @Forms\HiddenField.htm modifyblocktargetid targetid -->
+            <!-- @Forms\HiddenField.htm modifyblockreturnurl returnurl -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyblockdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyblockreturnurl').val('$p0');
+                if (args.param != null) {
+                    //modify
+                    var block = CORE.FindBlock(args.param);
+                    if (block != null) {
+                        jQuery('#modifyblockname').val(block.Name.Name);
+                        jQuery('#modifyblockdescription').val(block.Name.Description);
+                        jQuery('#modifyblockid').val(block.Name.UniqueId);
+                        var conditionsIdsSplits = block.ConditionsIds.split(',');
+                        jQuery('#modifyblockconditionscontent').html(jQuery('#modifyblockconditionstemplate').tmpl({Selected: conditionsIdsSplits}));
+                    }
+                }
+                else {
+                    //add
+                    jQuery('#modifyblocktargetid').val(args.targetid);
+                    jQuery('#modifyblockname').val('<!-- @RES:C:NewBlock -->');
+                    jQuery('#modifyblockconditionscontent').html(jQuery('#modifyblockconditionstemplate').tmpl({ Selected : ''}));
+                }
+
+                jQuery('#modifyblockdialog form').validate();
+            });
+        </script>
+    </div>
+</div>

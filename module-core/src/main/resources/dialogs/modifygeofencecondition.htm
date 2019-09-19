@@ -1,0 +1,43 @@
+<!-- @Forms\GeofencesTemplate.htm modifygeofencecondition -->
+
+<div data-role="dialog" id="modifygeofenceconditiondialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:GeofenceCondition -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyGeofenceCondition.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifygeofenceconditionname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifygeofenceconditiondescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifygeofenceconditiongeofencescontent"></div>
+            <!-- @Forms\HiddenField.htm modifygeofenceconditionid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifygeofenceconditiondialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifygeofenceconditiongeofencescontent').html(jQuery('#modifygeofenceconditiongeofencestemplate').tmpl());
+
+                var geofenceCondition = CORE.FindGeofenceCondition(args.param);
+
+                var name = (geofenceCondition != null) ? geofenceCondition.Name.Name : '';
+                var description = (geofenceCondition != null) ? geofenceCondition.Name.Description : '';
+                var uniqueId = (geofenceCondition != null) ? geofenceCondition.Name.UniqueId : '';
+                var geofencesIds = (geofenceCondition != null) ? geofenceCondition.GeofencesIds : '';
+
+                jQuery('#modifygeofenceconditiondialog [name=name]').val(name);
+                jQuery('#modifygeofenceconditiondialog [name=description]').val(description);
+                jQuery('#modifygeofenceconditiondialog [name=uniqueid]').val(uniqueId);
+
+                jQuery('input:checkbox').prop('checked', false);
+                var geofencesIdsSplits = geofencesIds.split(',');
+                for (var geofenceIdIndex in geofencesIdsSplits) {
+                    var geofenceId = 'modifygeofenceconditiongeofence-' + geofencesIdsSplits[geofenceIdIndex];
+                    jQuery('#' + geofenceId).prop('checked', true);
+                }
+            
+                jQuery('#modifygeofenceconditiondialog form').validate();
+            });
+        </script>
+    </div>
+</div>

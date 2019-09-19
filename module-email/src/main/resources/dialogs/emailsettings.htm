@@ -1,0 +1,25 @@
+﻿<div data-role="dialog" id="emailsettingsdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:E:SendingEmailsSettings -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyEmailSettings.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm emailsettingsmtphost smtphost required RES:E:SMTPHost -->
+            <!-- @Forms\TextField.htm emailsettingsmtphost imaphost required RES:E:IMAPHost -->
+            <!-- @Forms\TextField.htm emailsettinguser user required RES:C:User -->
+            <!-- @Forms\PasswordField.htm emailsettingpassword password required RES:C:Password -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#emailsettingsdialog').on('pagetransfer', function (e, args) {
+                jQuery('#emailsettingsdialog form').validate();
+                jQuery('#emailsettingsdialog [name=smtphost]').val(CheckAutomationSetting('Email.SMTPHost').Result);
+                jQuery('#emailsettingsdialog [name=imaphost]').val(CheckAutomationSetting('Email.IMAPHost').Result);
+                jQuery('#emailsettingsdialog [name=user]').val(CheckAutomationSetting('Email.User').Result);
+                jQuery('#emailsettingsdialog [name=password]').val('');
+            });
+        </script>
+    </div>
+</div>

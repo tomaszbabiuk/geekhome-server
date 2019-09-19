@@ -1,0 +1,85 @@
+<script id="portstemplate" type="text/x-jquery-tmpl">
+    <ul data-inset="true" data-role="listview">
+        <li data-theme="b">
+            $p0
+            <span class="ui-li-count">${$p1.length}</span>
+        </li>
+        {{each SortById($p1)}}
+            <li>
+                <h3>${Id}</h3>
+                {{if MappedTo.length == 0}}
+                    <p><em><!-- @RES:C:NoMappings --></em></p>
+                {{else}}
+                    {{each MappedTo}}
+                        <p>${Name} <span data-deviceid="${UniqueId}" class="devicewait">(<!-- @RES:C:Loading -->...)</span></p>
+                    {{/each}}
+                {{/if}}
+				<p class="ui-li-aside">
+                  <a href="#" onclick="javascript:doPortAction('${Id}');" data-role="button">
+                    <span data-portid="${Id}" class="wait" id="status-${Id.replace(/:/g,"_")}"><!-- @RES:C:Wait -->...</span>
+                  </a>
+                </p>
+            </li>
+        {{/each}}
+    </ul>
+</script>
+<div data-role="page" id="portsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:Diagnostics --> - $p0</h1>
+    </div>
+    <div id="content"  class="ui-content">
+        <div data-role="content" id="portscontent"></div>
+        <div>
+            <button data-role="button" data-inline="true"  href="javascript:void(0)"
+                    onclick="javascript:refresh()">
+                <!-- @RES:C:Refresh -->
+            </button>
+        </div>
+    </div>
+    <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    function refresh() {
+        HM.Refresh();
+        window.location.reload();
+    }
+
+    function doLazyLoading() {
+        var itemFound = false;
+        jQuery('.devicewait:first').each(function () {
+            itemFound = true;
+            var $this = jQuery(this);
+            var deviceId = $this.data('deviceid');
+            $this.removeClass('devicewait');
+            $this.addClass('devicedone');
+            CORE.FindDevice(deviceId, function (data) {
+                if (typeof data.RoomId !== 'undefined') {
+                    var room = CORE.FindRoom(data.RoomId);
+                    if (room != null) {
+                        $this.html("(" + CORE.FindRoom(data.RoomId).Name.Name + ")");
+                    } else {
+                        $this.html("");
+                    }
+                }
+            });
+        });
+
+        jQuery('.wait:first').each(function () {
+            itemFound = true;
+            var $this = jQuery(this);
+            var portid = $this.data('portid');
+            $this.removeClass('wait');
+            doPortAction(portid);
+        });
+
+        if (itemFound) {
+            setTimeout('doLazyLoading()', 100);
+        }
+    }
+
+    jQuery('#portsindex').on('pagecreate', function (event) {
+        jQuery(jQuery('#portstemplate').tmpl()).appendTo('#portscontent');
+        setTimeout('doLazyLoading()', 1000);
+    });
+</script>

@@ -1,0 +1,42 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="thermometersinfotemplate" type="text/x-jquery-tmpl">
+<!-- @RES:CH:CannotAddAveragingThermometersMessage -->
+<ul>
+    <li><a href="/config/roomsandfloors.htm" data-inline="true" rel="external"><!-- @RES:C:RoomsAndFloors --></a></li>
+    <li><a href="/config/thermometers.htm" data-inline="true" rel="external"><!-- @RES:CH:Thermometers --></a></li>
+</ul>
+</script>
+
+<script id="averagingthermometerstemplate" type="text/x-jquery-tmpl">
+    <!-- @Controls\HeatingCrudList.htm #averagingthermometerdetailsdialog CH.GetAveragingThermometers() RES:CH:AveragingThermometers -->
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifyaveragingthermometerdialog RES:CH:AddAveragingThermometer -->
+    </div>
+</script>
+
+<div data-role="page" id="averagingthermometersindex">
+    <div data-role="header">
+        <h1><!-- @RES:CH:AveragingThermometers --></h1>
+    </div>
+    <div data-role="content" id="averagingthermometerscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#averagingthermometersindex').on('pagecreate', function (event) {
+        if (CH.CanAddAveragingThermometers()) {
+            jQuery(jQuery('#averagingthermometerstemplate').tmpl()).appendTo('#averagingthermometerscontent');
+        } else {
+            jQuery(jQuery('#thermometersinfotemplate').tmpl()).appendTo('#averagingthermometerscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/averagingthermometers.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/averagingthermometers.htm -->
+<!-- @Dialogs\ModifyAveragingThermometer.htm -->
+<!-- @Dialogs\HeatingCrudDetails.htm averagingthermometerdetails #modifyaveragingthermometerdialog RemoveAveragingThermometer.post CH.FindAveragingThermometer RES:CH:AveragingThermometer RES:CH:AveragingThermometerDetails -->
+<!-- @Controls\MasterFooter.htm -->

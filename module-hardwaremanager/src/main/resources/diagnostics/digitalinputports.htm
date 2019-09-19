@@ -1,0 +1,24 @@
+<!-- @Controls\MasterHeader.htm -->
+
+<script type="text/javascript">
+    function formatStatusId(id) {
+        return '#status-' + (id + '').replace(/:/g, "_");
+    }
+    
+    function doPortAction(id) {
+        $.ajax({
+            type: 'GET',
+            url: '/readdigitalinputport.json?id=' + id,
+            dataType: 'json',
+            success: function (data) {
+                jQuery(formatStatusId(id)).html(FormatInputValue(data.Result));
+            },
+            beforeSend: function() {
+                jQuery(formatStatusId(id)).html('<!-- @RES:C:Loading -->...');
+            }
+        });
+    }
+</script>
+
+<!-- @Controls\PortsBase.htm RES:C:DigitalInputPorts HM.GetDigitalInputPorts() -->
+<!-- @Controls\MasterFooter.htm -->

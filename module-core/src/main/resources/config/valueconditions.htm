@@ -1,0 +1,38 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="valueconditionstemplate" type="text/x-jquery-tmpl">
+  <!-- @Controls\CoreCrudList.htm #valueconditiondetailsdialog CORE.GetValueConditions() RES:C:ValueConditions -->
+  <div>
+    <!-- @Controls\PageTransferButton.htm #modifyvalueconditiondialog RES:C:AddValueCondition -->
+  </div>
+</script>
+
+<script id="valueconditionsinfotemplate" type="text/x-jquery-tmpl">
+    <!-- @RES:C:CannotAddValueConditionsMessage -->
+</script>
+
+<div data-role="page" id="valueconditionsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:ValueConditions --></h1>
+    </div>
+    <div data-role="content" id="valueconditionscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#valueconditionsindex').on('pagecreate', function (event) {
+        if (CORE.CanAddValueConditions()) {
+            jQuery(jQuery('#valueconditionstemplate').tmpl()).appendTo('#valueconditionscontent');
+        } else {
+            jQuery(jQuery('#valueconditionsinfotemplate').tmpl()).appendTo('#valueconditionscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/valueconditions.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/valueconditions.htm -->
+<!-- @Dialogs\ModifyValueCondition.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm valueconditiondetails #modifyvalueconditiondialog RemoveValueCondition.post CORE.FindValueCondition RES:C:ValueCondition RES:C:ValueConditionDetails -->
+<!-- @Controls\MasterFooter.htm -->

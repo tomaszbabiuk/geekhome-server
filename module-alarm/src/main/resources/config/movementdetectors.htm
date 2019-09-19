@@ -1,0 +1,40 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddDevicesMessage -->
+<!-- @Controls\PortsInfo.htm false true false false false false false false -->
+
+<script id="movementdetectorstemplate" type="text/x-jquery-tmpl">
+    <!-- @Controls\AlarmCrudList.htm #movementdetectordetailsdialog ALARM.GetMovementDetectors() RES:ALARM:MovementDetectors -->
+    <div>
+        <!-- @Controls\PageTransferButton.htm #modifymovementdetectordialog RES:ALARM:AddMovementDetector -->
+    </div>
+</script>
+
+<div data-role="page" id="movementdetectorsindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:ALARM:MovementDetectors -->
+    </h1>
+  </div>
+  <div data-role="content" id="movementdetectorscontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#movementdetectorsindex').on('pagecreate', function (event) {
+        if (!HM.HasDigitalInputPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#movementdetectorscontent');
+        } else if (CORE.CanAddDevices()) {
+            jQuery(jQuery("#movementdetectorstemplate").tmpl()).appendTo("#movementdetectorscontent");
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#movementdetectorscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/movementdetectors.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/movementdetectors.htm -->
+<!-- @Dialogs\ModifyMovementDetector.htm -->
+<!-- @Dialogs\AlarmCrudDetails.htm movementdetectordetails #modifymovementdetectordialog RemoveMovementDetector.post ALARM.FindMovementDetector RES:ALARM:MovementDetector RES:ALARM:MovementDetectorDetails -->
+<!-- @Controls\MasterFooter.htm -->

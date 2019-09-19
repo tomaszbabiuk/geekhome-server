@@ -1,0 +1,79 @@
+<!-- @Forms\AlarmSensorsTemplate.htm modifyalarmzone -->
+<!-- @Forms\LocksTemplate.htm modifyalarmzone -->
+<!-- @Forms\RoomsTemplate.htm modifyalarmzone -->
+
+<div data-role="dialog" id="modifyalarmzonedialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:ALARM:AlarmZone -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyAlarmZone.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyalarmzonename name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyalarmzonedescription description none RES:C:Description -->
+            <!-- @Forms\AlarmType.htm modifyalarmzone -->
+            <div data-role="fieldcontain" id="modifyalarmzoneroomscontent"></div>
+            <div data-role="fieldcontain" id="modifyalarmzonelockscontent"></div>
+            <div data-role="fieldcontain" id="modifyalarmzonealarmsensorscontent"></div>
+            <!-- @Forms\DurationField.htm modifyalarmzoneleavingtime leavingtime required RES:ALARM:LeavingTime -->
+            <!-- @Forms\NumberField.htm modifyalarmzoneunlockingcode unlockingcode required RES:ALARM:UnlockingCode 9999 -->
+            <!-- @Forms\HiddenField.htm modifyalarmzoneid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyalarmzonedialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyalarmzoneroomscontent').html(jQuery('#modifyalarmzoneroomstemplate').tmpl());
+                jQuery('#modifyalarmzoneportcontent').html(jQuery('#modifyalarmzoneporttemplate').tmpl());
+                jQuery('#modifyalarmzonelockscontent').html(jQuery('#modifyalarmzonelockstemplate').tmpl({ ZoneId:args.param}));
+                jQuery('#modifyalarmzonealarmsensorscontent').html(jQuery('#modifyalarmzonealarmsensorstemplate').tmpl());
+                jQuery('#modifyalarmzonedialog form').validate();
+                
+                var alarmZone = ALARM.FindAlarmZone(args.param);
+
+                var name = (alarmZone != null) ? alarmZone.Name.Name : '';
+                var description = (alarmZone != null) ? alarmZone.Name.Description : '';
+                var uniqueId = (alarmZone != null) ? alarmZone.Name.UniqueId : '';
+                var alarmType = (alarmZone != null) ? alarmZone.AlarmType : '0';
+                var unlockingCode = (alarmZone != null) ? alarmZone.UnlockingCode : '';
+                var locksIds = (alarmZone != null) ? alarmZone.LocksIds : '';
+                var alarmSensorsIds = (alarmZone != null) ? alarmZone.AlarmSensorsIds : '';
+                var roomsIds = (alarmZone != null) ? alarmZone.RoomsIds : '';
+
+                jQuery('#modifyalarmzonedialog [name=name]').val(name);
+                jQuery('#modifyalarmzonedialog [name=description]').val(description);
+                jQuery('#modifyalarmzonedialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyalarmzonedialog [name=alarmtype]').val(alarmType);
+                jQuery('#modifyalarmzonedialog [name=unlockingcode]').val(unlockingCode);
+
+                jQuery('input:checkbox').prop('checked', false);
+                var locksIdsSplits = locksIds.split(',');
+                for (var lockIdIndex in locksIdsSplits) {
+                  var lockId = 'modifyalarmzonelock-' + locksIdsSplits[lockIdIndex];
+                  jQuery('#' + lockId).prop('checked', true);
+                }
+
+                var alarmSensorsIdsSplits = alarmSensorsIds.split(',');
+                for (var alarmSensorIdIndex in alarmSensorsIdsSplits) {
+                  var alarmSensorId = 'modifyalarmzonealarmsensor-' + alarmSensorsIdsSplits[alarmSensorIdIndex];
+                  jQuery('#' + alarmSensorId).prop('checked', true);
+                }
+
+                var roomsIdsSplits = roomsIds.split(',');
+                for (var roomIdIndex in roomsIdsSplits) {
+                  var roomId = 'modifyalarmzoneroom-' + roomsIdsSplits[roomIdIndex];
+                  jQuery('#' + roomId).prop('checked', true);
+                }
+            });
+            
+            jQuery('#modifyalarmzonedialog').on('pageaftertransfer', function (e, args) {
+                var alarmZone = ALARM.FindAlarmZone(args.param);
+
+                var leavingTime = (alarmZone != null) ? alarmZone.LeavingTime : '00:02:00';
+
+                jQuery('#modifyalarmzonedialog [name=leavingtime]').val(leavingTime);
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

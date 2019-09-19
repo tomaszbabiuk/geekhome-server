@@ -1,0 +1,31 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="alertstemplate" type="text/x-jquery-tmpl">
+  <!-- @Controls\CoreCrudListWithBlocks.htm #alertdetailsdialog CORE.GetAlerts() -->
+  <div>
+    <!-- @Controls\PageTransferButton.htm #modifyalertdialog RES:C:AddAlert -->
+  </div>  
+</script>
+
+<div data-role="page" id="alertsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:Alerts --></h1>
+    </div>
+    <div data-role="content" id="alertscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+<script type="text/javascript">
+    jQuery('#alertsindex').on('pagecreate', function (event) {
+        jQuery(jQuery('#alertstemplate').tmpl()).appendTo('#alertscontent');
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/alerts.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/alerts.htm -->
+<!-- @Dialogs\ModifyAlert.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm alertdetails #modifyalertdialog RemoveAlert.post CORE.FindAlert RES:C:Alert RES:C:AlertDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/alerts.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

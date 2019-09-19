@@ -1,0 +1,26 @@
+<!-- @Controls\CoreProperties.htm -->
+
+{{if (typeof LampsIds !== 'undefined' && LampsIds != '')}}
+    <p><strong><!-- @RES:LIGHTS:Lamps -->: </strong>${LIGHTS.LampsIdsToNames(LampsIds)}</p>
+{{/if}}
+{{if (typeof RedPortId !== 'undefined')}}
+<p><strong><!-- @RES:LIGHTS:RedChannelPort -->: </strong>${RedPortId}</p>
+{{/if}}
+{{if (typeof GreenPortId !== 'undefined')}}
+<p><strong><!-- @RES:LIGHTS:GreenChannelPort -->: </strong>${GreenPortId}</p>
+{{/if}}
+{{if (typeof BluePortId !== 'undefined')}}
+<p><strong><!-- @RES:LIGHTS:BlueChannelPort -->: </strong>${BluePortId}</p>
+{{/if}}
+{{if (typeof AutomaticControlPortId !== 'undefined')}}
+<p><strong><!-- @RES:LIGHTS:AutomaticControlPort -->: </strong>${AutomaticControlPortId}</p>
+{{/if}}
+{{if (typeof MotorPortId !== 'undefined')}}
+<p><strong><!-- @RES:LIGHTS:MotorPort -->: </strong>${MotorPortId}</p>
+{{/if}}
+{{if (typeof ClosingTime !== 'undefined')}}
+<p><strong><!-- @RES:LIGHTS:ClosingTime -->: </strong>${ClosingTime}</p>
+{{/if}}
+{{if (typeof ComfortSetTime !== 'undefined')}}
+<p><strong><!-- @RES:LIGHTS:ComfortSetTime -->: </strong>${ComfortSetTime}</p>
+{{/if}}

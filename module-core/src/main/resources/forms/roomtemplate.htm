@@ -1,0 +1,13 @@
+<script id="$p0roomtemplate" type="text/x-jquery-tmpl">
+    <label for="$p0room" class="select">
+        <!-- @RES:C:Room -->:</label>
+    <select id="$p0room" name="roomid" data-native-menu="false" validate="required:true, minlength:1">
+        {{each CORE.GetFloors()}}
+   			<optgroup label="${Name.Name}">
+            {{each SortByDescriptiveName(Rooms)}}
+				<option value="${Name.UniqueId}">${Name.Name} </option>
+                {{/each}}
+			</optgroup>
+        {{/each}}
+    </select>
+</script>

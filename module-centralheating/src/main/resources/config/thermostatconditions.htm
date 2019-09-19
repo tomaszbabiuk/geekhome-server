@@ -1,0 +1,42 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="thermostatconditionstemplate" type="text/x-jquery-tmpl">
+    <!-- @Controls\HeatingCrudList.htm #thermostatconditiondetailsdialog CH.GetThermostatConditions() RES:CH:ThermostatConditions -->
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifythermostatconditiondialog RES:CH:AddThermostatCondition -->
+    </div>
+</script>
+
+<script id="thermostatconditionsinfotemplate" type="text/x-jquery-tmpl">
+<!-- @RES:CH:CannotAddThermostatConditionsMessage -->
+<ul>
+    <li><a href="thermometers.htm" data-inline="true" rel="external"><!-- @RES:CH:Thermometers --></a></li>
+    <li><a href="temperaturecontrollers.htm" data-inline="true" rel="external"><!-- @RES:CH:TemperatureControllers --></a></li>
+</ul>
+</script>
+
+<div data-role="page" id="thermostatconditionsindex">
+    <div data-role="header">
+        <h1><!-- @RES:CH:ThermostatConditions --></h1>
+    </div>
+    <div data-role="content" id="thermostatconditionscontent">        
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#thermostatconditionsindex').on('pagecreate', function (event) {
+        if (CH.CanAddThermostatConditions()) {
+            jQuery(jQuery('#thermostatconditionstemplate').tmpl()).appendTo('#thermostatconditionscontent');
+        } else {
+            jQuery(jQuery('#thermostatconditionsinfotemplate').tmpl()).appendTo('#thermostatconditionscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/thermostatconditions.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/thermostatconditions.htm -->
+<!-- @Dialogs\ModifyThermostatCondition.htm -->
+<!-- @Dialogs\HeatingCrudDetails.htm thermostatconditiondetails #modifythermostatconditiondialog RemoveThermostatCondition.post CH.FindThermostatCondition RES:CH:ThermostatCondition RES:CH:ThermostatConditionDetails -->
+<!-- @Controls\MasterFooter.htm -->

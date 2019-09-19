@@ -1,0 +1,39 @@
+<div data-role="dialog" id="savechangesdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:Save -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <div id="restartpanel">
+            <div>
+                <img src="/css/icons/warning.svg" style="float:right" width="50" height="50"/>
+                <strong><!-- @RES:C:Warning --></strong>
+            </div>
+            <p><!-- @RES:C:SaveInfo --></p>
+            <form action="/config/Save.post" method="post" data-ajax="false">
+                <!-- @Forms\FilledTextField.htm savechangescomment comment required RES:C:Comment RES:C:SampleComment -->
+                <!-- @Forms\HiddenField.htm savechangesreturnurl returnurl -->
+                <!-- @Forms\SubmitButton.htm RES:C:Save -->
+            </form>
+        </div>
+        <div id="savingpanel" style="display:none">
+            <div>
+                <img src="/css/icons/fileexchange.svg" style="float:right" width="50" height="50"/>
+                <strong><!-- @RES:C:PleaseWait --></strong>
+            </div>
+            <p><!-- @RES:C:LongTimeInfo --></p>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery('#savechangesdialog').on('pageshow', function() {
+        jQuery('#savechangesdialog [name=returnurl]').val('$p0');
+        jQuery('#savechangesdialog form').validate();
+        jQuery('#savechangesdialog form').submit(function() {
+            jQuery('#restartpanel').hide();
+            jQuery('#savingpanel').show();
+        });
+    });
+</script>

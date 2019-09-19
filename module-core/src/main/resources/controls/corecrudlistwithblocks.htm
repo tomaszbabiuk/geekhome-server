@@ -1,0 +1,28 @@
+{{each $p1}}
+<ul data-inset="true" data-role="listview" data-split-theme="e">
+    <li data-theme="b">
+        <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('$p0', { param: '${Name.UniqueId}' })"
+        {{if (typeof IconName !== 'undefined')}} style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 15px; background-size: 32px 32px; padding-left:50px;" {{/if}}>
+            <!-- @Controls\CoreProperties.htm -->
+        </a>
+        <span class="ui-li-count">${CORE.FindBlocksByTarget(Name.UniqueId).length}</span>
+        <a href="javascript:void(0)" onclick="javascript:PageTransfer('#modifyblockdialog', { targetid: '${Name.UniqueId}', param:null })" data-icon="add">
+            <!-- @RES:C:AddNewBlock -->
+        </a>
+    </li>
+    {{each SortByPriority(CORE.FindBlocksByTarget(Name.UniqueId))}}
+    <li>
+        <a href="javascript:void(0)" onclick="javascript:PageTransfer('#blockdetailsdialog', { param: '${Name.UniqueId}' })">
+            <h3>
+                <!-- @Controls\DescriptiveName.htm -->
+            </h3>
+            {{if ConditionsIds != ''}}<p>
+            <strong>
+                <!-- @RES:C:Conditions -->:
+            </strong>${CORE.ConditionsIdsToNames(ConditionsIds)}
+        </p>{{/if}}
+        </a>
+    </li>
+    {{/each}}
+</ul>
+{{/each}}

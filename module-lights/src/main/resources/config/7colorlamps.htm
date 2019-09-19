@@ -1,0 +1,58 @@
+﻿<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddDevicesMessage -->
+<!-- @Controls\PortsInfo.htm true false false false false true false false -->
+
+<script id="7colorlampstemplate" type="text/x-jquery-tmpl">
+    {{each LIGHTS.Get7ColorLamps()}}
+    <ul data-inset="true" data-role="listview" data-split-theme="e">
+        <li data-theme="b">
+            <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#modify7colorlampdialog', { param: '${Name.UniqueId}' })"
+            {{if (typeof IconName !== 'undefined')}} style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 15px; background-size: 32px 32px; padding-left:50px;" {{/if}}>
+                <!-- @Controls\LightsProperties.htm -->
+            </a>
+        </li>
+        <!-- @Controls\NamedBlocksFragment.htm white RES:LIGHTS:BlocksEnablingWhiteColor -->
+        <!-- @Controls\NamedBlocksFragment.htm red RES:LIGHTS:BlocksEnablingRedColor -->
+        <!-- @Controls\NamedBlocksFragment.htm green RES:LIGHTS:BlocksEnablingGreenColor -->
+        <!-- @Controls\NamedBlocksFragment.htm blue RES:LIGHTS:BlocksEnablingBlueColor -->
+        <!-- @Controls\NamedBlocksFragment.htm cyan RES:LIGHTS:BlocksEnablingCyanColor -->
+        <!-- @Controls\NamedBlocksFragment.htm magenta RES:LIGHTS:BlocksEnablingMagentaColor -->
+        <!-- @Controls\NamedBlocksFragment.htm yellow RES:LIGHTS:BlocksEnablingYellowColor -->
+    </ul>
+    {{/each}}
+    <div>
+        <!-- @Controls\PageTransferButton.htm #modify7colorlampdialog RES:LIGHTS:Add7ColorLamp -->
+    </div>
+</script>
+
+<div data-role="page" id="7colorlampsindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:LIGHTS:7ColorLamps -->
+    </h1>
+  </div>
+  <div data-role="content" id="7colorlampscontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#7colorlampsindex').on('pagecreate', function (event) {
+        if (!HM.HasDigitalOutputPorts() && !HM.HasTogglePorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#7colorlampscontent');
+        } else if (CORE.CanAddDevices()) {
+            jQuery(jQuery("#7colorlampstemplate").tmpl()).appendTo("#7colorlampscontent");
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#7colorlampscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/7colorlamps.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/7colorlamps.htm -->
+<!-- @Dialogs\Modify7ColorLamp.htm -->
+<!-- @Dialogs\LightsCrudDetails.htm 7colorlampdetails #modify7colorlampdialog Remove7ColorLamp.post LIGHTS.Find7ColorLamp RES:LIGHTS:7ColorLamp RES:LIGHTS:7ColorLampDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/7colorlamps.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

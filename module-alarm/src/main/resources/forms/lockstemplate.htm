@@ -1,0 +1,12 @@
+<script id="$p0lockstemplate" type="text/x-jquery-tmpl">
+    {{if ALARM.GetAllLocks().length > 0}}
+        <fieldset data-role="controlgroup">
+	      <legend><!-- @RES:ALARM:CodeLocks -->:</legend>
+            {{each ALARM.GetAllLocks()}}
+	            <input type="checkbox" name="locksids" value="${Name.UniqueId}" id="$p0lock-${Name.UniqueId}" class="custom"
+	                   {{if ALARM.IsLockInUse(Name.UniqueId, ZoneId)}} disabled{{/if}}/>
+	            <label for="$p0lock-${Name.UniqueId}"><!-- @Controls\DeviceName.htm --></label>
+            {{/each}}
+        </fieldset>
+    {{/if}}
+</script>

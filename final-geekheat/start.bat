@@ -1,0 +1,1 @@
+java -Djava.library.path=..\lib-native -Dfile.encoding=UTF-8 -Dlog4j.configurationFile=log4j2.xml -jar target\final-geekheat-1.0-SNAPSHOT-jar-with-dependencies.jar

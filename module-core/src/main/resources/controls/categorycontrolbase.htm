@@ -1,0 +1,127 @@
+<!-- @Controls\MasterHeader.htm -->
+
+<script id="descriptionstemplate" type="text/x-jquery-tmpl">
+    <span class="{{if IsSignaled}}ui-body-b{{else}}ui-body-c{{/if}} ui-shadow ui-btn-corner-all ui-mini ui-btn-inline">
+        <strong>&nbsp;&nbsp;${InterfaceValue}&nbsp;&nbsp;</strong>
+    </span>
+    <ul style="white-space: normal">
+    {{each Descriptions}}
+        <li>${Key}{{if Value != ''}}: {{/if}}<strong>${Value}</strong></li>
+    {{/each}}
+    {{if ControlMode === 0}}
+        <li><i><!-- @RES:C:ManualWarning --></i></li>
+    {{/if}}
+    {{if IsAlternating}}
+        <li><i><!-- @RES:C:ToggledDeviceWarning --></i></li>
+    {{/if}}
+    </ul>
+</script>
+
+<script id="categorycontroltemplate" type="text/x-jquery-tmpl">
+{{if Result.length == 0}}
+    <!-- @RES:C:NoDevicesInSelectedCategory -->
+{{else}}
+{{each Result}}
+    <ul data-inset="true" data-role="listview">
+        <li data-theme="b">
+            <!-- @Controls\DescriptiveName.htm -->
+            <span class="ui-li-count">${Devices.length}</span>
+        </li>
+        {{each Devices}}
+            <li  style="font-weight:normal">
+                <a class="customlisticon" href="javascript:void(0)"
+                    {{if (typeof IconName !== 'undefined')}} style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 15px; background-size: 32px 32px; padding-left:50px;" {{/if}}
+                    {{if (ControlType == 0)}}
+                        onclick="javascript:PageTransfer('#readcontroldialog', { param: '${Name.UniqueId}' })"
+                    {{/if}}
+                    {{if (ControlType == 1)}}
+                        onclick="javascript:PageTransfer('#switchcontroldialog', { param: '${Name.UniqueId}' })"
+                    {{/if}}
+                    {{if (ControlType == 2)}}
+                        onclick="javascript:PageTransfer('#multicontrollercontroldialog', { param: '${Name.UniqueId}' })"
+                    {{/if}}
+                    {{if (ControlType == 3)}}
+                        onclick="javascript:PageTransfer('#multitogglecontroldialog', { param: '${Name.UniqueId}' })"
+                    {{/if}}
+                    {{if (ControlType == 5)}}
+                        onclick="javascript:PageTransfer('#codecontroldialog', { param: '${Name.UniqueId}' })"
+                    {{/if}}
+                    {{if (ControlType == 6)}}
+                        onclick="javascript:PageTransfer('#pushcontroldialog', { param: '${Name.UniqueId}' })"
+                    {{/if}}
+                    {{if (ControlType == 7)}}
+                        onclick="javascript:PageTransfer('#multistatecontroldialog', { param: '${Name.UniqueId}' })"
+                    {{/if}}
+                    <strong><!-- @Controls\DescriptiveName.htm --></strong>
+                    {{if (typeof RoomId !== 'undefined')}}
+                        (${CORE.FindFloorByRoomId(RoomId).Name.Name}/ ${CORE.FindRoom(RoomId).Name.Name})
+                    {{/if}}
+                    {{if (typeof RoomsIds !== 'undefined' && RoomsIds != '')}}
+                       (${CORE.RoomsIdsToNames(RoomsIds)})
+                    {{/if}}<br/>
+                    <span class="devicewait" deviceId="${Name.UniqueId}">
+                        <!-- @RES:C:Loading -->
+                    </span>
+                </a>
+            </li>
+        {{/each}}
+    </ul>
+{{/each}}
+{{/if}}
+</script>
+
+<div data-role="page" id="categorycontrolindex">
+    <div data-role="header">
+        <h1><!-- @RES:THIS:AppEdition --> - $p1</h1>
+    </div>
+    <div data-role="content" id="categorycontrolcontent">
+    </div>
+    <!-- @Controls\CategoryControlFooter.htm -->
+</div>
+
+<!-- @Controls\ControlDialogsScripts.htm -->
+<!-- @Dialogs\MulticontrollerControl.htm -->
+<!-- @Dialogs\CodeControl.htm -->
+<!-- @Dialogs\MultistateControl.htm -->
+<!-- @Dialogs\MultitoggleControl.htm -->
+<!-- @Dialogs\ReadControl.htm -->
+
+<script type="text/javascript">
+    function checkDevicesEvaluation() {
+        jQuery('.devicewait').each(function () {
+            var self = jQuery(this);
+            var id = self.attr('deviceid');
+            self.removeClass('devicewait');
+            CheckDeviceEvaluation(id, function (data) {
+                if (data != null) {
+                    var descriptionsHtml = jQuery('#descriptionstemplate').tmpl(data);
+                    self.html(descriptionsHtml);
+                }
+                else {
+                    self.html('-');
+                }
+
+                jQuery(self).addClass('devicedone');
+            });
+        });
+    }
+
+    function refresh() {
+        jQuery('.devicedone').removeClass('devicedone').addClass('devicewait');
+        checkDevicesEvaluation();
+    }
+
+    jQuery('#categorycontrolindex').on('pagecreate', function (event) {
+        var data = GetDevicesGroupsByCategory($p0);
+        jQuery(jQuery('#categorycontroltemplate').tmpl(data)).appendTo('#categorycontrolcontent');
+        checkDevicesEvaluation();
+        setInterval('refresh()', 10000);
+        setControlFooterSelection('$p0');
+    });
+
+    jQuery('#multicontrollercontroldialog, #codecontroldialog, #multistatecontroldialog, #readcontroldialog, #multitogglecontroldialog').on('pagehide', function (event) {
+        refresh();
+    });
+
+</script>
+<!-- @Controls\MasterFooter.htm -->

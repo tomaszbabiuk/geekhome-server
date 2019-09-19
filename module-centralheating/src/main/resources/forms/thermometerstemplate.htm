@@ -1,0 +1,13 @@
+<script id="$p0thermometerstemplate" type="text/x-jquery-tmpl">
+{{if CH.GetThermometers().length }}
+    <fieldset data-role="controlgroup">
+        <legend>
+            <!-- @RES:CH:Thermometers -->:
+        </legend>
+        {{each CH.GetThermometers()}}
+            <input type="checkbox" name="thermometersids" value="${Name.UniqueId}" id="$p0thermometer-${Name.UniqueId}" class="custom" validate="required:true, minlength:2" />
+            <label for="$p0thermometer-${Name.UniqueId}"><!-- @Controls\DeviceName.htm --></label>
+        {{/each}}
+    </fieldset>
+{{/if}}
+</script>

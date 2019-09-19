@@ -1,0 +1,11 @@
+<script id="$p0statetemplate" type="text/x-jquery-tmpl">
+    <label for="$p0state" class="select">
+        <!-- @RES:C:State -->:</label>
+    <select id="$p0state" name="stateid" data-native-menu="false" validate="required:true, minlength:1">
+        {{each States}}
+            {{if $value.Type != 0}}
+                <option value="${Name.UniqueId}"><!-- @Controls\DeviceName.htm --></option>
+            {{/if}}
+        {{/each}}
+    </select>
+</script>

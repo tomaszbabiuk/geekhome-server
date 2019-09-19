@@ -1,0 +1,30 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="nfcconditionstemplate" type="text/x-jquery-tmpl">
+  <!-- @Controls\AutomationCrudList.htm #nfcconditiondetailsdialog AUTO.GetNfcConditions() RES:AUTO:NfcConditions -->
+  <div>
+    <!-- @Controls\PageTransferButton.htm #modifynfcconditiondialog RES:AUTO:AddNfcCondition -->
+  </div>
+</script>
+
+<div data-role="page" id="nfcconditionsindex">
+    <div data-role="header">
+        <h1><!-- @RES:AUTO:NfcConditions --></h1>
+    </div>
+    <div data-role="content" id="nfcconditionscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#nfcconditionsindex').on('pagecreate', function (event) {
+        jQuery(jQuery('#nfcconditionstemplate').tmpl()).appendTo('#nfcconditionscontent');
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/nfcconditions.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/nfcconditions.htm -->
+<!-- @Dialogs\ModifyNfcCondition.htm -->
+<!-- @Dialogs\AutomationCrudDetails.htm nfcconditiondetails #modifynfcconditiondialog RemoveNfcCondition.post AUTO.FindNfcCondition RES:AUTO:NfcCondition RES:AUTO:NfcConditionDetails -->
+<!-- @Controls\MasterFooter.htm -->

@@ -1,0 +1,53 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="roomsandfloorstemplate" type="text/x-jquery-tmpl">
+    {{each CORE.GetFloors()}}
+        <ul data-inset="true" data-role="listview" data-split-theme="e">
+            <li data-theme="b">
+                <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#floordetailsdialog', { param: '${Name.UniqueId}' })" 
+                   style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 5px; background-size: 32px 32px; padding-left:50px;">
+                  <!-- @Controls\DescriptiveName.htm -->
+                </a>
+				<span class="ui-li-count">${Rooms.length}</span>
+                <a href="javascript:void(0)" onclick="javascript:PageTransfer('#modifyroomdialog', { param: null, floorid: '${Name.UniqueId}' })" data-icon="add">
+                    <!-- @RES:C:AddNewRoom -->
+                </a>
+            </li> 
+            {{each SortByDescriptiveName(Rooms)}}
+            <li>
+              <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#roomdetailsdialog', { param: '${Name.UniqueId}' })" 
+                 style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 5px; background-size: 32px 32px; padding-left:50px;">
+                  <!-- @Controls\DescriptiveName.htm -->
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+    {{/each}}
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifyfloordialog RES:C:AddFloor -->
+    </div>  
+</script>
+
+<div data-role="page" id="roomsandfloorsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:RoomsAndFloors --></h1>
+    </div>
+    <div data-role="content" id="roomsandfloorscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#roomsandfloorsindex').on('pagecreate', function (event) {
+        jQuery(jQuery("#roomsandfloorstemplate").tmpl()).appendTo("#roomsandfloorscontent");
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/roomsandfloors.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/roomsandfloors.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm floordetails #modifyfloordialog RemoveFloor.post CORE.FindFloor RES:C:Floor RES:C:FloorDetails -->
+<!-- @Dialogs\CoreCrudDetails.htm roomdetails #modifyroomdialog RemoveRoom.post CORE.FindRoom RES:C:Room RES:C:RoomDetails -->
+<!-- @Dialogs\ModifyFloor.htm -->
+<!-- @Dialogs\ModifyRoom.htm -->
+<!-- @Controls\MasterFooter.htm -->

@@ -1,0 +1,832 @@
+<!-- @Controls\MasterHeader.htm -->
+<style type="text/css">
+    #dashboardindex {
+        /* IE10 Consumer Preview */
+        background-image: -ms-linear-gradient(top left, #BDC3C5 0%, #343434 100%);
+
+        /* Mozilla Firefox */
+        background-image: -moz-linear-gradient(top left, #BDC3C5 0%, #343434 100%);
+
+        /* Opera */
+        background-image: -o-linear-gradient(top left, #BDC3C5 0%, #343434 100%);
+
+        /* Webkit (Safari/Chrome 10) */
+        background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #BDC3C5), color-stop(1, #343434));
+
+        /* Webkit (Chrome 11+) */
+        background-image: -webkit-linear-gradient(top left, #BDC3C5 0%, #343434 100%);
+
+        /* W3C Markup, IE10 Release Preview */
+        background-image: linear-gradient(to bottom right, #BDC3C5 0%, #343434 100%);
+    }
+
+    #dashboardindex [data-role=content] {
+        min-height:200px;
+        background-image: url('/css/images/gearpart.png'), url('/css/images/logo.svg');
+        background-position: right top, right top;
+        background-repeat: no-repeat, no-repeat;
+    }
+
+    #alertslistview {
+        margin-bottom:10px;
+    }
+
+    #isotopecontainer {
+        min-width:10px;
+        min-height:200px;
+        margin-bottom:50px;
+    }
+
+    .isotopeitem {
+        min-height:80px;
+        margin:2px;
+    }
+
+    .isotopesmallitem {
+        width:120px; 
+    }
+
+    .isotopebigitem {
+        width:276px; 
+    }
+
+    .icon-custom-power-system .ui-icon { background:  url(css/icons/plugin_white.svg) 50% 50% no-repeat; background-size: 14px 14px; }
+</style>
+
+<script id="headertemplate" type="text/x-jquery-tmpl">
+    <h1 data-theme="c"><!-- @RES:THIS:AppEdition --> <span id="userandtimeinfo"></h1>
+    <a data-theme="b" onclick="javascript:PageTransfer('#powerdialog')" data-icon=custom" class="icon-custom-power-system ui-btn-right ui-nodisc-icon"><!-- @RES:C:System --></a>
+    <div data-role="navbar" class="custom-nav">
+        <ul>
+            <li>
+                {{if OperationMode == 1}}
+                <a href="#" data-icon="custom" class="icon-custom-robot" data-theme="b">
+                    <!-- @RES:C:Automation --></a>
+                {{else}}
+                <a href="#switchtoautomaticdialog" data-icon="custom" class="icon-custom-robot-white" data-theme="a">
+                    <!-- @RES:C:Automation --></a>
+                {{/if}}
+
+            </li>
+            <li>
+                {{if OperationMode == 4}}
+                <a href="#" data-icon="custom" class="icon-custom-wrench" data-theme="b">
+                    <!-- @RES:C:Configuration --></a>
+                {{else}}
+                <a href="#switchtoconfigurationdialog" data-icon="custom" class="icon-custom-wrench-white" data-theme="a">
+                    <!-- @RES:C:Configuration --></a>
+                {{/if}}
+            </li>
+            <li>
+                {{if OperationMode == 3}}
+                <a href="#" data-icon="custom" class="icon-custom-stethoscope" data-theme="b">
+                    <!-- @RES:C:Diagnostics --></a>
+                {{else}}
+                <a href="#switchtodiagnosticsdialog" data-icon="custom" class="icon-custom-stethoscope-white" data-theme="a">
+                    <!-- @RES:C:Diagnostics --></a>
+                {{/if}}
+            </li>
+        </ul>
+    </div>
+</script>
+
+<script id="alertstemplate" type="text/x-jquery-tmpl">
+    <ul data-role="listview" id="alertslistview">
+    {{each Result}}
+        <li class="ui-body-b"><!-- @Controls\DescriptiveName.htm --></li>
+    {{/each}}
+    </ul>
+</script>
+
+<script id="footertemplate" type="text/x-jquery-tmpl">
+  <div data-role="navbar" class="custom-nav" data-grid="${Class}">
+    {{each Slices}}
+    <ul>
+      {{each $value}}
+      <li>
+        <a href="${Href}" {{if Href != '#'}} rel="external"{{/if}} onclick="${OnClick}" class="icon-custom-${IconName}" width="28" height="28" data-icon="custom">${Name}</a>
+      </li>
+      {{/each}}
+    </ul>
+    {{/each}}
+  </div>
+</script>
+
+<script id="descriptionstemplate" type="text/x-jquery-tmpl">
+    <strong>${InterfaceValue}</strong>
+    <ol style="white-space: normal">
+    {{each Descriptions}}
+        <li>${Key}{{if Value != ''}}: {{/if}}<strong>${Value}</strong></li>
+    {{/each}}
+    </ol>
+    {{if ControlMode === 0}}
+        <img src="/css/icons/manual{{if IsSignaled}}_signaled{{/if}}.svg" width="28" height="28" style="float:right" title="<!-- @RES:C:ManualWarning -->" />
+    {{/if}}
+    {{if IsAlternating}}
+        <img src="/css/icons/warning{{if IsSignaled}}_signaled{{/if}}.svg" width="28" height="28" style="float:right" title="<!-- @RES:C:ToggledDeviceWarning -->" />
+    {{/if}}
+    {{if ColorValue != null}}
+        <div style="width:50px; height:25px; background:${ColorValue}; border-color:gray; border-width:thin"></div>
+    {{/if}}
+</script>
+
+<script id="configurationmodifiedtemplate" type="text/x-jquery-tmpl">
+  <div id="isotopecontainer">
+      {{if IsConfigurationModified}}
+      <div class="isotopeitem ui-body ui-body-b ui-corner-bottom ui-corner-top isotopesmallitem" style="cursor:pointer"
+            onclick="javascript:location.href='#savechangesdialog'">
+          <div>
+              <img src="css/icons/gear.svg" style="float:right" width="28" height="28"/>
+              <strong><!-- @RES:C:Information --></strong>
+          </div>
+          <div>
+              <em><!-- @RES:C:ConfigurationIsModified --></em>
+          </div>
+      </div>
+      {{/if}}
+      {{each Validations}}
+      <div class="isotopeitem ui-body ui-body-c ui-corner-bottom ui-corner-top isotopebigitem" >
+          <div>
+              <img src="css/icons/warning.svg" style="float:right" width="28" height="28"/>
+              <strong><!-- @RES:C:Warning --></strong>
+          </div>
+          <div>
+              <em>${$value}</em>
+          </div>
+      </div>
+      {{/each}}
+  </div>
+</script>
+
+<script id="errorstemplate" type="text/x-jquery-tmpl">
+  <div id="isotopecontainer">
+      {{if HasErrors}}
+      <div class="isotopeitem ui-body ui-body-b ui-corner-bottom ui-corner-top isotopemediumitem" style="cursor:pointer"
+           onclick="javascript:location.href='/diagnostics/errors.htm'">
+          <div>
+              <img src="css/icons/error.svg" style="float:right" width="28" height="28"/>
+              <strong><!-- @RES:C:Errors -->: ${ErrorsCount}</strong>
+          </div>
+          <div>
+              <em><!-- @RES:C:ShowDetails --></em>
+          </div>
+      </div>
+      {{/if}}
+  </div>
+</script>
+
+<script id="roomnametemplate" type="text/x-jquery-tmpl">
+    <div id="isotopecontainer">
+        <div class="isotopeitem ui-body ui-body-c ui-corner-bottom ui-corner-top isotopesmallitem">
+            <div>
+                <img src="/css/icons/${IconName}.svg" width="56" height="56" style="float:right"/>
+                <strong>${Name.Name}</strong>
+            </div>
+            <div>
+                <em><!-- @RES:C:NoDevicesFound --></em>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="nofavoritestemplate" type="text/x-jquery-tmpl">
+    <div id="isotopecontainer">
+        <div class="isotopeitem ui-body ui-body-c ui-corner-bottom ui-corner-top isotopesmallitem">
+            <div>
+                <img src="/css/icons/star_off.svg" width="32" height="32" style="float:right"/>
+            </div>
+            <div>
+                <em><!-- @RES:C:NoFavoriteDevices --></em>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="devicesinroomautomatictemplate" type="text/x-jquery-tmpl">
+    <div style="z-index:-1; background-color:red; height:100%; width:100%"></div>
+    <div id="isotopecontainer">
+        {{each Result}}
+            <div class="isotopeitem ui-shadow ui-body ui-body-c ui-corner-bottom ui-corner-top isotopesmallitem" style="cursor:pointer" href="javascript:void(0)"
+            {{if (ControlType == 0)}}
+                onclick="javascript:PageTransfer('#readcontroldialog', { param: '${Name.UniqueId}' })"
+            {{/if}}
+            {{if (ControlType == 1)}}
+                onclick="javascript:PageTransfer('#switchcontroldialog', { param: '${Name.UniqueId}' })"
+            {{/if}}
+            {{if (ControlType == 2)}}
+                onclick="javascript:PageTransfer('#multicontrollercontroldialog', { param: '${Name.UniqueId}' })"
+            {{/if}}
+            {{if (ControlType == 3)}}
+                onclick="javascript:PageTransfer('#multitogglecontroldialog', { param: '${Name.UniqueId}' })"
+            {{/if}}
+            {{if (ControlType == 5)}}
+                onclick="javascript:PageTransfer('#codecontroldialog', { param: '${Name.UniqueId}' })"
+            {{/if}}
+            {{if (ControlType == 6)}}
+                onclick="javascript:PageTransfer('#pushcontroldialog', { param: '${Name.UniqueId}' })"
+            {{/if}}
+            {{if (ControlType == 7)}}
+                onclick="javascript:PageTransfer('#multistatecontroldialog', { param: '${Name.UniqueId}' })"
+            {{/if}}>
+                <div>
+                    <em>${Name.Name}</em>
+                    <img src="/css/icons/${IconName}.svg" width="28" height="28" style="float:right" />
+                    <br /><span class="devicewait" deviceId="${Name.UniqueId}"><!-- @RES:C:Loading --></span>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</script>
+
+<div data-role="page" id="dashboardindex">
+    <div data-role="header" id="dashboardheader">
+    </div>
+    <div data-role="content">
+        <div id="alertscontent"></div>
+        <div id="dashboardcontent"></div>
+    </div>
+    <div data-role="footer" id="dashboardfooter" class="custom-nav" data-position="fixed"  data-theme="c">
+    </div>
+</div>
+
+<script type="text/javascript">
+    var favoritesSelected = false;
+    var alertsCount = 0;
+    var selectedOperationMode = null;
+
+    function goToCategory(href, categoryName) {
+        var message = '<!-- @RES:C:LoadingCategory --> "' + categoryName + '"';
+        jQuery.mobile.loading( 'show', { textVisible: true, theme: 'a',	text: message});
+        location.href = href;
+    }
+
+    function createEmptyNavItem() {
+        var result = new Object();
+        result.IconName = 'none';
+        result.Name = '&nbsp;';
+        result.Href = '#';
+        result.OnClick = '';
+
+        return result;
+    }
+
+    function createFloorNavItem(floor) {
+        var result = new Object();
+        result.IconName = floor.IconName;
+        result.Name = floor.Name.Name;
+        result.Href = '#';
+        result.OnClick = 'javascript:selectFloor("' + floor.Name.UniqueId + '")';
+
+        return result;
+    }
+
+    function createRoomNavItem(room) {
+        var result = new Object();
+        result.IconName = room.IconName;
+        result.Name = room.Name.Name;
+        result.Href = '#';
+        result.OnClick = 'javascript:selectRoom("' + room.Name.UniqueId + '")';
+
+        return result;
+    }
+
+    function createBackToMainNavItem() {
+        var result = new Object();
+        result.IconName = "arrow";
+        result.Href = '#';
+        result.OnClick = 'javascript:backToMain()';
+        result.Name = '<!-- @RES:C:Back -->';
+
+        return result;
+    }
+
+    function createFavoritesNavItem() {
+        var result = new Object();
+        result.IconName = "star-on";
+        result.Href = '#';
+        result.OnClick = 'javascript:selectFavorites()';
+        result.Name = '<!-- @RES:C:Favorites -->';
+
+        return result;
+    }
+
+    function createDeviceCategoriesNavItem() {
+        var result = new Object();
+        result.IconName = "bycategory";
+        result.Href = '#';
+        result.OnClick = 'javascript:selectDeviceCategories()';
+        result.Name = '<!-- @RES:C:ByCategory -->';
+
+        return result;
+    }
+
+    function createHeatingNavItem() {
+        var result = new Object();
+        result.IconName = "sun";
+        result.Href = '#';
+        result.OnClick = 'javascript:goToCategory("/automatic/heatingcontrol.htm", "<!-- @RES:C:DeviceCategory1.Heating -->")';
+        result.Name = '<!-- @RES:C:DeviceCategory1.Heating -->';
+
+        return result;
+    }
+
+    function createHotWaterNavItem() {
+        var result = new Object();
+        result.IconName = "faucet";
+        result.Href = '#';
+        result.OnClick = 'javascript:goToCategory("/automatic/hotwatercontrol.htm", "<!-- @RES:C:DeviceCategory2.HotWater -->")';
+        result.Name = '<!-- @RES:C:DeviceCategory2.HotWater -->';
+
+        return result;
+    }
+
+    function createLocksNavItem() {
+        var result = new Object();
+        result.IconName = "lock";
+        result.Href = '#';
+        result.OnClick = 'javascript:goToCategory("/automatic/lockscontrol.htm", "<!-- @RES:C:DeviceCategory3.Locks -->")';
+        result.Name = '<!-- @RES:C:DeviceCategory3.Locks -->';
+
+        return result;
+    }
+
+    function createLightsNavItem() {
+        var result = new Object();
+        result.IconName = "lightbulb";
+        result.Href = '#';
+        result.OnClick = 'javascript:goToCategory("/automatic/lightscontrol.htm", "<!-- @RES:C:DeviceCategory4.Lights -->")';
+        result.Name = '<!-- @RES:C:DeviceCategory4.Lights -->';
+
+        return result;
+    }
+
+    function createVentilationNavItem() {
+        var result = new Object();
+        result.IconName = "fan";
+        result.Href = '#';
+        result.OnClick = 'javascript:goToCategory("/automatic/ventilationcontrol.htm", "<!-- @RES:C:DeviceCategory6.Ventilation -->")';
+        result.Name = '<!-- @RES:C:DeviceCategory6.Ventilation -->';
+
+        return result;
+    }
+
+    function createMonitoringNavItem() {
+        var result = new Object();
+        result.IconName = "monitoring";
+        result.Href = '#';
+        result.OnClick = 'javascript:goToCategory("/automatic/monitoringcontrol.htm", "<!-- @RES:C:DeviceCategory7.Monitoring -->")';
+        result.Name = '<!-- @RES:C:DeviceCategory7.Monitoring -->';
+
+        return result;
+    }
+
+    function createDevicesNavItem() {
+        var result = new Object();
+        result.IconName = "plugin";
+        result.Href = '#';
+        result.OnClick = 'javascript:selectSubcategory(5)';
+        result.Name = '<!-- @RES:C:Devices -->';
+
+        return result;
+    }
+
+    function createCalculationsNavItem() {
+        var result = new Object();
+        result.IconName = "calculator";
+        result.Href = '#';
+        result.OnClick = 'javascript:selectSubcategory(2)';
+        result.Name = '<!-- @RES:C:Calculations -->';
+
+        return result;
+    }
+
+    function createConditionsNavItem() {
+        var result = new Object();
+        result.IconName = "document";
+        result.Href = '#';
+        result.OnClick = 'javascript:selectSubcategory(6)';
+        result.Name = '<!-- @RES:C:Conditions -->';
+
+        return result;
+    }
+
+    function createCommandsNavItem() {
+        var result = new Object();
+        result.IconName = "interact";
+        result.Href = '#';
+        result.OnClick = 'javascript:selectSubcategory(8)';
+        result.Name = '<!-- @RES:C:Commands -->';
+
+        return result;
+    }
+
+    function createSettingsNavItem() {
+        var result = new Object();
+        result.IconName = "gear";
+        result.Href = '#';
+        result.OnClick = 'javascript:selectSubcategory(7)';
+        result.Name = '<!-- @RES:C:Settings -->';
+
+        return result;
+    }
+
+    function createUnitNavItem(module) {
+        var result = new Object();
+        result.IconName = module.IconName;
+        result.Name = module.Name;
+        result.Href = module.TargetUrl;
+        result.OnClick = 'javascript:void(0)';
+
+        return result;
+    }
+
+    function createAutomationNavItems() {
+        var result = new Array();
+        result.push(createFavoritesNavItem());
+        result.push(createDeviceCategoriesNavItem());
+        for (var iFloor in CORE.GetFloors()) {
+            var floor = CORE.GetFloors()[iFloor];
+            result.push(createFloorNavItem(floor));
+        }
+
+        var unitsItems = createUnitsNavItems(1);
+        for (var iUnitsItem in unitsItems) {
+            var unitsItem = unitsItems[iUnitsItem];
+            result.push(unitsItem);
+        }
+        result.push(createCalculationsNavItem());
+        return result;
+    }
+
+    function createUnitsNavItems(category) {
+        var result = [];
+        var units = SI.GetUnits(category);
+        for (var iUnit in units) {
+            var unit = units[iUnit];
+            result.push(createUnitNavItem(unit));
+        }
+
+        return result;
+    }
+
+    function createRoomsNavItems(floor) {
+        var navItems = [];
+        navItems.push(createBackToMainNavItem());
+        for (var iRoom in floor.Rooms) {
+            var room = floor.Rooms[iRoom];
+            navItems.push(createRoomNavItem(room));
+        }
+
+        return navItems;
+    }
+
+    function createConfigurationNavItems() {
+        var navItems = createUnitsNavItems(4); ;
+        navItems.push(createDevicesNavItem());
+        navItems.push(createConditionsNavItem());
+        navItems.push(createCommandsNavItem());
+        navItems.push(createSettingsNavItem());
+
+        return navItems;
+    }
+
+    function createDeviceCategoriesNavItems() {
+        var navItems = [];
+        navItems.push(createBackToMainNavItem());
+
+        if (CONFIG.HeatingCategoryEnabled) {
+            navItems.push(createHeatingNavItem());
+        }
+        if (CONFIG.HotWaterCategoryEnabled) {
+            navItems.push(createHotWaterNavItem());
+        }
+        if (CONFIG.LocksCategoryEnabled) {
+            navItems.push(createLocksNavItem());
+        }
+        if (CONFIG.LightsCategoryEnabled) {
+            navItems.push(createLightsNavItem());
+        }
+        if (CONFIG.VentilationCategoryEnabled) {
+            navItems.push(createVentilationNavItem());
+        }
+        if (CONFIG.MonitoringCategoryEnabled) {
+            navItems.push(createMonitoringNavItem());
+        }
+
+        return navItems;
+    }
+
+    function SliceItems(source) {
+        var result = new Object();
+        var sliceSize = 4;
+        var sliceClass = 'c';
+        if (source.length < 5) {
+            if (source.length % 4 == 0) {
+                sliceSize = 4;
+                sliceClass = 'c';
+            }
+            else if (source.length % 2 == 0) {
+                sliceSize = 2;
+                sliceClass = 'a';
+            }
+        }
+        if (source.length % 5 == 0) {
+            sliceSize = 5;
+            sliceClass = 'd';
+        }
+        result.Class = sliceClass;
+        result.Slices = [];
+        var lastSliceLength = source.length % sliceSize;
+        if (lastSliceLength != 0) {
+            for (var i = 0; i < sliceSize - lastSliceLength; i++) {
+                source.push(createEmptyNavItem());
+            }
+        }
+
+        var slicesCount = source.length / sliceSize;
+        if (slicesCount > 0) {
+            for (var i = 0; i < slicesCount; i++) {
+                var slice = source.slice(i * sliceSize, (i + 1) * sliceSize);
+                result.Slices.push(slice);
+            }
+        }
+        return result;
+    }
+
+    var images = new Array();
+    var imageIndex = 0;
+
+    function selectRandomPhoto() {
+        if (images.length > 0) {
+            var currentImage = '/photos/' + images[imageIndex % images.length];
+            jQuery('#dashboardindex').css('background', 'url(' + currentImage + ') no-repeat center center fixed');
+            jQuery('#dashboardindex').css('background-size', 'cover');
+            imageIndex++;
+        }
+    }
+
+    function refreshBackgroundImage() {
+    /*
+        if (images.length == 0) {
+            GetPhotos(function (data) {
+                for (var iImage in data) {
+                    var imageData = data[iImage];
+                    images.push(imageData.Value);
+                }
+                selectRandomPhoto();
+            });
+        }
+
+        selectRandomPhoto();
+    */
+    }
+
+    function refreshAlerts() {
+        GetLastLoggedAlerts(function (alerts) {
+            if (alerts.Result.length > 0) {
+                jQuery('#alertscontent').html(jQuery('#alertstemplate').tmpl(alerts));
+                jQuery('#alertslistview').listview();
+                if (alerts.Result.length - alertsCount > 0) {
+                    jQuery('#alertslistview').hide();
+                    jQuery('#alertslistview').slideDown();
+                }
+            } else {
+                jQuery('#alertslistview').slideUp("false", function() {
+                    jQuery('#alertscontent').html('');
+                });
+            }
+
+            alertsCount = alerts.Result.length;
+        });
+    }
+
+    function startIsotope() {
+        jQuery('#isotopecontainer').isotope({
+            itemSelector: '.isotopeitem',
+            layoutMode: 'fitRows'
+        });
+    }
+
+    function showRoomTiles(targetTemplate, data) {
+        jQuery('#dashboardcontent').html(jQuery(targetTemplate).tmpl(data));
+        jQuery('#dashboardindex').trigger('pagecreate').trigger('updatelayout');
+        jQuery('#isotopecontainer').css('margin-bottom', jQuery('#dashboardfooter').height());
+        startIsotope();
+
+        checkDevicesEvaluation();
+    }
+
+    function selectRoom(roomId) {
+        favoritesSelected = false;
+        var room = CORE.FindRoom(roomId);
+        jQuery.mobile.loading( 'show', { textVisible: false,	theme: 'c',	html: "" });
+
+        CORE.GetAllDevicesInRoom(roomId, function (data) {
+            showRoomTiles('#devicesinroomautomatictemplate', data);
+            if (data.Result.length == 0) {
+                jQuery('#roomnametemplate').tmpl(room).appendTo('#isotopecontainer');
+            }
+            jQuery.mobile.loading('hide');
+        });
+    }
+
+    function selectFavorites() {
+        favoritesSelected = true;
+        jQuery.mobile.loading( 'show', { textVisible: false,	theme: 'e',	html: "" });
+
+        GetFavoriteDevices(function (data) {
+            showRoomTiles('#devicesinroomautomatictemplate', data);
+            if (data.Result.length == 0) {
+                jQuery('#nofavoritestemplate').tmpl().appendTo('#isotopecontainer');
+            }
+            jQuery.mobile.loading('hide');
+        });
+    }
+
+    function selectDeviceCategories() {
+        beginRefreshingFooter();
+        var navItems = createDeviceCategoriesNavItems();
+        var navItemsSliced = SliceItems(navItems);
+        endRefreshingFooter(navItemsSliced);
+    }
+
+    function checkDevicesEvaluation() {
+        jQuery('.devicewait').each(function () {
+            var self = this;
+            var id = jQuery(self).attr('deviceid');
+            jQuery(self).removeClass('devicewait');
+            CheckDeviceEvaluation(id, function (data) {
+                if (data != null) {
+                    var tile = jQuery(self).closest('.isotopeitem');
+                    if (data.IsSignaled == true) {
+                        tile.removeClass('ui-body-c').addClass('ui-body-b');
+                    } else {
+                        tile.removeClass('ui-body-b').addClass('ui-body-c');
+                    }
+
+                    if (data.Descriptions != null && data.Descriptions.length > 0) {
+                        tile.removeClass('isotopesmallitem').addClass('isotopebigitem');
+                    }
+                    
+                    var descriptionsHtml = jQuery('#descriptionstemplate').tmpl(data);
+                    jQuery(self).html(descriptionsHtml);
+                    jQuery('#isotopecontainer').isotope('reLayout');
+                }
+                else {
+                    jQuery(self).html('-');
+                }
+
+                jQuery(self).addClass('devicedone');
+            });
+        });
+    }
+              
+    function refreshDevicesTiles() {
+        jQuery('.devicedone').removeClass('devicedone').addClass('devicewait');
+        checkDevicesEvaluation();
+    }
+
+    function selectFloor(floorId) {
+        beginRefreshingFooter();
+        var floor = CORE.FindFloor(floorId);
+        var navItems = createRoomsNavItems(floor);
+        var navItemsSliced = SliceItems(navItems);
+        endRefreshingFooter(navItemsSliced);
+    }
+
+    function beginRefreshingFooter() {
+        jQuery("#dashboardfooter").fixedtoolbar('hide');
+    }
+
+    function endRefreshingFooter(items) {
+        jQuery('#dashboardfooter').html(jQuery('#footertemplate').tmpl(items));
+        jQuery('#dashboardindex').trigger('pagecreate');
+        jQuery("#dashboardfooter").fixedtoolbar('show');
+    }
+
+    function selectSubcategory(unitCategory) {
+        beginRefreshingFooter();
+        var navItems = createUnitsNavItems(unitCategory);
+        navItems.splice(0, 0, createBackToMainNavItem());
+        var navItemsSliced = SliceItems(navItems);
+        endRefreshingFooter(navItemsSliced);
+    }
+
+    function backToMain() {
+        beginRefreshingFooter();
+        var status = SI.GetStatus();
+        navItems = createMainNavItems(status.OperationMode);
+        var navItemsSliced = SliceItems(navItems);
+        endRefreshingFooter(navItemsSliced);
+        jQuery('#dashboardcontent').html('');
+        showInfoTiles(status);
+    }
+
+    function createMainNavItems(operationModeId) {
+        var navItems = [];
+        if (operationModeId == 1) {
+            navItems = createAutomationNavItems();
+        }
+        else if (operationModeId == 4) {
+            navItems = createConfigurationNavItems();
+        } else {
+            navItems = createUnitsNavItems(operationModeId);
+        }
+
+        return navItems;
+    }
+
+    function showInfoTiles(status) {
+        var operationMode = status.OperationMode;
+        if (operationMode == 4) { //configuration
+            GetConfigInfo(function (data) {
+                jQuery('#dashboardcontent').html(jQuery('#configurationmodifiedtemplate').tmpl(data));
+                jQuery('.disableonpost').button();
+                startIsotope();
+            });
+        }
+
+        if (operationMode == 3) { //diagnostics
+            GetDiagnosticInfo(function (data) {
+                if (data.HasErrors) {
+                    jQuery('#dashboardcontent').html(jQuery('#errorstemplate').tmpl(data));
+                    jQuery('.disableonpost').button();
+                    startIsotope();
+                }
+            });
+        }
+	}
+
+    function updateUserAndDate(status) {
+        jQuery('#userandtimeinfo').html(' ('+ status.UserName + ' - ' + AddLeadingZero(status.Date.Hour) + ':' + AddLeadingZero(status.Date.Minute) + ')');
+    }
+
+    function refreshSystemStatus() {
+        var status = SI.GetStatus();
+        updateUserAndDate(status);
+
+        if (selectedOperationMode != null && status.OperationMode != selectedOperationMode) {
+            refresh();
+        }
+    }
+
+    function refresh() {
+        jQuery('#isotopecontainer').html('');
+        var status = SI.GetStatus();
+        if (!status.IsLicenseAccepted) {
+            location.href = '/license.htm';
+        }
+
+        if (status.HasActivationErrors) {
+            location.href = '/activation.htm';
+        }
+
+        selectedOperationMode = status.OperationMode;
+        var navItems = createMainNavItems(selectedOperationMode);
+        var navItemsSliced = SliceItems(navItems);
+        jQuery('#dashboardfooter').html(jQuery('#footertemplate').tmpl(navItemsSliced));
+        jQuery('#dashboardheader').html(jQuery('#headertemplate').tmpl({ OperationMode: selectedOperationMode }));
+        jQuery('#dashboardindex').trigger('pagecreate').trigger('updatelayout');
+
+        showInfoTiles(status);
+        updateUserAndDate(status);
+        refreshBackgroundImage();
+    }
+
+    jQuery('#dashboardindex').on('pagebeforecreate', function (e, args) {
+        refresh();
+
+        setInterval('refreshAlerts()', 5000);
+        setInterval('refreshSystemStatus()', 10000);
+        setInterval('refreshDevicesTiles()', 15000);
+        setInterval('refreshBackgroundImage()', 30000);
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /Dashboard.htm -->
+<!-- @Dialogs\ChangeOperationMode.htm 1 switchtoautomaticdialog RES:C:ChangeOperationModeToAutomaticQuestion RES:C:ChangingToAutomaticModeWarning robot -->
+<!-- @Dialogs\ChangeOperationMode.htm 4 switchtoconfigurationdialog RES:C:ChangeOperationModeToConfigurationQuestion RES:C:ChangingToConfigurationModeWarning wrench -->
+<!-- @Dialogs\ChangeOperationMode.htm 3 switchtodiagnosticsdialog RES:C:ChangeOperationModeToDiagnosticsQuestion RES:C:ChangingToDiagnosticsModeWarning stethoscope -->
+<!-- @Controls\ControlDialogsScripts.htm -->
+<!-- @Dialogs\MulticontrollerControl.htm -->
+<!-- @Dialogs\CodeControl.htm -->
+<!-- @Dialogs\MultistateControl.htm -->
+<!-- @Dialogs\MultitoggleControl.htm -->
+<!-- @Dialogs\ReadControl.htm -->
+<!-- @Dialogs\Power.htm -->
+<script type="text/javascript">
+    jQuery('#multicontrollercontroldialog, #codecontroldialog, #multistatecontroldialog, #readcontroldialog, #multitogglecontroldialog').on('pagehide', function (event) {
+        if (favoritesSelected) {
+            selectFavorites();
+            jQuery('.icon-custom-star-on').addClass('ui-btn-active');
+        } else {
+            refreshDevicesTiles();
+            jQuery('#isotopecontainer').isotope('reLayout');
+        }
+    });
+
+    jQuery('#switchtoautomaticdialog, #switchtoconfigurationdialog, #switchtodiagnosticsdialog').on('pagehide', function (e, args) {
+        refresh();
+    });
+</script>
+<!-- @Controls\MasterFooter.htm -->

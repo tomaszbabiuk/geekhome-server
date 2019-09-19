@@ -1,0 +1,42 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="geofenceconditionstemplate" type="text/x-jquery-tmpl">
+  <!-- @Controls\CoreCrudList.htm #geofenceconditiondetailsdialog CORE.GetGeofenceConditions() RES:C:GeofenceConditions -->
+  <div>
+    <!-- @Controls\PageTransferButton.htm #modifygeofenceconditiondialog RES:C:AddGeofenceCondition -->
+  </div>
+</script>
+
+<script id="geofencesinfotemplate" type="text/x-jquery-tmpl">
+<!-- @RES:C:CannotAddGeofenceConditionsMessage -->
+<ul>
+    <li><a href="/config/geofences.htm" data-inline="true" rel="external"><!-- @RES:C:Geofences --></a></li>
+</ul>
+</script>
+
+<div data-role="page" id="geofenceconditionsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:GeofenceConditions --></h1>
+    </div>
+    <div data-role="content" id="geofenceconditionscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#geofenceconditionsindex').on('pagecreate', function (event) {
+        if (CORE.CanAddGeofenceConditions()) {
+            jQuery(jQuery('#geofenceconditionstemplate').tmpl()).appendTo('#geofenceconditionscontent');
+        } else {
+            jQuery(jQuery('#geofencesinfotemplate').tmpl()).appendTo('#geofenceconditionscontent');
+        }
+
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/geofenceconditions.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/geofenceconditions.htm -->
+<!-- @Dialogs\ModifyGeofenceCondition.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm geofenceconditiondetails #modifygeofenceconditiondialog RemoveGeofenceCondition.post CORE.FindGeofenceCondition RES:C:GeofenceCondition RES:C:GeofenceConditionDetails -->
+<!-- @Controls\MasterFooter.htm -->

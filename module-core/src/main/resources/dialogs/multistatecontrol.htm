@@ -1,0 +1,178 @@
+<script id="multistatecontroltemplate" type="text/x-jquery-tmpl">
+
+<div data-role="fieldcontain">
+    <img onClick="javascript:toggleFavorite('${Device.Name.UniqueId}', this)" src="/css/icons/star_{{if IsFavorite('' + Device.Name.UniqueId)}}on{{else}}off{{/if}}.svg" style="float:right" width="32" height="32">
+    <h1>${Device.Name.Name}</h1>
+    <fieldset data-role="controlgroup" id="states">
+    <legend>{{if (typeof Device.IconName !== 'undefined')}} <img src="/css/icons/${Device.IconName}.svg" style="margin-right:15px" width="64" height="64"> {{/if}}</legend>
+        {{if Evaluation.ControlMode == 1}}
+            {{each SortByUniqueId(States)}}
+                {{if Type != 0}}
+                    <input type="radio" name="state-choice" id="state-${Name.UniqueId}" value="${Name.UniqueId}" />
+                    <label for="state-${Name.UniqueId}">${Name.Name}</label>
+                {{/if}}
+            {{/each}}
+            <input type="radio" name="state-choice" id="state-auto" value="auto" checked />
+            <label for="state-auto"><!-- @RES:C:Automatic --></label>
+        {{else}}
+            {{each SortByUniqueId(States)}}
+                {{if Type != 0}}
+                    <input type="radio" name="state-choice" id="state-${Name.UniqueId}" value="${Name.UniqueId}" {{if (Evaluation.Value == Name.UniqueId)}}checked{{/if}} />
+                    <label for="state-${Name.UniqueId}">${Name.Name}</label>
+                {{/if}}
+            {{/each}}
+            <input type="radio" name="state-choice" id="state-auto" value="auto" />
+            <label for="state-auto"><!-- @RES:C:Automatic --></label>
+        {{/if}}
+    </fieldset>
+</div>
+{{if ((typeof Device.IntensityPresetsIds !== 'undefined') || (typeof Device.RgbPresetsIds !== 'undefined'))}}
+    <fieldset class="ui-grid-b">
+        <div class="ui-block-a"><a data-role="button" data-theme="b" onclick="javascript:return changeDeviceState();"><!-- @RES:C:OK --></a></div>
+        <div class="ui-block-b"><a data-role="button" onclick="javascript:return changePresets();"><!-- @RES:C:Presets --></a></div>
+        <div class="ui-block-c"><a data-role="button" data-rel="back" href="#"><!-- @RES:C:Cancel --></a></div>
+    </fieldset>
+{{else}}
+    <fieldset class="ui-grid-a">
+        <div class="ui-block-a"><a data-role="button" data-theme="b" onclick="javascript:return changeDeviceState();"><!-- @RES:C:OK --></a></div>
+        <div class="ui-block-b"><a data-role="button" data-rel="back" href="#"><!-- @RES:C:Cancel --></a></div>
+    </fieldset>
+{{/if}}
+
+</script>
+
+<div data-role="dialog" id="multistatecontroldialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:ChangeState -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <div id="multistatecontrolcontent"></div>
+    </div>
+</div>
+
+<script id="intensitypresetcontroltemplate" type="text/x-jquery-tmpl">
+<div data-role="fieldcontain">
+    <img onClick="javascript:toggleFavorite('${Device.Name.UniqueId}', this)" src="/css/icons/star_{{if IsFavorite('' + Device.Name.UniqueId)}}on{{else}}off{{/if}}.svg" style="float:right" width="32" height="32">
+    <h1>${Device.Name.Name}</h1>
+    <h4 style="text-align:center"><!-- @RES:C:Presets --></h4>
+    {{if (typeof Device.IntensityPresetsIds !== 'undefined')}}
+        {{each Device.IntensityPresetsIds.split(',')}}
+        <div data-role="fieldcontain">
+            <label for="${Device.Name.UniqueId + "_" + $value}">${$value}:</label>
+            <input class="sliderwait presetinput" settingid="${Device.Name.UniqueId + "_" + $value}" type="range" name="${Device.Name.UniqueId + "_" + $value}"
+                   id="${Device.Name.UniqueId + "_" + $value}" min="0" max="255" initialvalue="0"/>
+        </div>
+        {{/each}}
+    {{/if}}
+    {{if (typeof Device.RgbPresetsIds !== 'undefined')}}
+        {{each Device.RgbPresetsIds.split(',')}}
+        <div data-role="fieldcontain">
+            <label for="${Device.Name.UniqueId + "_" + $value}">${$value}:</label>
+           <input class="inputwait presetinput" data-highlight="true" settingid="${Device.Name.UniqueId + "_" + $value}" type="color" id="${Device.Name.UniqueId + "_" + $value}" name="${Device.Name.UniqueId + "_" + $value}"  />
+        </div>
+        {{/each}}
+    {{/if}}
+</div>
+</script>
+
+<div data-role="dialog" id="presetcontroldialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:DeviceControl -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <div id="intensitypresetcontrolcontent"></div>
+        <fieldset class="ui-grid-a">
+            <div class="ui-block-a"><a data-role="button" data-rel="back" data-theme="b" onclick="javascript:updatePresetsAndClose();"><!-- @RES:C:OK --></a></div>
+            <div class="ui-block-b"><a data-role="button" data-rel="back" href="#"><!-- @RES:C:Cancel --></a></div>
+        </fieldset>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var multistateDeviceId;
+
+    jQuery('#multistatecontroldialog').on('pagetransfer', function (e, args) {
+        multistateDeviceId = args.param;
+
+        var templateData = {
+            Device: CORE.FindDevice(multistateDeviceId),
+            States: GetDeviceStates(multistateDeviceId),
+            Evaluation: CheckDeviceEvaluation(multistateDeviceId)
+        };
+
+        jQuery('#multistatecontrolcontent').html(jQuery('#multistatecontroltemplate').tmpl(templateData));
+    });
+
+    function changePresets() {
+        PageTransfer('#presetcontroldialog', { param: multistateDeviceId });
+    }
+
+    function changeDeviceState() {
+        var state = jQuery('input[name=state-choice]:checked','#states').val();
+        if (state == 'auto') {
+            SwitchToAutomatic(multistateDeviceId);
+        } else {
+            ChangeDeviceState(multistateDeviceId, state);
+        }
+        jQuery('.ui-dialog').dialog('close');
+        return true;
+    }
+
+    jQuery('#presetcontroldialog').on('pageaftertransfer', function (e, args) {
+        //intensity
+        jQuery('.sliderwait').each(function () {
+            var self = this;
+            var initialValue = jQuery(self).attr('initialvalue');
+            var settingId = jQuery(self).attr('settingid');
+            jQuery(self).removeClass('.sliderwait');
+            CheckAutomationSetting(settingId, function (data) {
+                if (data != null) {
+                    jQuery(self).removeAttr('disabled');
+                    jQuery(self).slider('enable');
+                    var valueToSet = (data.Result == '') ? initialValue : data.Result;
+                    jQuery(self).val('' + valueToSet);
+                    jQuery(self).slider('refresh');
+                }
+            });
+        });
+
+        //rgb inputs
+        jQuery('.inputwait').each(function () {
+            var self = this;
+            var settingId = jQuery(self).attr('settingid');
+            jQuery(self).removeClass('.inputwait');
+            CheckAutomationSetting(settingId, function (data) {
+                if (data != null) {
+                    var valueToSet = (data.Result == '') ? '#000000' : data.Result;
+                    jQuery(self).val('' + valueToSet);
+                }
+            });
+        });
+    });
+
+    function updatePresetsAndClose() {
+        jQuery('.presetinput').each(function () {
+            var self = this;
+            var id = jQuery(self).attr('settingid');
+            var val = jQuery(self).val();
+            ChangeAutomationSetting(id, val);
+        });
+
+        return true;
+    }
+
+    jQuery('#presetcontroldialog').on('pagetransfer', function (e, args) {
+        var intensitypresetDeviceId = args.param;
+
+        var templateData = {
+            Device: CORE.FindDevice(intensitypresetDeviceId),
+            Evaluation: CheckDeviceEvaluation(intensitypresetDeviceId)
+        };
+
+        jQuery("#intensitypresetcontrolcontent").html(jQuery("#intensitypresetcontroltemplate").tmpl(templateData));
+    });
+</script>

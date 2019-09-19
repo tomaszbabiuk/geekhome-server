@@ -1,0 +1,30 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="geofencestemplate" type="text/x-jquery-tmpl">
+  <!-- @Controls\CoreCrudList.htm #geofencedetailsdialog CORE.GetGeofences() RES:C:Geofences -->
+  <div>
+    <!-- @Controls\PageTransferButton.htm #modifygeofencedialog RES:C:AddGeofence -->
+  </div>
+</script>
+
+<div data-role="page" id="geofencesindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:Geofences --></h1>
+    </div>
+    <div data-role="content" id="geofencescontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#geofencesindex').on('pagecreate', function (event) {
+        jQuery(jQuery('#geofencestemplate').tmpl()).appendTo('#geofencescontent');
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/geofences.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/geofences.htm -->
+<!-- @Dialogs\ModifyGeofence.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm geofencedetails #modifygeofencedialog RemoveGeofence.post CORE.FindGeofence RES:C:Geofence RES:C:GeofenceDetails -->
+<!-- @Controls\MasterFooter.htm -->

@@ -1,0 +1,42 @@
+<div data-role="dialog" id="modifydateconditiondialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:DateCondition -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyDateCondition.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifydateconditionname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifydateconditiondescription description none RES:C:Description -->
+            <!-- @Forms\DateField.htm modifydateconditionstartdate startdate required RES:C:StartDate -->
+            <!-- @Forms\DateField.htm modifydateconditionstopdate stopdate required RES:C:StopDate -->
+            <!-- @Forms\HiddenField.htm modifydateconditionid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifydateconditiondialog').on('pagetransfer', function (e, args) {
+                var dateCondition = CORE.FindDateCondition(args.param);
+
+                var name = (dateCondition != null) ? dateCondition.Name.Name : '';
+                var description = (dateCondition != null) ? dateCondition.Name.Description : '';
+                var uniqueId = (dateCondition != null) ? dateCondition.Name.UniqueId : '';
+
+                jQuery('#modifydateconditiondialog [name=name]').val(name);
+                jQuery('#modifydateconditiondialog [name=description]').val(description);
+                jQuery('#modifydateconditiondialog [name=uniqueid]').val(uniqueId);
+
+                jQuery('#modifydateconditiondialog form').validate();
+            });
+
+            jQuery('#modifydateconditiondialog').on('pageaftertransfer', function (e, args) {
+                var dateCondition = CORE.FindDateCondition(args.param);
+
+                var startDate = (dateCondition != null) ? dateCondition.StartDate : '';
+                var stopDate = (dateCondition != null) ? dateCondition.StopDate : '';
+
+                jQuery('#modifydateconditiondialog [name=startdate]').val(startDate);
+                jQuery('#modifydateconditiondialog [name=stopdate]').val(stopDate);
+            });
+        </script>
+    </div>
+</div>

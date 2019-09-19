@@ -1,0 +1,22 @@
+package com.geekhome.coremodule;
+
+import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.Persistable;
+
+public class GeofenceCondition extends ConditionBase {
+    private String _geofencesIds;
+
+    @Persistable(name = "GeofencesIds")
+    public String getGeofencesIds() {
+        return _geofencesIds;
+    }
+
+    public void setGeofencesIds(String geofencesIds) {
+        _geofencesIds = geofencesIds;
+    }
+
+    public GeofenceCondition(DescriptiveName name, String geofencesIds) {
+        super(name);
+        setGeofencesIds(geofencesIds);
+    }
+}

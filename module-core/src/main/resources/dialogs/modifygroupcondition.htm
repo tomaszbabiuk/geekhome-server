@@ -1,0 +1,41 @@
+<!-- @Forms\ConditionsTemplate.htm modifygroupcondition -->
+<!-- @Forms\GroupMatchTemplate.htm modifygroupcondition -->
+
+<div data-role="dialog" id="modifygroupconditiondialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:GroupCondition -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyGroupCondition.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifygroupconditionname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifygroupconditiondescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifygroupconditiongroupmatchcontent"></div>
+            <div data-role="fieldcontain" id="modifygroupconditionconditionscontent"></div>
+            <!-- @Forms\HiddenField.htm modifygroupconditionid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifygroupconditiondialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifygroupconditiongroupmatchcontent').html(jQuery('#modifygroupconditiongroupmatchtemplate').tmpl());
+
+                var groupCondition = CORE.FindGroupCondition(args.param);
+                var name = (groupCondition != null) ? groupCondition.Name.Name : '';
+                var description = (groupCondition != null) ? groupCondition.Name.Description : '';
+                var uniqueId = (groupCondition != null) ? groupCondition.Name.UniqueId : '';
+                var match = (groupCondition != null) ? groupCondition.Match : '';
+                var conditionsIds = (groupCondition != null) ? groupCondition.ConditionsIds : '';
+                var conditionsIdsSplits = conditionsIds.split(',');
+
+                jQuery('#modifygroupconditionname').val(name);
+                jQuery('#modifygroupconditiondescription').val(description);
+                jQuery('#modifygroupconditionid').val(uniqueId);
+                jQuery('#modifygroupconditiongroupmatch').val(match);
+                jQuery('#modifygroupconditionconditionscontent').html(jQuery('#modifygroupconditionconditionstemplate').tmpl({Selected: conditionsIdsSplits}));
+
+                jQuery('#modifygroupconditiondialog form').validate();
+            });
+        </script>
+    </div>
+</div>

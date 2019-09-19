@@ -1,0 +1,80 @@
+<script id="multicontrollercontroltemplate" type="text/x-jquery-tmpl">
+<div data-role="fieldcontain">
+    <img onClick="javascript:toggleFavorite('${Device.Name.UniqueId}', this)" src="/css/icons/star_{{if IsFavorite('' + Device.Name.UniqueId)}}on{{else}}off{{/if}}.svg" style="float:right" width="32" height="32">
+    <h1>${Device.Name.Name}</h1>
+    {{if (typeof Device.IconName !== 'undefined')}} <img src="/css/icons/${Device.IconName}.svg" style="margin-right:auto; margin-left:auto; display:block" width="64" height="64" /> {{/if}}
+    <h4 style="text-align:center">${Evaluation.InterfaceValue}</h4>
+    <div data-role="fieldcontain">
+        <label for="${Device.Name.UniqueId}">
+            <!-- @RES:C:Default -->:
+        </label>
+        <input class="sliderwait multicontrollerinput" sliderid="${Device.Name.UniqueId}" type="range" name="${Device.Name.UniqueId}" id="${Device.Name.UniqueId}"
+               min="${Device.MinValue}" max="${Device.MaxValue}" initialvalue="${Device.InitialValue}" />
+    </div>
+    {{if Device.ModesIds != ""}}
+        {{each Device.ModesIds.split(',')}}
+        <div data-role="fieldcontain">
+            <label for="${Device.Name.UniqueId + "_" + $value}">${CORE.FindMode($value).Name.Name}:</label>
+            <input class="sliderwait multicontrollerinput" sliderid="${Device.Name.UniqueId + "_" + $value}" type="range" name="${Device.Name.UniqueId + "_" + $value}"
+                   id="${Device.Name.UniqueId + "_" + $value}" min="${Device.MinValue}" max="${Device.MaxValue}" initialvalue="${Device.InitialValue}"/>
+        </div>
+        {{/each}}
+    {{/if}}
+</div>
+</script>
+
+<div data-role="dialog" id="multicontrollercontroldialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:DeviceControl -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <div id="multicontrollercontrolcontent"></div>
+        <fieldset class="ui-grid-a">
+            <div class="ui-block-a"><a data-role="button" data-rel="back" data-theme="b" onclick="javascript:updateValuesAndClose();"><!-- @RES:C:OK --></a></div>
+	        <div class="ui-block-b"><a data-role="button" data-rel="back" href="#"><!-- @RES:C:Cancel --></a></div>
+        </fieldset>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery('#multicontrollercontroldialog').on('pageaftertransfer', function (e, args) {
+        jQuery('.sliderwait').each(function () {
+            var self = this;
+            var initialValue = jQuery(self).attr('initialvalue');
+            var id = jQuery(self).attr('sliderid');
+            jQuery(self).removeClass('.sliderwait');
+            CheckAutomationSetting(id, function (data) {
+                if (data != null) {
+                    jQuery(self).removeAttr('disabled');
+                    jQuery(self).slider('enable');
+                    var valueToSet = (data.Result == '') ? initialValue : data.Result;
+                    jQuery(self).val('' + valueToSet);
+                    jQuery(self).slider('refresh');
+                }
+            });
+        });
+    });
+
+    function updateValuesAndClose() {
+        jQuery('.multicontrollerinput').each(function () {
+            var self = this;
+            var id = jQuery(self).attr('sliderid');
+            var val = jQuery(self).val();
+            ChangeAutomationSetting(id, val);
+        });
+        
+        return true;
+    }
+
+    jQuery('#multicontrollercontroldialog').on('pagetransfer', function (e, args) {
+        var multicontrollerDeviceId = args.param;
+
+        var templateData = {
+            Device: CORE.FindDevice(multicontrollerDeviceId),
+            Evaluation: CheckDeviceEvaluation(multicontrollerDeviceId)
+        };
+
+        jQuery("#multicontrollercontrolcontent").html(jQuery("#multicontrollercontroltemplate").tmpl(templateData));
+    });
+</script>

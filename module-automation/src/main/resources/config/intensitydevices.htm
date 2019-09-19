@@ -1,0 +1,55 @@
+﻿<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddDevicesMessage -->
+<!-- @Controls\PortsInfo.htm false false true false false false false false -->
+
+<script id="intensitydevicestemplate" type="text/x-jquery-tmpl">
+    {{each AUTO.GetIntensityDevices()}}
+        <ul data-inset="true" data-role="listview" data-split-theme="e">
+            <li data-theme="b">
+                <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#intensitydevicedetailsdialog', { param: '${Name.UniqueId}' })"
+                {{if (typeof IconName !== 'undefined')}} style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 15px; background-size: 32px 32px; padding-left:50px;" {{/if}}>
+                    <!-- @Controls\LightsProperties.htm -->
+                </a>
+            </li>
+            <!-- @Controls\NamedBlocksFragment.htm preset1 RES:C:BlocksEnablingPreset1 -->
+            <!-- @Controls\NamedBlocksFragment.htm preset2 RES:C:BlocksEnablingPreset2 -->
+            <!-- @Controls\NamedBlocksFragment.htm preset3 RES:C:BlocksEnablingPreset3 -->
+            <!-- @Controls\NamedBlocksFragment.htm preset4 RES:C:BlocksEnablingPreset4 -->
+        </ul>
+    {{/each}}
+    <div>
+        <!-- @Controls\PageTransferButton.htm #modifyintensitydevicedialog RES:AUTO:AddIntensityDevice -->
+    </div>
+</script>
+
+<div data-role="page" id="intensitydevicesindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:AUTO:IntensityDevices -->
+    </h1>
+  </div>
+  <div data-role="content" id="intensitydevicescontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#intensitydevicesindex').on('pagecreate', function (event) {
+        if (!HM.HasAnalogOutputPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#intensitydevicescontent');
+        } else if (CORE.CanAddDevices()) {
+            jQuery(jQuery("#intensitydevicestemplate").tmpl()).appendTo("#intensitydevicescontent");
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#intensitydevicescontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/intensitydevices.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/intensitydevices.htm -->
+<!-- @Dialogs\ModifyIntensityDevice.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm intensitydevicedetails #modifyintensitydevicedialog RemoveIntensityDevice.post AUTO.FindIntensityDevice RES:AUTO:IntensityDevice RES:AUTO:IntensityDeviceDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/intensitydevices.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

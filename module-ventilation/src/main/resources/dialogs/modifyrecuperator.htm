@@ -1,0 +1,52 @@
+<!-- @Forms\NamedPortTemplate.htm modifyrecuperatorautomaticcontrol HM.GetDigitalOutputPorts() automaticcontrolportid RES:VENT:AutomaticControlPort false -->
+<!-- @Forms\NamedPortTemplate.htm modifyrecuperatorsecondgear HM.GetDigitalOutputPorts() secondgearportid RES:VENT:SecondGearPort false -->
+<!-- @Forms\NamedPortTemplate.htm modifyrecuperatorthirdgear HM.GetDigitalOutputPorts() thirdgearportid RES:VENT:ThirdGearPort false -->
+<!-- @Forms\RoomTemplate.htm modifyrecuperator -->
+
+<div data-role="dialog" id="modifyrecuperatordialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:VENT:Recuperator -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyRecuperator.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyrecuperatorname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyrecuperatordescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifyrecuperatorautomaticcontrolportcontent"></div>
+            <div data-role="fieldcontain" id="modifyrecuperatorsecondgearportcontent"></div>
+            <div data-role="fieldcontain" id="modifyrecuperatorthirdgearportcontent"></div>
+            <div data-role="fieldcontain" id="modifyrecuperatorroomcontent"></div>
+            <!-- @Forms\HiddenField.htm modifyrecuperatorid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:OK -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyrecuperatordialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyrecuperatorautomaticcontrolportcontent').html(jQuery('#modifyrecuperatorautomaticcontrolporttemplate').tmpl());
+                jQuery('#modifyrecuperatorsecondgearportcontent').html(jQuery('#modifyrecuperatorsecondgearporttemplate').tmpl());
+                jQuery('#modifyrecuperatorthirdgearportcontent').html(jQuery('#modifyrecuperatorthirdgearporttemplate').tmpl());
+                jQuery('#modifyrecuperatorroomcontent').html(jQuery('#modifyrecuperatorroomtemplate').tmpl());
+
+                var recuperator = VENT.FindRecuperator(args.param);
+
+                var name = (recuperator != null) ? recuperator.Name.Name : '';
+                var description = (recuperator != null) ? recuperator.Name.Description : '';
+                var uniqueId = (recuperator != null) ? recuperator.Name.UniqueId : '';
+                var automaticControlPortId = (recuperator != null) ? recuperator.AutomaticControlPortId : '';
+                var secondGearPortId = (recuperator != null) ? recuperator.SecondGearPortId : '';
+                var thirdGearPortId = (recuperator != null) ? recuperator.ThirdGearPortId : '';
+                var roomId = (recuperator != null) ? recuperator.RoomId : '';
+
+                jQuery('#modifyrecuperatordialog [name=name]').val(name);
+                jQuery('#modifyrecuperatordialog [name=description]').val(description);
+                jQuery('#modifyrecuperatordialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyrecuperatordialog [name=automaticcontrolportid]').val(automaticControlPortId);
+                jQuery('#modifyrecuperatordialog [name=secondgearportid]').val(secondGearPortId);
+                jQuery('#modifyrecuperatordialog [name=thirdgearportid]').val(thirdGearPortId);
+                jQuery('#modifyrecuperatordialog [name=roomid]').val(roomId);
+
+                jQuery('#modifyrecuperatordialog form').validate();
+            });           
+        </script>
+    </div>
+</div>

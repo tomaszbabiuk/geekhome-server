@@ -1,0 +1,21 @@
+<script id="dependenciestemplate" type="text/x-jquery-tmpl">
+    {{if Result.length > 0 }}
+        <h2><!-- @RES:C:Dependencies -->:</h2>
+        <ul data-inset="true" data-role="listview" class="tolistview">
+        {{each Result}}
+            <li>${DependencyTypeNames[Type]} - <!-- @Controls\DescriptiveName.htm --><span class="ui-li-count"><!-- @RES:C:Level -->: ${Level}</span></li>
+        {{/each}}
+        </ul>
+    {{else}}
+    <h3><!-- @RES:C:NoDependencies --></h3>
+    {{/if}}
+</script>
+<script type="text/javascript" language="javascript">
+    function AppendDependenciesTo(dependencyId, controlSelector) {
+        jQuery('<div class="dependenciesloading"><h3><!-- @RES:C:LoadingDependencies --></h3></div>').appendTo(controlSelector);
+        GetDependencies(dependencyId, function (dependencies) {
+            jQuery('.dependenciesloading').html(jQuery('#dependenciestemplate').tmpl(dependencies));
+            jQuery('.tolistview').listview();
+        });
+    }
+</script>

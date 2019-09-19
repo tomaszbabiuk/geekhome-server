@@ -1,0 +1,48 @@
+<div data-role="dialog" id="modifytimeconditiondialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:TimeCondition -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyTimeCondition.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifytimeconditionname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifytimeconditiondescription description none RES:C:Description -->
+            <!-- @Forms\TimeField.htm modifytimeconditionstarttime starttime required RES:C:StartTime -->
+            <!-- @Forms\TimeField.htm modifytimeconditionstoptime stoptime required RES:C:StopTime -->
+            <!-- @Forms\DaysSelectorField.htm modifytimecondition -->
+            <!-- @Forms\HiddenField.htm modifytimeconditionid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifytimeconditiondialog').on('pagetransfer', function (e, args) {
+                var timeCondition = CORE.FindTimeCondition(args.param);
+                var name = (timeCondition != null) ? timeCondition.Name.Name : '';
+                var description = (timeCondition != null) ? timeCondition.Name.Description : '';
+                var uniqueId = (timeCondition != null) ? timeCondition.Name.UniqueId : '';
+                var daysIds = (timeCondition != null) ? timeCondition.DaysIds : 'mo,tu,we,th,fr,sa,su';
+
+                jQuery('#modifytimeconditionname').val(name);
+                jQuery('#modifytimeconditiondescription').val(description);
+                jQuery('#modifytimeconditionid').val(uniqueId);
+
+                jQuery('input:checkbox').prop('checked', false);
+                var daysIdsSplits = daysIds.split(',');
+                for (var dayIdIndex in daysIdsSplits) {
+                    var dayId = 'modifytimeconditionday-' + daysIdsSplits[dayIdIndex];
+                    jQuery('#' + dayId).prop('checked', true);
+                }
+
+                jQuery('#modifytimeconditiondialog form').validate();
+            });
+
+            jQuery('#modifytimeconditiondialog').on('pageaftertransfer', function (e, args) {
+                var timeCondition = CORE.FindTimeCondition(args.param);
+                var startTime = (timeCondition != null) ? timeCondition.StartTime : '12:00';
+                var stopTime = (timeCondition != null) ? timeCondition.StopTime : '13:00';
+                jQuery('#modifytimeconditionstarttime').val(startTime);
+                jQuery('#modifytimeconditionstoptime').val(stopTime);
+            });
+        </script>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<!-- @Forms\PortTemplate.htm modifymagneticdetector HM.GetDigitalInputPorts() false -->
+<!-- @Forms\RoomTemplate.htm modifymagneticdetector -->
+<!-- @Forms\DisarmingMovementDetectorTemplate.htm modify -->
+
+<div data-role="dialog" id="modifymagneticdetectordialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:ALARM:MagneticDetector -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyMagneticDetector.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifymagneticdetectorname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifymagneticdetectordescription description none RES:C:Description -->
+            <!-- @Forms\MagneticDetectorIconName.htm modifymagneticdetector -->
+            <div data-role="fieldcontain" id="modifymagneticdetectorportcontent"></div>
+            <div data-role="fieldcontain" id="modifymagneticdetectorroomcontent"></div>
+            <div data-role="fieldcontain" id="modifydisarmingmovementdetectorcontent"></div>
+            <!-- @Forms\DurationField.htm modifymagneticdetectordelaytime delaytime required RES:C:DelayTime -->
+            <!-- @Forms\InactiveState.htm modifymagneticdetector -->
+            <!-- @Forms\HiddenField.htm modifymagneticdetectorid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:OK -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifymagneticdetectordialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifymagneticdetectorportcontent').html(jQuery('#modifymagneticdetectorporttemplate').tmpl());
+                jQuery('#modifymagneticdetectorroomcontent').html(jQuery('#modifymagneticdetectorroomtemplate').tmpl());
+                jQuery('#modifydisarmingmovementdetectorcontent').html(jQuery('#modifydisarmingmovementdetectortemplate').tmpl());
+
+                var magneticDetector = ALARM.FindMagneticDetector(args.param);
+
+                var name = (magneticDetector != null) ? magneticDetector.Name.Name : '';
+                var description = (magneticDetector != null) ? magneticDetector.Name.Description : '';
+                var uniqueId = (magneticDetector != null) ? magneticDetector.Name.UniqueId : '';
+                var iconName = (magneticDetector != null) ? magneticDetector.IconName : '';
+                var portId = (magneticDetector != null) ? magneticDetector.PortId : '';
+                var roomId = (magneticDetector != null) ? magneticDetector.RoomId : '';
+                var inactiveState = (magneticDetector != null) ? magneticDetector.InactiveState : '0';
+                var disarmingMovementDetectorId = (magneticDetector != null) ? magneticDetector.DisarmingMovementDetectorId : '';
+
+                jQuery('#modifymagneticdetectordialog [name=name]').val(name);
+                jQuery('#modifymagneticdetectordialog [name=description]').val(description);
+                jQuery('#modifymagneticdetectordialog [name=iconname]').val(iconName);
+                jQuery('#modifymagneticdetectordialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifymagneticdetectordialog [name=portid]').val(portId);
+                jQuery('#modifymagneticdetectordialog [name=roomid]').val(roomId);
+                jQuery('#modifymagneticdetectordialog [name=inactivestate]').val(inactiveState);
+                jQuery('#modifymagneticdetectordialog [name=disarmingmovementdetectorid]').val(disarmingMovementDetectorId);
+
+                jQuery('#modifymagneticdetectordialog form').validate();
+            });
+
+            jQuery('#modifymagneticdetectordialog').on('pageaftertransfer', function (e, args) {
+                var magneticDetector = ALARM.FindMagneticDetector(args.param);
+                var delayTime = (magneticDetector != null) ? magneticDetector.DelayTime : '00:00:00';
+
+                jQuery('#modifymagneticdetectordialog [name=delaytime]').val(delayTime);
+                jQuery('[data-role=slider]').slider('refresh');
+
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

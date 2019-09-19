@@ -1,0 +1,52 @@
+﻿<!-- @Forms\NamedOutputAndTogglePortsTemplate.htm modify7colorlampred redportid RES:LIGHTS:RedChannelPort -->
+<!-- @Forms\NamedOutputAndTogglePortsTemplate.htm modify7colorlampgreen greenportid RES:LIGHTS:GreenChannelPort -->
+<!-- @Forms\NamedOutputAndTogglePortsTemplate.htm modify7colorlampblue blueportid RES:LIGHTS:BlueChannelPort -->
+<!-- @Forms\RoomTemplate.htm modify7colorlamp -->
+
+<div data-role="dialog" id="modify7colorlampdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:LIGHTS:7ColorLamp -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="Modify7ColorLamp.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modify7colorlampname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modify7colorlampdescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modify7colorlampredportcontent"></div>
+            <div data-role="fieldcontain" id="modify7colorlampgreenportcontent"></div>
+            <div data-role="fieldcontain" id="modify7colorlampblueportcontent"></div>
+            <div data-role="fieldcontain" id="modify7colorlamproomcontent"></div>
+            <!-- @Forms\HiddenField.htm modify7colorlampid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:OK -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modify7colorlampdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modify7colorlampredportcontent').html(jQuery('#modify7colorlampredporttemplate').tmpl());
+                jQuery('#modify7colorlampgreenportcontent').html(jQuery('#modify7colorlampgreenporttemplate').tmpl());
+                jQuery('#modify7colorlampblueportcontent').html(jQuery('#modify7colorlampblueporttemplate').tmpl());
+                jQuery('#modify7colorlamproomcontent').html(jQuery('#modify7colorlamproomtemplate').tmpl());
+
+                var sevenColorLamp = LIGHTS.Find7ColorLamp(args.param);
+
+                var name = (sevenColorLamp != null) ? sevenColorLamp.Name.Name : '';
+                var description = (sevenColorLamp != null) ? sevenColorLamp.Name.Description : '';
+                var uniqueId = (sevenColorLamp != null) ? sevenColorLamp.Name.UniqueId : '';
+                var redPortId = (sevenColorLamp != null) ? sevenColorLamp.RedPortId : '';
+                var greenPortId = (sevenColorLamp != null) ? sevenColorLamp.GreenPortId : '';
+                var bluePortId = (sevenColorLamp != null) ? sevenColorLamp.BluePortId : '';
+                var roomId = (sevenColorLamp != null) ? sevenColorLamp.RoomId : '';
+
+                jQuery('#modify7colorlampdialog [name=name]').val(name);
+                jQuery('#modify7colorlampdialog [name=description]').val(description);
+                jQuery('#modify7colorlampdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modify7colorlampdialog [name=redportid]').val(redPortId);
+                jQuery('#modify7colorlampdialog [name=greenportid]').val(greenPortId);
+                jQuery('#modify7colorlampdialog [name=blueportid]').val(bluePortId);
+                jQuery('#modify7colorlampdialog [name=roomid]').val(roomId);
+
+                jQuery('#modify7colorlampdialog form').validate();
+            });           
+        </script>
+    </div>
+</div>

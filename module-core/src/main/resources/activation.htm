@@ -1,0 +1,45 @@
+<!-- @Controls\MasterHeader.htm -->
+
+<script id="activationtemplate" type="text/x-jquery-tmpl">
+    <ul data-inset="true" data-role="listview">
+        <li data-theme="b">
+            <!-- @RES:C:Adapters -->
+            <span class="ui-li-count">${A.GetAdapterActivations().Result.length}</span>
+        </li>
+        {{each A.GetAdapterActivations().Result}}
+            <li>
+                <h3><!-- @Controls\DescriptiveName.htm --></h3>
+                <p><em>${ActivationId}</em></p>
+				<p class="ui-li-aside">
+                  <a href="#" onclick="javascript:doActivationAction('${ActivationId}');" data-role="button">
+                    <span data-activationid="${ActivationId}" class="wait" id="status-${$value.replace(/:/g,"_")}"><!-- @RES:C:Activate --></span>
+                  </a>
+                </p>
+            </li>
+        {{/each}}
+    </ul>
+</script>
+
+<div data-role="page" id="activationindex">
+  <div data-role="header">
+    <h1><!-- @RES:C:Activation --></h1>
+  </div>
+  <div id="content"  class="ui-content">
+    <div data-role="content" id="activationcontent"></div>
+  </div>
+  <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#activationindex').on('pagecreate', function (event) {
+        jQuery(jQuery('#activationtemplate').tmpl()).appendTo('#activationcontent');
+    });
+
+    function doActivationAction(id) {
+        jQuery('#activateadapterdialog [name=id]').val(id);
+        location.href='#activateadapterdialog';
+    }
+</script>
+
+<!-- @Dialogs\ActivateAdapter.htm /Dashboard.htm /ActivationFailure.htm -->
+<!-- @Controls\MasterFooter.htm -->

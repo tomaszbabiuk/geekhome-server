@@ -1,0 +1,39 @@
+<div data-role="dialog" id="modifynfcconditiondialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:AUTO:NfcCondition -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyNfcCondition.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifynfcconditionname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifynfcconditiondescription description none RES:C:Description -->
+            <!-- @Forms\TextField.htm modifynfcconditiontag tag none RES:AUTO:Tag -->
+            <!-- @Forms\DurationField.htm modifynfcconditionleavingtime duration required RES:C:Duration -->
+            <!-- @Forms\HiddenField.htm modifynfcconditionid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifynfcconditiondialog').on('pagetransfer', function (e, args) {
+                var nfcCondition = AUTO.FindNfcCondition(args.param);
+                var name = (nfcCondition != null) ? nfcCondition.Name.Name : '';
+                var description = (nfcCondition != null) ? nfcCondition.Name.Description : '';
+                var tag = (nfcCondition != null) ? nfcCondition.Tag : '';
+                var uniqueId = (nfcCondition != null) ? nfcCondition.Name.UniqueId : '';
+
+                jQuery('#modifynfcconditiondialog [name=name]').val(name);
+                jQuery('#modifynfcconditiondialog [name=description]').val(description);
+                jQuery('#modifynfcconditiondialog [name=tag]').val(tag);
+                jQuery('#modifynfcconditiondialog [name=uniqueid]').val(uniqueId);
+
+                jQuery('#modifynfcconditiondialog form').validate();
+            });
+
+            jQuery('#modifynfcconditiondialog').on('pageaftertransfer', function (e, args) {
+                var nfcCondition = AUTO.FindNfcCondition(args.param);
+                var duration = (nfcCondition != null) ? nfcCondition.Duration : '00:00:10';
+                jQuery('#modifynfcconditiondialog [name=duration]').val(duration);
+            });
+        </script>
+    </div>
+</div>

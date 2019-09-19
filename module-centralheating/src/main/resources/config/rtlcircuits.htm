@@ -1,0 +1,52 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\CircuitsInfo.htm RES:CH:CannotAddRtlCircuitsMessage -->
+<!-- @Controls\PortsInfo.htm true false false false false false false false -->
+
+<script id="rtlcircuitstemplate" type="text/x-jquery-tmpl">
+    {{each CH.GetRtlCircuits()}}
+        <ul data-inset="true" data-role="listview" data-split-theme="e">
+            <li data-theme="b">
+                <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#rtlcircuitdetailsdialog', { param: '${Name.UniqueId}' })"
+                {{if (typeof IconName !== 'undefined')}} style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 15px; background-size: 32px 32px; padding-left:50px;" {{/if}}>
+                    <!-- @Controls\HeatingProperties.htm -->
+                </a>
+            </li>
+            <!-- @Controls\NamedBlocksFragment.htm forceon RES:CH:BlocksForcingCircuitToEnable -->
+            <!-- @Controls\NamedBlocksFragment.htm forceoff RES:CH:BlocksForcingCircuitToDisable -->
+            <!-- @Controls\NamedBlocksFragment.htm returntemppriority RES:CH:BlocksEnablingReturnTemperaturePriority -->
+        </ul>
+    {{/each}}
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifyrtlcircuitdialog RES:CH:AddRtlCircuit -->
+    </div>
+</script>
+<div data-role="page" id="rtlcircuitsindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:CH:RtlCircuits -->
+    </h1>
+  </div>
+  <div data-role="content" id="rtlcircuitscontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+<script type="text/javascript">
+    jQuery('#rtlcircuitsindex').on('pagecreate', function (event) {
+        if (!HM.HasDigitalOutputPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#rtlcircuitscontent');
+        } else if (CH.CanAddCircuits()) {
+            jQuery(jQuery('#rtlcircuitstemplate').tmpl()).appendTo('#rtlcircuitscontent');
+        } else {
+            jQuery(jQuery('#circuitsinfotemplate').tmpl()).appendTo('#rtlcircuitscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/rtlcircuits.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/rtlcircuits.htm -->
+<!-- @Dialogs\ModifyRtlCircuit.htm -->
+<!-- @Dialogs\HeatingCrudDetails.htm rtlcircuitdetails #modifyrtlcircuitdialog RemoveRtlCircuit.post CH.FindRtlCircuit RES:CH:RtlCircuit RES:CH:RtlCircuitDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/rtlcircuits.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

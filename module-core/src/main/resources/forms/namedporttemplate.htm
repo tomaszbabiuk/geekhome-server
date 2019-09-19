@@ -1,0 +1,13 @@
+<script id="$p0porttemplate" type="text/x-jquery-tmpl">
+    <label for="$p0port" class="select">
+        $p3:</label>
+    <select id="$p0port" name="$p2" data-native-menu="false" validate="required:true, minlength:1">
+        {{if ($p4)}}
+            <option value="-"><!-- @RES:C:None --> (<!-- @RES:C:Virtual -->)</option>
+        {{/if}}
+        {{each $p1}}
+            <option value="${Id}">${Id}{{if MappedTo.length > 0 }}: {{each MappedTo}}${Name}, {{/each}}(${MappedTo.length}){{/if}}
+            </option>
+        {{/each}}
+    </select>
+</script>

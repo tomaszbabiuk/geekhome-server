@@ -1,0 +1,55 @@
+<script id="codecontroltemplate" type="text/x-jquery-tmpl">
+<div data-role="fieldcontain">
+    <img onClick="javascript:toggleFavorite('${Device.Name.UniqueId}', this)" src="/css/icons/star_{{if IsFavorite('' + Device.Name.UniqueId)}}on{{else}}off{{/if}}.svg" style="float:right" width="32" height="32">
+    <h1>${Device.Name.Name}</h1>
+    {{if (typeof Device.IconName !== 'undefined')}} <img src="/css/icons/${Device.IconName}.svg" style="margin-right:auto; margin-left:auto; display:block" width="64" height="64" /> {{/if}}
+    <h4 style="text-align:center">${Evaluation.InterfaceValue}</h4>
+    {{if NextState.CodeRequired}}
+        <!-- @Forms\PasswordField.htm code code none RES:C:Code -->
+    {{/if}}
+    <h4 class="invalidcodepanel" style="display:none"><!-- @RES:C:InvalidCode --></h4>
+    <fieldset class="ui-grid-a">
+        <div class="ui-block-a"><a data-role="button" data-theme="b" onclick="javascript:return changeStateAndClose('${Device.Name.UniqueId}', '${NextState.Name.UniqueId}');">${NextState.Name.Description}</a></div>
+        <div class="ui-block-b"><a data-role="button" data-rel="back" href="#"><!-- @RES:C:Cancel --></a></div>
+    </fieldset>
+</div>
+</script>
+
+<div data-role="dialog" id="codecontroldialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:DeviceControl -->
+        </h1>
+    </div>
+    <div data-role="content" id="codecontrolcontent">
+    </div>
+</div>
+
+<script type="text/javascript">
+    function checkNextState(states, stateType) {
+        for (iState in states) {
+            var state = states[iState];
+            if (state.Type == stateType) {
+                return state;
+            }
+        }
+
+        return null;
+    }
+
+    jQuery('#codecontroldialog').on('pagetransfer', function (e, args) {
+        var codeDeviceId = args.param;
+        var device = CORE.FindDevice(codeDeviceId);
+        var evaluation = CheckDeviceEvaluation(codeDeviceId);
+        var states = GetDeviceStates(codeDeviceId);
+        var nextState = checkNextState(states, evaluation.IsSignaled ? 2 : 3);
+
+        var templateData = {
+            Device: device,
+            Evaluation: evaluation,
+            NextState: nextState
+        };
+
+        jQuery('#codecontrolcontent').html(jQuery('#codecontroltemplate').tmpl(templateData));
+    });
+</script>

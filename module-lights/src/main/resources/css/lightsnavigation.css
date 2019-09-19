@@ -1,0 +1,5 @@
+/* no custom css navs yet */
+.icon-custom-lightswitch	.ui-icon { background:  url(icons/lightswitch.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-rgblamp    	.ui-icon { background:  url(icons/rgblamp.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-blinds    	    .ui-icon { background:  url(icons/blinds.svg) 50% 50% no-repeat; background-size: 28px 28px; }
+.icon-custom-luminosity	    .ui-icon { background:  url(icons/luminosity.svg) 50% 50% no-repeat; background-size: 28px 28px; }

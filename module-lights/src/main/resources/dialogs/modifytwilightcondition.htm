@@ -1,0 +1,36 @@
+<div data-role="dialog" id="modifytwilightconditiondialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:LIGHTS:TwilightCondition -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyTwilightCondition.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifytwilightconditionname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifytwilightconditiondescription description none RES:C:Description -->
+            <!-- @Forms\NumberField.htm modifytwilightconditionlongitude longitude required RES:C:Longitude 0 -->
+            <!-- @Forms\NumberField.htm modifytwilightconditionlatitude latitude required RES:C:Latitude 0 -->
+            <!-- @Forms\HiddenField.htm modifytwilightconditionid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifytwilightconditiondialog').on('pagetransfer', function (e, args) {
+                var twilightCondition = LIGHTS.FindTwilightCondition(args.param);
+
+                var name = (twilightCondition != null) ? twilightCondition.Name.Name : '';
+                var description = (twilightCondition != null) ? twilightCondition.Name.Description : '';
+                var uniqueId = (twilightCondition != null) ? twilightCondition.Name.UniqueId : '';
+                var longitude = (twilightCondition != null) ? twilightCondition.Longitude : '';
+                var latitude = (twilightCondition != null) ? twilightCondition.Latitude : '';
+
+                jQuery('#modifytwilightconditiondialog [name=name]').val(name);
+                jQuery('#modifytwilightconditiondialog [name=description]').val(description);
+                jQuery('#modifytwilightconditiondialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifytwilightconditiondialog [name=longitude]').val(longitude);
+                jQuery('#modifytwilightconditiondialog [name=latitude]').val(latitude);
+
+                jQuery('#modifytwilightconditiondialog form').validate();
+            });
+        </script>
+    </div>
+</div>

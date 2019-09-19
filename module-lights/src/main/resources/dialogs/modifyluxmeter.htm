@@ -1,0 +1,49 @@
+<!-- @Forms\PortTemplate.htm modifyluxmeter HM.GetLuminosityPorts() false -->
+<!-- @Forms\RoomTemplate.htm modifyluxmeter -->
+
+<div data-role="dialog" id="modifyluxmeterdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:LIGHTS:Luxmeter -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyLuxmeter.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyluxmetername name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyluxmeterdescription description none RES:C:Description -->
+            <!-- @Forms\DeviceCategory.htm modifyluxmeterdevicecategory -->
+            <div data-role="fieldcontain" id="modifyluxmeterportcontent"></div>
+            <div data-role="fieldcontain" id="modifyluxmeterroomcontent"></div>
+            <!-- @Forms\HiddenField.htm modifyluxmeterid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyluxmeterdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyluxmeterportcontent').html(jQuery('#modifyluxmeterporttemplate').tmpl());
+                jQuery('#modifyluxmeterroomcontent').html(jQuery('#modifyluxmeterroomtemplate').tmpl());
+
+                var luxmeter = LIGHTS.FindLuxmeter(args.param);
+
+                var name = (luxmeter != null) ? luxmeter.Name.Name : '';
+                var description = (luxmeter != null) ? luxmeter.Name.Description : '';
+                var uniqueId = (luxmeter != null) ? luxmeter.Name.UniqueId : '';
+                var portId = (luxmeter != null) ? luxmeter.PortId : '';
+                var roomId = (luxmeter != null) ? luxmeter.RoomId : '';
+                var deviceCategory = (luxmeter != null) ? luxmeter.DeviceCategory : '1';
+
+                jQuery('#modifyluxmeterdialog [name=name]').val(name);
+                jQuery('#modifyluxmeterdialog [name=description]').val(description);
+                jQuery('#modifyluxmeterdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyluxmeterdialog [name=portid]').val(portId);
+                jQuery('#modifyluxmeterdialog [name=roomid]').val(roomId);
+                jQuery('#modifyluxmeterdialog [name=devicecategory]').val(deviceCategory);
+
+                jQuery('#modifyluxmeterdialog form').validate();
+            });
+
+            jQuery('#modifyluxmeterdialog').on('pageaftertransfer', function (e, args) {
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

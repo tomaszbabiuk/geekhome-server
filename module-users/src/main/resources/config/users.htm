@@ -1,0 +1,34 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="userstemplate" type="text/x-jquery-tmpl">
+    <div class="ui-body ui-body-c">
+        <p><strong><!-- @RES:C:Warning --></strong></p>
+        <p><!-- @RES:U:UsersModificationWarning --></p>
+        <p><!-- @RES:U:DefaultUserWillBeCreated --></p>
+    </div>
+    <!-- @Controls\CoreCrudList.htm #userdetailsdialog U.GetUsers() RES:U:WWWUsers -->
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifyuserdialog RES:U:AddUser -->
+    </div>
+</script>
+
+<div data-role="page" id="usersindex">
+    <div data-role="header">
+        <h1><!-- @RES:U:WWWUsers --></h1>
+    </div>
+    <div data-role="content" id="userscontent">
+    </div>
+    <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+<script type="text/javascript">
+    jQuery('#usersindex').on('pagecreate', function (event) {
+        jQuery(jQuery('#userstemplate').tmpl()).appendTo('#userscontent');
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/users.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/users.htm -->
+<!-- @Dialogs\ModifyUser.htm -->
+<!-- @Dialogs\CoreCrudDetailsNoDependencies.htm userdetails #modifyuserdialog RemoveUser.post U.FindUser RES:U:User RES:U:UserDetails -->
+<!-- @Controls\MasterFooter.htm -->

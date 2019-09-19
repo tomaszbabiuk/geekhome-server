@@ -1,0 +1,53 @@
+<!-- @Controls\CoreProperties.htm -->
+
+{{if (typeof PresenceType !== 'undefined')}}
+    <p><strong><!-- @RES:ALARM:PresenceType -->: </strong>${PresenceTypeNames[PresenceType]}</p>
+{{/if}}
+{{if (typeof AlarmType !== 'undefined')}}
+    <p><strong><!-- @RES:ALARM:AlarmType -->: </strong>${AlarmTypeNames[AlarmType]}</p>
+{{/if}}
+{{if (typeof AlarmTypesIds !== 'undefined')}}
+    <p><strong><!-- @RES:ALARM:AlarmTypes -->: </strong>${AlarmTypesToNames(AlarmTypesIds)}</p>
+{{/if}}
+{{if (typeof LeavingTime !== 'undefined')}}
+    <p><strong><!-- @RES:ALARM:LeavingTime -->: </strong>${LeavingTime}</p>
+{{/if}}
+{{if (typeof Sensitivity !== 'undefined')}}
+    <p><strong><!-- @RES:ALARM:Sensitivity -->: </strong>${Sensitivity}</p>
+{{/if}}
+{{if (typeof IsPetFriendly !== 'undefined')}}
+    <p><strong><!-- @RES:ALARM:IsPetFriendly -->: </strong>${YesNoNames[IsPetFriendly]}</p>
+{{/if}}
+{{if (typeof DisarmingMovementDetectorId !== 'undefined')}}
+    <p><strong><!-- @RES:ALARM:DisarmingMovementDetector -->: </strong>{{if (DisarmingMovementDetectorId == '')}}<!-- @RES:C:None -->{{else}}${ALARM.FindMovementDetector(DisarmingMovementDetectorId).Name.Name}{{/if}}</p>
+{{/if}}
+{{if (typeof MagneticDetectorId !== 'undefined')}}
+    <p><strong><!-- @RES:ALARM:MagneticDetector -->: </strong>{{if (MagneticDetectorId == '-' || MagneticDetectorId == '')}}<!-- @RES:C:None -->{{else}}${ALARM.FindMagneticDetector(MagneticDetectorId).Name.Name}{{/if}}</p>
+{{/if}}
+{{if (typeof LocksIds !== 'undefined' && LocksIds != '')}}
+    <p><strong><!-- @RES:ALARM:Locks -->: </strong>${ALARM.LocksIdsToNames(LocksIds)}</p>
+{{/if}}
+{{if (typeof AlarmSensorsIds !== 'undefined' && AlarmSensorsIds != '')}}
+    <p><strong><!-- @RES:ALARM:AlarmSensors -->: </strong>${ALARM.AlarmSensorsIdsToNames(AlarmSensorsIds)}</p>
+{{/if}}
+{{if (typeof MovementDetectorsIds !== 'undefined' && MovementDetectorsIds != '')}}
+    <p><strong><!-- @RES:ALARM:MovementDetectors -->: </strong>${ALARM.MovementDetectorsIdsToNames(MovementDetectorsIds)}</p>
+{{/if}}
+{{if (typeof UnlockingCode !== 'undefined' && UnlockingCode != '')}}
+    <p><strong><!-- @RES:ALARM:UnlockingCode -->: </strong>${UnlockingCode}</p>
+{{/if}}
+{{if (typeof ArmingPortId !== 'undefined' && ArmingPortId != '')}}
+    <p><strong><!-- @RES:ALARM:ArmingPort -->: </strong>${ArmingPortId}</p>
+{{/if}}
+{{if (typeof StatusPortId !== 'undefined' && StatusPortId != '')}}
+    <p><strong><!-- @RES:ALARM:StatusPort -->: </strong>${StatusPortId}</p>
+{{/if}}
+{{if (typeof MaximumWorkingTime !== 'undefined')}}
+    <p><strong><!-- @RES:ALARM:MaximumWorkingTime -->: </strong>${MaximumWorkingTime}</p>
+{{/if}}
+{{if (typeof GateControlPortId !== 'undefined' && GateControlPortId != '')}}
+    <p><strong><!-- @RES:ALARM:GateControlPort -->: </strong>${GateControlPortId}</p>
+{{/if}}
+{{if (typeof MagneticDetectorPortId !== 'undefined' && MagneticDetectorPortId != '')}}
+    <p><strong><!-- @RES:ALARM:MagneticDetectorPort -->: </strong>${MagneticDetectorPortId}</p>
+{{/if}}

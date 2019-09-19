@@ -1,0 +1,27 @@
+<script id="versiondetailstemplate" type="text/x-jquery-tmpl">
+    <h4><!-- @Controls\DescriptiveName.htm --></h4>
+    <p><strong><!-- @RES:C:FromDate -->: </strong>${FromDate}</p>
+    <p><strong><!-- @RES:C:Version -->: </strong>${Version}</p>
+</script>
+
+<div data-role="dialog" id="restorebackupdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:RestoreThisVersion -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <div class="content"></div>
+        <form action="RestoreBackup.post" method="post" data-ajax="false">
+            <!-- @Forms\HiddenField.htm restorebackupid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Restore -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#restorebackupdialog').on('pagetransfer', function (e, args) {
+                var backup = B.FindBackup(args.param);
+                jQuery('#restorebackupdialog .content').html(jQuery('#versiondetailstemplate').tmpl(backup));
+                jQuery('#restorebackupdialog [name=uniqueid]').val(backup.Name.UniqueId);
+            });
+        </script>
+    </div>
+</div>

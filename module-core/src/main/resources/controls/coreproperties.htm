@@ -1,0 +1,121 @@
+{{if (typeof Name !== 'undefined')}}
+    <h4><!-- @Controls\DescriptiveName.htm --></h4>
+{{/if}}
+{{if (typeof RoomId !== 'undefined')}}
+    <p><strong><!-- @RES:C:Room -->: </strong>${CORE.FindRoom(RoomId).Name.Name}</p>
+    <p><strong><!-- @RES:C:Floor -->: </strong>${CORE.FindFloorByRoomId(RoomId).Name.Name}</p>
+{{/if}}
+{{if (typeof RoomsIds !== 'undefined' && RoomsIds != '')}}
+    <p><strong><!-- @RES:C:Rooms -->: </strong>${CORE.RoomsIdsToNames(RoomsIds)}</p>
+{{/if}}
+{{if (typeof PortId !== 'undefined')}}
+    <p><strong><!-- @RES:C:Port -->: </strong>{{if (PortId == '')}}<!-- @RES:C:None --> (<!-- @RES:C:Virtual -->){{else}}${PortId}{{/if}}</p>
+{{/if}}
+{{if (typeof Priority !== 'undefined')}}
+    <p><strong><!-- @RES:C:Priority -->: </strong>${Priority}</p>
+{{/if}}
+{{if (typeof InactiveState !== 'undefined')}}
+    <p><strong><!-- @RES:C:InactiveState -->: </strong>${InactiveStatesNames[InactiveState]}</p>
+{{/if}}
+{{if (typeof State !== 'undefined')}}
+    <p><strong><!-- @RES:C:State -->: </strong>${DeviceStateNames[State]}</p>
+{{/if}}
+{{if (typeof ConditionId !== 'undefined')}}
+    <p><strong><!-- @RES:C:Condition -->: </strong>${CORE.FindCondition(ConditionId).Name.Name}</p>
+{{/if}}
+{{if (typeof DeviceId !== 'undefined')}}
+    <p><strong><!-- @RES:C:Device -->: </strong>${CORE.FindDevice(DeviceId).Name.Name}</p>
+{{/if}}
+{{if (typeof DevicesIds !== 'undefined' && DevicesIds != '')}}
+    <p><strong><!-- @RES:C:Devices -->: </strong>${CORE.DevicesIdsToNames(DevicesIds)}</p>
+{{/if}}
+{{if (typeof Match !== 'undefined')}}
+    <p><strong><!-- @RES:C:Match -->: </strong>${GroupMatchNames[Match]}</p>
+{{/if}}
+{{if (typeof Operator !== 'undefined')}}
+    <p><strong><!-- @RES:C:EqualityOperator -->: </strong>${EqualityOperatorNames[Operator]}</p>
+{{/if}}
+{{if (typeof MinimumWorkingTime !== 'undefined')}}
+    <p><strong><!-- @RES:C:MinimumWorkingTime -->: </strong>${MinimumWorkingTime}</p>
+{{/if}}
+{{if (typeof StartTime !== 'undefined')}}
+    <p><strong><!-- @RES:C:StartTime -->: </strong>${StartTime}</p>
+{{/if}}
+{{if (typeof StopTime !== 'undefined')}}
+    <p><strong><!-- @RES:C:StopTime -->: </strong>${StopTime}</p>
+{{/if}}
+{{if (typeof StartDate !== 'undefined')}}
+    <p><strong><!-- @RES:C:StartDate -->: </strong>${StartDate}</p>
+{{/if}}
+{{if (typeof StopDate !== 'undefined')}}
+    <p><strong><!-- @RES:C:StopDate -->: </strong>${StopDate}</p>
+{{/if}}
+{{if (typeof DaysIds !== 'undefined' && DaysIds != '')}}
+    <p><strong><!-- @RES:C:Days -->: </strong>${DaysIdsToNames(DaysIds)}</p>
+{{/if}}
+{{if (typeof ConditionsIds !== 'undefined' && ConditionsIds != '')}}
+    <p><strong><!-- @RES:C:Conditions -->: </strong>${CORE.ConditionsIdsToNames(ConditionsIds)}</p>
+{{/if}}
+{{if (typeof ModesIds !== 'undefined' && ModesIds != '')}}
+    <p><strong><!-- @RES:C:Modes -->: </strong>${CORE.ModesIdsToNames(ModesIds)}</p>
+{{/if}}
+{{if (typeof TriggeredManually !== 'undefined')}}
+    <p><strong><!-- @RES:C:TriggeredManually -->: </strong>${YesNoNames[TriggeredManually]}</p>
+{{/if}}
+{{if (typeof Stability !== 'undefined' && Stability != '')}}
+    <p><strong><!-- @RES:C:Type -->: </strong>${StabilityNames[Stability]}</p>
+{{/if}}
+{{if (typeof StatesIds !== 'undefined' && StatesIds != '' && typeof DeviceId !== 'undefined' && DeviceId != '')}}
+    <p><strong><!-- @RES:C:States -->: </strong>${CORE.StatesIdsToNames(DeviceId, StatesIds)}</p>
+{{/if}}
+{{if (typeof StateId !== 'undefined' && StateId != '' && typeof DeviceId !== 'undefined' && DeviceId != '')}}
+    <p><strong><!-- @RES:C:State -->: </strong>${CORE.StatesIdsToNames(DeviceId, StateId)}</p>
+{{/if}}
+{{if (typeof AlertServicesIds !== 'undefined')}}
+    <p><strong><!-- @RES:C:AdditionalChannels -->: </strong>
+        {{if AlertServicesIds.length > 0}}
+            ${SI.AlertServicesIdsToNames(AlertServicesIds)}
+        {{else}}
+            -
+        {{/if}}
+    </p>
+{{/if}}
+{{if (typeof Code !== 'undefined' && Code != '')}}
+    <p><strong><!-- @RES:C:Code -->: </strong>${Code}</p>
+{{/if}}
+{{if (typeof DeviceCategory !== 'undefined' && DeviceCategory != '')}}
+    <p><strong><!-- @RES:C:DeviceCategory -->: </strong>${DeviceCategoryNames[DeviceCategory]}</p>
+{{/if}}
+{{if (typeof Duration !== 'undefined')}}
+    <p><strong><!-- @RES:C:Duration -->: </strong>${Duration}</p>
+{{/if}}
+{{if (typeof DelayTime !== 'undefined')}}
+    <p><strong><!-- @RES:C:DelayTime -->: </strong>${DelayTime}</p>
+{{/if}}
+{{if (typeof Longitude !== 'undefined')}}
+    <p><strong><!-- @RES:C:Longitude -->: </strong>${Longitude}</p>
+{{/if}}
+{{if (typeof Latitude !== 'undefined')}}
+    <p><strong><!-- @RES:C:Latitude -->: </strong>${Latitude}</p>
+{{/if}}
+{{if (typeof Radius !== 'undefined' && Radius != '')}}
+    <p><strong><!-- @RES:C:RadiusInM -->: </strong>${Radius}</p>
+{{/if}}
+{{if (typeof GeofencesIds !== 'undefined' && GeofencesIds != '')}}
+<p><strong><!-- @RES:C:Geofences -->: </strong>${CORE.GeofencesIdsToNames(GeofencesIds)}</p>
+{{/if}}
+{{if (typeof Value !== 'undefined' && Value != '')}}
+<p><strong><!-- @RES:C:Value -->: </strong>${Value}</p>
+{{/if}}
+{{if (typeof FirstDeviceId !== 'undefined')}}
+<p><strong><!-- @RES:C:FirstDevice -->: </strong>${CORE.FindDevice(FirstDeviceId).Name.Name}</p>
+{{/if}}
+{{if (typeof SecondDeviceId !== 'undefined')}}
+<p><strong><!-- @RES:C:SecondDevice -->: </strong>${CORE.FindDevice(SecondDeviceId).Name.Name}</p>
+{{/if}}
+{{if (typeof Delta !== 'undefined' && Delta != '')}}
+<p><strong><!-- @RES:C:Delta -->: </strong>${Delta}</p>
+{{/if}}
+{{if (typeof Hysteresis !== 'undefined' && Hysteresis != '')}}
+<p><strong><!-- @RES:C:Hysteresis -->: </strong>${Hysteresis}</p>
+{{/if}}

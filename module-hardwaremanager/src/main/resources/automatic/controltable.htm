@@ -1,0 +1,159 @@
+<!-- @Controls\MasterHeader.htm -->
+<script id="controltabletemplate" type="text/x-jquery-tmpl">
+    <h2><!-- @RES:HM:Inputs --></h2>
+    <div class="ui-grid-c my-breakpoint">
+        <div class="ui-block-a" >
+            <input type="button" value="INPUT0"
+            {{if HMD.ReadInputPort('INPUT0')}}
+                data-theme="b" onclick="javascript:changeInputPort('INPUT0', false)"
+            {{else}}
+                data-theme="c" onclick="javascript:changeInputPort('INPUT0', true)"
+            {{/if}}/>
+        </div>
+        <div class="ui-block-b" >
+            <input type="button" value="INPUT1"
+            {{if HMD.ReadInputPort('INPUT1')}}
+                data-theme="b" onclick="javascript:changeInputPort('INPUT1', false)"
+            {{else}}
+                data-theme="c" onclick="javascript:changeInputPort('INPUT1', true)"
+            {{/if}}/>
+        </div>
+        <div class="ui-block-c" >
+            <input type="button" value="INPUT2"
+            {{if HMD.ReadInputPort('INPUT2')}}
+                data-theme="b" onclick="javascript:changeInputPort('INPUT2', false)"
+            {{else}}
+                data-theme="c" onclick="javascript:changeInputPort('INPUT2', true)"
+            {{/if}}/>
+        </div>
+        <div class="ui-block-d" >
+            <input type="button" value="INPUT3"
+            {{if HMD.ReadInputPort('INPUT3')}}
+                data-theme="b" onclick="javascript:changeInputPort('INPUT3', false)"
+            {{else}}
+                data-theme="c" onclick="javascript:changeInputPort('INPUT3', true)"
+            {{/if}}/>
+        </div>
+    </div>
+
+    <h2><!-- @RES:HM:Outputs --></h2>
+    <div class="ui-grid-c my-breakpoint">
+        <div class="ui-block-a">
+            <div class="ui-body ui-body-{{if HMD.ReadOutputPort('OUTPUT0')}}e{{else}}c{{/if}}">
+                OUTPUT0
+            </div>
+        </div>
+        <div class="ui-block-b">
+            <div class="ui-body ui-body-{{if HMD.ReadOutputPort('OUTPUT1')}}e{{else}}c{{/if}}">
+                OUTPUT1
+            </div>
+        </div>
+        <div class="ui-block-c">
+            <div class="ui-body ui-body-{{if HMD.ReadOutputPort('OUTPUT2')}}e{{else}}c{{/if}}">
+                OUTPUT2
+            </div>
+        </div>
+        <div class="ui-block-d">
+            <div class="ui-body ui-body-{{if HMD.ReadOutputPort('OUTPUT3')}}e{{else}}c{{/if}}">
+                OUTPUT3
+            </div>
+        </div>
+    </div>
+
+    <h2><!-- @RES:HM:Temperatures --></h2>
+    <div class="ui-grid-c my-breakpoint">
+        <div class="ui-block-a">
+            <input type="text" value="${HMD.ReadTemperaturePort('TEMP0')}" onchange="javascript:changeTemperaturePort('TEMP0', jQuery(this).val())" />
+        </div>
+        <div class="ui-block-b">
+            <input type="text" value="${HMD.ReadTemperaturePort('TEMP1')}" onchange="javascript:changeTemperaturePort('TEMP1', jQuery(this).val())" />
+        </div>
+        <div class="ui-block-c">
+            <input type="text" value="${HMD.ReadTemperaturePort('TEMP2')}" onchange="javascript:changeTemperaturePort('TEMP2', jQuery(this).val())" />
+        </div>
+        <div class="ui-block-d">
+            <input type="text" value="${HMD.ReadTemperaturePort('TEMP3')}" onchange="javascript:changeTemperaturePort('TEMP3', jQuery(this).val())" />
+        </div>
+    </div>
+
+    <h2><!-- @RES:HM:Humidity --></h2>
+    <div class="ui-grid-c my-breakpoint">
+        <div class="ui-block-a">
+            <input type="text" value="${HMD.ReadHumidityPort('HUM0')}" onchange="javascript:changeHumidityPort('HUM0', jQuery(this).val())" />
+        </div>
+        <div class="ui-block-b">
+            <input type="text" value="${HMD.ReadHumidityPort('HUM1')}" onchange="javascript:changeHumidityPort('HUM1', jQuery(this).val())" />
+        </div>
+        <div class="ui-block-c">
+            <input type="text" value="${HMD.ReadHumidityPort('HUM2')}" onchange="javascript:changeHumidityPort('HUM2', jQuery(this).val())" />
+        </div>
+        <div class="ui-block-d">
+            <input type="text" value="${HMD.ReadHumidityPort('HUM3')}" onchange="javascript:changeHumidityPort('HUM3', jQuery(this).val())" />
+        </div>
+    </div>
+
+
+    <h2><!-- @RES:HM:Luminosity --></h2>
+    <div class="ui-grid-c my-breakpoint">
+        <div class="ui-block-a">
+            <input type="text" value="${HMD.ReadLuminosityPort('LUM0')}" onchange="javascript:changeLuminosityPort('LUM0', jQuery(this).val())" />
+        </div>
+        <div class="ui-block-b">
+            <input type="text" value="${HMD.ReadLuminosityPort('LUM1')}" onchange="javascript:changeLuminosityPort('LUM1', jQuery(this).val())" />
+        </div>
+        <div class="ui-block-c">
+            <input type="text" value="${HMD.ReadLuminosityPort('LUM2')}" onchange="javascript:changeLuminosityPort('LUM2', jQuery(this).val())" />
+        </div>
+        <div class="ui-block-d">
+            <input type="text" value="${HMD.ReadLuminosityPort('LUM3')}" onchange="javascript:changeLuminosityPort('LUM3', jQuery(this).val())" />
+        </div>
+    </div>
+</script>
+<div data-role="page" id="controltableindex">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:HM:ControlTable -->
+        </h1>
+    </div>
+    <div data-role="content" id="controltablecontent">
+    </div>
+    <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+
+<script type="text/javascript" language="javascript">
+    function reloadTemplate() {
+        jQuery('#controltablecontent').html(jQuery('#controltabletemplate').tmpl());
+    }
+
+    function changeInputPort(id, value) {
+        HMD.ChangeInputPort(id, value);
+        refresh();
+    }
+
+    function changeTemperaturePort(id, value) {
+        HMD.ChangeTemperaturePort(id, value);
+        refresh();
+    }
+
+    function changeHumidityPort(id, value) {
+        HMD.ChangeHumidityPort(id, value);
+        refresh();
+    }
+
+    function changeLuminosityPort(id, value) {
+        HMD.ChangeLuminosityPort(id, value);
+        refresh();
+    }
+
+    function refresh() {
+        reloadTemplate();
+        jQuery(':button').button();
+        jQuery(':text').textinput();
+    }
+
+    jQuery('#controltableindex').on('pagecreate', function (event) {
+        reloadTemplate();
+    });
+</script>
+
+<!-- @Controls\MasterFooter.htm -->

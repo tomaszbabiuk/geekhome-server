@@ -1,0 +1,77 @@
+<!-- @Forms\RoomTemplate.htm modifyunderfloorcircuit -->
+<!-- @Forms\NamedPortTemplate.htm modifyunderfloorcircuit HM.GetDigitalOutputPorts() actuatorportid RES:CH:ActuatorPort false -->
+<!-- @Forms\NamedThermometerTemplate.htm modifyunderfloorcircuit ambient RES:CH:AmbientThermometer -->
+<!-- @Forms\NamedThermometerTemplate.htm modifyunderfloorcircuit floor RES:CH:FloorThermometer -->
+<!-- @Forms\TemperatureControllerTemplate.htm modifyunderfloorcircuit -->
+
+<div data-role="dialog" id="modifyunderfloorcircuitdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:CH:UnderfloorCircuit -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyUnderfloorCircuit.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyunderfloorcircuitname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyunderfloorcircuitdescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifyunderfloorcircuitroomcontent"></div>
+            <div data-role="fieldcontain" id="modifyunderfloorcircuitportcontent"></div>
+            <div data-role="fieldcontain" id="modifyunderfloorcircuitambientthermometercontent"></div>
+            <div data-role="fieldcontain" id="modifyunderfloorcircuitfloorthermometercontent"></div>
+            <div data-role="fieldcontain" id="modifyunderfloorcircuittemperaturecontrollercontent"></div>
+            <!-- @Forms\NumberField.htm modifyunderfloorcircuitminvalue minfloortemperature required RES:CH:MinFloorTemperature 5 -->
+            <!-- @Forms\NumberField.htm modifyunderfloorcircuitmaxvalue maxfloortemperature required RES:CH:MaxFloorTemperature 35 -->
+            <!-- @Forms\DurationField.htm modifyunderfloorcircuitactivationtime activationtime required RES:CH:ActivationTime -->
+            <!-- @Forms\InactiveState.htm modifyunderfloorcircuit -->
+            <!-- @Forms\HiddenField.htm modifyunderfloorcircuitid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyunderfloorcircuitdialog').on('pagetransfer', function (e, args) {
+                var createMode = args.param == null;
+                jQuery('#modifyunderfloorcircuitroomcontent').html(jQuery('#modifyunderfloorcircuitroomtemplate').tmpl());
+                jQuery('#modifyunderfloorcircuitportcontent').html(jQuery('#modifyunderfloorcircuitporttemplate').tmpl());
+                jQuery('#modifyunderfloorcircuitambientthermometercontent').html(jQuery('#modifyunderfloorcircuitambientthermometertemplate').tmpl());
+                jQuery('#modifyunderfloorcircuitfloorthermometercontent').html(jQuery('#modifyunderfloorcircuitfloorthermometertemplate').tmpl());
+                jQuery('#modifyunderfloorcircuittemperaturecontrollercontent')
+                    .html(jQuery('#modifyunderfloorcircuittemperaturecontrollertemplate').tmpl( { CreateMode: createMode } ));
+
+                var underfloorCircuit = CH.FindUnderfloorCircuit(args.param);
+
+                var name = (underfloorCircuit != null) ? underfloorCircuit.Name.Name : '';
+                var description = (underfloorCircuit != null) ? underfloorCircuit.Name.Description : '';
+                var uniqueId = (underfloorCircuit != null) ? underfloorCircuit.Name.UniqueId : '';
+                var actuatorPortId = (underfloorCircuit != null) ? underfloorCircuit.ActuatorPortId : '';
+                var inactiveState = (underfloorCircuit != null) ? underfloorCircuit.InactiveState : '0';
+                var roomId = (underfloorCircuit != null) ? underfloorCircuit.RoomId : '';
+                var ambientThermometerId = (underfloorCircuit != null) ? underfloorCircuit.AmbientThermometerId : '';
+                var floorThermometerId = (underfloorCircuit != null) ? underfloorCircuit.FloorThermometerId : '';
+                var minFloorTemperature = (underfloorCircuit != null) ? underfloorCircuit.MinFloorTemperature : '5';
+                var maxFloorTemperature = (underfloorCircuit != null) ? underfloorCircuit.MaxFloorTemperature : '35';
+                var temperatureControllerId = (underfloorCircuit != null) ? underfloorCircuit.TemperatureControllerId : '';
+
+                jQuery('#modifyunderfloorcircuitdialog [name=name]').val(name);
+                jQuery('#modifyunderfloorcircuitdialog [name=description]').val(description);
+                jQuery('#modifyunderfloorcircuitdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyunderfloorcircuitdialog [name=roomid]').val(roomId);
+                jQuery('#modifyunderfloorcircuitdialog [name=inactivestate]').val(inactiveState);
+                jQuery('#modifyunderfloorcircuitdialog [name=actuatorportid]').val(actuatorPortId);
+                jQuery('#modifyunderfloorcircuitdialog [name=ambientthermometerid]').val(ambientThermometerId);
+                jQuery('#modifyunderfloorcircuitdialog [name=floorthermometerid]').val(floorThermometerId);
+                jQuery('#modifyunderfloorcircuitdialog [name=minfloortemperature]').val(minFloorTemperature);
+                jQuery('#modifyunderfloorcircuitdialog [name=maxfloortemperature]').val(maxFloorTemperature);
+                jQuery('#modifyunderfloorcircuitdialog [name=temperaturecontrollerid]').val(temperatureControllerId);
+
+                jQuery('#modifyunderfloorcircuitdialog form').validate();
+            });
+
+            jQuery('#modifyunderfloorcircuitdialog').on('pageaftertransfer', function (e, args) {
+                var underfloorcircuit = CH.FindUnderfloorCircuit(args.param);
+                var activationTime = (underfloorcircuit != null) ? underfloorcircuit.ActivationTime : '00:02:00';
+                jQuery('#modifyunderfloorcircuitdialog [name=activationtime]').val(activationTime);
+                jQuery('[data-role=slider]').slider('refresh');
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

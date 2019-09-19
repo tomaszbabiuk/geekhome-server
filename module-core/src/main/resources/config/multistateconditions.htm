@@ -1,0 +1,38 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="multistateconditionstemplate" type="text/x-jquery-tmpl">
+  <!-- @Controls\CoreCrudList.htm #multistateconditiondetailsdialog CORE.GetMultistateConditions() RES:C:MultistateConditions -->
+  <div>
+    <!-- @Controls\PageTransferButton.htm #modifymultistateconditiondialog RES:C:AddMultistateCondition -->
+  </div>
+</script>
+
+<script id="multistateconditionsinfotemplate" type="text/x-jquery-tmpl">
+    <!-- @RES:C:CannotAddMultistateConditionsMessage -->
+</script>
+
+<div data-role="page" id="multistateconditionsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:MultistateConditions --></h1>
+    </div>
+    <div data-role="content" id="multistateconditionscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#multistateconditionsindex').on('pagecreate', function (event) {
+        if (CORE.CanAddMultistateConditions()) {
+            jQuery(jQuery('#multistateconditionstemplate').tmpl()).appendTo('#multistateconditionscontent');
+        } else {
+            jQuery(jQuery('#multistateconditionsinfotemplate').tmpl()).appendTo('#multistateconditionscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/multistateconditions.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/multistateconditions.htm -->
+<!-- @Dialogs\ModifyMultistateCondition.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm multistateconditiondetails #modifymultistateconditiondialog RemoveMultistateCondition.post CORE.FindMultistateCondition RES:C:MultistateCondition RES:C:MultistateConditionDetails -->
+<!-- @Controls\MasterFooter.htm -->

@@ -1,0 +1,12 @@
+<script id="$p0temperaturecontrollertemplate" type="text/x-jquery-tmpl">
+    <label for="$p0temperaturecontroller" class="select">
+        <!-- @RES:CH:TemperatureController -->:</label>
+    <select id="$p0temperaturecontroller" name="temperaturecontrollerid" data-native-menu="false">
+        {{if CreateMode}}
+            <option value="createnew" selected>(<!-- @RES:C:CreateNew -->)</option>
+        {{/if}}
+        {{each CH.GetTemperatureControllers()}}
+            <option value="${Name.UniqueId}"><!-- @Controls\DeviceName.htm --></option>
+        {{/each}}
+    </select>
+</script>

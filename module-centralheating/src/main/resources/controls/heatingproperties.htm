@@ -1,0 +1,77 @@
+<!-- @Controls\CoreProperties.htm -->
+
+{{if (typeof MinValue !== 'undefined')}}
+    <p><strong><!-- @RES:CH:MinValue -->: </strong>${MinValue}</p>
+{{/if}}
+{{if (typeof MaxValue !== 'undefined')}}
+    <p><strong><!-- @RES:CH:MaxValue -->: </strong>${MaxValue}</p>
+{{/if}}
+{{if (typeof InitialValue !== 'undefined')}}
+    <p><strong><!-- @RES:CH:InitialValue -->: </strong>${InitialValue}</p>
+{{/if}}
+{{if (typeof ThermometerId !== 'undefined')}}
+    <p><strong><!-- @RES:CH:Thermometer -->: </strong>${CH.FindAnyThermometer(ThermometerId).Name.Name}</p>
+{{/if}}
+{{if (typeof AmbientThermometerId !== 'undefined')}}
+    <p><strong><!-- @RES:CH:AmbientThermometer -->: </strong>${CH.FindAnyThermometer(AmbientThermometerId).Name.Name}</p>
+{{/if}}
+{{if (typeof FloorThermometerId !== 'undefined')}}
+    <p><strong><!-- @RES:CH:FloorThermometer -->: </strong>${CH.FindAnyThermometer(FloorThermometerId).Name.Name}</p>
+{{/if}}
+{{if (typeof ReturnThermometerId !== 'undefined')}}
+    <p><strong><!-- @RES:CH:ReturnThermometer -->: </strong>${CH.FindAnyThermometer(ReturnThermometerId).Name.Name}</p>
+{{/if}}
+{{if (typeof FirstThermometerId !== 'undefined')}}
+    <p><strong><!-- @RES:CH:FirstThermometer -->: </strong>${CH.FindAnyThermometer(FirstThermometerId).Name.Name}</p>
+{{/if}}
+{{if (typeof SecondThermometerId !== 'undefined')}}
+    <p><strong><!-- @RES:CH:SecondThermometer -->: </strong>${CH.FindAnyThermometer(SecondThermometerId).Name.Name}</p>
+{{/if}}
+{{if (typeof ActivationTime !== 'undefined')}}
+    <p><strong><!-- @RES:CH:ActivationTime -->: </strong>${ActivationTime}</p>
+{{/if}}
+{{if (typeof TemperatureControllerId !== 'undefined')}}
+    <p><strong><!-- @RES:CH:TemperatureController -->: </strong>${CH.FindTemperatureController(TemperatureControllerId).Name.Name}</p>
+{{/if}}
+{{if (typeof Delta !== 'undefined')}}
+    <p><strong><!-- @RES:CH:DeltaTInC -->: </strong>${Delta}</p>
+{{/if}}
+{{if (typeof Hysteresis !== 'undefined')}}
+    <p><strong><!-- @RES:CH:HysteresisInC -->: </strong>${Hysteresis}</p>
+{{/if}}
+{{if (typeof Temperature !== 'undefined')}}
+    <p><strong><!-- @RES:CH:Temperature -->: </strong>${Temperature}</p>
+{{/if}}
+{{if (typeof CircuitsIds !== 'undefined' && CircuitsIds != '')}}
+    <p><strong><!-- @RES:CH:Circuits -->: </strong>${CH.CircuitsIdsToNames(CircuitsIds)}</p>
+{{/if}}
+{{if (typeof ThermometersIds !== 'undefined' && ThermometersIds != '')}}
+    <p><strong><!-- @RES:CH:Thermometers -->: </strong>${CH.ThermometersIdsToNames(ThermometersIds)}</p>
+{{/if}}
+{{if (typeof MinFloorTemperature !== 'undefined')}}
+    <p><strong><!-- @RES:CH:MinFloorTemperature -->: </strong>${MinFloorTemperature}</p>
+{{/if}}
+{{if (typeof MaxFloorTemperature !== 'undefined')}}
+    <p><strong><!-- @RES:CH:MaxFloorTemperature -->: </strong>${MaxFloorTemperature}</p>
+{{/if}}
+{{if (typeof MinReturnTemperature !== 'undefined')}}
+    <p><strong><!-- @RES:CH:MinReturnTemperature -->: </strong>${MinReturnTemperature}</p>
+{{/if}}
+{{if (typeof MaxReturnTemperature !== 'undefined')}}
+    <p><strong><!-- @RES:CH:MaxReturnTemperature -->: </strong>${MaxReturnTemperature}</p>
+{{/if}}
+{{if (typeof ActuatorPortId !== 'undefined')}}
+    <p><strong><!-- @RES:CH:ActuatorPort -->: </strong>${ActuatorPortId}</p>
+{{/if}}
+{{if (typeof PumpOrFurnacePortId !== 'undefined')}}
+    <p><strong><!-- @RES:CH:PumpOrFurnacePort -->: </strong>${PumpOrFurnacePortId}</p>
+{{/if}}
+{{if (typeof ActuatorsTransformerPortId !== 'undefined')}}
+    <p><strong><!-- @RES:CH:ActuatorsTransformerPort -->: </strong>${ActuatorsTransformerPortId}</p>
+{{/if}}
+{{if (typeof TemperaturePortId !== 'undefined')}}
+    <p><strong><!-- @RES:CH:TemperaturePort -->: </strong>${TemperaturePortId}</p>
+{{/if}}
+{{if (typeof HumidityPortId !== 'undefined')}}
+    <p><strong><!-- @RES:CH:HumidityPort -->: </strong>${HumidityPortId}</p>
+{{/if}}

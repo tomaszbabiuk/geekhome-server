@@ -1,0 +1,86 @@
+﻿﻿<script id="evaluationstemplate" type="text/x-jquery-tmpl">
+    {{if $p0.length == 0}}
+       <em>$p3</em>
+    {{else}}
+    <ul data-inset="true" data-role="listview">
+        {{each $p0}}
+            <li class="$p1wait" data-id="${Name.UniqueId}">
+                <h3><!-- @Controls\DescriptiveName.htm --></h3>
+                {{if ((CORE.FindBlocksByTarget(Name.UniqueId)).length == 0)}}
+                    <p><em><!-- @RES:C:NoBlocksDefined --></em></p>
+                {{/if}}
+                {{each CORE.FindBlocksByTarget(Name.UniqueId)}}
+                <div class="blockwait ui-body ui-body-c" data-id="${Name.UniqueId}">
+                    <h4><!-- @Controls\DescriptiveName.htm --></h4>
+                    {{if ConditionsIds != ''}}
+                        {{each ConditionsIds.split(',') }}
+                            <p>${CORE.ConditionsIdsToNames($value)}: <strong class="conditionwait" data-id="${$value}"><!-- @RES:C:Wait --></strong></p>
+                        {{/each}}
+                    {{/if}}
+                </div>
+                {{/each}}
+            </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</script>
+<div data-role="page" id="evaluationsindex">
+    <div data-role="header">
+        <h1>$p2</h1>
+    </div>
+    <div data-role="content">
+        <div id="evaluationscontent">
+        </div>
+    </div>
+    <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+<script type="text/javascript">
+    jQuery('#evaluationsindex').on('pagecreate', function (event) {
+        jQuery('#evaluationscontent').html(jQuery('#evaluationstemplate').tmpl());
+
+        jQuery('.conditionwait').show(function () {
+            var self = this;
+            var id = jQuery(self).data('id');
+            jQuery(self).removeClass('conditionwait');
+            CheckConditionEvaluation(id, function (data) {
+                var result = data.Result ? '<!-- @RES:C:Passed -->' : '<!-- @RES:C:Failed -->';
+                jQuery(self).html(result);
+            });
+        });
+
+        jQuery('.blockwait').show(function () {
+            var self = this;
+            var id = jQuery(self).data('id');
+            jQuery(self).removeClass('blockwait');
+            CheckBlockEvaluation(id, function (data) {
+                if (data.Result) {
+                    jQuery(self).removeClass('ui-body-c');
+                    jQuery(self).addClass('ui-body-b');                }
+            });
+        });
+
+        jQuery('.modewait').show(function () {
+            var self = this;
+            var id = jQuery(this).data('id');
+            jQuery(this).removeClass('modewait');
+            CheckModeEvaluation(id, function (data) {
+                if (data.Result) {
+                    jQuery(self).removeClass('ui-btn-up-c');
+                    jQuery(self).addClass('ui-btn-up-b');
+                }
+            });
+        });
+
+        jQuery('.alertwait').show(function () {
+            var self = this;
+            var id = jQuery(this).data('id');
+            jQuery(this).removeClass('alertwait');
+            CheckAlertEvaluation(id, function (data) {
+                if (data.Result) {
+                    jQuery(self).removeClass('ui-btn-up-c');
+                    jQuery(self).addClass('ui-btn-up-b');
+                }
+            });
+        });
+    });
+</script>

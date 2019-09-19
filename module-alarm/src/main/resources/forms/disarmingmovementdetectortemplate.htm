@@ -1,0 +1,15 @@
+<script id="$p0disarmingmovementdetectortemplate" type="text/x-jquery-tmpl">
+    <label for="$p0disarmingmovementdetector" class="select">
+        <!-- @RES:ALARM:DisarmingMovementDetector --> (<!-- @RES:ALARM:Optional -->):
+    </label>
+    <select id="$p0disarmingmovementdetector" name="disarmingmovementdetectorid" data-native-menu="false">
+        <option value="">
+            <!-- @RES:C:None -->
+        </option>
+        {{each ALARM.GetMovementDetectors()}}
+        <option value="${Name.UniqueId}">
+            <!-- @Controls\DeviceName.htm -->
+        </option>
+        {{/each}}
+    </select>
+</script>

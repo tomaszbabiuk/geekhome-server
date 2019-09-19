@@ -1,0 +1,51 @@
+<!-- @Forms\RoomTemplate.htm modifykeyswitch -->
+<!-- @Forms\PortTemplate.htm modifykeyswitch HM.GetDigitalInputPorts() true -->
+
+<div data-role="dialog" id="modifykeyswitchdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:KeySwitch -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyKeySwitch.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifykeyswitchname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifykeyswitchdescription description none RES:C:Description -->
+            <!-- @Forms\DeviceCategory.htm modifykeyswitch -->
+            <div data-role="fieldcontain" id="modifykeyswitchroomcontent"></div>
+            <div data-role="fieldcontain" id="modifykeyswitchportcontent"></div>
+            <!-- @Forms\HiddenField.htm modifykeyswitchid uniqueid -->
+            <!-- @Forms\CreateMultistateCondition.htm -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifykeyswitchdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifykeyswitchroomcontent').html(jQuery('#modifykeyswitchroomtemplate').tmpl());
+                jQuery('#modifykeyswitchportcontent').html(jQuery('#modifykeyswitchporttemplate').tmpl());
+
+                var keySwitch = CORE.FindKeySwitch(args.param);
+                if (keySwitch != null) {
+                    jQuery("#createmultistatecondition").hide();
+                }
+
+                var name = (keySwitch != null) ? keySwitch.Name.Name : '';
+                var description = (keySwitch != null) ? keySwitch.Name.Description : '';
+                var uniqueId = (keySwitch != null) ? keySwitch.Name.UniqueId : '';
+                var roomId = (keySwitch != null) ? keySwitch.RoomId : '';
+                var portId = (keySwitch != null) ? keySwitch.PortId : '';
+                var portId = (keySwitch != null) ? keySwitch.PortId : '';
+                var deviceCategory = (keySwitch != null) ? keySwitch.DeviceCategory : '1';
+
+                jQuery('#modifykeyswitchdialog [name=name]').val(name);
+                jQuery('#modifykeyswitchdialog [name=description]').val(description);
+                jQuery('#modifykeyswitchdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifykeyswitchdialog [name=roomid]').val(roomId);
+                jQuery('#modifykeyswitchdialog [name=portid]').val(portId);
+                jQuery('#modifykeyswitchdialog [name=devicecategory]').val(deviceCategory);
+
+
+                jQuery('#modifykeyswitchdialog form').validate();
+            });
+        </script>
+    </div>
+</div>

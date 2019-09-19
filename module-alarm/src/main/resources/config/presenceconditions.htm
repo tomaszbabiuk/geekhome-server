@@ -1,0 +1,44 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddDevicesMessage -->
+
+<script id="presenceconditionsinfotemplate" type="text/x-jquery-tmpl">
+<!-- @RES:C:CannotAddPresenceConditionsMessage -->
+<ul>
+    <li><a href="movementdetectors.htm" data-inline="true" rel="external"><!-- @RES:ALARM:MovementDetectors --></a></li>
+</ul>
+</script>
+
+<script id="presenceconditionstemplate" type="text/x-jquery-tmpl">
+    <!-- @Controls\AlarmCrudList.htm #presenceconditiondetailsdialog ALARM.GetPresenceConditions() RES:ALARM:PresenceConditions -->
+    <div>
+        <!-- @Controls\PageTransferButton.htm #modifypresenceconditiondialog RES:ALARM:AddPresenceCondition -->
+    </div>
+</script>
+
+<div data-role="page" id="presenceconditionsindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:ALARM:PresenceConditions -->
+    </h1>
+  </div>
+  <div data-role="content" id="presenceconditionscontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#presenceconditionsindex').on('pagecreate', function (event) {
+        if (ALARM.CanAddPresenceConditions()) {
+            jQuery(jQuery("#presenceconditionstemplate").tmpl()).appendTo("#presenceconditionscontent");
+        } else {
+            jQuery(jQuery('#presenceconditionsinfotemplate').tmpl()).appendTo('#presenceconditionscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/presenceconditions.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/presenceconditions.htm -->
+<!-- @Dialogs\ModifyPresenceCondition.htm -->
+<!-- @Dialogs\AlarmCrudDetails.htm presenceconditiondetails #modifypresenceconditiondialog RemovePresenceCondition.post ALARM.FindPresenceCondition RES:ALARM:PresenceCondition RES:ALARM:PresenceConditionDetails -->
+<!-- @Controls\MasterFooter.htm -->

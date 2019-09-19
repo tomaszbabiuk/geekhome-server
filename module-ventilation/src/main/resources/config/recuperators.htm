@@ -1,0 +1,52 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddDevicesMessage -->
+<!-- @Controls\PortsInfo.htm true false false false false false false false -->
+
+<script id="recuperatorstemplate" type="text/x-jquery-tmpl">
+    {{each VENT.GetRecuperators()}}
+    <ul data-inset="true" data-role="listview" data-split-theme="e">
+        <li data-theme="b">
+            <a href="javascript:void(0)" onclick="javascript:PageTransfer('#recuperatordetailsdialog', { param: '${Name.UniqueId}' })">
+                <!-- @Controls\VentilationProperties.htm -->
+            </a>
+        </li>
+        <!-- @Controls\NamedBlocksFragment.htm 2nd RES:VENT:BlocksEnablingSecondGear -->
+        <!-- @Controls\NamedBlocksFragment.htm 3rd RES:VENT:BlocksEnablingThirdGear -->
+    </ul>
+    {{/each}}
+    <div>
+        <!-- @Controls\PageTransferButton.htm #modifyrecuperatordialog RES:VENT:AddRecuperator -->
+    </div>
+</script>
+
+<div data-role="page" id="recuperatorsindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:VENT:Recuperators -->
+    </h1>
+  </div>
+  <div data-role="content" id="recuperatorscontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#recuperatorsindex').on('pagecreate', function (event) {
+        if (!HM.HasDigitalOutputPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#onoffdevicescontent');
+        } else if (CORE.CanAddDevices()) {
+            jQuery(jQuery("#recuperatorstemplate").tmpl()).appendTo("#recuperatorscontent");
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#recuperatorscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/recuperators.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/recuperators.htm -->
+<!-- @Dialogs\ModifyRecuperator.htm -->
+<!-- @Dialogs\VentilationCrudDetails.htm recuperatordetails #modifyrecuperatordialog RemoveRecuperator.post VENT.FindRecuperator RES:VENT:Recuperator RES:VENT:RecuperatorDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/recuperators.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

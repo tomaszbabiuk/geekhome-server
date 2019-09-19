@@ -1,0 +1,40 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddDevicesMessage -->
+<!-- @Controls\PortsInfo.htm true false false false false false false false -->
+
+<script id="signalizatorstemplate" type="text/x-jquery-tmpl">
+  <!-- @Controls\AlarmCrudList.htm #signalizatordetailsdialog ALARM.GetSignalizators() RES:ALARM:Signalizators -->
+  <div>
+    <!-- @Controls\PageTransferButton.htm #modifysignalizatordialog RES:ALARM:AddSignalizator -->
+  </div>
+</script>
+
+<div data-role="page" id="signalizatorsindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:ALARM:Signalizators -->
+    </h1>
+  </div>
+  <div data-role="content" id="signalizatorscontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#signalizatorsindex').on('pagecreate', function (event) {
+        if (!HM.HasDigitalOutputPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#signalizatorscontent');
+        } else if (CORE.CanAddDevices()) {
+            jQuery(jQuery("#signalizatorstemplate").tmpl()).appendTo("#signalizatorscontent");
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#signalizatorscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/signalizators.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/signalizators.htm -->
+<!-- @Dialogs\ModifySignalizator.htm -->
+<!-- @Dialogs\AlarmCrudDetails.htm signalizatordetails #modifysignalizatordialog RemoveSignalizator.post ALARM.FindSignalizator RES:ALARM:Signalizator RES:ALARM:SignalizatorDetails -->
+<!-- @Controls\MasterFooter.htm -->

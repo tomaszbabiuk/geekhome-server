@@ -1,0 +1,42 @@
+<div data-role="dialog" id="modifygeofencedialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:Geofence -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyGeofence.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifygeofencename name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifygeofencedescription description none RES:C:Description -->
+            <!-- @Forms\GeofenceIconName.htm modifygeogencecondition -->
+            <!-- @Forms\NumberField.htm modifygeofencelatitude latitude required RES:C:Latitude 0 -->
+            <!-- @Forms\NumberField.htm modifygeofencelongitude longitude required RES:C:Longitude 0 -->
+            <!-- @Forms\NumberField.htm modifygeofenceradius radius required RES:C:RadiusInM 100 -->
+            <!-- @Forms\HiddenField.htm modifygeofenceid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifygeofencedialog').on('pagetransfer', function (e, args) {
+                var geofence = CORE.FindGeofence(args.param);
+
+                var name = (geofence != null) ? geofence.Name.Name : '';
+                var description = (geofence != null) ? geofence.Name.Description : '';
+                var iconName = (geofence != null) ? geofence.IconName : '';
+                var uniqueId = (geofence != null) ? geofence.Name.UniqueId : '';
+                var longitude = (geofence != null) ? geofence.Longitude : '';
+                var latitude = (geofence != null) ? geofence.Latitude : '';
+                var radius = (geofence != null) ? geofence.Radius : '';
+
+                jQuery('#modifygeofencedialog [name=name]').val(name);
+                jQuery('#modifygeofencedialog [name=description]').val(description);
+                jQuery('#modifygeofencedialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifygeofencedialog [name=iconname]').val(iconName);
+                jQuery('#modifygeofencedialog [name=longitude]').val(longitude);
+                jQuery('#modifygeofencedialog [name=latitude]').val(latitude);
+                jQuery('#modifygeofencedialog [name=radius]').val(radius);
+
+                jQuery('#modifygeofencedialog form').validate();
+            });
+        </script>
+    </div>
+</div>

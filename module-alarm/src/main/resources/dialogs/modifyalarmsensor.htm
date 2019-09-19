@@ -1,0 +1,54 @@
+<!-- @Forms\PortTemplate.htm modifyalarmsensor HM.GetDigitalInputPorts() false -->
+<!-- @Forms\RoomTemplate.htm modifyalarmsensor -->
+
+<div data-role="dialog" id="modifyalarmsensordialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:ALARM:AlarmSensor -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyAlarmSensor.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyalarmsensorname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyalarmsensordescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifyalarmsensorportcontent"></div>
+            <div data-role="fieldcontain" id="modifyalarmsensorroomcontent"></div>
+            <!-- @Forms\InactiveState.htm modifyalarmsensor -->
+            <!-- @Forms\DurationField.htm modifyalarmsensordelaytime delaytime required RES:C:DelayTime -->
+            <!-- @Forms\HiddenField.htm modifyalarmsensorid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:OK -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyalarmsensordialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyalarmsensorportcontent').html(jQuery('#modifyalarmsensorporttemplate').tmpl());
+                jQuery('#modifyalarmsensorroomcontent').html(jQuery('#modifyalarmsensorroomtemplate').tmpl());
+
+                var alarmSensor = ALARM.FindAlarmSensor(args.param);
+
+                var name = (alarmSensor != null) ? alarmSensor.Name.Name : '';
+                var description = (alarmSensor != null) ? alarmSensor.Name.Description : '';
+                var uniqueId = (alarmSensor != null) ? alarmSensor.Name.UniqueId : '';
+                var portId = (alarmSensor != null) ? alarmSensor.PortId : '';
+                var roomId = (alarmSensor != null) ? alarmSensor.RoomId : '';
+                var inactiveState = (alarmSensor != null) ? alarmSensor.InactiveState : '0';
+
+                jQuery('#modifyalarmsensordialog [name=name]').val(name);
+                jQuery('#modifyalarmsensordialog [name=description]').val(description);
+                jQuery('#modifyalarmsensordialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyalarmsensordialog [name=portid]').val(portId);
+                jQuery('#modifyalarmsensordialog [name=roomid]').val(roomId);
+                jQuery('#modifyalarmsensordialog [name=inactivestate]').val(inactiveState);
+
+                jQuery('#modifyalarmsensordialog form').validate();
+            });
+            
+            jQuery('#modifyalarmsensordialog').on('pageaftertransfer', function (e, args) {
+                var alarmSensor = ALARM.FindAlarmSensor(args.param);
+
+                var delayTime = (alarmSensor != null) ? alarmSensor.DelayTime : '00:00:00';
+
+                jQuery('#modifyalarmsensordialog [name=delaytime]').val(delayTime);
+            });
+        </script>
+    </div>
+</div>

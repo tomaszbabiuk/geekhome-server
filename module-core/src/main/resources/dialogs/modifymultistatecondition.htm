@@ -1,0 +1,69 @@
+<!-- @Forms\MultistateDeviceTemplate.htm modifymultistatecondition -->
+<!-- @Forms\MultistateTemplate.htm modifymultistatecondition -->
+
+<div data-role="dialog" id="modifymultistateconditiondialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:MultistateCondition -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyMultistateCondition.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifymultistateconditionname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifymultistateconditiondescription description none RES:C:Description -->
+            <!-- @Forms\DurationField.htm modifymultistateconditiondelaytime delaytime required RES:C:DelayTime -->
+            <div data-role="fieldcontain" id="modifymultistateconditiondevicecontent"></div>
+            <div data-role="fieldcontain" id="modifymultistateconditiondevicemultistatecontent"></div>
+            <!-- @Forms\HiddenField.htm modifymultistateconditionid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifymultistateconditiondialog').on('pagetransfer', function (e, args) {
+                var multistateCondition = CORE.FindMultistateCondition(args.param);
+                var multistateDevices = CORE.GetAllMultistateDevices();
+                var name = (multistateCondition != null) ? multistateCondition.Name.Name : '';
+                var description = (multistateCondition != null) ? multistateCondition.Name.Description : '';
+                var uniqueId = (multistateCondition != null) ? multistateCondition.Name.UniqueId : '';
+                var deviceId = (multistateCondition != null) ? multistateCondition.DeviceId : multistateDevices[0].Name.UniqueId;
+                var statesIds = (multistateCondition != null) ? multistateCondition.StatesIds : '';
+
+                jQuery('#modifymultistateconditiondialog [name=name]').val(name);
+                jQuery('#modifymultistateconditiondialog [name=description]').val(description);
+                jQuery('#modifymultistateconditiondialog [name=uniqueid]').val(uniqueId);
+
+                var devicesTemplateData = {
+                    Devices: multistateDevices,
+                    Selected: deviceId
+                };
+                jQuery('#modifymultistateconditiondevicecontent').html(jQuery('#modifymultistateconditiondevicetemplate').tmpl(devicesTemplateData));
+
+                var statesTemplateData = {
+                    States: GetDeviceStates(deviceId),
+                    Selected: statesIds.split(',')
+                };
+                jQuery('#modifymultistateconditiondevicemultistatecontent').html(jQuery('#modifymultistateconditionmultistatetemplate').tmpl(statesTemplateData));
+
+                jQuery('#modifymultistateconditiondialog form').validate();
+
+                jQuery('#modifymultistateconditiondevice').on('change',function() {
+                    var multistateDeviceId = jQuery(this).val();
+                    var templateData = {
+                        States: GetDeviceStates(multistateDeviceId),
+                        Selected: ''
+                    };
+
+                    jQuery('#modifymultistateconditiondevicemultistatecontent').html(jQuery('#modifymultistateconditionmultistatetemplate').tmpl(templateData));
+                    var controlgroup = jQuery('[data-role=controlgroup]').controlgroup();
+                    controlgroup.trigger('create');
+                    controlgroup.controlgroup('refresh');
+                });
+            });
+
+            jQuery('#modifymultistateconditiondialog').on('pageaftertransfer', function (e, args) {
+                var multistateCondition = CORE.FindMultistateCondition(args.param);
+                var delay = (multistateCondition != null) ? multistateCondition.DelayTime : '00:00:00';
+                jQuery('#modifymultistateconditiondialog [name=delaytime]').val(delay);
+            });
+        </script>
+    </div>
+</div>

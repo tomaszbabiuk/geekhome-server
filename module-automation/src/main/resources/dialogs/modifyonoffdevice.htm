@@ -1,0 +1,54 @@
+﻿<!-- @Forms\RoomTemplate.htm modifyonoffdevice -->
+<!-- @Forms\PortTemplate.htm modifyonoffdevice HM.GetDigitalOutputPorts() false -->
+
+<div data-role="dialog" id="modifyonoffdevicedialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:AUTO:OnOffDevice -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyOnOffDevice.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyonoffdevicename name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyonoffdevicedescription description none RES:C:Description -->
+            <!-- @Forms\OnOffDeviceIconName.htm modifyonoffdevice -->
+            <!-- @Forms\DeviceCategory.htm modifyonoffdevicedevicecategory -->
+            <div data-role="fieldcontain" id="modifyonoffdeviceroomcontent"></div>
+            <div data-role="fieldcontain" id="modifyonoffdeviceportcontent"></div>
+            <!-- @Forms\YesNoField.htm modifyonoffdevicetriggeredmanually triggeredmanually RES:C:TriggeredManually -->
+            <!-- @Forms\HiddenField.htm modifyonoffdeviceid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyonoffdevicedialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyonoffdeviceroomcontent').html(jQuery('#modifyonoffdeviceroomtemplate').tmpl());
+                jQuery('#modifyonoffdeviceportcontent').html(jQuery('#modifyonoffdeviceporttemplate').tmpl());
+                jQuery('#modifyonoffdevicedialog form').validate();
+
+                var onOffDevice = AUTO.FindOnOffDevice(args.param);
+
+                var name = (onOffDevice != null) ? onOffDevice.Name.Name : '';
+                var description = (onOffDevice != null) ? onOffDevice.Name.Description : '';
+                var uniqueId = (onOffDevice != null) ? onOffDevice.Name.UniqueId : '';
+                var roomId = (onOffDevice != null) ? onOffDevice.RoomId : '';
+                var portId = (onOffDevice != null) ? onOffDevice.PortId : '';
+                var triggeredManually = (onOffDevice != null) ? onOffDevice.TriggeredManually : '0';
+                var deviceCategory = (onOffDevice != null) ? onOffDevice.DeviceCategory : '1';
+                var iconName = (onOffDevice != null) ? onOffDevice.IconName : '';
+
+                jQuery('#modifyonoffdevicedialog [name=name]').val(name);
+                jQuery('#modifyonoffdevicedialog [name=description]').val(description);
+                jQuery('#modifyonoffdevicedialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyonoffdevicedialog [name=roomid]').val(roomId);
+                jQuery('#modifyonoffdevicedialog [name=portid]').val(portId);
+                jQuery('#modifyonoffdevicedialog [name=triggeredmanually]').val(triggeredManually);
+                jQuery('#modifyonoffdevicedialog [name=devicecategory]').val(deviceCategory);
+                jQuery('#modifyonoffdevicedialog [name=iconname]').val(iconName);
+            });
+
+            jQuery('#modifyonoffdevicedialog').on('pageaftertransfer', function (e, args) {
+                jQuery('[data-role=slider]').slider('refresh');
+            });
+        </script>
+    </div>
+</div>

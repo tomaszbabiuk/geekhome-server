@@ -1,0 +1,47 @@
+<!-- @Forms\EqualityOperatorTemplate.htm modifyvaluecondition -->
+<!-- @Forms\ValueDeviceTemplate.htm modifyvaluecondition deviceid RES:C:Device true true true -->
+
+<div data-role="dialog" id="modifyvalueconditiondialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:ValueCondition -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyValueCondition.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyvalueconditionname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyvalueconditiondescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifyvalueconditiondevicecontent"></div>
+            <div data-role="fieldcontain" id="modifyvalueconditionoperatorcontent"></div>
+            <!-- @Forms\NumberField.htm modifyvalueconditionvalue value required RES:C:Value 20 -->
+            <!-- @Forms\HiddenField.htm modifyvalueconditionid uniqueid -->
+            <!-- @Forms\NumberField.htm modifyvalueconditionhysteresis hysteresis required RES:C:Hysteresis 1 -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyvalueconditiondialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyvalueconditionoperatorcontent').html(jQuery('#modifyvalueconditionoperatortemplate').tmpl());
+                jQuery('#modifyvalueconditiondevicecontent').html(jQuery('#modifyvalueconditiondevicetemplate').tmpl());
+
+                var valueCondition = CORE.FindValueCondition(args.param);
+
+                var name = (valueCondition != null) ? valueCondition.Name.Name : '';
+                var description = (valueCondition != null) ? valueCondition.Name.Description : '';
+                var uniqueId = (valueCondition != null) ? valueCondition.Name.UniqueId : '';
+                var operator = (valueCondition != null) ? valueCondition.Operator : '0';
+                var deviceId = (valueCondition != null) ? valueCondition.DeviceId : '';
+                var value = (valueCondition != null) ? valueCondition.Value : '';
+                var hysteresis = (valueCondition != null) ? valueCondition.Hysteresis : '';
+
+                jQuery('#modifyvalueconditionname').val(name);
+                jQuery('#modifyvalueconditiondescription').val(description);
+                jQuery('#modifyvalueconditionid').val(uniqueId);
+                jQuery('#modifyvalueconditionoperator').val(operator);
+                jQuery('#modifyvalueconditiondevice').val(deviceId);
+                jQuery('#modifyvalueconditionvalue').val(value);
+
+                jQuery('#modifyvalueconditiondialog form').validate();
+            });
+        </script>
+    </div>
+</div>

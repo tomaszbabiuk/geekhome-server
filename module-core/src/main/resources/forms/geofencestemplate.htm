@@ -1,0 +1,11 @@
+<script id="$p0geofencestemplate" type="text/x-jquery-tmpl">
+    {{if CORE.GetGeofences().length }}
+        <fieldset data-role="controlgroup">
+	        <legend><!-- @RES:C:Geofences -->:</legend>
+            {{each CORE.GetGeofences()}}
+	            <input type="checkbox" name="geofencesids" value="${Name.UniqueId}" id="$p0geofence-${Name.UniqueId}" class="custom" validate="required:true, minlength:1" />
+	            <label for="$p0geofence-${Name.UniqueId}"><!-- @Controls\DescriptiveName.htm --></label>
+            {{/each}}
+        </fieldset>
+    {{/if}}
+</script>

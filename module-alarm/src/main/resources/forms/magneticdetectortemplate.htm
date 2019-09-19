@@ -1,0 +1,12 @@
+<script id="$p0magneticdetectortemplate" type="text/x-jquery-tmpl">
+  <label for="$p0magneticdetector" class="select">
+      <!-- @RES:ALARM:MagneticDetector -->:
+  </label>
+  <select id="$p0magneticdetector" name="magneticdetectorid" data-native-menu="false" validate="required:true, minlength:1">
+    {{each ALARM.GetMagneticDetectors()}}
+    <option value="${Name.UniqueId}">
+      <!-- @Controls\DeviceName.htm -->
+    </option>
+    {{/each}}
+  </select>
+</script>

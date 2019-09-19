@@ -1,0 +1,41 @@
+<!-- @Forms\DevicesTemplate.htm modifyreadvaluecommand CORE.GetAllDevices() -->
+
+<div data-role="dialog" id="modifyreadvaluecommanddialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:ReadValueCommand -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyReadValueCommand.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyreadvaluecommandname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyreadvaluecommanddescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifyreadvaluecommanddevicescontent"></div>
+            <!-- @Forms\HiddenField.htm modifyreadvaluecommandid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyreadvaluecommanddialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyreadvaluecommanddevicescontent').html(jQuery('#modifyreadvaluecommanddevicestemplate').tmpl());
+                
+                var readValueCommand = CORE.FindReadValueCommand(args.param);
+                var name = (readValueCommand != null) ? readValueCommand.Name.Name : '';
+                var description = (readValueCommand != null) ? readValueCommand.Name.Description : '';
+                var uniqueId = (readValueCommand != null) ? readValueCommand.Name.UniqueId : '';
+                var devicesIds = (readValueCommand != null) ? readValueCommand.DevicesIds : '';
+
+                var devicesIdsSplits = devicesIds.split(',');
+                for (var deviceIdIndex in devicesIdsSplits) {
+                    var deviceId = 'modifyreadvaluecommanddevice-' + devicesIdsSplits[deviceIdIndex];
+                    jQuery('#' + deviceId).prop('checked', true);
+                }
+
+                jQuery('#modifyreadvaluecommandname').val(name);
+                jQuery('#modifyreadvaluecommanddescription').val(description);
+                jQuery('#modifyreadvaluecommandid').val(uniqueId);
+
+                jQuery('#modifyreadvaluecommanddialog form').validate();
+            });
+        </script>
+    </div>
+</div>

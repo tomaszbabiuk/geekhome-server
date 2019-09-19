@@ -1,0 +1,32 @@
+<script id="readcontroltemplate" type="text/x-jquery-tmpl">
+<div data-role="fieldcontain">
+    <img onClick="javascript:toggleFavorite('${Device.Name.UniqueId}', this)" src="/css/icons/star_{{if IsFavorite('' + Device.Name.UniqueId)}}on{{else}}off{{/if}}.svg" style="float:right" width="32" height="32">
+    <h1>${Device.Name.Name}</h1>
+    {{if (typeof Device.IconName !== 'undefined')}} <img src="/css/icons/${Device.IconName}.svg" style="margin-right:auto; margin-left:auto; display:block" width="64" height="64" /> {{/if}}
+    <h4 style="text-align:center">${Evaluation.InterfaceValue}</h4>
+    <a data-role="button" data-rel="back" href="#"><!-- @RES:C:OK --></a>
+</div>
+</script>
+
+<div data-role="dialog" id="readcontroldialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:DeviceControl -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <div id="readcontrolcontent"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery('#readcontroldialog').on('pagetransfer', function (e, args) {
+        var readDeviceId = args.param;
+
+        var templateData = {
+            Device: CORE.FindDevice(readDeviceId),
+            Evaluation: CheckDeviceEvaluation(readDeviceId)
+        };
+
+        jQuery('#readcontrolcontent').html(jQuery('#readcontroltemplate').tmpl(templateData));
+    });
+</script>

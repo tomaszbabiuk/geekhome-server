@@ -1,0 +1,52 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\CircuitsInfo.htm RES:CH:CannotAddUnderfloorCircuitsMessage -->
+<!-- @Controls\PortsInfo.htm true false false false false false false false -->
+
+<script id="underfloorcircuitstemplate" type="text/x-jquery-tmpl">
+    {{each CH.GetUnderfloorCircuits()}}
+        <ul data-inset="true" data-role="listview" data-split-theme="e">
+            <li data-theme="b">
+                <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#underfloorcircuitdetailsdialog', { param: '${Name.UniqueId}' })"
+                {{if (typeof IconName !== 'undefined')}} style="background: url('/css/icons/${IconName}.svg');background-repeat: no-repeat; background-position: 10px 15px; background-size: 32px 32px; padding-left:50px;" {{/if}}>
+                    <!-- @Controls\HeatingProperties.htm -->
+                </a>
+            </li>
+            <!-- @Controls\NamedBlocksFragment.htm forceon RES:CH:BlocksForcingCircuitToEnable -->
+            <!-- @Controls\NamedBlocksFragment.htm forceoff RES:CH:BlocksForcingCircuitToDisable -->
+            <!-- @Controls\NamedBlocksFragment.htm floortemppriority RES:CH:BlocksEnablingFloorTemperaturePriority -->
+        </ul>
+    {{/each}}
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifyunderfloorcircuitdialog RES:CH:AddUnderfloorCircuit -->
+    </div>
+</script>
+<div data-role="page" id="underfloorcircuitsindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:CH:UnderfloorCircuits -->
+    </h1>
+  </div>
+  <div data-role="content" id="underfloorcircuitscontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+<script type="text/javascript">
+    jQuery('#underfloorcircuitsindex').on('pagecreate', function (event) {
+        if (!HM.HasDigitalOutputPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#underfloorcircuitscontent');
+        } else if (CH.CanAddCircuits()) {
+            jQuery(jQuery('#underfloorcircuitstemplate').tmpl()).appendTo('#underfloorcircuitscontent');
+        } else {
+            jQuery(jQuery('#circuitsinfotemplate').tmpl()).appendTo('#underfloorcircuitscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/underfloorcircuits.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/underfloorcircuits.htm -->
+<!-- @Dialogs\ModifyUnderfloorCircuit.htm -->
+<!-- @Dialogs\HeatingCrudDetails.htm underfloorcircuitdetails #modifyunderfloorcircuitdialog RemoveUnderfloorCircuit.post CH.FindUnderfloorCircuit RES:CH:UnderfloorCircuit RES:CH:UnderfloorCircuitDetails -->
+<!-- @Dialogs\ModifyBlock.htm /config/underfloorcircuits.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm blockdetails #modifyblockdialog RemoveBlock.post CORE.FindBlock RES:C:Block RES:C:BlockDetails -->
+<!-- @Controls\MasterFooter.htm -->

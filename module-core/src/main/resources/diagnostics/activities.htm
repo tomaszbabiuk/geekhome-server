@@ -1,0 +1,85 @@
+<!-- @Controls\MasterHeader.htm -->
+
+<script id="logstemplate" type="text/x-jquery-tmpl">
+    <ul data-role="listview" data-count-theme="c" data-inset="true">
+    {{if Result.length == 0}}
+        <li><!-- @RES:C:NoActivities --></li>
+    {{else}}
+        {{each Result}}
+            <li>
+                <span>
+                    {{if (Level == 6)}}
+                        <img src="/css/icons/microchip.svg" style="float:right" width="28" height="28"/>
+                    {{/if}}
+                    {{if (Level == 7)}}
+                        <img src="/css/icons/list.svg" style="float:right" width="28" height="28"/>
+                    {{/if}}
+                </span>
+                {{if (typeof Message !== 'undefined')}}
+                    <h2>${Message}</h2>
+                {{/if}}
+
+                {{if (typeof Source !== 'undefined')}}
+                    <h2>${Source}
+                    {{if Value !== 'undefined'}}
+                        -> ${Value}
+                    {{/if}}
+                    </h2>
+                {{/if}}
+
+                <p>${FormatDateToLocal(Year, Month, Day, Hour, Minute, Second, Millisecond)}</p>
+
+                {{if (typeof Details !== 'undefined')}}
+                    <code>${Details}</code>
+                {{/if}}
+            </li>
+        {{/each}}
+    {{/if}}
+    </ul>
+</script>
+
+<div data-role="page" id="logsindex">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:C:Activities -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <div class="ui-body ui-body-c">
+            <p><strong><!-- @RES:C:Warning --></strong></p>
+            <p><!-- @RES:C:ViewMayContainUntranslatedTechnicalData --></p>
+        </div>
+        <div id="logscontent">
+        </div>
+        <div>
+            <button data-role="button" data-inline="true" onclick="javascript:refresh();">
+                <!-- @RES:C:Refresh -->
+            </button>
+            <button data-role="button" data-inline="true" onclick="javascript:clearContent();">
+                <!-- @RES:C:Clear -->
+            </button>
+        </div>
+    </div>
+    <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    function refresh() {
+        GetLastActivities(function(data) {
+            jQuery("#logscontent").html(jQuery("#logstemplate").tmpl(data));
+            jQuery('[data-role=listview]').listview();
+            jQuery('[data-role=button]').button();
+        });
+    }
+
+    function clearContent() {
+        ClearActivities();
+        jQuery("#logscontent").html("");
+    }
+
+    jQuery('#logsindex').on('pagecreate', function (event) {
+        refresh();
+    });
+</script>
+
+<!-- @Controls\MasterFooter.htm -->

@@ -1,0 +1,52 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls/ServerErrorTemplate.htm -->
+
+<script id="firebasetemplate" type="text/x-jquery-tmpl">
+    <ul data-inset="true" data-role="listview" data-split-theme="e">
+        <li data-theme="b">
+            <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#firebasesettingsdialog', { param: null })"
+               style="background: url('/css/icons/messaging.svg');background-repeat: no-repeat; background-position: 10px 5px; background-size: 32px 32px; padding-left:50px;">
+                <h4><!-- @RES:FIRE:FirebaseSettings --></h4>
+                <p><strong><!-- @RES:FIRE:Host -->: </strong>${host}</p>
+                <p><strong><!-- @RES:FIRE:Path -->: </strong>${path}</p>
+            </a>
+        </li>
+    </div>
+    </ul>
+</script>
+
+
+
+<div data-role="page" id="firebaseindex">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:FIRE:FirebaseControl -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <div id="settingscontent"></div>
+    </div>
+    <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+
+
+<script type="text/javascript">
+    jQuery('#firebaseindex').on('pagecreate', function (event) {
+        var templateData = {
+            host: CheckAutomationSetting('Firebase.Host').Result,
+            path: CheckAutomationSetting('Firebase.Path').Result,
+        }
+
+        jQuery("#firebasetemplate").tmpl(templateData).appendTo("#settingscontent");
+    });
+</script>
+
+<!-- @Dialogs\FirebaseSettings.htm -->
+
+<script type="text/javascript">
+    jQuery('#firebasesettingsdialog').on('pagehide', function (e, args) {
+        loadContacts();
+    });
+</script>
+
+<!-- @Controls\MasterFooter.htm -->

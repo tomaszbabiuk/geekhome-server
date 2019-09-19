@@ -1,0 +1,20 @@
+<script id="$p0porttemplate" type="text/x-jquery-tmpl">
+    {{if ((HM.GetDigitalOutputPorts().length + HM.GetTogglePorts().length) > 0) }}
+        <label for="$p0port" class="select">
+            $p2:</label>
+        <select id="$p0port" name="$p1" data-native-menu="false" validate="required:true, minlength:1">
+            {{each HM.GetDigitalOutputPorts()}}
+                <optgroup label="<!-- @RES:C:DigitalOutputPorts -->:">
+                    <option value="${Id}">${Id}{{if MappedTo.length > 0 }}: {{each MappedTo}}${Name}, {{/each}}(${MappedTo.length}){{/if}}
+                    </option>
+                </optgroup>
+            {{/each}}
+            {{each HM.GetTogglePorts()}}
+                <optgroup label="<!-- @RES:C:TogglePorts -->:">
+                    <option value="${Id}">${Id}{{if MappedTo.length > 0 }}: {{each MappedTo}}${Name}, {{/each}}(${MappedTo.length}){{/if}}
+                    </option>
+                </optgroup>
+            {{/each}}
+        </select>
+    {{/if}}
+</script>

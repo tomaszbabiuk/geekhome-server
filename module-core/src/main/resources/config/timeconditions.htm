@@ -1,0 +1,30 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="timeconditionstemplate" type="text/x-jquery-tmpl">
+  <!-- @Controls\CoreCrudList.htm #timeconditiondetailsdialog CORE.GetTimeConditions() RES:C:TimeConditions -->
+  <div>
+    <!-- @Controls\PageTransferButton.htm #modifytimeconditiondialog RES:C:AddTimeCondition -->
+  </div>
+</script>
+
+<div data-role="page" id="timeconditionsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:TimeConditions --></h1>
+    </div>
+    <div data-role="content" id="timeconditionscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#timeconditionsindex').on('pagecreate', function (event) {
+        jQuery(jQuery('#timeconditionstemplate').tmpl()).appendTo('#timeconditionscontent');
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/timeconditions.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/timeconditions.htm -->
+<!-- @Dialogs\ModifyTimeCondition.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm timeconditiondetails #modifytimeconditiondialog RemoveTimeCondition.post CORE.FindTimeCondition RES:C:TimeCondition RES:C:TimeConditionDetails -->
+<!-- @Controls\MasterFooter.htm -->

@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    function toggleFavorite(id, sender) {
+        $sender = jQuery(sender);
+        var src= $sender.attr('src');
+        if (src.indexOf('star_on.svg') > 0) {
+            $sender.attr('src', '/css/icons/star_off.svg');
+        } else {
+            $sender.attr('src', '/css/icons/star_on.svg');
+        }
+        ToggleFavorite(id);
+    }
+
+    function changeStateAndClose(deviceId, stateId) {
+        var enteredCode = jQuery('#codecontroldialog [name=code]').val();
+        if (ChangeDeviceState(deviceId, stateId, enteredCode)) {
+            jQuery('#codecontroldialog [data-role=content]').removeClass('ui-body-b').addClass('ui-body-c');
+            jQuery('.ui-dialog').dialog('close');
+            return true;
+        }
+        else {
+            jQuery('#codecontroldialog [data-role=content]').removeClass('ui-body-c').addClass('ui-body-b');
+            jQuery(".invalidcodepanel").show();
+            return false;
+        }
+    }
+</script>

@@ -1,0 +1,40 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddDevicesMessage -->
+<!-- @Controls\PortsInfo.htm false true false false false false false false-->
+
+<script id="alarmsensorstemplate" type="text/x-jquery-tmpl">
+    <!-- @Controls\AlarmCrudList.htm #alarmsensordetailsdialog ALARM.GetAlarmSensors() RES:ALARM:AlarmSensors -->
+    <div>
+        <!-- @Controls\PageTransferButton.htm #modifyalarmsensordialog RES:ALARM:AddAlarmSensor -->
+    </div>
+</script>
+
+<div data-role="page" id="alarmsensorsindex">
+  <div data-role="header">
+    <h1>
+      <!-- @RES:ALARM:AlarmSensors -->
+    </h1>
+  </div>
+  <div data-role="content" id="alarmsensorscontent">
+  </div>
+  <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#alarmsensorsindex').on('pagecreate', function (event) {
+        if (!HM.HasDigitalInputPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#alarmsensorscontent');
+        } else if (CORE.CanAddDevices()) {
+            jQuery(jQuery("#alarmsensorstemplate").tmpl()).appendTo("#alarmsensorscontent");
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#alarmsensorscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/alarmsensors.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/alarmsensors.htm -->
+<!-- @Dialogs\ModifyAlarmSensor.htm -->
+<!-- @Dialogs\AlarmCrudDetails.htm alarmsensordetails #modifyalarmsensordialog RemoveAlarmSensor.post ALARM.FindAlarmSensor RES:ALARM:AlarmSensor RES:ALARM:AlarmSensorDetails -->
+<!-- @Controls\MasterFooter.htm -->

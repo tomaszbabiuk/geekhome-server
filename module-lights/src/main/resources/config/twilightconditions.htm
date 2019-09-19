@@ -1,0 +1,30 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="twilightconditionstemplate" type="text/x-jquery-tmpl">
+  <!-- @Controls\CoreCrudList.htm #twilightconditiondetailsdialog LIGHTS.GetTwilightConditions() RES:LIGHTS:TwilightConditions -->
+  <div>
+    <!-- @Controls\PageTransferButton.htm #modifytwilightconditiondialog RES:LIGHTS:AddTwilightCondition -->
+  </div>
+</script>
+
+<div data-role="page" id="twilightconditionsindex">
+    <div data-role="header">
+        <h1><!-- @RES:LIGHTS:TwilightConditions --></h1>
+    </div>
+    <div data-role="content" id="twilightconditionscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#twilightconditionsindex').on('pagecreate', function (event) {
+        jQuery(jQuery('#twilightconditionstemplate').tmpl()).appendTo('#twilightconditionscontent');
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/twilightconditions.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/twilightconditions.htm -->
+<!-- @Dialogs\ModifyTwilightCondition.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm twilightconditiondetails #modifytwilightconditiondialog RemoveTwilightCondition.post LIGHTS.FindTwilightCondition RES:LIGHTS:TwilightCondition RES:LIGHTS:TwilightConditionDetails -->
+<!-- @Controls\MasterFooter.htm -->

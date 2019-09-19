@@ -1,0 +1,9 @@
+<script id="$p0alarmsensorstemplate" type="text/x-jquery-tmpl">
+    <fieldset data-role="controlgroup">
+	    <legend><!-- @RES:ALARM:AlarmSensors -->:</legend>
+        {{each ALARM.GetAllAlarmSensors()}}
+	        <input type="checkbox" name="alarmsensorsids" value="${Name.UniqueId}" id="$p0alarmsensor-${Name.UniqueId}" class="custom" validate="required:true, minlength:1" />
+	        <label for="$p0alarmsensor-${Name.UniqueId}"><!-- @Controls\DeviceName.htm --></label>
+        {{/each}}
+    </fieldset>
+</script>

@@ -1,0 +1,35 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:C:CannotAddDevicesMessage -->
+
+<script id="temperaturecontrollerstemplate" type="text/x-jquery-tmpl">
+    <!-- @Controls\HeatingCrudList.htm #temperaturecontrollerdetailsdialog CH.GetTemperatureControllers() RES:CH:TemperatureControllers -->
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifytemperaturecontrollerdialog RES:CH:AddTemperatureController -->
+    </div>
+</script>
+
+<div data-role="page" id="temperaturecontrollersindex">
+    <div data-role="header">
+        <h1><!-- @RES:CH:TemperatureControllers --></h1>
+    </div>
+    <div data-role="content" id="temperaturecontrollerscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#temperaturecontrollersindex').on('pagecreate', function (event) {
+        if (CORE.CanAddDevices()) {
+            jQuery(jQuery('#temperaturecontrollerstemplate').tmpl()).appendTo('#temperaturecontrollerscontent');
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#temperaturecontrollerscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/temperaturecontrollers.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/temperaturecontrollers.htm -->
+<!-- @Dialogs\ModifyTemperatureController.htm -->
+<!-- @Dialogs\HeatingCrudDetails.htm temperaturecontrollerdetails #modifytemperaturecontrollerdialog RemoveTemperatureController.post CH.FindTemperatureController RES:CH:TemperatureController RES:CH:TemperatureControllerDetails -->
+<!-- @Controls\MasterFooter.htm -->

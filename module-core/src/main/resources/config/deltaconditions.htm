@@ -1,0 +1,41 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+
+<script id="deltaconditionstemplate" type="text/x-jquery-tmpl">
+    <!-- @Controls\CoreCrudList.htm #deltaconditiondetailsdialog CORE.GetDeltaConditions() RES:C:DeltaConditions -->
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifydeltaconditiondialog RES:C:AddDeltaCondition -->
+    </div>
+</script>
+
+<script id="deltaconditionsinfotemplate" type="text/x-jquery-tmpl">
+<!-- @RES:C:CannotAddDeltaConditionsMessage -->
+<ul>
+    <li><a href="thermometers.htm" data-inline="true" rel="external"><!-- @RES:C:Thermometers --></a></li>
+</ul>
+</script>
+
+<div data-role="page" id="deltaconditionsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:DeltaConditions --></h1>
+    </div>
+    <div data-role="content" id="deltaconditionscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#deltaconditionsindex').on('pagecreate', function (event) {
+        if (CORE.CanAddDeltaConditions()) {
+            jQuery(jQuery('#deltaconditionstemplate').tmpl()).appendTo('#deltaconditionscontent');
+        } else {
+            jQuery(jQuery('#deltaconditionsinfotemplate').tmpl()).appendTo('#deltaconditionscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/deltaconditions.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/deltaconditions.htm -->
+<!-- @Dialogs\ModifyDeltaCondition.htm -->
+<!-- @Dialogs\CoreCrudDetails.htm deltaconditiondetails #modifydeltaconditiondialog RemoveDeltaCondition.post CORE.FindDeltaCondition RES:C:DeltaCondition RES:C:DeltaConditionDetails -->
+<!-- @Controls\MasterFooter.htm -->

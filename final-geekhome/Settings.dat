@@ -1,0 +1,26 @@
+[Devices]
+
+[Settings]
+FAVORITES.user = lights36,lights44,auto56,lights58
+undefined = 100
+lights58_4 = #fffb00
+lights58_3 = #00fdff
+Firebase.Host = geekhome-server-ab6b1.firebaseio.com
+DS2408Role.BF00000005CED329 = 1
+lights58_2 = #0433ff
+Firebase.Path = temporary_pass
+lights58_1 = #ff0000
+DS2408Role.3D0000000C5B1629 = 1
+lights44_4 = 221
+lights44_3 = 102
+lights44_2 = 46
+lights44_1 = 156
+System.LicenseAccepted = 1
+
+[Adapters]
+MQTT = sj0jt5hl
+26000016B7A86301 = aa
+asdfasdf = aa
+MOCK = cjm253kx
+01000016B797FF01 = aa
+

@@ -1,0 +1,66 @@
+<!-- @Forms\RoomTemplate.htm modifyheatingmanifold -->
+<!-- @Forms\NamedPortTemplate.htm modifyheatingmanifoldpumporfurnace HM.GetDigitalOutputPorts() pumporfurnaceportid RES:CH:PumpOrFurnacePort true -->
+<!-- @Forms\NamedPortTemplate.htm modifyheatingmanifoldactuatorstransformer HM.GetDigitalOutputPorts() actuatorstransformerportid RES:CH:ActuatorsTransformerPort true -->
+<!-- @Forms\CircuitsTemplate.htm modifyheatingmanifold -->
+
+<div data-role="dialog" id="modifyheatingmanifolddialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:CH:HeatingManifold -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyHeatingManifold.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyheatingmanifoldname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyheatingmanifolddescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifyheatingmanifoldroomcontent"></div>
+            <div data-role="fieldcontain" id="modifyheatingmanifoldpumporfurnaceportcontent"></div>
+            <div data-role="fieldcontain" id="modifyheatingmanifoldactuatorstransformerportcontent"></div>
+            <!-- @Forms\DurationField.htm modifyheatingmanifoldminimumworkingtime minimumworkingtime required RES:C:MinimumWorkingTime -->
+            <div data-role="fieldcontain" id="modifyheatingmanifoldcircuitscontent"></div>
+            <!-- @Forms\HiddenField.htm modifyheatingmanifoldid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyheatingmanifolddialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyheatingmanifoldroomcontent').html(jQuery('#modifyheatingmanifoldroomtemplate').tmpl());
+                jQuery('#modifyheatingmanifoldpumporfurnaceportcontent').html(jQuery('#modifyheatingmanifoldpumporfurnaceporttemplate').tmpl());
+                jQuery('#modifyheatingmanifoldactuatorstransformerportcontent').html(jQuery('#modifyheatingmanifoldactuatorstransformerporttemplate').tmpl());
+                jQuery('#modifyheatingmanifoldcircuitscontent').html(jQuery('#modifyheatingmanifoldcircuitstemplate').tmpl());
+                jQuery('#modifyheatingmanifolddialog form').validate();
+
+                var heatingManifold = CH.FindHeatingManifold(args.param);
+
+                var name = (heatingManifold != null) ? heatingManifold.Name.Name : '';
+                var description = (heatingManifold != null) ? heatingManifold.Name.Description : '';
+                var uniqueId = (heatingManifold != null) ? heatingManifold.Name.UniqueId : '';
+                var pumpOrFurnacePortId = (heatingManifold != null) ? heatingManifold.PumpOrFurnacePortId : '';
+                var actuatorsTransformerPortId = (heatingManifold != null) ? heatingManifold.ActuatorsTransformerPortId : '';
+                var roomId = (heatingManifold != null) ? heatingManifold.RoomId : '';
+                var circuitsIds = (heatingManifold != null) ? heatingManifold.CircuitsIds : '';
+
+                jQuery('#modifyheatingmanifolddialog [name=name]').val(name);
+                jQuery('#modifyheatingmanifolddialog [name=description]').val(description);
+                jQuery('#modifyheatingmanifolddialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyheatingmanifolddialog [name=roomid]').val(roomId);
+                jQuery('#modifyheatingmanifolddialog [name=pumporfurnaceportid]').val(pumpOrFurnacePortId);
+                jQuery('#modifyheatingmanifolddialog [name=actuatorstransformerportid]').val(actuatorsTransformerPortId);
+
+                jQuery('input:checkbox').prop('checked', false);
+                var circuitsIdsSplits = circuitsIds.split(',');
+                for (var circuitIdIndex in circuitsIdsSplits) {
+                    var circuitId = 'modifyheatingmanifoldcircuit-' + circuitsIdsSplits[circuitIdIndex];
+                    jQuery('#' + circuitId).prop('checked', true);
+                }
+            });
+
+            jQuery('#modifyheatingmanifolddialog').on('pageaftertransfer', function (e, args) {
+                var heatingManifold = CH.FindHeatingManifold(args.param);
+                var minimumWorkingTime = (heatingManifold != null) ? heatingManifold.MinimumWorkingTime : '00:00:20';
+
+                jQuery('#modifyheatingmanifoldminimumworkingtime').val(minimumWorkingTime);
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

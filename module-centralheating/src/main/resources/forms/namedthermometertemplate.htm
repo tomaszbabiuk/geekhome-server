@@ -1,0 +1,9 @@
+<script id="$p0$p1thermometertemplate" type="text/x-jquery-tmpl">
+    <label for="$p0$p1thermometer" class="select">
+        $p2:</label>
+    <select id="$p0$p1thermometer" name="$p1thermometerid" data-native-menu="false" validate="required:true, minlength:1">
+        {{each CH.GetAllThermometers()}}
+            <option value="${Name.UniqueId}"><!-- @Controls\DeviceName.htm --></option>
+        {{/each}}
+    </select>
+</script>

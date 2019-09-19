@@ -1,0 +1,51 @@
+<!-- @Controls\MasterHeader.htm -->
+
+<script id="emailtemplate" type="text/x-jquery-tmpl">
+    <ul data-inset="true" data-role="listview" data-split-theme="e">
+        <li data-theme="b">
+            <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#emailsettingsdialog', { param: null })"
+               style="background: url('/css/icons/letter.svg');background-repeat: no-repeat; background-position: 10px 5px; background-size: 32px 32px; padding-left:50px;">
+                <h4><!-- @RES:E:SendingEmailsSettings --></h4>
+                <p><strong><!-- @RES:E:SMTPHost -->: </strong>${CheckAutomationSetting('Email.SMTPHost').Result}</p>
+                <p><strong><!-- @RES:E:IMAPHost -->: </strong>${CheckAutomationSetting('Email.IMAPHost').Result}</p>
+                <p><strong><!-- @RES:C:User -->: </strong>${CheckAutomationSetting('Email.User').Result}</p>
+                <p><strong><!-- @RES:C:Password -->: </strong>***</p>
+            </a>
+        </li>
+        {{each E.GetTrustedRecipients()}}
+        <li>
+          <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#trustedrecipientdetailsdialog', { param: '${Name.UniqueId}' })"
+             style="background: url('/css/icons/email.svg');background-repeat: no-repeat; background-position: 10px 5px; background-size: 32px 32px; padding-left:50px;">
+              ${Name.Name} (${Name.UniqueId})
+            </a>
+        </li>
+        {{/each}}
+    </ul>
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifytrustedrecipientdialog RES:E:AddTrustedRecipient -->
+    </div>
+</script>
+
+
+<div data-role="page" id="emailindex">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:E:EmailControl -->
+        </h1>
+    </div>
+    <div data-role="content" id="emailcontent">
+    </div>
+    <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+
+
+<script type="text/javascript">
+    jQuery('#emailindex').on('pagecreate', function (event) {
+        jQuery(jQuery("#emailtemplate").tmpl()).appendTo("#emailcontent");
+    });
+</script>
+
+<!-- @Dialogs\CoreCrudDetailsNoDependencies.htm trustedrecipientdetails #modifytrustedrecipientdialog RemoveTrustedRecipient.post E.FindTrustedRecipient RES:E:TrustedRecipient RES:E:TrustedRecipientDetails -->
+<!-- @Dialogs\EmailSettings.htm -->
+<!-- @Dialogs\ModifyTrustedRecipient.htm -->
+<!-- @Controls\MasterFooter.htm -->

@@ -1,0 +1,54 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls/ServerErrorTemplate.htm -->
+
+<script id="backupstemplate" type="text/x-jquery-tmpl">
+{{if Result.length == 0}}
+    <!-- @RES:C:NoBackups -->
+{{else}}
+    <ul data-inset="true" data-role="listview" data-split-theme="e">
+        {{each SortByVersionDesc(Result)}}
+            {{if Current}}
+                <li data-theme="b">
+                        <h4><!-- @Controls\DescriptiveName.htm --></h4>
+                        <p><strong><!-- @RES:C:FromDate -->: </strong>${FromDate}</p>
+                        <p><strong><!-- @RES:C:Version -->: </strong>${Version}</p>
+                </li>
+            {{else}}
+                <li>
+                    <a class="customlisticon" href="javascript:void(0)" onclick="javascript:PageTransfer('#restorebackupdialog', { param: '${Name.UniqueId}' })"
+                        style="background: url('/css/icons/fileexchange.svg');background-repeat: no-repeat; background-position: 10px 15px; background-size: 32px 32px; padding-left:50px;">
+                        <h4><!-- @Controls\DescriptiveName.htm --></h4>
+                        <p><strong><!-- @RES:C:FromDate -->: </strong>${FromDate}</p>
+                        <p><strong><!-- @RES:C:Version -->: </strong>${Version}</p>
+                    </a>
+                </li>
+            {{/if}}
+        {{/each}}
+    </ul>
+{{/if}}
+</script>
+
+<div data-role="page" id="backupsindex">
+    <div data-role="header">
+        <h1><!-- @RES:C:Backups --></h1>
+    </div>
+    <div data-role="content" id="backupscontent">
+    </div>
+    <!-- @Controls\BackToDashboardFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#backupsindex').on('pagecreate', function (event) {
+        var errorCallback = function(xhr, ajaxOptions, thrownError) {
+                jQuery(jQuery('#servererrortemplate').tmpl()).appendTo('#backupscontent');
+            };
+
+        var backups = B.GetBackups(errorCallback);
+        if (backups != null) {
+            jQuery(jQuery('#backupstemplate').tmpl( { Result: backups })).appendTo('#backupscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\RestoreBackup.htm -->
+<!-- @Controls\MasterFooter.htm -->

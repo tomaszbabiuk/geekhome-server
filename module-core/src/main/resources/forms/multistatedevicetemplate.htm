@@ -1,0 +1,8 @@
+<script id="$p0devicetemplate" type="text/x-jquery-tmpl">
+    <label for="$p0device" class="select"><!-- @RES:C:Device -->:</label>
+    <select id="$p0device" name="deviceid" data-native-menu="false" validate="required:true, minlength:1">
+        {{each SortByDescriptiveName(Devices)}}
+            <option value="${Name.UniqueId}" {{if Selected==Name.UniqueId}}selected{{/if}}><!-- @Controls\DeviceName.htm --></option>
+        {{/each}}
+    </select>
+</script>

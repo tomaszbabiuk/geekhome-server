@@ -1,0 +1,62 @@
+<!-- @Forms\RoomTemplate.htm modifysignalizator -->
+<!-- @Forms\PortTemplate.htm modifysignalizator HM.GetDigitalOutputPorts() false -->
+
+<div data-role="dialog" id="modifysignalizatordialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:ALARM:Signalizator -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifySignalizator.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifysignalizatorname name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifysignalizatordescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifysignalizatorroomcontent"></div>
+            <div data-role="fieldcontain" id="modifysignalizatorportcontent"></div>
+            <!-- @Forms\AlarmTypes.htm modifysignalizator -->
+            <!-- @Forms\DurationField.htm modifysignalizatorminimumworkingtime minimumworkingtime required RES:C:MinimumWorkingTime -->
+            <!-- @Forms\DurationField.htm modifysignalizatormaximumworkingtime maximumworkingtime required RES:ALARM:MaximumWorkingTime -->
+            <!-- @Forms\HiddenField.htm modifysignalizatorid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifysignalizatordialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifysignalizatorroomcontent').html(jQuery('#modifysignalizatorroomtemplate').tmpl());
+                jQuery('#modifysignalizatorportcontent').html(jQuery('#modifysignalizatorporttemplate').tmpl());
+                jQuery('#modifysignalizatordialog form').validate();
+
+                var signalizator = ALARM.FindSignalizator(args.param);
+
+                var name = (signalizator != null) ? signalizator.Name.Name : '';
+                var description = (signalizator != null) ? signalizator.Name.Description : '';
+                var uniqueId = (signalizator != null) ? signalizator.Name.UniqueId : '';
+                var roomId = (signalizator != null) ? signalizator.RoomId : '';
+                var portId = (signalizator != null) ? signalizator.PortId : '';
+                var alarmTypesIdsSplits = (signalizator != null) ? signalizator.AlarmTypesIds.split(',') : '';
+
+                jQuery('input:checkbox').prop('checked', false);
+                for (var alarmTypeIdIndex in alarmTypesIdsSplits) {
+                    var alarmTypeId = 'modifysignalizatoralarmtype-' + alarmTypesIdsSplits[alarmTypeIdIndex];
+                    jQuery('#' + alarmTypeId).prop('checked', true);
+                }
+
+                jQuery('#modifysignalizatordialog [name=name]').val(name);
+                jQuery('#modifysignalizatordialog [name=description]').val(description);
+                jQuery('#modifysignalizatordialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifysignalizatordialog [name=roomid]').val(roomId);
+                jQuery('#modifysignalizatordialog [name=portid]').val(portId);
+            });
+
+            jQuery('#modifysignalizatordialog').on('pageaftertransfer', function (e, args) {
+                var signalizator = ALARM.FindSignalizator(args.param);
+
+                var minimumWorkingTime = (signalizator != null) ? signalizator.MinimumWorkingTime : '00:00:05';
+                var maximumWorkingTime = (signalizator != null) ? signalizator.MaximumWorkingTime : '00:05:00';
+
+                jQuery('#modifysignalizatordialog [name=minimumworkingtime]').val(minimumWorkingTime);
+                jQuery('#modifysignalizatordialog [name=maximumworkingtime]').val(maximumWorkingTime);
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

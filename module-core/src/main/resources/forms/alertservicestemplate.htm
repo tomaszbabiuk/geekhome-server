@@ -1,0 +1,11 @@
+<script id="$p0alertservicestemplate" type="text/x-jquery-tmpl">
+    <fieldset data-role="controlgroup">
+        <legend><!-- @RES:C:AdditionalChannels -->:</legend>
+        {{each SI.GetAlertServices()}}
+            {{if !IsMandatory}}
+                <input type="checkbox" name="alertservicesids" value="${Name.UniqueId}" id="$p0alertservice-${Name.UniqueId}" />
+                <label for="$p0alertservice-${Name.UniqueId}">${Name.Name}</label>
+            {{/if}}
+        {{/each}}
+    </fieldset>
+</script>
