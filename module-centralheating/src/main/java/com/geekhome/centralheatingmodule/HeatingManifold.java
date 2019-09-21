@@ -73,8 +73,8 @@ public class HeatingManifold extends MultistateDevice implements IRoomDevice, IP
     @Override
     public CollectorCollection<State> buildStates(ILocalizationProvider localizationProvider) {
         CollectorCollection<State> states = new CollectorCollection<>();
-        states.add(new State(new DescriptiveName(localizationProvider.getValue("C:On"),"on"), StateType.Control, false));
-        states.add(new State(new DescriptiveName(localizationProvider.getValue("C:Off"),"off"), StateType.Control, false));
+        states.add(new State(new DescriptiveName(localizationProvider.getValue("C:On"),"on"), StateType.ReadOnly, false));
+        states.add(new State(new DescriptiveName(localizationProvider.getValue("C:Off"),"off"), StateType.ReadOnly, false));
 
         return states;
     }

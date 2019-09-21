@@ -49,11 +49,13 @@ public class FirebaseAutomationHook implements IAutomationHook {
 
     @Override
     public void beforeAutomationLoop() {
-        sendAllDevicesUpdate();
-        sendAllFloorsUpdate();
-        sendAllGeofencesUpdate();
-        sendAllEvaluationsUpdate();
-        sendAllAlertsUpdate();
+        if (_sse != null) {
+            sendAllDevicesUpdate();
+            sendAllFloorsUpdate();
+            sendAllGeofencesUpdate();
+            sendAllEvaluationsUpdate();
+            sendAllAlertsUpdate();
+        }
     }
 
     private void sendAllDevicesUpdate() {

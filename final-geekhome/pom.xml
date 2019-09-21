@@ -96,7 +96,7 @@
         </dependency>
         <dependency>
             <groupId>geekhome.server</groupId>
-            <artifactId>module-firebase-sse</artifactId>
+            <artifactId>module-gree</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>
