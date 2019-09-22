@@ -25,6 +25,10 @@ public class CentralHeatingConfigurationValidation extends MasterConfigurationVa
                isAnyRtlCircuitDefined(centralHeatingConfiguration);
     }
 
+    public static boolean canAddAirConditioners(CentralHeatingConfiguration centralHeatingConfiguration) {
+        return isAnyTemperatureControllerDefined(centralHeatingConfiguration);
+    }
+
     private static boolean isAnyRtlCircuitDefined(CentralHeatingConfiguration centralHeatingConfiguration) {
         return centralHeatingConfiguration.getRTLCircuits().size() > 0;
     }
@@ -48,5 +52,4 @@ public class CentralHeatingConfigurationValidation extends MasterConfigurationVa
     private static boolean thereAreAtLeast2ThermometersDefined(CentralHeatingConfiguration centralHeatingConfiguration) {
         return centralHeatingConfiguration.getThermometers().size() > 1;
     }
-
 }

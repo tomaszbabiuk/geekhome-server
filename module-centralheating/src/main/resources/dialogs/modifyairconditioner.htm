@@ -1,0 +1,66 @@
+<!-- @Forms\RoomTemplate.htm modifyairconditioner -->
+<!-- @Forms\NamedPortTemplate.htm modifyairconditionerpumporfurnace HM.GetDigitalOutputPorts() pumporfurnaceportid RES:CH:PumpOrFurnacePort true -->
+<!-- @Forms\NamedPortTemplate.htm modifyairconditioneractuatorstransformer HM.GetDigitalOutputPorts() actuatorstransformerportid RES:CH:ActuatorsTransformerPort true -->
+<!-- @Forms\CircuitsTemplate.htm modifyairconditioner -->
+
+<div data-role="dialog" id="modifyairconditionerdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:CH:AirConditioner -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyAirConditioner.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifyairconditionername name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifyairconditionerdescription description none RES:C:Description -->
+            <div data-role="fieldcontain" id="modifyairconditionerroomcontent"></div>
+            <div data-role="fieldcontain" id="modifyairconditionerpumporfurnaceportcontent"></div>
+            <div data-role="fieldcontain" id="modifyairconditioneractuatorstransformerportcontent"></div>
+            <!-- @Forms\DurationField.htm modifyairconditionerminimumworkingtime minimumworkingtime required RES:C:MinimumWorkingTime -->
+            <div data-role="fieldcontain" id="modifyairconditionercircuitscontent"></div>
+            <!-- @Forms\HiddenField.htm modifyairconditionerid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifyairconditionerdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifyairconditionerroomcontent').html(jQuery('#modifyairconditionerroomtemplate').tmpl());
+                jQuery('#modifyairconditionerpumporfurnaceportcontent').html(jQuery('#modifyairconditionerpumporfurnaceporttemplate').tmpl());
+                jQuery('#modifyairconditioneractuatorstransformerportcontent').html(jQuery('#modifyairconditioneractuatorstransformerporttemplate').tmpl());
+                jQuery('#modifyairconditionercircuitscontent').html(jQuery('#modifyairconditionercircuitstemplate').tmpl());
+                jQuery('#modifyairconditionerdialog form').validate();
+
+                var airConditioner = CH.FindAirConditioner(args.param);
+
+                var name = (airConditioner != null) ? airConditioner.Name.Name : '';
+                var description = (airConditioner != null) ? airConditioner.Name.Description : '';
+                var uniqueId = (airConditioner != null) ? airConditioner.Name.UniqueId : '';
+                var pumpOrFurnacePortId = (airConditioner != null) ? airConditioner.PumpOrFurnacePortId : '';
+                var actuatorsTransformerPortId = (airConditioner != null) ? airConditioner.ActuatorsTransformerPortId : '';
+                var roomId = (airConditioner != null) ? airConditioner.RoomId : '';
+                var circuitsIds = (airConditioner != null) ? airConditioner.CircuitsIds : '';
+
+                jQuery('#modifyairconditionerdialog [name=name]').val(name);
+                jQuery('#modifyairconditionerdialog [name=description]').val(description);
+                jQuery('#modifyairconditionerdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifyairconditionerdialog [name=roomid]').val(roomId);
+                jQuery('#modifyairconditionerdialog [name=pumporfurnaceportid]').val(pumpOrFurnacePortId);
+                jQuery('#modifyairconditionerdialog [name=actuatorstransformerportid]').val(actuatorsTransformerPortId);
+
+                jQuery('input:checkbox').prop('checked', false);
+                var circuitsIdsSplits = circuitsIds.split(',');
+                for (var circuitIdIndex in circuitsIdsSplits) {
+                    var circuitId = 'modifyairconditionercircuit-' + circuitsIdsSplits[circuitIdIndex];
+                    jQuery('#' + circuitId).prop('checked', true);
+                }
+            });
+
+            jQuery('#modifyairconditionerdialog').on('pageaftertransfer', function (e, args) {
+                var airConditioner = CH.FindAirConditioner(args.param);
+                var minimumWorkingTime = (airConditioner != null) ? airConditioner.MinimumWorkingTime : '00:00:20';
+
+                jQuery('#modifyairconditionerminimumworkingtime').val(minimumWorkingTime);
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

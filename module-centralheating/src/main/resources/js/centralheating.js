@@ -6,6 +6,7 @@ var CH = {
 	averagingThermometers: null,
 	comfortmeters: null,
 	heatingManifolds: null,
+	airConditioners: null,
 	circulationPumps: null,
 	radiators: null,
 	underfloorCircuits: null,
@@ -137,6 +138,22 @@ var CH = {
 		return ajaxInit('/config/canaddheatingmanifolds.json').Result;
 	},
 
+
+	/* AIR CONDITIONERS */
+	GetAirConditioners: function() {
+		if (this.airConditioners == null) {
+			this.airConditioners = SortByDescriptiveName(ajaxInit('/config/airconditioners.json').Result);
+		}
+		return this.airConditioners;
+	},
+
+	FindAirConditioner: function(id) {
+		return FindDescriptiveNameObject(id, CH.GetAirConditioners());
+	},
+
+	CanAddAirConditioners: function() {
+		return ajaxInit('/config/canaddairconditioners.json').Result;
+	},
 
 	/* RADIATORS */
 	GetRadiators: function () {

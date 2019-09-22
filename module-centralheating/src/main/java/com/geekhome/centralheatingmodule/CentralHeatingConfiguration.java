@@ -17,6 +17,7 @@ public class CentralHeatingConfiguration extends Collector {
     private CollectorCollection<AveragingThermometer> _averagingThermometers;
     private CollectorCollection<Comfortmeter> _comfortmeters;
     private CollectorCollection<HeatingManifold> _heatingManifolds;
+    private CollectorCollection<AirConditioner> _airConditioners;
     private CollectorCollection<CirculationPump> _circulationPumps;
     private CollectorCollection<TemperatureController> _temperatureControllers;
     private CollectorCollection<ThermostatCondition> _thermostatConditions;
@@ -47,6 +48,11 @@ public class CentralHeatingConfiguration extends Collector {
     @ConfigurationSaver(sectionName = "HeatingManifold", hasChildren = false)
     public CollectorCollection<HeatingManifold> getHeatingManifolds() {
         return _heatingManifolds;
+    }
+
+    @ConfigurationSaver(sectionName = "AirConditioner", hasChildren = false)
+    public CollectorCollection<AirConditioner> getAirConditioners() {
+        return _airConditioners;
     }
 
     @ConfigurationSaver(sectionName = "CirculationPump", hasChildren = false)
@@ -86,6 +92,7 @@ public class CentralHeatingConfiguration extends Collector {
         _averagingThermometers = new CollectorCollection<>();
         _comfortmeters = new CollectorCollection<>();
         _heatingManifolds = new CollectorCollection<>();
+        _airConditioners = new CollectorCollection<>();
         _circulationPumps = new CollectorCollection<>();
         _temperatureControllers = new CollectorCollection<>();
         _thermostatConditions = new CollectorCollection<>();
@@ -101,6 +108,7 @@ public class CentralHeatingConfiguration extends Collector {
         getAveragingThermometers().clear();
         getComfortmeters().clear();
         getHeatingManifolds().clear();
+        getAirConditioners().clear();
         getCirculationPumps().clear();
         getTemperatureControllers().clear();
         getThermostatConditions().clear();
@@ -316,7 +324,6 @@ public class CentralHeatingConfiguration extends Collector {
     private void addHeatingManifold(String name, String description, String pumpOrFurnacePortId, String actuatorsTransformerPortId, String roomId,
                                     String minimumWorkingTime, String circuitsIds, String uniqueId) throws Exception {
         uniqueId = poolUniqueIdIfEmpty(uniqueId);
-        //_masterConfiguration.bindToAlwaysOnCondition(uniqueId + "_on");
         DescriptiveName deviceName = new DescriptiveName(name, uniqueId, description);
         HeatingManifold device = new HeatingManifold(deviceName, pumpOrFurnacePortId, actuatorsTransformerPortId, roomId, minimumWorkingTime, circuitsIds);
         getHeatingManifolds().add(device);
@@ -337,6 +344,65 @@ public class CentralHeatingConfiguration extends Collector {
         device.setMinimumWorkingTime(minimumWorkingTime);
         device.setCircuitsIds(circuitsIds);
     }
+
+    @SuppressWarnings("WeakerAccess")
+    @ConfigurationLoader(sectionName = "AirConditioner", parentId = "")
+    public void modifyAirConditioner(CrudAction action, INameValueSet values) throws Exception {
+        String name = values.getValue("name");
+        String description = values.getValue("description");
+        String uniqueId = values.getValue("uniqueid");
+        String heatingPortId = values.getValue("heatingportid");
+        String coolingPortId = values.getValue("coolingportid");
+        String forceManualPortId = values.getValue("forcemanualportid");
+        String powerOutputPortId = values.getValue("powerportid");
+        String roomId = values.getValue("roomid");
+        String temperatureControllerId = values.getValue("temperaturecontrollerid");
+        if (action == CrudAction.AddOrCreate) {
+            addAirConditioner(name, description, heatingPortId, coolingPortId, forceManualPortId, powerOutputPortId, roomId, temperatureControllerId, uniqueId);
+        } else {
+            editAirConditioner(name, description, heatingPortId, coolingPortId, forceManualPortId, powerOutputPortId, roomId, temperatureControllerId, uniqueId);
+        }
+        onInvalidateCache("/CONFIG/AIRCONDITIONERS.JSON");
+        onInvalidateCache("/CONFIG/ALLDEVICES.JSON");
+        onInvalidateCache("/CONFIG/ALLMULTISTATEDEVICES.JSON");
+        onInvalidateCache("/CONFIG/ALLBLOCKSTARGETDEVICES.JSON");
+        onModified();
+    }
+
+    private void addAirConditioner(String name, String description, String heatingPortId, String coolingPortId,
+                                   String forceManualPortId, String powerOutputPortId, String roomId,
+                                   String temperatureControllerId, String uniqueId) throws Exception {
+        uniqueId = poolUniqueIdIfEmpty(uniqueId);
+        DescriptiveName deviceName = new DescriptiveName(name, uniqueId, description);
+        AirConditioner device = new AirConditioner(deviceName, heatingPortId, coolingPortId, forceManualPortId, powerOutputPortId, roomId, temperatureControllerId);
+        getAirConditioners().add(device);
+        onInvalidateCache("/DIGITALOUTPUTPORTS.JSON");
+    }
+
+    private void editAirConditioner(String name, String description, String heatingPortId, String coolingPortId,
+                                    String forceManualPortId, String powerOutputPortId, String roomId,
+                                    String temperatureControllerId, String uniqueId) throws Exception {
+        AirConditioner device = getAirConditioners().find(uniqueId);
+        if (!heatingPortId.equals(device.getHeatingModePortId()) ||
+            !coolingPortId.equals(device.getCoolingModePortId()) ||
+            !forceManualPortId.equals(device.getForceManualPortId())) {
+            onInvalidateCache("/DIGITALOUTPUTPORTS.JSON");
+        }
+
+        if (!powerOutputPortId.equals(device.getPowerOutputPortId())) {
+            onInvalidateCache("/POWEROUTPUTPORTS.JSON");
+        }
+
+        device.getName().setName(name);
+        device.getName().setDescription(description);
+        device.setHeatingModePortId(heatingPortId);
+        device.setCoolingModePortId(coolingPortId);
+        device.setForceManualPortId(forceManualPortId);
+        device.setPowerOutputPortId(powerOutputPortId);
+        device.setTemperatureControllerId(temperatureControllerId);
+        device.setRoomId(roomId);
+    }
+
 
     @SuppressWarnings("WeakerAccess")
     @ConfigurationLoader(sectionName = "CirculationPump", parentId = "")
@@ -662,6 +728,7 @@ public class CentralHeatingConfiguration extends Collector {
     public void addDevicesCollectors(ArrayList<CollectorCollection<? extends IDevice>> devicesCollectors) {
         devicesCollectors.add(getCirculationPumps());
         devicesCollectors.add(getHeatingManifolds());
+        devicesCollectors.add(getAirConditioners());
         devicesCollectors.add(getThermometers());
         devicesCollectors.add(getHygrometers());
         devicesCollectors.add(getAveragingThermometers());
@@ -697,6 +764,7 @@ public class CentralHeatingConfiguration extends Collector {
     public ArrayList<CollectorCollection<? extends INamedObject>> buildAllCollections() {
         ArrayList<CollectorCollection<? extends INamedObject>> result = new ArrayList<>();
         result.add(getHeatingManifolds());
+        result.add(getAirConditioners());
         result.add(getCirculationPumps());
         result.add(getThermometers());
         result.add(getHygrometers());

@@ -221,102 +221,51 @@ public class CentralHeatingModule extends Module {
         ArrayList<ICrudPostHandler> handlers = new ArrayList<>();
 
         CrudPostHandler heatingManifoldsHandler = new CrudPostHandler(_masterConfiguration, "HEATINGMANIFOLD",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _centralHeatingConfiguration.modifyHeatingManifold(action, values);
-                    }
-                }, new RedirectionResponse("/config/HeatingManifolds.htm"));
+                (action, values) -> _centralHeatingConfiguration.modifyHeatingManifold(action, values), new RedirectionResponse("/config/HeatingManifolds.htm"));
         handlers.add(heatingManifoldsHandler);
 
+        CrudPostHandler airConditionersHandler = new CrudPostHandler(_masterConfiguration, "AIRCONDITIONER",
+                (action, values) -> _centralHeatingConfiguration.modifyAirConditioner(action, values), new RedirectionResponse("/config/AirConditioners.htm"));
+        handlers.add(airConditionersHandler);
+
         CrudPostHandler circulationPump = new CrudPostHandler(_masterConfiguration, "CIRCULATIONPUMP",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _centralHeatingConfiguration.modifyCirculationPump(action, values);
-                    }
-                }, new RedirectionResponse("/config/CirculationPumps.htm"));
+                (action, values) -> _centralHeatingConfiguration.modifyCirculationPump(action, values), new RedirectionResponse("/config/CirculationPumps.htm"));
         handlers.add(circulationPump);
 
         CrudPostHandler thermometersHandler = new CrudPostHandler(_masterConfiguration, "THERMOMETER",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _centralHeatingConfiguration.modifyThermometer(action, values);
-                    }
-                }, new RedirectionResponse("/config/Thermometers.htm"));
+                (action, values) -> _centralHeatingConfiguration.modifyThermometer(action, values), new RedirectionResponse("/config/Thermometers.htm"));
         handlers.add(thermometersHandler);
 
         CrudPostHandler hygrometersHandler = new CrudPostHandler(_masterConfiguration, "HYGROMETER",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _centralHeatingConfiguration.modifyHygrometer(action, values);
-                    }
-                }, new RedirectionResponse("/config/Hygrometers.htm"));
+                (action, values) -> _centralHeatingConfiguration.modifyHygrometer(action, values), new RedirectionResponse("/config/Hygrometers.htm"));
         handlers.add(hygrometersHandler);
 
         CrudPostHandler averagingThermometersHandler = new CrudPostHandler(_masterConfiguration, "AVERAGINGTHERMOMETER",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _centralHeatingConfiguration.modifyAveragingThermometer(action, values);
-                    }
-                }, new RedirectionResponse("/config/AveragingThermometers.htm"));
+                (action, values) -> _centralHeatingConfiguration.modifyAveragingThermometer(action, values), new RedirectionResponse("/config/AveragingThermometers.htm"));
         handlers.add(averagingThermometersHandler);
 
         CrudPostHandler comfortmetersHandler = new CrudPostHandler(_masterConfiguration, "COMFORTMETER",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _centralHeatingConfiguration.modifyComfortmeter(action, values);
-                    }
-                }, new RedirectionResponse("/config/Comfortmeters.htm"));
+                (action, values) -> _centralHeatingConfiguration.modifyComfortmeter(action, values), new RedirectionResponse("/config/Comfortmeters.htm"));
         handlers.add(comfortmetersHandler);
 
         CrudPostHandler temperatureControllersHandler = new CrudPostHandler(_masterConfiguration, "TEMPERATURECONTROLLER",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _centralHeatingConfiguration.modifyTemperatureController(action, values);
-                    }
-                }, new RedirectionResponse("/config/TemperatureControllers.htm"));
+                (action, values) -> _centralHeatingConfiguration.modifyTemperatureController(action, values), new RedirectionResponse("/config/TemperatureControllers.htm"));
         handlers.add(temperatureControllersHandler);
 
         CrudPostHandler thermostatConditionsHandler = new CrudPostHandler(_masterConfiguration, "THERMOSTATCONDITION",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _centralHeatingConfiguration.modifyThermostatCondition(action, values);
-                    }
-                }, new RedirectionResponse("/config/ThermostatConditions.htm"));
+                (action, values) -> _centralHeatingConfiguration.modifyThermostatCondition(action, values), new RedirectionResponse("/config/ThermostatConditions.htm"));
         handlers.add(thermostatConditionsHandler);
 
         CrudPostHandler radiatorsHandler = new CrudPostHandler(_masterConfiguration, "RADIATOR",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _centralHeatingConfiguration.modifyRadiator(action, values);
-                    }
-                }, new RedirectionResponse("/config/Radiators.htm"));
+                (action, values) -> _centralHeatingConfiguration.modifyRadiator(action, values), new RedirectionResponse("/config/Radiators.htm"));
         handlers.add(radiatorsHandler);
 
         CrudPostHandler underfloorCircuitsHandler = new CrudPostHandler(_masterConfiguration, "UNDERFLOORCIRCUIT",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _centralHeatingConfiguration.modifyUnderfloorCircuit(action, values);
-                    }
-                }, new RedirectionResponse("/config/UnderfloorCircuits.htm"));
+                (action, values) -> _centralHeatingConfiguration.modifyUnderfloorCircuit(action, values), new RedirectionResponse("/config/UnderfloorCircuits.htm"));
         handlers.add(underfloorCircuitsHandler);
 
         CrudPostHandler rtlCircuitsHandler = new CrudPostHandler(_masterConfiguration, "RTLCIRCUIT",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _centralHeatingConfiguration.modifyRTLCircuit(action, values);
-                    }
-                }, new RedirectionResponse("/config/RtlCircuits.htm"));
+                (action, values) -> _centralHeatingConfiguration.modifyRTLCircuit(action, values), new RedirectionResponse("/config/RtlCircuits.htm"));
         handlers.add(rtlCircuitsHandler);
 
         return handlers;

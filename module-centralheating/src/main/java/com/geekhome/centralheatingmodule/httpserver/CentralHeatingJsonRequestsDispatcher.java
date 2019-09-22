@@ -96,6 +96,11 @@ public class CentralHeatingJsonRequestsDispatcher extends JsonRequestsDispatcher
             return new JsonResponse(json, false);
         }
 
+        if (originalStringUppercased.equals("/CONFIG/CANADDAIRCONDITIONERS.JSON")) {
+            JSONObject json = JsonResponse.createJSONResult(CentralHeatingConfigurationValidation.canAddAirConditioners(_centralHeatingConfiguration));
+            return new JsonResponse(json, false);
+        }
+
         if (originalStringUppercased.equals("/CONFIG/CANADDTHERMOSTATCONDITIONS.JSON")) {
             JSONObject json = JsonResponse.createJSONResult(CentralHeatingConfigurationValidation.canAddThermostatConditions(_centralHeatingConfiguration));
             return new JsonResponse(json, false);
