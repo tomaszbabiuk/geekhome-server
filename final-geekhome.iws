@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="76de2133-c160-40d8-be7b-b8ddd428235e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/final-geekhome/Configuration.dat.89" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/final-geekhome/Configuration.dat.93" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/final-geekhome/Configuration.dat" beforeDir="false" afterPath="$PROJECT_DIR$/final-geekhome/Configuration.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/AirConditioner.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/AirConditioner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/CentralHeatingConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/CentralHeatingConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/CentralHeatingConfigurationValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/CentralHeatingConfigurationValidation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/CentralHeatingModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/CentralHeatingModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/httpserver/CentralHeatingJsonRequestsDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/httpserver/CentralHeatingJsonRequestsDispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/resources/dialogs/modifyairconditioner.htm" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/resources/dialogs/modifyairconditioner.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/resources/dialogs/modifyradiator.htm" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/resources/dialogs/modifyradiator.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/coremodule/CoreModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/coremodule/CoreModule.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="dedicatedModuleDir" value="$PROJECT_DIR$" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1R72Q2tHTBKedA5CdKQ1f1Njeo8" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/module-centralheating/src/main/resources/dialogs" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.4868421" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.geekhome.centralheatingmodule" />
+      <recent name="com.geekhome.greemodule" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/module-centralheating/src/main/resources/dialogs" />
+      <recent name="$PROJECT_DIR$/module-centralheating/src/main/resources/config" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="geekhome" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.geekhome.Main" />
+      <module name="final-geekhome" />
+      <option name="VM_PARAMETERS" value="-Dfile.encoding=UTF-8 -Dlog4j.configurationFile=./log4j2.xml -Djava.library.path=/usr/lib/jni" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/final-geekhome" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="76de2133-c160-40d8-be7b-b8ddd428235e" name="Default Changelist" comment="" />
+      <created>1569003793202</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1569003793202</updated>
+    </task>
+    <task id="LOCAL-00001" summary="trying to control gree air conditioners">
+      <created>1569095300042</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1569095300043</updated>
+    </task>
+    <task id="LOCAL-00002" summary="removing activation and adding air conditioner device">
+      <created>1569138313704</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1569138313704</updated>
+    </task>
+    <task id="LOCAL-00003" summary="renaming analog ports to power ports">
+      <created>1569177054557</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1569177054557</updated>
+    </task>
+    <task id="LOCAL-00004" summary="air conditioners configuration">
+      <created>1569179363130</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1569179363130</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="trying to control gree air conditioners" />
+    <MESSAGE value="removing activation and adding air conditioner device" />
+    <MESSAGE value="renaming analog ports to power ports" />
+    <MESSAGE value="air conditioners configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="air conditioners configuration" />
+  </component>
+</project>
