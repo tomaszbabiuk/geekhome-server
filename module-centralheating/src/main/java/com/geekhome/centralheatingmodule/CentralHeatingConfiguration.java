@@ -357,6 +357,11 @@ public class CentralHeatingConfiguration extends Collector {
         String powerOutputPortId = values.getValue("powerportid");
         String roomId = values.getValue("roomid");
         String temperatureControllerId = values.getValue("temperaturecontrollerid");
+        if (temperatureControllerId.equals("createnew")) {
+            temperatureControllerId = addTemperatureController(name, description, roomId, 5, 25, 20, "", DeviceCategory.Heating, "");
+            onInvalidateCache("/CONFIG/TEMPERATURECONTROLLERS.JSON");
+        }
+
         if (action == CrudAction.AddOrCreate) {
             addAirConditioner(name, description, heatingPortId, coolingPortId, forceManualPortId, powerOutputPortId, roomId, temperatureControllerId, uniqueId);
         } else {

@@ -56,6 +56,11 @@ public class CentralHeatingJsonRequestsDispatcher extends JsonRequestsDispatcher
             return new JsonResponse(json, true);
         }
 
+        if (originalStringUppercased.equals("/CONFIG/AIRCONDITIONERS.JSON")) {
+            JSONObject json = JsonResponse.createJSONResult(_centralHeatingConfiguration.getAirConditioners());
+            return new JsonResponse(json, true);
+        }
+
         if (originalStringUppercased.equals("/CONFIG/CIRCULATIONPUMPS.JSON")) {
             JSONObject json = JsonResponse.createJSONResult(_centralHeatingConfiguration.getCirculationPumps());
             return new JsonResponse(json, true);
@@ -97,7 +102,7 @@ public class CentralHeatingJsonRequestsDispatcher extends JsonRequestsDispatcher
         }
 
         if (originalStringUppercased.equals("/CONFIG/CANADDAIRCONDITIONERS.JSON")) {
-            JSONObject json = JsonResponse.createJSONResult(CentralHeatingConfigurationValidation.canAddAirConditioners(_centralHeatingConfiguration));
+            JSONObject json = JsonResponse.createJSONResult(CentralHeatingConfigurationValidation.canAddAirConditioners(_masterConfiguration));
             return new JsonResponse(json, false);
         }
 

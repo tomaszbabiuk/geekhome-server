@@ -1,83 +1,8 @@
 [Version]
 version = 1
-pool = 85
+pool = 93
 comment = Zmiany w konfiguracji
-from = 23.08.19 14:04
-
-[Alert]
-alertservicesids = 
-name = Al2
-description = 
-uniqueid = core81
-
-[Alert]
-alertservicesids = 
-name = Al1
-description = 
-uniqueid = core80
-
-[Block]
-conditionsids = core51
-targetid = core81
-name = Nowy blok
-description = 
-uniqueid = core83
-
-[Block]
-conditionsids = core51
-targetid = lights44_preset2
-name = Nowy blok
-description = 
-uniqueid = core53
-
-[Block]
-conditionsids = core49
-targetid = core80
-name = Nowy blok
-description = 
-uniqueid = core82
-
-[Block]
-conditionsids = core49
-targetid = lights44_preset1
-name = Nowy blok
-description = 
-uniqueid = core52
-
-[Block]
-conditionsids = core76
-targetid = auto70_on
-name = Nowy blok
-description = 
-uniqueid = core78
-
-[Block]
-conditionsids = core51
-targetid = lights62_yellow
-name = Nowy blok
-description = 
-uniqueid = core68
-
-[Block]
-conditionsids = core49
-targetid = lights62_white
-name = Nowy blok
-description = 
-uniqueid = core67
-
-[Block]
-conditionsids = core51
-targetid = lights58_preset2
-name = Nowy blok
-description = 
-uniqueid = core65
-
-[Block]
-conditionsids = core49
-targetid = lights58_preset1
-name = Nowy blok
-description = 
-uniqueid = core64
+from = 9/22/19, 9:43 PM
 
 [Floor]
 iconname = house
@@ -91,13 +16,56 @@ name = R1
 description = 
 uniqueid = core34
 
+[MultistateCondition]
+statesids = on
+delaytime = 00:00:00
+deviceid = core50
+name = Włącz preset 2 - Wł
+description = 
+uniqueid = core51
+
+[MultistateCondition]
+statesids = on
+delaytime = 00:00:00
+deviceid = core48
+name = Włącz preset 1 - Wł
+description = 
+uniqueid = core49
+
+[ValueCondition]
+value = 10.0
+hysteresis = 1.0
+operator = 0
+deviceid = heating74
+name = T1 większe od 10
+description = 
+uniqueid = core76
+
+[Mode]
+priority = 10
+name = T1
+description = 
+uniqueid = core91
+
+[Alert]
+alertservicesids = 
+name = Al2
+description = 
+uniqueid = core81
+
+[Alert]
+alertservicesids = 
+name = Al1
+description = 
+uniqueid = core80
+
 [KeySwitch]
 hasnonreadonlystates = true
 roomid = core34
 portid = -
 devicecategory = 1
-iconname = trigger
 controltype = 5
+iconname = trigger
 name = Włącz preset 2
 description = 
 uniqueid = core50
@@ -107,76 +75,141 @@ hasnonreadonlystates = true
 roomid = core34
 portid = -
 devicecategory = 4
-iconname = trigger
 controltype = 5
+iconname = trigger
 name = Włącz preset 1
 description = 
 uniqueid = core48
 
+[Block]
+targetid = core81
+conditionsids = core51
+name = Nowy blok
+description = 
+uniqueid = core83
+
+[Block]
+targetid = lights44_preset2
+conditionsids = core51
+name = Nowy blok
+description = 
+uniqueid = core53
+
+[Block]
+targetid = core80
+conditionsids = core49
+name = Nowy blok
+description = 
+uniqueid = core82
+
+[Block]
+targetid = lights44_preset1
+conditionsids = core49
+name = Nowy blok
+description = 
+uniqueid = core52
+
+[Block]
+targetid = auto70_on
+conditionsids = core76
+name = Nowy blok
+description = 
+uniqueid = core78
+
+[Block]
+targetid = lights62_yellow
+conditionsids = core51
+name = Nowy blok
+description = 
+uniqueid = core68
+
+[Block]
+targetid = lights62_white
+conditionsids = core49
+name = Nowy blok
+description = 
+uniqueid = core67
+
+[Block]
+targetid = lights58_preset2
+conditionsids = core51
+name = Nowy blok
+description = 
+uniqueid = core65
+
+[Block]
+targetid = lights58_preset1
+conditionsids = core49
+name = Nowy blok
+description = 
+uniqueid = core64
+
 [Geofence]
-iconname = marker_other
 longitude = 40.0
-radius = 10.0
 latitude = 50.0
+radius = 10.0
+iconname = marker_other
 name = kraków
 description = 
 uniqueid = core18
 
-[MultistateCondition]
-deviceid = core50
-statesids = on
-delaytime = 00:00:00
-name = Włącz preset 2 - Wł
+[TemperatureController]
+roomid = core34
+modesids = 
+initialvalue = 20.0
+minvalue = 5.0
+maxvalue = 25.0
+devicecategory = 1
+controltype = 2
+iconname = thermostat
+name = K1
 description = 
-uniqueid = core51
-
-[MultistateCondition]
-deviceid = core48
-statesids = on
-delaytime = 00:00:00
-name = Włącz preset 1 - Wł
-description = 
-uniqueid = core49
-
-[ValueCondition]
-value = 10.0
-deviceid = heating74
-operator = 0
-hysteresis = 1.0
-name = T1 większe od 10
-description = 
-uniqueid = core76
+uniqueid = heating89
 
 [Thermometer]
 roomid = core34
-valuetype = 0
 portid = TEMP0
+valuetype = 0
 devicecategory = 1
-iconname = thermometer
 controltype = 0
+iconname = thermometer
 name = T1
 description = 
 uniqueid = heating74
 
+[AirConditioner]
+roomid = core34
+hasnonreadonlystates = false
+temperaturecontrollerid = heating89
+heatingmodeportid = OUTPUT1
+coolingmodeportid = OUTPUT1
+forcemanualportid = OUTPUT2
+devicecategory = 1
+controltype = 7
+iconname = snow
+name = K1
+description = 
+uniqueid = heating90
+
 [IntensityDevice]
 roomid = core34
-intensitypresetsids = 1,2,3,4
 portid = POWER-OUT-1
+intensitypresetsids = 1,2,3,4
 devicecategory = 4
-iconname = lightbulb
 controltype = 7
+iconname = lightbulb
 name = L1
 description = Lampa gdzieś tamrrrrr
 uniqueid = lights44
 
 [OnOffDevice]
 roomid = core34
+portid = OUTPUT0
 hasnonreadonlystates = true
 triggeredmanually = 1
-portid = OUTPUT0
 devicecategory = 1
-iconname = power
 controltype = 7
+iconname = power
 name = asdf
 description = asdf
 uniqueid = auto70

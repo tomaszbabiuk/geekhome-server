@@ -162,7 +162,7 @@ public class CentralHeatingModule extends Module {
                 new Resource("CH:AirConditioners", "Air conditioners", "Klimatyzatory"),
                 new Resource("CH:AirConditionerDetails", "Air conditioner details", "Szczegóły klimatyzatora"),
                 new Resource("CH:AddAirConditioner", "Add air conditioner", "Dodaj klimatyzator"),
-                new Resource("CH:CannotAddAirConditionersMessage", "In order to add an air conditioner there must be at least one room defined, one temperature controller and three ports available: temperature output one and two digital output ones!", "Aby dodawać klimatyzatory musi być zdefiniowany conajmniej jeden pokój, jeden kontroler temperatury oraz muszą być dostępne trzy porty: temperaturowy wyjścia oraz dwa porty wyjścia!"),
+                new Resource("CH:CannotAddAirConditionersMessage", "In order to add an air conditioner there must be at least one room defined and four ports available: power output one and three digital output ones!", "Aby dodawać klimatyzatory musi być zdefiniowany conajmniej jeden pokój oraz muszą być dostępne cztery porty: jeden port wyjścia mocy oraz trzy cyfrowe porty wyjścia!"),
         };
     }
 

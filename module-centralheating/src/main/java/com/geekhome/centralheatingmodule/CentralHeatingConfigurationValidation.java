@@ -25,8 +25,8 @@ public class CentralHeatingConfigurationValidation extends MasterConfigurationVa
                isAnyRtlCircuitDefined(centralHeatingConfiguration);
     }
 
-    public static boolean canAddAirConditioners(CentralHeatingConfiguration centralHeatingConfiguration) {
-        return isAnyTemperatureControllerDefined(centralHeatingConfiguration);
+    public static boolean canAddAirConditioners(MasterConfiguration masterConfiguration) {
+        return isAnyRoomDefined(masterConfiguration);
     }
 
     private static boolean isAnyRtlCircuitDefined(CentralHeatingConfiguration centralHeatingConfiguration) {

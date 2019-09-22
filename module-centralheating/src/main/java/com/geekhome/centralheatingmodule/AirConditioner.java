@@ -75,7 +75,7 @@ public class AirConditioner extends MultistateDevice implements IRoomDevice, IPo
     public AirConditioner(DescriptiveName name, String heatingModePortId, String coolingModePortId,
                           String forceManualPortId, String powerOutputPortId, String roomId,
                           String temperatureControllerId) {
-        super(name, "sun", DeviceCategory.Heating);
+        super(name, "snow", DeviceCategory.Heating);
         setRoomId(roomId);
         setHeatingModePortId(heatingModePortId);
         setCoolingModePortId(coolingModePortId);
