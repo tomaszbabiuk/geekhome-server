@@ -17,7 +17,7 @@ class MockedAdapter extends NamedObject implements IHardwareManagerAdapter {
 
     @Override
     public void discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
-                         InputPortsCollection<Integer> analogInputPorts, OutputPortsCollection<Integer> analogOutputPorts,
+                         InputPortsCollection<Integer> powerInputPorts, OutputPortsCollection<Integer> powerOutputPorts,
                          InputPortsCollection<Double> temperaturePorts, TogglePortsCollection togglePorts,
                          InputPortsCollection<Double> humidityPorts, InputPortsCollection<Double> luminosityPorts) throws DiscoveryException {
         digitalInputPorts.add(new SynchronizedInputPort<>("INPUT0", false));
@@ -45,20 +45,20 @@ class MockedAdapter extends NamedObject implements IHardwareManagerAdapter {
         luminosityPorts.add(new SynchronizedInputPort<>("LUM2", 1000.0));
         luminosityPorts.add(new SynchronizedInputPort<>("LUM3", 2000.0));
 
-        analogInputPorts.add(new SynchronizedInputPort<>("ANALOG-IN-0", 0));
-        analogInputPorts.add(new SynchronizedInputPort<>("ANALOG-IN-1", 0));
-        analogInputPorts.add(new SynchronizedInputPort<>("ANALOG-IN-2", 0));
-        analogInputPorts.add(new SynchronizedInputPort<>("ANALOG-IN-3", 0));
+        powerInputPorts.add(new SynchronizedInputPort<>("POWER-IN-0", 0));
+        powerInputPorts.add(new SynchronizedInputPort<>("POWER-IN-1", 0));
+        powerInputPorts.add(new SynchronizedInputPort<>("POWER-IN-2", 0));
+        powerInputPorts.add(new SynchronizedInputPort<>("POWER-IN-3", 0));
 
         togglePorts.add(new SynchronizedTogglePort("ExtaFree-001"));
         togglePorts.add(new SynchronizedTogglePort("ExtaFree-002"));
         togglePorts.add(new SynchronizedTogglePort("ExtaFree-003"));
         togglePorts.add(new SynchronizedTogglePort("ExtaFree-004"));
 
-        analogOutputPorts.add(new SynchronizedOutputPort<>("ANALOG-OUT-1"));
-        analogOutputPorts.add(new SynchronizedOutputPort<>("ANALOG-OUT-2"));
-        analogOutputPorts.add(new SynchronizedOutputPort<>("ANALOG-OUT-3"));
-        analogOutputPorts.add(new SynchronizedOutputPort<>("ANALOG-OUT-4"));
+        powerOutputPorts.add(new SynchronizedOutputPort<>("POWER-OUT-1", 0));
+        powerOutputPorts.add(new SynchronizedOutputPort<>("POWER-OUT-2", 0));
+        powerOutputPorts.add(new SynchronizedOutputPort<>("POWER-OUT-3", 0));
+        powerOutputPorts.add(new SynchronizedOutputPort<>("POWER-OUT-4", 0));
     }
 
     @Override

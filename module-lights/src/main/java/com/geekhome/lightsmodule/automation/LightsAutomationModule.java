@@ -49,9 +49,9 @@ public class LightsAutomationModule implements IAutomationModule {
         }
 
         for (RgbLamp rgbLamp : _lightsConfiguration.getRgbLamps().values()) {
-            IOutputPort<Integer> redPort = _hardwareManager.findAnalogOutputPort(rgbLamp.getRedPortId());
-            IOutputPort<Integer> greenPort = _hardwareManager.findAnalogOutputPort(rgbLamp.getGreenPortId());
-            IOutputPort<Integer> bluePort = _hardwareManager.findAnalogOutputPort(rgbLamp.getBluePortId());
+            IOutputPort<Integer> redPort = _hardwareManager.findPowerOutputPort(rgbLamp.getRedPortId());
+            IOutputPort<Integer> greenPort = _hardwareManager.findPowerOutputPort(rgbLamp.getGreenPortId());
+            IOutputPort<Integer> bluePort = _hardwareManager.findPowerOutputPort(rgbLamp.getBluePortId());
             RgbLampAutomationUnit unit = new RgbLampAutomationUnit(rgbLamp, redPort, greenPort,bluePort, _localizationProvider, _automationSettings);
             devicesList.add(unit);
         }

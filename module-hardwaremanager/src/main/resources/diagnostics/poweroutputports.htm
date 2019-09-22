@@ -9,19 +9,19 @@
         var $sender = jQuery(formatStatusId(id));
         var loaded = $sender.hasClass('loaded');
         if (loaded) {
-            writeAnalogOutputPort(id, $sender.val());
+            writePowerOutputPort(id, $sender.val());
         }
         else {
-            readAnalogOutputPort(id);
+            readPowerOutputPort(id);
             $sender.addClass('loaded');
         }
     }
 
-    function readAnalogOutputPort(id) {
+    function readPowerOutputPort(id) {
         var $sender = jQuery(formatStatusId(id));
         $.ajax({
             type: 'GET',
-            url: '/readanalogoutputport.json?id=' + id,
+            url: '/readpoweroutputport.json?id=' + id,
             dataType: 'json',
             success: function (data) {
                 $sender.val(data.Result);
@@ -31,25 +31,25 @@
                     var $sender = jQuery(this);
                     var id = $sender.data('portid');
                     var value = $sender.val();
-                    writeAnalogOutputPort(id, value);
+                    writePowerOutputPort(id, value);
                 });
             },
         });
     }
 
-    function writeAnalogOutputPort(id, value) {
+    function writePowerOutputPort(id, value) {
         var $sender = jQuery(formatStatusId(id));
-        $.ajax('/writeanalogoutputport.json?id=' + id + '&value=' + value);
+        $.ajax('/writepoweroutputport.json?id=' + id + '&value=' + value);
     }
 </script>
 
 <script id="portstemplate" type="text/x-jquery-tmpl">
     <ul data-inset="true" data-role="listview">
         <li data-theme="b">
-            <!-- @RES:C:AnalogOutputPorts -->
-            <span class="ui-li-count">${HM.GetAnalogOutputPorts().length}</span>
+            <!-- @RES:C:PowerOutputPorts -->
+            <span class="ui-li-count">${HM.GetPowerOutputPorts().length}</span>
         </li>
-        {{each SortById(HM.GetAnalogOutputPorts())}}
+        {{each SortById(HM.GetPowerOutputPorts())}}
             <li>
                 <h3>${Id}</h3>
                 {{if MappedTo.length == 0}}
@@ -69,7 +69,7 @@
 </script>
 <div data-role="page" id="portsindex">
     <div data-role="header">
-        <h1><!-- @RES:C:Diagnostics --> - <!-- @RES:C:AnalogOutputPorts --></h1>
+        <h1><!-- @RES:C:Diagnostics --> - <!-- @RES:C:PowerOutputPorts --></h1>
     </div>
     <div data-role="content" id="portscontent"></div>
     <!-- @Controls\BackToDashboardFooter.htm -->

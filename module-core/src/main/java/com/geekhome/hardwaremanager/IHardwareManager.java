@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public interface IHardwareManager {
     OutputPortsCollection<Boolean> getDigitalOutputPorts();
     InputPortsCollection<Boolean> getDigitalInputPorts();
-    OutputPortsCollection<Integer> getAnalogOutputPorts();
-    InputPortsCollection<Integer> getAnalogInputPorts();
+    OutputPortsCollection<Integer> getPowerOutputPorts();
+    InputPortsCollection<Integer> getPowerInputPorts();
     InputPortsCollection<Double> getTemperaturePorts();
     InputPortsCollection<Double> getHumidityPorts();
     InputPortsCollection<Double> getLuminosityPorts();
@@ -23,11 +23,11 @@ public interface IHardwareManager {
     IInputPort<Boolean> findDigitalInputPort(String id) throws PortNotFoundException;
     IInputPort<Boolean> tryFindDigitalInputPort(String id);
 
-    IOutputPort<Integer> findAnalogOutputPort(String id) throws PortNotFoundException;
-    IOutputPort<Integer> tryFindAnalogOutputPort(String id);
+    IOutputPort<Integer> findPowerOutputPort(String id) throws PortNotFoundException;
+    IOutputPort<Integer> tryFindPowerOutputPort(String id);
 
-    IInputPort<Integer> findAnalogInputPort(String id) throws PortNotFoundException;
-    IInputPort<Integer> tryFindAnalogInputPort(String id);
+    IInputPort<Integer> findPowerInputPort(String id) throws PortNotFoundException;
+    IInputPort<Integer> tryFindPowerInputPort(String id);
 
     IInputPort<Double> findTemperaturePort(String id) throws PortNotFoundException;
     IInputPort<Double> tryFindTemperaturePort(String id);

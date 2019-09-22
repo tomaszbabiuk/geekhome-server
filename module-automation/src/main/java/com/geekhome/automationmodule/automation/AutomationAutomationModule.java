@@ -54,7 +54,7 @@ public class AutomationAutomationModule implements IAutomationModule {
         }
 
         for (IntensityDevice intensityDevice : _automationConfiguration.getIntensityDevices().values()) {
-            IOutputPort<Integer> controlPort = _hardwareManager.findAnalogOutputPort(intensityDevice.getPortId());
+            IOutputPort<Integer> controlPort = _hardwareManager.findPowerOutputPort(intensityDevice.getPortId());
             IntensityDeviceAutomationUnit unit = new IntensityDeviceAutomationUnit(intensityDevice, controlPort, _localizationProvider, _automationSettings);
             devicesList.add(unit);
         }

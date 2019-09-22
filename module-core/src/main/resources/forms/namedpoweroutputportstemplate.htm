@@ -3,8 +3,8 @@
         <label for="$p0port" class="select">
             $p2:</label>
         <select id="$p0port" name="$p1" data-native-menu="false" validate="required:true, minlength:1">
-            {{each HM.GetAnalogOutputPorts()}}
-                <optgroup label="<!-- @RES:C:AnalogOutputPorts -->:">
+            {{each HM.GetPowerOutputPorts()}}
+                <optgroup label="<!-- @RES:C:PowerOutputPorts -->:">
                     <option value="${Id}">${Id}{{if MappedTo.length > 0 }}: {{each MappedTo}}${Name}, {{/each}}(${MappedTo.length}){{/if}}
                     </option>
                 </optgroup>

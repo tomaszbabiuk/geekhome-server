@@ -140,7 +140,7 @@ public class LightsConfiguration extends Collector {
         DescriptiveName deviceName = new DescriptiveName(name, uniqueId, description);
         RgbLamp device = new RgbLamp(deviceName, redPortId, greenPortId, bluePortId, roomId);
         getRgbLamps().add(device);
-        onInvalidateCache("/ANALOGOUTPUTPORTS.JSON");
+        onInvalidateCache("/POWEROUTPUTPORTS.JSON");
         onInvalidateCache("/TOGGLEPORTS.JSON");
 
         changeRgbPresetValue(device.getName().getUniqueId(), 1, preset1);
@@ -156,7 +156,7 @@ public class LightsConfiguration extends Collector {
         RgbLamp device = getRgbLamps().find(uniqueId);
         if (!device.getRedPortId().equals(redPortId) || !device.getBluePortId().equals(bluePortId) ||
                 !device.getGreenPortId().equals(greenPortId)) {
-            onInvalidateCache("/ANALOGOUTPUTPORTS.JSON");
+            onInvalidateCache("/POWEROUTPUTPORTS.JSON");
             onInvalidateCache("/TOGGLEPORTS.JSON");
         }
         device.getName().setName(name);

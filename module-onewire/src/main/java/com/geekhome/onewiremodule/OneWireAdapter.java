@@ -47,7 +47,7 @@ class OneWireAdapter extends SerialAdapterBase {
 
     @Override
     public void discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
-                         InputPortsCollection<Integer> analogInputPorts, OutputPortsCollection<Integer> analogOutputPorts,
+                         InputPortsCollection<Integer> powerInputPorts, OutputPortsCollection<Integer> powerOutputPorts,
                          InputPortsCollection<Double> temperaturePorts, TogglePortsCollection togglePorts,
                          InputPortsCollection<Double> humidityPorts, InputPortsCollection<Double> luminosityPorts) throws DiscoveryException {
         _switchesAsSensedInputs.clear();

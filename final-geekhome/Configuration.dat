@@ -161,7 +161,7 @@ uniqueid = heating74
 [IntensityDevice]
 roomid = core34
 intensitypresetsids = 1,2,3,4
-portid = ANALOG-OUT-1
+portid = POWER-OUT-1
 devicecategory = 4
 iconname = lightbulb
 controltype = 7

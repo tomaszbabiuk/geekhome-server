@@ -33,8 +33,8 @@ public class SonoffDiscoveryHelper {
     public void processSonoffDiscovery(final ServiceEvent serviceEvent,
                                        final InputPortsCollection<Boolean> digitalInputPorts,
                                        final OutputPortsCollection<Boolean> digitalOutputPorts,
-                                       final InputPortsCollection<Integer> analogInputPorts,
-                                       final OutputPortsCollection<Integer> analogOutputPorts,
+                                       final InputPortsCollection<Integer> powerInputPorts,
+                                       final OutputPortsCollection<Integer> powerOutputPorts,
                                        final InputPortsCollection<Double> temperaturePorts,
                                        final TogglePortsCollection togglePortsCollection,
                                        final InputPortsCollection<Double> humidityPorts,
@@ -68,7 +68,7 @@ public class SonoffDiscoveryHelper {
             for (String tasmotaPWMChannel : pwm.keySet()) {
                 Integer initialPwmValue = pwm.get(tasmotaPWMChannel);
                 int channel = Integer.valueOf(tasmotaPWMChannel.replace("PWM", "")) - 1;
-                addAnalogOutputPort(serviceEvent, channel, analogOutputPorts, initialPwmValue);
+                addPowerOutputPort(serviceEvent, channel, powerOutputPorts, initialPwmValue);
             }
 
             SensorStatus sensorStatus = _sonoffHijacker.readSensorStatus(address);
@@ -88,13 +88,13 @@ public class SonoffDiscoveryHelper {
         }
     }
 
-    private void addAnalogOutputPort(final ServiceEvent serviceEvent,
+    private void addPowerOutputPort(final ServiceEvent serviceEvent,
                                      final int channel,
-                                     final OutputPortsCollection<Integer> analogOutputPorts,
+                                     final OutputPortsCollection<Integer> powerOutputPorts,
                                      final Integer initialValue) {
         String portId = serviceEvent.getName() + ":" + channel;
-        SynchronizedOutputPort<Integer> analogPort = new TasmotaAnalogOutputPort(_mqttClientResolver, portId, initialValue);
-        analogOutputPorts.add(analogPort);
+        SynchronizedOutputPort<Integer> powerOutputPort = new TasmotaPowerOutputPort(_mqttClientResolver, portId, initialValue);
+        powerOutputPorts.add(powerOutputPort);
     }
 
     private void addTemperaturePort(final ServiceEvent serviceEvent,

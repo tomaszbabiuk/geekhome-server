@@ -3,9 +3,6 @@ package com.geekhome.common;
 import com.geekhome.hardwaremanager.IOutputPort;
 
 public class SynchronizedOutputPort<T> extends SynchronizedInputPort<T> implements IOutputPort<T> {
-    public SynchronizedOutputPort(String id) {
-        super(id);
-    }
 
     public SynchronizedOutputPort(String id, T initialValue) {
         super(id, initialValue);

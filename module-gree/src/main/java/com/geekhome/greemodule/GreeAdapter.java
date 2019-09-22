@@ -28,8 +28,8 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
     @Override
     public void discover(final InputPortsCollection<Boolean> digitalInputPorts,
                            final OutputPortsCollection<Boolean> digitalOutputPorts,
-                           final InputPortsCollection<Integer> analogInputPorts,
-                           final OutputPortsCollection<Integer> analogOutputPorts,
+                           final InputPortsCollection<Integer> powerInputPorts,
+                           final OutputPortsCollection<Integer> powerOutputPorts,
                            final InputPortsCollection<Double> temperaturePorts,
                            final TogglePortsCollection togglePorts,
                            final InputPortsCollection<Double> humidityPorts,

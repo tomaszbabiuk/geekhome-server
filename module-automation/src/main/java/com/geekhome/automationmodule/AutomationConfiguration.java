@@ -200,7 +200,7 @@ public class AutomationConfiguration extends Collector {
         DescriptiveName deviceName = new DescriptiveName(name, uniqueId, description);
         IntensityDevice device = new IntensityDevice(deviceName, portId, roomId, iconName);
         getIntensityDevices().add(device);
-        onInvalidateCache("/ANALOGOUTPUTPORTS.JSON");
+        onInvalidateCache("/POWEROUTPUTPORTS.JSON");
 
         changeIntensityPresetValue(device.getName().getUniqueId(), 1, preset1);
         changeIntensityPresetValue(device.getName().getUniqueId(), 2, preset2);
@@ -214,7 +214,7 @@ public class AutomationConfiguration extends Collector {
                                 String roomId, Integer preset1, Integer preset2, Integer preset3, Integer preset4, String uniqueId) throws Exception {
         IntensityDevice device = getIntensityDevices().find(uniqueId);
         if (!device.getPortId().equals(portId)) {
-            onInvalidateCache("/ANALOGOUTPUTPORTS.JSON");
+            onInvalidateCache("/POWEROUTPUTPORTS.JSON");
         }
         device.getName().setName(name);
         device.getName().setDescription(description);

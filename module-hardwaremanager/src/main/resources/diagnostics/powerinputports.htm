@@ -8,7 +8,7 @@
     function doPortAction(id) {
         $.ajax({
             type: 'GET',
-            url: '/readanaloginputport.json?id=' + id,
+            url: '/readpowerinputport.json?id=' + id,
             dataType: 'json',
             success: function (data) {
                 jQuery(formatStatusId(id)).html(data.Result);
@@ -20,5 +20,5 @@
     }
 </script>
 
-<!-- @Controls\PortsBase.htm RES:C:AnalogInputPorts HM.GetAnalogInputPorts() -->
+<!-- @Controls\PortsBase.htm RES:C:PowerInputPorts HM.GetPowerInputPorts() -->
 <!-- @Controls\MasterFooter.htm -->

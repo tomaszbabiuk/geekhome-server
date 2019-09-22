@@ -36,7 +36,7 @@
 
 <script type="text/javascript">
     jQuery('#intensitydevicesindex').on('pagecreate', function (event) {
-        if (!HM.HasAnalogOutputPorts()) {
+        if (!HM.HasPowerOutputPorts()) {
             jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#intensitydevicescontent');
         } else if (CORE.CanAddDevices()) {
             jQuery(jQuery("#intensitydevicestemplate").tmpl()).appendTo("#intensitydevicescontent");

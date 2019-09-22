@@ -50,8 +50,8 @@ class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCa
     @Override
     public void discover(final InputPortsCollection<Boolean> digitalInputPorts,
                            final OutputPortsCollection<Boolean> digitalOutputPorts,
-                           final InputPortsCollection<Integer> analogInputPorts,
-                           final OutputPortsCollection<Integer> analogOutputPorts,
+                           final InputPortsCollection<Integer> powerInputPorts,
+                           final OutputPortsCollection<Integer> powerOutputPorts,
                            final InputPortsCollection<Double> temperaturePorts,
                            final TogglePortsCollection togglePorts,
                            final InputPortsCollection<Double> humidityPorts,
@@ -96,7 +96,7 @@ class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCa
 
             for (ServiceEvent sonoffService : sonoffsFound) {
                 _sonoffDiscoveryHelper.processSonoffDiscovery(sonoffService, digitalInputPorts, digitalOutputPorts,
-                    analogInputPorts, analogOutputPorts, temperaturePorts, togglePorts, humidityPorts, luminosityPorts);
+                    powerInputPorts, powerOutputPorts, temperaturePorts, togglePorts, humidityPorts, luminosityPorts);
             }
         } catch (ConnectException cex) {
             _logger.info("Cannot connect to MQTT server... discovery skipped.");
@@ -227,7 +227,7 @@ class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCa
             deviceId += ":" + String.valueOf(channel);
         }
         if (topic.endsWith(expectedEnding)) {
-            SynchronizedOutputPort<Integer> outputPort = (SynchronizedOutputPort<Integer>) _hardwareManager.tryFindAnalogOutputPort(deviceId);
+            SynchronizedOutputPort<Integer> outputPort = (SynchronizedOutputPort<Integer>) _hardwareManager.tryFindPowerOutputPort(deviceId);
             if (outputPort != null) {
                 Integer value = Integer.valueOf(mqttMessage);
                 outputPort.setValue(value);

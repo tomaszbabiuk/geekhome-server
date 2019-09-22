@@ -19,8 +19,8 @@ public class HardwareManager implements IHardwareManager {
     private ILogger _logger = LoggingService.getLogger();
     private InputPortsCollection<Boolean> _digitalInputPorts;
     private OutputPortsCollection<Boolean> _digitalOutputPorts;
-    private InputPortsCollection<Integer> _analogInputPorts;
-    private OutputPortsCollection<Integer> _analogOutputPorts;
+    private InputPortsCollection<Integer> _powerInputPorts;
+    private OutputPortsCollection<Integer> _powerOutputPorts;
     private InputPortsCollection<Double> _temperaturePorts;
     private InputPortsCollection<Double> _humidityPorts;
     private InputPortsCollection<Double> _luminosityPorts;
@@ -36,8 +36,8 @@ public class HardwareManager implements IHardwareManager {
     public HardwareManager() {
         _digitalInputPorts = new InputPortsCollection<>();
         _digitalOutputPorts = new OutputPortsCollection<>();
-        _analogInputPorts = new InputPortsCollection<>();
-        _analogOutputPorts = new OutputPortsCollection<>();
+        _powerInputPorts = new InputPortsCollection<>();
+        _powerOutputPorts = new OutputPortsCollection<>();
         _temperaturePorts = new InputPortsCollection<>();
         _humidityPorts = new InputPortsCollection<>();
         _luminosityPorts = new InputPortsCollection<>();
@@ -47,8 +47,8 @@ public class HardwareManager implements IHardwareManager {
     protected void clear() {
         _digitalInputPorts.clear();
         _digitalOutputPorts.clear();
-        _analogInputPorts.clear();
-        _analogOutputPorts.clear();
+        _powerInputPorts.clear();
+        _powerOutputPorts.clear();
         _temperaturePorts.clear();
         _humidityPorts.clear();
         _luminosityPorts.clear();
@@ -66,13 +66,13 @@ public class HardwareManager implements IHardwareManager {
     }
 
     @Override
-    public OutputPortsCollection<Integer> getAnalogOutputPorts() {
-        return _analogOutputPorts;
+    public OutputPortsCollection<Integer> getPowerOutputPorts() {
+        return _powerOutputPorts;
     }
 
     @Override
-    public InputPortsCollection<Integer> getAnalogInputPorts() {
-        return _analogInputPorts;
+    public InputPortsCollection<Integer> getPowerInputPorts() {
+        return _powerInputPorts;
     }
 
     @Override
@@ -116,23 +116,23 @@ public class HardwareManager implements IHardwareManager {
     }
 
     @Override
-    public IOutputPort<Integer> findAnalogOutputPort(String id) throws PortNotFoundException {
-        return getAnalogOutputPorts().find(id);
+    public IOutputPort<Integer> findPowerOutputPort(String id) throws PortNotFoundException {
+        return getPowerOutputPorts().find(id);
     }
 
     @Override
-    public IOutputPort<Integer> tryFindAnalogOutputPort(String id) {
-        return getAnalogOutputPorts().tryFind(id);
+    public IOutputPort<Integer> tryFindPowerOutputPort(String id) {
+        return getPowerOutputPorts().tryFind(id);
     }
 
     @Override
-    public IInputPort<Integer> findAnalogInputPort(String id) throws PortNotFoundException {
-        return getAnalogInputPorts().find(id);
+    public IInputPort<Integer> findPowerInputPort(String id) throws PortNotFoundException {
+        return getPowerInputPorts().find(id);
     }
 
     @Override
-    public IInputPort<Integer> tryFindAnalogInputPort(String id) {
-        return getAnalogInputPorts().tryFind(id);
+    public IInputPort<Integer> tryFindPowerInputPort(String id) {
+        return getPowerInputPorts().tryFind(id);
     }
 
     @Override
@@ -187,10 +187,10 @@ public class HardwareManager implements IHardwareManager {
         for (IOutputPort<Boolean> port : getDigitalOutputPorts().values()) {
             port.initialize(portMapper);
         }
-        for (IInputPort<Integer> port : getAnalogInputPorts().values()) {
+        for (IInputPort<Integer> port : getPowerInputPorts().values()) {
             port.initialize(portMapper);
         }
-        for (IOutputPort<Integer> port : getAnalogOutputPorts().values()) {
+        for (IOutputPort<Integer> port : getPowerOutputPorts().values()) {
             port.initialize(portMapper);
         }
         for (IInputPort<Double> port : getTemperaturePorts().values()) {
@@ -271,8 +271,8 @@ public class HardwareManager implements IHardwareManager {
         clear();
         onInvalidateCache("/DIGITALINPUTPORTS.JSON");
         onInvalidateCache("/DIGITALOUTPUTPORTS.JSON");
-        onInvalidateCache("/ANALOGINPUTPORTS.JSON");
-        onInvalidateCache("/ANALOGOUTPUTPORTS.JSON");
+        onInvalidateCache("/POWERINPUTPORTS.JSON");
+        onInvalidateCache("/POWEROUTPUTPORTS.JSON");
         onInvalidateCache("/TEMPERATUREPORTS.JSON");
         onInvalidateCache("/HUMIDITYPORTS.JSON");
         onInvalidateCache("/LUMINOSITYPORTS.JSON");
@@ -282,7 +282,7 @@ public class HardwareManager implements IHardwareManager {
                 try {
                     adapter.discover(
                             getDigitalInputPorts(), getDigitalOutputPorts(),
-                            getAnalogInputPorts(), getAnalogOutputPorts(),
+                            getPowerInputPorts(), getPowerOutputPorts(),
                             getTemperaturePorts(), getTogglePorts(),
                             getHumidityPorts(), getLuminosityPorts());
 

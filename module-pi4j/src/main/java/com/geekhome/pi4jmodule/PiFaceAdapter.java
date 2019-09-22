@@ -125,8 +125,7 @@ class PiFaceAdapter extends NamedObject implements IHardwareManagerAdapter {
         Hashtable<Byte, SynchronizedOutputPort<Boolean>> outputs = new Hashtable<>();
         for (byte i=0; i<8; i++) {
             String portId = String.format("PIFACE-%s-OUT%d", _address.getCode(), i);
-            SynchronizedOutputPort<Boolean> output = new SynchronizedOutputPort<>(portId);
-            output.setValue(false);
+            SynchronizedOutputPort<Boolean> output = new SynchronizedOutputPort<>(portId, false);
             outputs.put(i, output);
         }
         _outputs = outputs;
@@ -134,7 +133,7 @@ class PiFaceAdapter extends NamedObject implements IHardwareManagerAdapter {
 
     @Override
     public void discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
-                         InputPortsCollection<Integer> analogInputPorts, OutputPortsCollection<Integer> analogOutputPorts,
+                         InputPortsCollection<Integer> powerInputPorts, OutputPortsCollection<Integer> powerOutputPorts,
                          InputPortsCollection<Double> temperaturePorts, TogglePortsCollection togglePorts,
                          InputPortsCollection<Double> humidityPorts, InputPortsCollection<Double> luminosityPorts) throws DiscoveryException {
 

@@ -15,8 +15,8 @@
                     </option>
                 </optgroup>
             {{/each}}
-            {{each HM.GetAnalogOutputPorts()}}
-                <optgroup label="<!-- @RES:C:AnalogOutputPorts -->:">
+            {{each HM.GetPowerOutputPorts()}}
+                <optgroup label="<!-- @RES:C:PowerOutputPorts -->:">
                     <option value="${Id}">${Id}{{if MappedTo.length > 0 }}: {{each MappedTo}}${Name}, {{/each}}(${MappedTo.length}){{/if}}
                     </option>
                 </optgroup>

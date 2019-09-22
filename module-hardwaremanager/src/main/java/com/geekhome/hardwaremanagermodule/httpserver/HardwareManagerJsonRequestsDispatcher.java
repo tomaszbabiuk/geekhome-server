@@ -34,27 +34,27 @@ public class HardwareManagerJsonRequestsDispatcher extends JsonRequestsDispatche
             return new JsonResponse(json, false);
         }
 
-        if (originalStringUppercased.equals("/READANALOGINPUTPORT.JSON")) {
+        if (originalStringUppercased.equals("/READPOWERINPUTPORT.JSON")) {
             String portId = request.getUrl().getQueryString().getValues().getValue("id");
-            IInputPort<Integer> port = _hardwareManager.findAnalogInputPort(portId);
+            IInputPort<Integer> port = _hardwareManager.findPowerInputPort(portId);
             int value = port.read();
             JSONObject json = JsonResponse.createJSONResult(value);
             return new JsonResponse(json, false);
         }
 
-        if (originalStringUppercased.equals("/READANALOGOUTPUTPORT.JSON")) {
+        if (originalStringUppercased.equals("/READPOWEROUTPUTPORT.JSON")) {
             String portId = request.getUrl().getQueryString().getValues().getValue("id");
-            IInputPort<Integer> port = _hardwareManager.findAnalogOutputPort(portId);
+            IInputPort<Integer> port = _hardwareManager.findPowerOutputPort(portId);
             int value = port.read();
             JSONObject json = JsonResponse.createJSONResult(value);
             return new JsonResponse(json, false);
         }
 
-        if (originalStringUppercased.equals("/WRITEANALOGOUTPUTPORT.JSON")) {
+        if (originalStringUppercased.equals("/WRITEPOWEROUTPUTPORT.JSON")) {
             String portId = request.getUrl().getQueryString().getValues().getValue("id");
             int value = Integer.parseInt(request.getUrl().getQueryString().getValues().getValue("value"));
-            IOutputPort<Integer> analogOutputPort = _hardwareManager.findAnalogOutputPort(portId);
-            analogOutputPort.write(value);
+            IOutputPort<Integer> powerOutputPort = _hardwareManager.findPowerOutputPort(portId);
+            powerOutputPort.write(value);
             JSONObject json = JsonResponse.createJSONResult(true);
             return new JsonResponse(json, false);
         }
@@ -118,13 +118,13 @@ public class HardwareManagerJsonRequestsDispatcher extends JsonRequestsDispatche
             return new JsonResponse(json, true);
         }
 
-        if (originalStringUppercased.equals("/ANALOGINPUTPORTS.JSON")) {
-            JSONObject json = JsonResponse.createJSONResult(_hardwareManager.getAnalogInputPorts());
+        if (originalStringUppercased.equals("/POWERINPUTPORTS.JSON")) {
+            JSONObject json = JsonResponse.createJSONResult(_hardwareManager.getPowerInputPorts());
             return new JsonResponse(json, true);
         }
 
-        if (originalStringUppercased.equals("/ANALOGOUTPUTPORTS.JSON")) {
-            JSONObject json = JsonResponse.createJSONResult(_hardwareManager.getAnalogOutputPorts());
+        if (originalStringUppercased.equals("/POWEROUTPUTPORTS.JSON")) {
+            JSONObject json = JsonResponse.createJSONResult(_hardwareManager.getPowerOutputPorts());
             return new JsonResponse(json, true);
         }
 

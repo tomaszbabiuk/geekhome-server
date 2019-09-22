@@ -31,8 +31,8 @@ public class HardwareManagerModule extends Module {
         units.add(new Unit(UnitCategory.Diagnostics, _localizationProvider.getValue("C:DigitalOutputPorts"), "outputplug", "/diagnostics/digitaloutputports.htm"));
         units.add(new Unit(UnitCategory.Diagnostics, _localizationProvider.getValue("C:TemperaturePorts"),"temperatureplug", "/diagnostics/temperatureports.htm"));
         units.add(new Unit(UnitCategory.Diagnostics, _localizationProvider.getValue("C:TogglePorts"),"toggleplug", "/diagnostics/toggleports.htm"));
-//        units.add(new Unit(UnitCategory.Diagnostics, _localizationProvider.getValue("C:AnalogInputPorts"), "inputplug", "/diagnostics/analoginputports.htm"));
-        units.add(new Unit(UnitCategory.Diagnostics, _localizationProvider.getValue("C:AnalogOutputPorts"), "outputplug", "/diagnostics/analogoutputports.htm"));
+//        units.add(new Unit(UnitCategory.Diagnostics, _localizationProvider.getValue("C:PowerInputPorts"), "inputplug", "/diagnostics/powerinputports.htm"));
+        units.add(new Unit(UnitCategory.Diagnostics, _localizationProvider.getValue("C:PowerOutputPorts"), "outputplug", "/diagnostics/poweroutputports.htm"));
         units.add(new Unit(UnitCategory.Diagnostics, _localizationProvider.getValue("C:HumidityPorts"),"humidityplug", "/diagnostics/humidityports.htm"));
         units.add(new Unit(UnitCategory.Diagnostics, _localizationProvider.getValue("C:LuminosityPorts"),"luminosityplug", "/diagnostics/luminosityports.htm"));
         units.add(new Unit(UnitCategory.Automatic, _localizationProvider.getValue("HM:ControlTable"), "table", "/automatic/controltable.htm"));

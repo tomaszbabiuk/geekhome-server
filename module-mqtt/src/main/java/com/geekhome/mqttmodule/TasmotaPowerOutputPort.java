@@ -1,8 +1,8 @@
 package com.geekhome.mqttmodule;
 
-public class TasmotaAnalogOutputPort extends TasmotaOutputPort<Integer> {
+public class TasmotaPowerOutputPort extends TasmotaOutputPort<Integer> {
 
-    public TasmotaAnalogOutputPort(MqttClientResolver clientResolver, String id, Integer initialValue) {
+    public TasmotaPowerOutputPort(MqttClientResolver clientResolver, String id, Integer initialValue) {
         super(clientResolver, id, initialValue);
     }
 

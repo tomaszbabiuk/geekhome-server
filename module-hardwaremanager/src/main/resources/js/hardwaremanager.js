@@ -4,22 +4,22 @@ var HM = {
 	temperaturePorts: null,
 	humidityPorts: null,
 	luminosityPorts: null,
-    analogInputsPorts: null,
-    analogOutputPorts: null,
+    powerInputsPorts: null,
+    powerOutputPorts: null,
     togglePorts: null,
 
-	GetAnalogOutputPorts: function() {
-		if (this.analogOutputPorts == null) {
-			this.analogOutputPorts = SortById(ajaxInit('/analogoutputports.json').Result);
+	GetPowerOutputPorts: function() {
+		if (this.powerOutputPorts == null) {
+			this.powerOutputPorts = SortById(ajaxInit('/poweroutputports.json').Result);
 		}
-		return this.analogOutputPorts;
+		return this.powerOutputPorts;
 	},
 
-	GetAnalogInputPorts: function() {
-		if (this.analogInputPorts == null) {
-			this.analogInputPorts = SortById(ajaxInit('/analoginputports.json').Result);
+	GetPowerInputPorts: function() {
+		if (this.powerInputPorts == null) {
+			this.powerInputPorts = SortById(ajaxInit('/powerinputports.json').Result);
 		}
-		return this.analogInputPorts;
+		return this.powerInputPorts;
 	},
 
 	GetDigitalOutputPorts: function() {
@@ -64,12 +64,12 @@ var HM = {
 		return this.togglePorts;
 	},
 
-	HasAnalogOutputPorts: function() {
-	    return HM.GetAnalogOutputPorts().length > 0;
+	HasPowerOutputPorts: function() {
+	    return HM.GetPowerOutputPorts().length > 0;
 	},
 
-	HasAnalogInputPorts: function() {
-	    return HM.GetAnalogInputPorts().length > 0;
+	HasPowerInputPorts: function() {
+	    return HM.GetPowerInputPorts().length > 0;
 	},
 
 	HasDigitalOutputPorts: function() {
