@@ -6,7 +6,7 @@ import com.geekhome.hardwaremanager.TogglePortsCollection;
 import com.geekhome.httpserver.OperationMode;
 
 public interface IHardwareManagerAdapter extends IMonitorable, INamedObject {
-    String discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
+    void discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
                   InputPortsCollection<Integer> analogInputPorts, OutputPortsCollection<Integer> analogOutputPorts,
                   InputPortsCollection<Double> temperaturePorts, TogglePortsCollection togglePorts,
                   InputPortsCollection<Double> humidityPorts, InputPortsCollection<Double> luminosityPorts) throws DiscoveryException;

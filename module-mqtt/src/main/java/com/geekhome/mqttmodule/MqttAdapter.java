@@ -48,7 +48,7 @@ class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCa
     }
 
     @Override
-    public String discover(final InputPortsCollection<Boolean> digitalInputPorts,
+    public void discover(final InputPortsCollection<Boolean> digitalInputPorts,
                            final OutputPortsCollection<Boolean> digitalOutputPorts,
                            final InputPortsCollection<Integer> analogInputPorts,
                            final OutputPortsCollection<Integer> analogOutputPorts,
@@ -103,8 +103,6 @@ class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCa
         } catch (Exception e) {
             throw new DiscoveryException("Unhandled error during MQTT discovery", e);
         }
-
-        return "MQTT";
     }
 
 

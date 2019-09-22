@@ -50,6 +50,7 @@ public class CentralHeatingModule extends Module {
         units.add(new Unit(UnitCategory.ConfigurationDevices, _localizationProvider.getValue("CH:CirculationPumps"), "watertreatmentplant", "/config/circulationpumps.htm"));
         units.add(new Unit(UnitCategory.ConfigurationDevices, _localizationProvider.getValue("CH:Radiators"), "radiator", "/config/radiators.htm"));
         units.add(new Unit(UnitCategory.ConfigurationDevices, _localizationProvider.getValue("CH:UnderfloorCircuits"), "heat", "/config/underfloorcircuits.htm"));
+        units.add(new Unit(UnitCategory.ConfigurationDevices, _localizationProvider.getValue("CH:AirConditioners"), "snow", "/config/airconditioners.htm"));
 //        units.add(new Unit(UnitCategory.ConfigurationDevices, _localizationProvider.getValue("CH:RtlCircuits"), "rtl", "/config/rtlcircuits.htm"));
         units.add(new Unit(UnitCategory.ConfigurationConditions, _localizationProvider.getValue("CH:ThermostatConditions"), "thermostat", "/config/thermostatconditions.htm"));
         return units;
@@ -153,6 +154,15 @@ public class CentralHeatingModule extends Module {
                 new Resource("CH:TemperaturePort", "Temperature port", "Port temperaturowy"),
                 new Resource("CH:Humidity", "Humidity", "Wilgotność"),
                 new Resource("CH:NoDemand", "No demand", "Brak zapotrzebowania"),
+                new Resource("CH:Cooling", "Cooling", "Chłodzenie"),
+                new Resource("CH:Manual", "Manual", "Tryb ręczny"),
+                new Resource("CH:BlocksEnablingCooling", "Blocks enabling cooling", "Bloki włączające chłodzenie"),
+                new Resource("CH:BlocksEnablingHeating", "Blocks enabling heating", "Bloki włączające ogrzewanie"),
+                new Resource("CH:AirConditioner", "Air conditioner", "Klimatyzator"),
+                new Resource("CH:AirConditioners", "Air conditioners", "Klimatyzatory"),
+                new Resource("CH:AirConditionerDetails", "Air conditioner details", "Szczegóły klimatyzatora"),
+                new Resource("CH:AddAirConditioner", "Add air conditioner", "Dodaj klimatyzator"),
+                new Resource("CH:CannotAddAirConditionersMessage", "In order to add an air conditioner there must be at least one room defined, one temperature controller and three ports available: temperature output one and two digital output ones!", "Aby dodawać klimatyzatory musi być zdefiniowany conajmniej jeden pokój, jeden kontroler temperatury oraz muszą być dostępne trzy porty: temperaturowy wyjścia oraz dwa porty wyjścia!"),
         };
     }
 

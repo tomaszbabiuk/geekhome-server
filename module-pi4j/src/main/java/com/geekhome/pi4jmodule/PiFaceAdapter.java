@@ -133,7 +133,7 @@ class PiFaceAdapter extends NamedObject implements IHardwareManagerAdapter {
     }
 
     @Override
-    public String discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
+    public void discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
                          InputPortsCollection<Integer> analogInputPorts, OutputPortsCollection<Integer> analogOutputPorts,
                          InputPortsCollection<Double> temperaturePorts, TogglePortsCollection togglePorts,
                          InputPortsCollection<Double> humidityPorts, InputPortsCollection<Double> luminosityPorts) throws DiscoveryException {
@@ -145,8 +145,6 @@ class PiFaceAdapter extends NamedObject implements IHardwareManagerAdapter {
         for (SynchronizedOutputPort<Boolean> output : _outputs.values()) {
             digitalOutputPorts.add(output);
         }
-
-        return null;
     }
 
     @Override

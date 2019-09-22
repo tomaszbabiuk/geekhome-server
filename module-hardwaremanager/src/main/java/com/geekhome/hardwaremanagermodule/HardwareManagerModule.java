@@ -1,7 +1,6 @@
 package com.geekhome.hardwaremanagermodule;
 
 import com.geekhome.common.IHardwareManagerAdapterFactory;
-import com.geekhome.common.ILicenseManager;
 import com.geekhome.http.Resource;
 import com.geekhome.hardwaremanager.IHardwareManager;
 import com.geekhome.hardwaremanagermodule.httpserver.HardwareManagerDebugPostRequestsDispatcher;
@@ -17,14 +16,12 @@ public class HardwareManagerModule extends Module {
     private boolean _debugMode;
     private ILocalizationProvider _localizationProvider;
     private IHardwareManager _hardwareManager;
-    private ILicenseManager _licenseManager;
 
     public HardwareManagerModule(boolean debugMode, ILocalizationProvider localizationProvider,
-                                 IHardwareManager hardwareManager, ILicenseManager licenseManager) {
+                                 IHardwareManager hardwareManager) {
         _debugMode = debugMode;
         _localizationProvider = localizationProvider;
         _hardwareManager = hardwareManager;
-        _licenseManager = licenseManager;
     }
 
     @Override

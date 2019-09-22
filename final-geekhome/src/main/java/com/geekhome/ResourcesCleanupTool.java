@@ -1,11 +1,10 @@
 package com.geekhome;
 
 import com.geekhome.alarmmodule.AlarmModule;
+import com.geekhome.alarmmodule.AlarmModule;
 import com.geekhome.automationmodule.AutomationModule;
 import com.geekhome.centralheatingmodule.CentralHeatingModule;
 import com.geekhome.common.HardwareManager;
-import com.geekhome.common.ILicenseManager;
-import com.geekhome.common.LicenseManager;
 import com.geekhome.common.commands.CommandsProcessor;
 import com.geekhome.common.commands.Synchronizer;
 import com.geekhome.common.json.JSONArrayList;
@@ -54,8 +53,7 @@ public class ResourcesCleanupTool {
         try {
             TextFileAutomationSettingsPersister settingsPersister = new TextFileAutomationSettingsPersister();
             AutomationSettings automationSettings = new AutomationSettings(settingsPersister);
-            ILicenseManager licenseManager = new LicenseManager(automationSettings);
-            HardwareManager hardwareManager = new HardwareManager(licenseManager);
+            HardwareManager hardwareManager = new HardwareManager();
             ILocalizationProvider localizationProvider = new ResourceLocalizationProvider();
             DashboardAlertService dashboardAlertService = new DashboardAlertService(localizationProvider);
             SystemInfo systemInfo = new SystemInfo(OperationMode.Diagnostics, localizationProvider, dashboardAlertService);
@@ -68,7 +66,7 @@ public class ResourcesCleanupTool {
                     localizationProvider, systemInfo, commandsProcessor, dashboardAlertService);
             JSONArrayList<IModule> modules = buildModules(hardwareManager, automationSettings,
                     localizationProvider, systemInfo, masterConfiguration, masterAutomation,
-                    synchronizer, commandsProcessor, dashboardAlertService, licenseManager);
+                    synchronizer, commandsProcessor, dashboardAlertService);
 
             _warnings = 0;
             for (IModule module : modules) {
@@ -173,12 +171,12 @@ public class ResourcesCleanupTool {
                                                        ILocalizationProvider localizationProvider, SystemInfo systemInfo,
                                                        MasterConfiguration masterConfiguration, MasterAutomation masterAutomation,
                                                        Synchronizer synchronizer, CommandsProcessor commandsProcessor,
-                                                       DashboardAlertService dashboardAlertService, ILicenseManager licenseManager) throws Exception {
+                                                       DashboardAlertService dashboardAlertService) throws Exception {
         JSONArrayList<IModule> modules = new JSONArrayList<>();
         modules.add(new CoreModule(localizationProvider, systemInfo, masterConfiguration, masterAutomation, hardwareManager,
-                automationSettings, synchronizer, dashboardAlertService, licenseManager));
+                automationSettings, synchronizer, dashboardAlertService));
         modules.add(new UsersModule(localizationProvider));
-        modules.add(new HardwareManagerModule(true, localizationProvider, hardwareManager, licenseManager));
+        modules.add(new HardwareManagerModule(true, localizationProvider, hardwareManager));
         modules.add(new LightsModule(localizationProvider, masterConfiguration, hardwareManager, automationSettings));
         modules.add(new AlarmModule(localizationProvider, masterConfiguration, masterAutomation, hardwareManager));
         modules.add(new CentralHeatingModule(localizationProvider, masterConfiguration, masterAutomation, hardwareManager, automationSettings));

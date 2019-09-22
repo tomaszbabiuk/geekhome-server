@@ -1,6 +1,5 @@
 package com.geekhome.coremodule.httpserver;
 
-import com.geekhome.common.ILicenseManager;
 import com.geekhome.coremodule.SystemStatus;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.http.IHttpListenerRequest;
@@ -16,13 +15,10 @@ import java.util.Objects;
 public class SystemInfoJsonRequestsDispatcher extends JsonRequestsDispatcherBase {
     private SystemInfo _systemInfo;
     private AutomationSettings _automationSettings;
-    private ILicenseManager _licenseManager;
 
-    public SystemInfoJsonRequestsDispatcher(SystemInfo systemInfo, AutomationSettings automationSettings,
-                                            ILicenseManager licenseManager) {
+    public SystemInfoJsonRequestsDispatcher(SystemInfo systemInfo, AutomationSettings automationSettings) {
         _systemInfo = systemInfo;
         _automationSettings = automationSettings;
-        _licenseManager = licenseManager;
     }
 
     @Override
@@ -32,7 +28,7 @@ public class SystemInfoJsonRequestsDispatcher extends JsonRequestsDispatcherBase
         if (originalStringUppercased.equals("/SYSTEMINFO/STATUS.JSON")) {
             boolean isLicenceAccepted = Objects.equals(_automationSettings.readSetting("System.LicenseAccepted", "0"), "1");
             SystemStatus status = new SystemStatus(request.getUserName(), _systemInfo.getOperationMode().toInt(),
-                    isLicenceAccepted, _licenseManager.getActivationErrors().size() > 0);
+                    isLicenceAccepted);
             JSONObject json = JsonResponse.createJSONResult(status);
             return new JsonResponse(json, false);
         }

@@ -14,7 +14,7 @@ class ExtaFreeSerialAdaptersFactory extends SerialAdapterFactoryBase {
 
     @Override
     protected IHardwareManagerAdapter createAdapter(String adapterPort, String adapterAlias) {
-        return new ExtaFreeSerialAdapter(adapterPort, adapterAlias, _localizationProvider);
+        return new ExtaFreeSerialAdapter(adapterPort, _localizationProvider);
     }
 
     ExtaFreeSerialAdaptersFactory(ILocalizationProvider localizationProvider) {

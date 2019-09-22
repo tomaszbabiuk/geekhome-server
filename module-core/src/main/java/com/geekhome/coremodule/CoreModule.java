@@ -1,7 +1,6 @@
 package com.geekhome.coremodule;
 
 import com.geekhome.common.CrudAction;
-import com.geekhome.common.ILicenseManager;
 import com.geekhome.common.commands.IAlertService;
 import com.geekhome.common.commands.Synchronizer;
 import com.geekhome.coremodule.automation.CoreAutomationModule;
@@ -31,11 +30,10 @@ public class CoreModule extends Module {
     private AutomationSettings _settings;
     private Synchronizer _synchronizer;
     private DashboardAlertService _dashboardAlertService;
-    private ILicenseManager _licenseManager;
 
     public CoreModule(ILocalizationProvider localizationProvider, SystemInfo systemInfo, MasterConfiguration masterConfiguration,
                       MasterAutomation masterAutomation, IHardwareManager hardwareManager, AutomationSettings settings,
-                      Synchronizer synchronizer, DashboardAlertService dashboardAlertService, ILicenseManager licenseManager) {
+                      Synchronizer synchronizer, DashboardAlertService dashboardAlertService) {
         _localizationProvider = localizationProvider;
         _systemInfo = systemInfo;
         _masterAutomation = masterAutomation;
@@ -44,7 +42,6 @@ public class CoreModule extends Module {
         _settings = settings;
         _synchronizer = synchronizer;
         _dashboardAlertService = dashboardAlertService;
-        _licenseManager = licenseManager;
     }
 
     @Override
@@ -561,9 +558,7 @@ public class CoreModule extends Module {
         dispatchers.add(new BackupPostRequestsDispatcher(_masterConfiguration));
         dispatchers.add(new BackupJsonRequestsDispatcher(_masterConfiguration));
         dispatchers.add(new SynchronizeJsonRequestsDispatcher(_synchronizer, _localizationProvider));
-        dispatchers.add(new SystemInfoJsonRequestsDispatcher(_systemInfo, _settings, _licenseManager));
-        dispatchers.add(new ActivationJsonRequestsDispatcher(_licenseManager));
-        dispatchers.add(new ActivationPostRequestsDispatcher(_licenseManager));
+        dispatchers.add(new SystemInfoJsonRequestsDispatcher(_systemInfo, _settings));
         dispatchers.add(new SystemInfoPostRequestsDispatcher(_systemInfo));
         dispatchers.add(new MasterConfigurationPostRequestsDispatcher(_masterConfiguration));
         dispatchers.add(new AutomationPostRequestsDispatcher(_masterAutomation));

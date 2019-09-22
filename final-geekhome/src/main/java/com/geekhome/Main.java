@@ -22,14 +22,14 @@ public class Main {
     public static void main(String[] args) {
         final int port = HomeServerStarter.extractPortFromArgs(args);
 
-        HomeServerStarter.start(port, (hardwareManager, automationSettings, localizationProvider, systemInfo, masterConfiguration, masterAutomation, synchronizer, commandsProcessor, dashboardAlertService, licenseManager) -> {
+        HomeServerStarter.start(port, (hardwareManager, automationSettings, localizationProvider, systemInfo, masterConfiguration, masterAutomation, synchronizer, commandsProcessor, dashboardAlertService) -> {
             JSONArrayList<IModule> modules = new JSONArrayList<>();
             modules.add(new FullEditionAdaptationModule());
             modules.add(new CoreModule(localizationProvider, systemInfo, masterConfiguration, masterAutomation, hardwareManager,
-                    automationSettings, synchronizer, dashboardAlertService, licenseManager));
+                    automationSettings, synchronizer, dashboardAlertService));
             modules.add(new UsersModule(localizationProvider));
-            modules.add(new HardwareManagerModule(true, localizationProvider, hardwareManager, licenseManager));
-//            modules.add(new LightsModule(localizationProvider, masterConfiguration, hardwareManager, automationSettings));
+            modules.add(new HardwareManagerModule(true, localizationProvider, hardwareManager));
+            modules.add(new LightsModule(localizationProvider, masterConfiguration, hardwareManager, automationSettings));
             modules.add(new AlarmModule(localizationProvider, masterConfiguration, masterAutomation, hardwareManager));
             modules.add(new CentralHeatingModule(localizationProvider, masterConfiguration, masterAutomation, hardwareManager, automationSettings));
             modules.add(new ExtaFreeModule

@@ -28,14 +28,12 @@ public class HardwareManager implements IHardwareManager {
     private IInvalidateCacheListener _invalidateCacheListener;
     private ArrayList<IHardwareManagerAdapter> _adapters = new ArrayList<>();
     private boolean _discoveryPending;
-    private ILicenseManager _licenseManager;
 
     public ArrayList<IHardwareManagerAdapter> getAdapters() {
         return _adapters;
     }
 
-    public HardwareManager(ILicenseManager licenseManager) {
-        _licenseManager = licenseManager;
+    public HardwareManager() {
         _digitalInputPorts = new InputPortsCollection<>();
         _digitalOutputPorts = new OutputPortsCollection<>();
         _analogInputPorts = new InputPortsCollection<>();
@@ -282,14 +280,13 @@ public class HardwareManager implements IHardwareManager {
         if (_adapters != null) {
             for (IHardwareManagerAdapter adapter : _adapters) {
                 try {
-                    String activationId = adapter.discover(
+                    adapter.discover(
                             getDigitalInputPorts(), getDigitalOutputPorts(),
                             getAnalogInputPorts(), getAnalogOutputPorts(),
                             getTemperaturePorts(), getTogglePorts(),
                             getHumidityPorts(), getLuminosityPorts());
 
-                    _licenseManager.reportAdapter(adapter, activationId);
-                } catch (DiscoveryException | NoSuchAlgorithmException e) {
+                } catch (DiscoveryException e) {
                     _logger.error("Discovery exception", e);
                 }
             }

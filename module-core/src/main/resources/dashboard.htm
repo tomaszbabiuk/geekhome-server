@@ -777,10 +777,6 @@
             location.href = '/license.htm';
         }
 
-        if (status.HasActivationErrors) {
-            location.href = '/activation.htm';
-        }
-
         selectedOperationMode = status.OperationMode;
         var navItems = createMainNavItems(selectedOperationMode);
         var navItemsSliced = SliceItems(navItems);

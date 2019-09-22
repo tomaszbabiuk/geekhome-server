@@ -6,7 +6,6 @@ import com.geekhome.common.json.JSONAwareBase;
 public class SystemStatus extends JSONAwareBase {
     private DateTimeInfo _date;
     private int _operationMode;
-    private boolean _hasActivationErrors;
     private String _userName;
     private boolean _isLicenceAccepted;
 
@@ -30,15 +29,9 @@ public class SystemStatus extends JSONAwareBase {
         return _isLicenceAccepted;
     }
 
-    @Persistable(name="HasActivationErrors")
-    public boolean hasActivationErrors() {
-        return _hasActivationErrors;
-    }
-
-    public SystemStatus(String userName, int operationMode, boolean isLicenceAccepted, boolean hasActivationErrors) {
+    public SystemStatus(String userName, int operationMode, boolean isLicenceAccepted) {
         _userName = userName;
         _operationMode = operationMode;
-        _hasActivationErrors = hasActivationErrors;
         _date = new DateTimeInfo();
         _isLicenceAccepted = isLicenceAccepted;
     }

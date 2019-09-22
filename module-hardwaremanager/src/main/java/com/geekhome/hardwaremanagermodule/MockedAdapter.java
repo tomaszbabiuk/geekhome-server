@@ -16,7 +16,7 @@ class MockedAdapter extends NamedObject implements IHardwareManagerAdapter {
     }
 
     @Override
-    public String discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
+    public void discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
                          InputPortsCollection<Integer> analogInputPorts, OutputPortsCollection<Integer> analogOutputPorts,
                          InputPortsCollection<Double> temperaturePorts, TogglePortsCollection togglePorts,
                          InputPortsCollection<Double> humidityPorts, InputPortsCollection<Double> luminosityPorts) throws DiscoveryException {
@@ -59,8 +59,6 @@ class MockedAdapter extends NamedObject implements IHardwareManagerAdapter {
         analogOutputPorts.add(new SynchronizedOutputPort<>("ANALOG-OUT-2"));
         analogOutputPorts.add(new SynchronizedOutputPort<>("ANALOG-OUT-3"));
         analogOutputPorts.add(new SynchronizedOutputPort<>("ANALOG-OUT-4"));
-
-        return "MOCK";
     }
 
     @Override

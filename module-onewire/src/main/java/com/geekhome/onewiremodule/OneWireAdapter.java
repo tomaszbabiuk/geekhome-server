@@ -46,14 +46,13 @@ class OneWireAdapter extends SerialAdapterBase {
     }
 
     @Override
-    public String discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
+    public void discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
                          InputPortsCollection<Integer> analogInputPorts, OutputPortsCollection<Integer> analogOutputPorts,
                          InputPortsCollection<Double> temperaturePorts, TogglePortsCollection togglePorts,
                          InputPortsCollection<Double> humidityPorts, InputPortsCollection<Double> luminosityPorts) throws DiscoveryException {
         _switchesAsSensedInputs.clear();
         _switchesAsOutputs.clear();
         _identifiers.clear();
-        String key = null;
         DiscoveryProcess discoveryProcess = new DiscoveryProcess(getSerialPortName(), _automationSettings);
 
         boolean hasThermometers = false;
@@ -77,7 +76,6 @@ class OneWireAdapter extends SerialAdapterBase {
                     }
                 } else if (di instanceof IdentityDiscoveryInfo) {
                     _identifiers.add((IdentityDiscoveryInfo) di);
-                    key = di.getAddress();
                 }
             }
             markAsOperational();
@@ -89,8 +87,6 @@ class OneWireAdapter extends SerialAdapterBase {
         if (hasSwitches && !hasThermometers) {
             _pipe.add(new AdapterTask(TaskType.Continue, null));
         }
-
-        return key;
     }
 
     private void addOutputPort(OutputPortsCollection<Boolean> digitalOutputPorts, SwitchDiscoveryInfo di, int channel, String id) {

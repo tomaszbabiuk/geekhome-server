@@ -17,18 +17,17 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 class ExtaFreeSerialAdapter extends SerialAdapterBase {
-    private final String _adapterAlias;
+
     private ILogger _logger = LoggingService.getLogger();
     private SerialPort _serialPort;
     private OutputStream _serialOutputStream;
 
-    ExtaFreeSerialAdapter(String port, String adapterAlias, ILocalizationProvider localizationProvider) {
+    ExtaFreeSerialAdapter(String port, ILocalizationProvider localizationProvider) {
         super(new DescriptiveName("Exta free adapter " + port, "extafree" + port), port, localizationProvider);
-        _adapterAlias = adapterAlias;
     }
 
     @Override
-    public String discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
+    public void discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
                          InputPortsCollection<Integer> analogInputPorts, OutputPortsCollection<Integer> analogOutputPorts,
                          InputPortsCollection<Double> temperaturePorts, TogglePortsCollection togglePorts,
                          InputPortsCollection<Double> humidityPorts, InputPortsCollection<Double> luminosityPorts) throws DiscoveryException {
@@ -184,8 +183,6 @@ class ExtaFreeSerialAdapter extends SerialAdapterBase {
             markAsNonOperational(ex);
             throw new DiscoveryException("Cannot add exta free output port", ex);
         }
-
-        return _adapterAlias;
     }
 
     @Override

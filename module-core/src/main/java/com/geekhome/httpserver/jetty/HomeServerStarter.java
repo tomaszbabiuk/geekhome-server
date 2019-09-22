@@ -1,8 +1,6 @@
 package com.geekhome.httpserver.jetty;
 
 import com.geekhome.common.HardwareManager;
-import com.geekhome.common.ILicenseManager;
-import com.geekhome.common.LicenseManager;
 import com.geekhome.common.commands.CommandsProcessor;
 import com.geekhome.common.commands.Synchronizer;
 import com.geekhome.common.json.JSONArrayList;
@@ -15,7 +13,6 @@ import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.coremodule.settings.TextFileAutomationSettingsPersister;
 import com.geekhome.hardwaremanager.IPortMapper;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.IOperationModeChangedListener;
 import com.geekhome.httpserver.OperationMode;
 import com.geekhome.httpserver.SystemInfo;
 import com.geekhome.httpserver.modules.IModule;
@@ -26,15 +23,14 @@ public class HomeServerStarter {
                                             ILocalizationProvider localizationProvider, SystemInfo systemInfo,
                                             MasterConfiguration masterConfiguration, MasterAutomation masterAutomation,
                                             Synchronizer synchronizer, CommandsProcessor commandsProcessor,
-                                            DashboardAlertService dashboardAlertService, ILicenseManager licenseManager) throws Exception;
+                                            DashboardAlertService dashboardAlertService) throws Exception;
     }
 
     public static void start(int port, BuildModulesDelegate buildModulesDelegate) {
         try {
             TextFileAutomationSettingsPersister settingsPersister = new TextFileAutomationSettingsPersister();
             AutomationSettings automationSettings = new AutomationSettings(settingsPersister);
-            ILicenseManager licenseManager = new LicenseManager(automationSettings);
-            HardwareManager hardwareManager = new HardwareManager(licenseManager);
+            HardwareManager hardwareManager = new HardwareManager();
             ILocalizationProvider localizationProvider = new ResourceLocalizationProvider();
             DashboardAlertService dashboardAlertService = new DashboardAlertService(localizationProvider);
             SystemInfo systemInfo = new SystemInfo(OperationMode.Diagnostics, localizationProvider, dashboardAlertService);
@@ -45,8 +41,7 @@ public class HomeServerStarter {
                     localizationProvider, systemInfo, commandsProcessor, dashboardAlertService);
             JSONArrayList<IModule> modules = buildModulesDelegate.buildModules(hardwareManager,
                     automationSettings, localizationProvider, systemInfo, masterConfiguration,
-                    masterAutomation, synchronizer, commandsProcessor, dashboardAlertService,
-                    licenseManager);
+                    masterAutomation, synchronizer, commandsProcessor, dashboardAlertService);
 
             for (IModule module : modules) {
                 localizationProvider.load(module.getResources());
