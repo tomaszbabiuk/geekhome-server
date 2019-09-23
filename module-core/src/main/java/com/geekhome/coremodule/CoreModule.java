@@ -406,7 +406,6 @@ public class CoreModule extends Module {
                         "Automatic system restart has been scheduled. The system will reboot in next 5 minutes.",
                         "Został zaplanowany automatyczny restart systemu. System zostanie ponownie uruchomiony w ciągu najbliższych 5 minut."),
                 new Resource("C:PowerInputPorts", "Power input ports", "Porty wejścia mocy"),
-                new Resource("C:PowerOutputPort", "Power output port", "Port wyjścia mocy"),
                 new Resource("C:PowerOutputPorts", "Power output ports", "Porty wyjścia mocy"),
                 new Resource("C:DigitalInputPorts", "Digital input ports", "Cyfrowe porty wejścia"),
                 new Resource("C:DigitalOutputPorts", "Digital output ports", "Cyfrowe porty wyjścia"),

@@ -1,8 +1,8 @@
 [Version]
 version = 1
-pool = 93
+pool = 97
 comment = Zmiany w konfiguracji
-from = 9/22/19, 9:43 PM
+from = 9/23/19, 7:44 PM
 
 [Floor]
 iconname = house
@@ -17,26 +17,26 @@ description =
 uniqueid = core34
 
 [MultistateCondition]
+deviceid = core50
 statesids = on
 delaytime = 00:00:00
-deviceid = core50
 name = Włącz preset 2 - Wł
 description = 
 uniqueid = core51
 
 [MultistateCondition]
+deviceid = core48
 statesids = on
 delaytime = 00:00:00
-deviceid = core48
 name = Włącz preset 1 - Wł
 description = 
 uniqueid = core49
 
 [ValueCondition]
 value = 10.0
-hysteresis = 1.0
-operator = 0
 deviceid = heating74
+operator = 0
+hysteresis = 1.0
 name = T1 większe od 10
 description = 
 uniqueid = core76
@@ -61,22 +61,22 @@ uniqueid = core80
 
 [KeySwitch]
 hasnonreadonlystates = true
-roomid = core34
 portid = -
+roomid = core34
 devicecategory = 1
-controltype = 5
 iconname = trigger
+controltype = 5
 name = Włącz preset 2
 description = 
 uniqueid = core50
 
 [KeySwitch]
 hasnonreadonlystates = true
-roomid = core34
 portid = -
+roomid = core34
 devicecategory = 4
-controltype = 5
 iconname = trigger
+controltype = 5
 name = Włącz preset 1
 description = 
 uniqueid = core48
@@ -145,71 +145,59 @@ description =
 uniqueid = core64
 
 [Geofence]
-longitude = 40.0
-latitude = 50.0
-radius = 10.0
 iconname = marker_other
+longitude = 40.0
+radius = 10.0
+latitude = 50.0
 name = kraków
 description = 
 uniqueid = core18
 
-[TemperatureController]
-roomid = core34
-modesids = 
-initialvalue = 20.0
-minvalue = 5.0
-maxvalue = 25.0
-devicecategory = 1
-controltype = 2
-iconname = thermostat
-name = K1
-description = 
-uniqueid = heating89
-
 [Thermometer]
-roomid = core34
 portid = TEMP0
+roomid = core34
 valuetype = 0
 devicecategory = 1
-controltype = 0
 iconname = thermometer
+controltype = 0
 name = T1
 description = 
 uniqueid = heating74
 
 [AirConditioner]
 roomid = core34
-hasnonreadonlystates = false
-temperaturecontrollerid = heating89
+temperaturecontrollerid = heating94
 heatingmodeportid = OUTPUT1
-coolingmodeportid = OUTPUT1
-forcemanualportid = OUTPUT2
+coolingmodeportid = OUTPUT2
+forcemanualportid = OUTPUT3
+temperaturecontrolportid = POWER-OUT-2
+hasnonreadonlystates = false
 devicecategory = 1
-controltype = 7
 iconname = snow
+controltype = 7
 name = K1
-description = 
-uniqueid = heating90
+description = asdf
+uniqueid = heating95
 
 [IntensityDevice]
-roomid = core34
 portid = POWER-OUT-1
+roomid = core34
 intensitypresetsids = 1,2,3,4
 devicecategory = 4
-controltype = 7
 iconname = lightbulb
+controltype = 7
 name = L1
 description = Lampa gdzieś tamrrrrr
 uniqueid = lights44
 
 [OnOffDevice]
-roomid = core34
 portid = OUTPUT0
-hasnonreadonlystates = true
 triggeredmanually = 1
+roomid = core34
+hasnonreadonlystates = true
 devicecategory = 1
-controltype = 7
 iconname = power
+controltype = 7
 name = asdf
 description = asdf
 uniqueid = auto70

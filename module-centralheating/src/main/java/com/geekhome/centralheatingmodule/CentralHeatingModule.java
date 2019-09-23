@@ -163,6 +163,10 @@ public class CentralHeatingModule extends Module {
                 new Resource("CH:AirConditionerDetails", "Air conditioner details", "Szczegóły klimatyzatora"),
                 new Resource("CH:AddAirConditioner", "Add air conditioner", "Dodaj klimatyzator"),
                 new Resource("CH:CannotAddAirConditionersMessage", "In order to add an air conditioner there must be at least one room defined and four ports available: power output one and three digital output ones!", "Aby dodawać klimatyzatory musi być zdefiniowany conajmniej jeden pokój oraz muszą być dostępne cztery porty: jeden port wyjścia mocy oraz trzy cyfrowe porty wyjścia!"),
+                new Resource("CH:HeatingModePort", "Heating-enable port", "Port włączający ogrzewanie"),
+                new Resource("CH:CoolingModePort", "Cooling-enable port", "Port włączający chłodzenie"),
+                new Resource("CH:ForceManualPort", "Force manual port", "Port wymuszający tryb ręczny"),
+                new Resource("CH:TemperatureControlPort", "Temperature control port", "Port kontroli temperatury"),
         };
     }
 

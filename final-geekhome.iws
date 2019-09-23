@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76de2133-c160-40d8-be7b-b8ddd428235e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/final-geekhome/Configuration.dat.89" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/final-geekhome/Configuration.dat.93" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/final-geekhome/Configuration.dat.94" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/final-geekhome.iws" beforeDir="false" afterPath="$PROJECT_DIR$/final-geekhome.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/final-geekhome/Configuration.dat" beforeDir="false" afterPath="$PROJECT_DIR$/final-geekhome/Configuration.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/AirConditioner.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/AirConditioner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/CentralHeatingConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/CentralHeatingConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/CentralHeatingConfigurationValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/CentralHeatingConfigurationValidation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/CentralHeatingModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/CentralHeatingModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/httpserver/CentralHeatingJsonRequestsDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/httpserver/CentralHeatingJsonRequestsDispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/resources/controls/heatingproperties.htm" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/resources/controls/heatingproperties.htm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/resources/dialogs/modifyairconditioner.htm" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/resources/dialogs/modifyairconditioner.htm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/resources/dialogs/modifyradiator.htm" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/resources/dialogs/modifyradiator.htm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/coremodule/CoreModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/coremodule/CoreModule.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -115,7 +113,21 @@
       <option name="project" value="LOCAL" />
       <updated>1569179363130</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="air conditioners configuration">
+      <created>1569181654412</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1569181654412</updated>
+    </task>
+    <task id="LOCAL-00006" summary="main idea project">
+      <created>1569181681694</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1569181681694</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -137,6 +149,7 @@
     <MESSAGE value="removing activation and adding air conditioner device" />
     <MESSAGE value="renaming analog ports to power ports" />
     <MESSAGE value="air conditioners configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="air conditioners configuration" />
+    <MESSAGE value="main idea project" />
+    <option name="LAST_COMMIT_MESSAGE" value="main idea project" />
   </component>
 </project>

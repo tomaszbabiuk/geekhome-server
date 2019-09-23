@@ -14,7 +14,7 @@ public class AirConditioner extends MultistateDevice implements IRoomDevice, IPo
     private String _heatingModePortId;
     private String _coolingModePortId;
     private String _forceManualPortId;
-    private String _powerOutputPortId;
+    private String _temperatureControlPortId;
     private String _roomId;
     private String _temperatureControllerId;
 
@@ -45,13 +45,13 @@ public class AirConditioner extends MultistateDevice implements IRoomDevice, IPo
         _forceManualPortId = value;
     }
 
-    @Persistable(name="TemperatureOutputPortId")
-    public String getPowerOutputPortId() {
-        return _powerOutputPortId;
+    @Persistable(name="TemperatureControlPortId")
+    public String getTemperatureControlPortId() {
+        return _temperatureControlPortId;
     }
 
-    public void setPowerOutputPortId(String value) {
-        _powerOutputPortId = value;
+    public void setTemperatureControlPortId(String value) {
+        _temperatureControlPortId = value;
     }
 
     @Persistable(name="RoomId")
@@ -73,14 +73,14 @@ public class AirConditioner extends MultistateDevice implements IRoomDevice, IPo
     }
 
     public AirConditioner(DescriptiveName name, String heatingModePortId, String coolingModePortId,
-                          String forceManualPortId, String powerOutputPortId, String roomId,
+                          String forceManualPortId, String temperatureControlPortId, String roomId,
                           String temperatureControllerId) {
         super(name, "snow", DeviceCategory.Heating);
         setRoomId(roomId);
         setHeatingModePortId(heatingModePortId);
         setCoolingModePortId(coolingModePortId);
         setForceManualPortId(forceManualPortId);
-        setPowerOutputPortId(powerOutputPortId);
+        setTemperatureControlPortId(temperatureControlPortId);
         setTemperatureControllerId(temperatureControllerId);
     }
 

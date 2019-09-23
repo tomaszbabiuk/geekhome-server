@@ -1,8 +1,8 @@
 <!-- @Forms\RoomTemplate.htm modifyairconditioner -->
-<!-- @Forms\NamedPortTemplate.htm modifyairconditionerheating HM.GetDigitalOutputPorts() heatingportid RES:CH:HeatingPort true -->
-<!-- @Forms\NamedPortTemplate.htm modifyairconditionercooling HM.GetDigitalOutputPorts() coolingportid RES:CH:CoolingPort true -->
+<!-- @Forms\NamedPortTemplate.htm modifyairconditionerheating HM.GetDigitalOutputPorts() heatingportid RES:CH:HeatingModePort true -->
+<!-- @Forms\NamedPortTemplate.htm modifyairconditionercooling HM.GetDigitalOutputPorts() coolingportid RES:CH:CoolingModePort true -->
 <!-- @Forms\NamedPortTemplate.htm modifyairconditionerforcemanual HM.GetDigitalOutputPorts() forcemanualportid RES:CH:ForceManualPort true -->
-<!-- @Forms\NamedPortTemplate.htm modifyairconditionerpoweroutput HM.GetPowerOutputPorts() poweroutputportid RES:C:PowerOutputPort true -->
+<!-- @Forms\NamedPortTemplate.htm modifyairconditionertemperaturecontrol HM.GetPowerOutputPorts() temperaturecontrolportid RES:CH:TemperatureControlPort true -->
 <!-- @Forms\TemperatureControllerTemplate.htm modifyairconditioner -->
 <!-- @Forms\CircuitsTemplate.htm modifyairconditioner -->
 
@@ -20,7 +20,7 @@
             <div data-role="fieldcontain" id="modifyairconditionerheatingportcontent"></div>
             <div data-role="fieldcontain" id="modifyairconditionercoolingportcontent"></div>
             <div data-role="fieldcontain" id="modifyairconditionerforcemanualportcontent"></div>
-            <div data-role="fieldcontain" id="modifyairconditionerforcepoweroutputportcontent"></div>
+            <div data-role="fieldcontain" id="modifyairconditionertemperaturecontrolportcontent"></div>
             <div data-role="fieldcontain" id="modifyairconditionertemperaturecontrollercontent"></div>
             <!-- @Forms\HiddenField.htm modifyairconditionerid uniqueid -->
             <!-- @Forms\SubmitButton.htm RES:C:Save -->
@@ -32,7 +32,7 @@
                 jQuery('#modifyairconditionerheatingportcontent').html(jQuery('#modifyairconditionerheatingporttemplate').tmpl());
                 jQuery('#modifyairconditionercoolingportcontent').html(jQuery('#modifyairconditionercoolingporttemplate').tmpl());
                 jQuery('#modifyairconditionerforcemanualportcontent').html(jQuery('#modifyairconditionerforcemanualporttemplate').tmpl());
-                jQuery('#modifyairconditionerpoweroutputportcontent').html(jQuery('#modifyairconditionerpoweroutputporttemplate').tmpl());
+                jQuery('#modifyairconditionertemperaturecontrolportcontent').html(jQuery('#modifyairconditionertemperaturecontrolporttemplate').tmpl());
                 jQuery('#modifyairconditionertemperaturecontrollercontent')
                     .html(jQuery('#modifyairconditionertemperaturecontrollertemplate').tmpl( { CreateMode: createMode } ));
                 jQuery('#modifyairconditionerdialog form').validate();
@@ -42,10 +42,10 @@
                 var name = (airConditioner != null) ? airConditioner.Name.Name : '';
                 var description = (airConditioner != null) ? airConditioner.Name.Description : '';
                 var uniqueId = (airConditioner != null) ? airConditioner.Name.UniqueId : '';
-                var heatingPortId = (airConditioner != null) ? airConditioner.HeatingPortId : '';
-                var coolingPortId = (airConditioner != null) ? airConditioner.CoolingPortId : '';
+                var heatingModePortId = (airConditioner != null) ? airConditioner.HeatingModePortId : '';
+                var coolingModePortId = (airConditioner != null) ? airConditioner.CoolingModePortId : '';
                 var forceManualPortId = (airConditioner != null) ? airConditioner.ForceManualPortId : '';
-                var powerOutputPortId = (airConditioner != null) ? airConditioner.PowerOutputPortId : '';
+                var temperatureControlPortId = (airConditioner != null) ? airConditioner.TemperatureControlPortId : '';
                 var roomId = (airConditioner != null) ? airConditioner.RoomId : '';
                 var temperatureControllerId = (airConditioner != null) ? airConditioner.TemperatureControllerId : '';
 
@@ -54,10 +54,10 @@
                 jQuery('#modifyairconditionerdialog [name=description]').val(description);
                 jQuery('#modifyairconditionerdialog [name=uniqueid]').val(uniqueId);
                 jQuery('#modifyairconditionerdialog [name=roomid]').val(roomId);
-                jQuery('#modifyairconditionerdialog [name=heatingportid]').val(heatingPortId);
-                jQuery('#modifyairconditionerdialog [name=coolingportid]').val(coolingPortId);
+                jQuery('#modifyairconditionerdialog [name=heatingportid]').val(heatingModePortId);
+                jQuery('#modifyairconditionerdialog [name=coolingportid]').val(coolingModePortId);
                 jQuery('#modifyairconditionerdialog [name=forcemanualportid]').val(forceManualPortId);
-                jQuery('#modifyairconditionerdialog [name=poweroutputportid]').val(powerOutputPortId);
+                jQuery('#modifyairconditionerdialog [name=temperaturecontrolportid]').val(temperatureControlPortId);
                 jQuery('#modifyradiatordialog [name=temperaturecontrollerid]').val(temperatureControllerId);
             });
 
