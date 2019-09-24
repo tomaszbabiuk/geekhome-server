@@ -7,6 +7,8 @@ import com.geekhome.hardwaremanager.TogglePortsCollection;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.OperationMode;
 
+import java.util.Calendar;
+
 class MockedAdapter extends NamedObject implements IHardwareManagerAdapter {
     private ILocalizationProvider _localizationProvider;
 
@@ -84,7 +86,7 @@ class MockedAdapter extends NamedObject implements IHardwareManagerAdapter {
     }
 
     @Override
-    public void refresh() throws Exception {
+    public void refresh(Calendar now) throws Exception {
     }
 
     @Override

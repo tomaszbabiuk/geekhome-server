@@ -40,7 +40,7 @@ public class Main {
             modules.add(new EmailModule(localizationProvider, masterAutomation, automationSettings, commandsProcessor));
             modules.add(new FirebaseModule(localizationProvider, automationSettings, synchronizer, masterAutomation));
 //            modules.add(new MqttModule(localizationProvider, hardwareManager, args));
-            modules.add(new GreeModule(localizationProvider));
+            modules.add(new GreeModule(hardwareManager, localizationProvider));
             return modules;
         });
     }

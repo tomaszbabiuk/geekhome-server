@@ -7,6 +7,8 @@ import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
 import com.geekhome.httpserver.JsonResponse;
 import org.json.simple.JSONObject;
 
+import java.util.Calendar;
+
 public class HardwareManagerJsonRequestsDispatcher extends JsonRequestsDispatcherBase {
     private IHardwareManager _hardwareManager;
 
@@ -149,7 +151,7 @@ public class HardwareManagerJsonRequestsDispatcher extends JsonRequestsDispatche
         }
 
         if (originalStringUppercased.equals("/HMREFRESH.JSON")) {
-            _hardwareManager.refreshAndWait();
+            _hardwareManager.refreshAndWait(Calendar.getInstance());
             JSONObject json = JsonResponse.createJSONResult(true);
             return new JsonResponse(json, true);
         }

@@ -14,18 +14,18 @@ import java.util.Calendar;
 public class AirConditionerAutomationUnit extends MultistateDeviceAutomationUnit<AirConditioner> implements ICalculableAutomationUnit {
 
     private final TemperatureMulticontrollerAutomationUnit _temperatureController;
-    private IOutputPort<Boolean> _powerOnPort;
-    private IOutputPort<Boolean> _heatingCoolingTogglePort;
+    private IOutputPort<Boolean> _heatingEnablePort;
+    private IOutputPort<Boolean> _coolingEnablePort;
     private IInputPort<Boolean> _forceManualPort;
     private IOutputPort<Integer> _temperatureControlPort;
 
-    public AirConditionerAutomationUnit(IOutputPort<Boolean> powerOnPort, IOutputPort<Boolean> heatingCoolingTogglePort,
+    public AirConditionerAutomationUnit(IOutputPort<Boolean> heatingEnablePort, IOutputPort<Boolean> coolingEnablePort,
                                         IInputPort<Boolean> forceManualPort, IOutputPort<Integer> temperatureControlPort,
                                         AirConditioner airConditioner, MasterAutomation masterAutomation,
                                         ILocalizationProvider localizationProvider) throws Exception {
         super(airConditioner, localizationProvider);
-        _powerOnPort = powerOnPort;
-        _heatingCoolingTogglePort = heatingCoolingTogglePort;
+        _heatingEnablePort = heatingEnablePort;
+        _coolingEnablePort = coolingEnablePort;
         _forceManualPort = forceManualPort;
         _temperatureControlPort = temperatureControlPort;
         _temperatureController = (TemperatureMulticontrollerAutomationUnit)masterAutomation
@@ -57,18 +57,24 @@ public class AirConditionerAutomationUnit extends MultistateDeviceAutomationUnit
     }
 
     private void execute() throws Exception {
+        if (getStateId().equals("manual")) {
+            changeOutputPortStateIfNeeded(_temperatureControlPort, -1); //-1 == manual
+            return;
+        }
+
         if (getStateId().equals("heating")) {
-            _heatingCoolingTogglePort.write(true);
-            _powerOnPort.write(true);
+            _coolingEnablePort.write(false);
+            _heatingEnablePort.write(true);
         }
 
         if (getStateId().equals("cooling")) {
-            _heatingCoolingTogglePort.write(false);
-            _powerOnPort.write(true);
+            _coolingEnablePort.write(true);
+            _heatingEnablePort.write(false);
         }
 
         if (getStateId().equals("nodemand")) {
-            _powerOnPort.write(false);
+            _heatingEnablePort.write(false);
+            _heatingEnablePort.write(false);
         }
 
         if (getStateId().equals("heating") || getStateId().equals("cooling")) {

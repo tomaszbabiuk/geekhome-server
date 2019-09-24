@@ -19,6 +19,7 @@ import com.geekhome.httpserver.OperationMode;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -109,7 +110,7 @@ class OneWireAdapter extends SerialAdapterBase {
     }
 
     @Override
-    public void refresh() {
+    public void refresh(Calendar now) {
         if (isOperational()) {
             _state = RefreshState.Refreshing;
             ArrayList<AdapterTask> tasks = new ArrayList<>();

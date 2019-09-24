@@ -10,8 +10,8 @@ import com.geekhome.httpserver.SystemInfo;
 import com.geekhome.httpserver.modules.IInvalidateCacheListener;
 import com.geekhome.httpserver.modules.IModule;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class HardwareManager implements IHardwareManager {
@@ -208,12 +208,12 @@ public class HardwareManager implements IHardwareManager {
     }
 
     @Override
-    public void refreshAndWait() throws Exception {
+    public void refreshAndWait(Calendar now) throws Exception {
         int refreshTrial = 0;
         do {
             if (!_discoveryPending && _adapters != null) {
                 for (IHardwareManagerAdapter adapter : _adapters) {
-                    adapter.refresh();
+                    adapter.refresh(now);
                 }
 
                 waitTillAllAdaptersAreRefreshed();

@@ -1,8 +1,8 @@
 [Version]
 version = 1
-pool = 122
+pool = 125
 comment = Zmiany w konfiguracji
-from = 9/24/19, 8:27 AM
+from = 9/24/19, 3:42 PM
 
 [Floor]
 iconname = house
@@ -34,9 +34,9 @@ uniqueid = core112
 
 [ValueCondition]
 value = 10.0
+deviceid = heating74
 operator = 0
 hysteresis = 1.0
-deviceid = heating74
 name = T1 większe od 10
 description = 
 uniqueid = core76
@@ -63,9 +63,9 @@ uniqueid = core80
 hasnonreadonlystates = true
 roomid = core34
 portid = -
+devicecategory = 1
 iconname = trigger
 controltype = 5
-devicecategory = 1
 name = Grzanie
 description = 
 uniqueid = core113
@@ -74,9 +74,9 @@ uniqueid = core113
 hasnonreadonlystates = true
 roomid = core34
 portid = -
+devicecategory = 1
 iconname = trigger
 controltype = 5
-devicecategory = 1
 name = Chłodzenie
 description = 
 uniqueid = core111
@@ -103,10 +103,10 @@ description =
 uniqueid = core78
 
 [Geofence]
-iconname = marker_other
+latitude = 50.0
 longitude = 40.0
 radius = 10.0
-latitude = 50.0
+iconname = marker_other
 name = kraków
 description = 
 uniqueid = core18
@@ -115,13 +115,13 @@ uniqueid = core18
 hasnonreadonlystates = false
 roomid = core34
 temperaturecontrollerid = heating97
-poweronportid = OUTPUT1
-heatingcoolingtoggleportid = OUTPUT2
+heatingenableportid = GREE:f4911e63af87:heat
+coolingenableportid = GREE:f4911e63af87:cool
 forcemanualportid = INPUT0
 temperaturecontrolportid = POWER-OUT-4
+devicecategory = 1
 iconname = snow
 controltype = 7
-devicecategory = 1
 name = K1
 description = asdf
 uniqueid = heating101
@@ -132,9 +132,9 @@ initialvalue = 20.0
 modesids = 
 minvalue = 5.0
 maxvalue = 25.0
+devicecategory = 1
 iconname = thermostat
 controltype = 2
-devicecategory = 1
 name = K1
 description = asdf
 uniqueid = heating97
@@ -143,32 +143,32 @@ uniqueid = heating97
 valuetype = 0
 roomid = core34
 portid = TEMP0
+devicecategory = 1
 iconname = thermometer
 controltype = 0
-devicecategory = 1
 name = T1
 description = 
 uniqueid = heating74
 
 [IntensityDevice]
-intensitypresetsids = 1,2,3,4
 roomid = core34
 portid = POWER-OUT-1
+intensitypresetsids = 1,2,3,4
+devicecategory = 4
 iconname = lightbulb
 controltype = 7
-devicecategory = 4
 name = L1
 description = Lampa gdzieś tamrrrrr
 uniqueid = lights44
 
 [OnOffDevice]
-triggeredmanually = 1
 hasnonreadonlystates = true
+triggeredmanually = 1
 roomid = core34
 portid = OUTPUT0
+devicecategory = 1
 iconname = power
 controltype = 7
-devicecategory = 1
 name = asdf
 description = asdf
 uniqueid = auto70

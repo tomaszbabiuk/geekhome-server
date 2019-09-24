@@ -19,6 +19,7 @@ import java.net.ConnectException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCallback {
 
@@ -156,7 +157,7 @@ class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCa
     }
 
     @Override
-    public void refresh() throws Exception {
+    public void refresh(Calendar now) throws Exception {
     }
 
     @Override
@@ -208,7 +209,7 @@ class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCa
         String expectedEnding = "POWER";
         if (channel >=0) {
             expectedEnding += String.valueOf(channel + 1);
-            deviceId += ":" + String.valueOf(channel);
+            deviceId += ":" + channel;
         }
         if (topic.endsWith(expectedEnding)) {
             SynchronizedOutputPort<Boolean> outputPort = (SynchronizedOutputPort<Boolean>) _hardwareManager.tryFindDigitalOutputPort(deviceId);
@@ -224,7 +225,7 @@ class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCa
         String expectedEnding = "PWM";
         if (channel >=0) {
             expectedEnding += String.valueOf(channel + 1);
-            deviceId += ":" + String.valueOf(channel);
+            deviceId += ":" + channel;
         }
         if (topic.endsWith(expectedEnding)) {
             SynchronizedOutputPort<Integer> outputPort = (SynchronizedOutputPort<Integer>) _hardwareManager.tryFindPowerOutputPort(deviceId);

@@ -233,7 +233,7 @@ public final class MasterAutomation {
         while (true) {
             Calendar now = Calendar.getInstance();
             try {
-                _hardwareManager.refreshAndWait();
+                _hardwareManager.refreshAndWait(now);
                 _automationCycler.automate(now, this::triggerAfterAutomationHooks);
             } catch (Exception ex) {
                 if (_systemInfo.getOperationMode() == OperationMode.Automatic) {

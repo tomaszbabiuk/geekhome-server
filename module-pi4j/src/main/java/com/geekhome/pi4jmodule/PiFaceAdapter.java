@@ -12,6 +12,7 @@ import com.geekhome.httpserver.OperationMode;
 import com.pi4j.wiringpi.Spi;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Hashtable;
 
 class PiFaceAdapter extends NamedObject implements IHardwareManagerAdapter {
@@ -49,7 +50,7 @@ class PiFaceAdapter extends NamedObject implements IHardwareManagerAdapter {
         setupRegisters(spiChannel);
         createInputs();
         createOutputs();
-        refresh();
+        refresh(Calendar.getInstance());
     }
 
     private void setupRegisters(int spiChannel) throws IOException {
@@ -172,7 +173,7 @@ class PiFaceAdapter extends NamedObject implements IHardwareManagerAdapter {
     }
 
     @Override
-    public void refresh() throws Exception {
+    public void refresh(Calendar now) throws Exception {
         _refreshState = RefreshState.Refreshing;
         try {
             refreshInputs();

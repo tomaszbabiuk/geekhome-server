@@ -6,6 +6,7 @@ import com.geekhome.httpserver.OperationMode;
 import com.geekhome.httpserver.modules.IInvalidateCacheListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public interface IHardwareManager {
     OutputPortsCollection<Boolean> getDigitalOutputPorts();
@@ -45,7 +46,7 @@ public interface IHardwareManager {
 
     ArrayList<IHardwareManagerAdapter> getAdapters();
     void setAdapters(ArrayList<IHardwareManagerAdapter> adapters);
-    void refreshAndWait() throws Exception;
+    void refreshAndWait(Calendar now) throws Exception;
     void discover() throws DiscoveryException;
     void invalidateAdapters(OperationMode operationMode) throws Exception;
     void setInvalidateCacheListener(IInvalidateCacheListener listener);
