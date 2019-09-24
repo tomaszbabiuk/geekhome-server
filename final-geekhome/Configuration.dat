@@ -1,8 +1,8 @@
 [Version]
 version = 1
-pool = 101
+pool = 122
 comment = Zmiany w konfiguracji
-from = 9/23/19, 7:50 PM
+from = 9/24/19, 8:27 AM
 
 [Floor]
 iconname = house
@@ -17,26 +17,26 @@ description =
 uniqueid = core34
 
 [MultistateCondition]
-deviceid = core50
-delaytime = 00:00:00
+deviceid = core113
 statesids = on
-name = Włącz preset 2 - Wł
+delaytime = 00:00:00
+name = Grzanie - Wł
 description = 
-uniqueid = core51
+uniqueid = core114
 
 [MultistateCondition]
-deviceid = core48
-delaytime = 00:00:00
+deviceid = core111
 statesids = on
-name = Włącz preset 1 - Wł
+delaytime = 00:00:00
+name = Chłodzenie - Wł
 description = 
-uniqueid = core49
+uniqueid = core112
 
 [ValueCondition]
 value = 10.0
-deviceid = heating74
 operator = 0
 hysteresis = 1.0
+deviceid = heating74
 name = T1 większe od 10
 description = 
 uniqueid = core76
@@ -61,53 +61,39 @@ uniqueid = core80
 
 [KeySwitch]
 hasnonreadonlystates = true
-portid = -
 roomid = core34
-devicecategory = 1
-controltype = 5
+portid = -
 iconname = trigger
-name = Włącz preset 2
+controltype = 5
+devicecategory = 1
+name = Grzanie
 description = 
-uniqueid = core50
+uniqueid = core113
 
 [KeySwitch]
 hasnonreadonlystates = true
-portid = -
 roomid = core34
-devicecategory = 4
-controltype = 5
+portid = -
 iconname = trigger
-name = Włącz preset 1
+controltype = 5
+devicecategory = 1
+name = Chłodzenie
 description = 
-uniqueid = core48
+uniqueid = core111
 
 [Block]
-targetid = core81
-conditionsids = core51
+targetid = heating101_heating
+conditionsids = core114
 name = Nowy blok
 description = 
-uniqueid = core83
+uniqueid = core119
 
 [Block]
-targetid = lights44_preset2
-conditionsids = core51
+targetid = heating101_cooling
+conditionsids = core112
 name = Nowy blok
 description = 
-uniqueid = core53
-
-[Block]
-targetid = core80
-conditionsids = core49
-name = Nowy blok
-description = 
-uniqueid = core82
-
-[Block]
-targetid = lights44_preset1
-conditionsids = core49
-name = Nowy blok
-description = 
-uniqueid = core52
+uniqueid = core118
 
 [Block]
 targetid = auto70_on
@@ -116,86 +102,73 @@ name = Nowy blok
 description = 
 uniqueid = core78
 
-[Block]
-targetid = lights62_yellow
-conditionsids = core51
-name = Nowy blok
-description = 
-uniqueid = core68
-
-[Block]
-targetid = lights62_white
-conditionsids = core49
-name = Nowy blok
-description = 
-uniqueid = core67
-
-[Block]
-targetid = lights58_preset2
-conditionsids = core51
-name = Nowy blok
-description = 
-uniqueid = core65
-
-[Block]
-targetid = lights58_preset1
-conditionsids = core49
-name = Nowy blok
-description = 
-uniqueid = core64
-
 [Geofence]
 iconname = marker_other
-latitude = 50.0
-radius = 10.0
 longitude = 40.0
+radius = 10.0
+latitude = 50.0
 name = kraków
 description = 
 uniqueid = core18
 
+[AirConditioner]
+hasnonreadonlystates = false
+roomid = core34
+temperaturecontrollerid = heating97
+poweronportid = OUTPUT1
+heatingcoolingtoggleportid = OUTPUT2
+forcemanualportid = INPUT0
+temperaturecontrolportid = POWER-OUT-4
+iconname = snow
+controltype = 7
+devicecategory = 1
+name = K1
+description = asdf
+uniqueid = heating101
+
 [TemperatureController]
 roomid = core34
-modesids = 
 initialvalue = 20.0
+modesids = 
 minvalue = 5.0
 maxvalue = 25.0
-devicecategory = 1
-controltype = 2
 iconname = thermostat
+controltype = 2
+devicecategory = 1
 name = K1
 description = asdf
 uniqueid = heating97
 
 [Thermometer]
-portid = TEMP0
-roomid = core34
 valuetype = 0
-devicecategory = 1
-controltype = 0
+roomid = core34
+portid = TEMP0
 iconname = thermometer
+controltype = 0
+devicecategory = 1
 name = T1
 description = 
 uniqueid = heating74
 
 [IntensityDevice]
-portid = POWER-OUT-1
-roomid = core34
 intensitypresetsids = 1,2,3,4
-devicecategory = 4
-controltype = 7
+roomid = core34
+portid = POWER-OUT-1
 iconname = lightbulb
+controltype = 7
+devicecategory = 4
 name = L1
 description = Lampa gdzieś tamrrrrr
 uniqueid = lights44
 
 [OnOffDevice]
-portid = OUTPUT0
+triggeredmanually = 1
 hasnonreadonlystates = true
 roomid = core34
-triggeredmanually = 1
-devicecategory = 1
-controltype = 7
+portid = OUTPUT0
 iconname = power
+controltype = 7
+devicecategory = 1
 name = asdf
 description = asdf
 uniqueid = auto70

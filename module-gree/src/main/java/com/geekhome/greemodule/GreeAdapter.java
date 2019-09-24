@@ -38,21 +38,21 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
         _logger.info("Starting Gree discovery");
 
         try {
-            InetAddress broadcastAddress = InetAddress.getByAddress(new byte[]{(byte) 192, (byte) 168, (byte) 1, (byte) 255});
-            DatagramSocket clientSocket = new DatagramSocket();
-            clientSocket.setSoTimeout(60000);
-
-            GreeDeviceFinder finder = new GreeDeviceFinder(broadcastAddress);
-            finder.Scan(clientSocket);
-
-            for (String greeDeviceId : finder.GetDevices().keySet()) {
-                GreeDevice greeDevice = finder.GetDevice(greeDeviceId);
-                greeDevice.SetDeviceMode(clientSocket, 0 /*1, 2, 3, 4*/);
-                greeDevice.SetDevicePower(clientSocket, 0);
-
-                //is light on
-                //greeDevice.GetDeviceLight() == 1
-            }
+//            InetAddress broadcastAddress = InetAddress.getByAddress(new byte[]{(byte) 192, (byte) 168, (byte) 1, (byte) 255});
+//            DatagramSocket clientSocket = new DatagramSocket();
+//            clientSocket.setSoTimeout(60000);
+//
+//            GreeDeviceFinder finder = new GreeDeviceFinder(broadcastAddress);
+//            finder.Scan(clientSocket);
+//
+//            for (String greeDeviceId : finder.GetDevices().keySet()) {
+//                GreeDevice greeDevice = finder.GetDevice(greeDeviceId);
+//                greeDevice.SetDeviceMode(clientSocket, 0 /*1, 2, 3, 4*/);
+//                greeDevice.SetDevicePower(clientSocket, 0);
+//
+//                //is light on
+//                //greeDevice.GetDeviceLight() == 1
+//            }
 
         } catch (Exception ex) {
         }

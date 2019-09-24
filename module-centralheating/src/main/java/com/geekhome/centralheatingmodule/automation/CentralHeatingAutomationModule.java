@@ -101,6 +101,16 @@ public class CentralHeatingAutomationModule implements IAutomationModule {
             devicesList.add(unit);
         }
 
+        for (AirConditioner airConditioner : _centralHeatingConfiguration.getAirConditioners().values()) {
+            IOutputPort<Boolean> powerOnPort = _hardwareManager.tryFindDigitalOutputPort(airConditioner.getPowerOnPortId());
+            IOutputPort<Boolean> heatingCoolingTogglePort = _hardwareManager.tryFindDigitalOutputPort(airConditioner.getHeatingCoolingTogglePortId());
+            IInputPort<Boolean> forceManualPort = _hardwareManager.tryFindDigitalInputPort(airConditioner.getForceManualPortId());
+            IOutputPort<Integer> temperatureControlPort = _hardwareManager.tryFindPowerOutputPort(airConditioner.getTemperatureControlPortId());
+            AirConditionerAutomationUnit unit = new AirConditionerAutomationUnit(powerOnPort, heatingCoolingTogglePort,
+                    forceManualPort, temperatureControlPort, airConditioner, _masterAutomation, _localizationProvider);
+            devicesList.add(unit);
+        }
+
         for (CirculationPump pump : _centralHeatingConfiguration.getCirculationPumps().values()) {
             IOutputPort<Boolean> outputPort = _hardwareManager.findDigitalOutputPort(pump.getPortId());
             CirculationPumpAutomationUnit unit = new CirculationPumpAutomationUnit(outputPort, pump, _masterAutomation, _localizationProvider);

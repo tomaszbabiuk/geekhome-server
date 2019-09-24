@@ -351,8 +351,8 @@ public class CentralHeatingConfiguration extends Collector {
         String name = values.getValue("name");
         String description = values.getValue("description");
         String uniqueId = values.getValue("uniqueid");
-        String heatingPortId = values.getValue("heatingportid");
-        String coolingPortId = values.getValue("coolingportid");
+        String powerOnPortId = values.getValue("poweronportid");
+        String heatingCoolingTogglePortId = values.getValue("heatingcoolingtoggleportid");
         String forceManualPortId = values.getValue("forcemanualportid");
         String temperatureControlPortId = values.getValue("temperaturecontrolportid");
         String roomId = values.getValue("roomid");
@@ -363,9 +363,9 @@ public class CentralHeatingConfiguration extends Collector {
         }
 
         if (action == CrudAction.AddOrCreate) {
-            addAirConditioner(name, description, heatingPortId, coolingPortId, forceManualPortId, temperatureControlPortId, roomId, temperatureControllerId, uniqueId);
+            addAirConditioner(name, description, powerOnPortId, heatingCoolingTogglePortId, forceManualPortId, temperatureControlPortId, roomId, temperatureControllerId, uniqueId);
         } else {
-            editAirConditioner(name, description, heatingPortId, coolingPortId, forceManualPortId, temperatureControlPortId, roomId, temperatureControllerId, uniqueId);
+            editAirConditioner(name, description, powerOnPortId, heatingCoolingTogglePortId, forceManualPortId, temperatureControlPortId, roomId, temperatureControllerId, uniqueId);
         }
         onInvalidateCache("/CONFIG/AIRCONDITIONERS.JSON");
         onInvalidateCache("/CONFIG/ALLDEVICES.JSON");
@@ -388,8 +388,8 @@ public class CentralHeatingConfiguration extends Collector {
                                     String forceManualPortId, String temperatureControlPortId, String roomId,
                                     String temperatureControllerId, String uniqueId) throws Exception {
         AirConditioner device = getAirConditioners().find(uniqueId);
-        if (!heatingPortId.equals(device.getHeatingModePortId()) ||
-            !coolingPortId.equals(device.getCoolingModePortId()) ||
+        if (!heatingPortId.equals(device.getPowerOnPortId()) ||
+            !coolingPortId.equals(device.getHeatingCoolingTogglePortId()) ||
             !forceManualPortId.equals(device.getForceManualPortId())) {
             onInvalidateCache("/DIGITALOUTPUTPORTS.JSON");
         }
@@ -400,8 +400,8 @@ public class CentralHeatingConfiguration extends Collector {
 
         device.getName().setName(name);
         device.getName().setDescription(description);
-        device.setHeatingModePortId(heatingPortId);
-        device.setCoolingModePortId(coolingPortId);
+        device.setPowerOnPortId(heatingPortId);
+        device.setHeatingCoolingTogglePortId(coolingPortId);
         device.setForceManualPortId(forceManualPortId);
         device.setTemperatureControlPortId(temperatureControlPortId);
         device.setTemperatureControllerId(temperatureControllerId);

@@ -83,6 +83,12 @@ class CentralHeatingDependenciesCheckerModule extends DependenciesCheckerModule 
                 }
             }
 
+            for (AirConditioner airConditioner : _centralHeatingConfiguration.getAirConditioners().values()) {
+                if (airConditioner.getTemperatureControllerId().equals(temperatureController.getName().getUniqueId())) {
+                    addDependency(dependencies, DependencyType.Device, airConditioner, level);
+                }
+            }
+
             for (ThermostatCondition thermostatCondition : _centralHeatingConfiguration.getThermostatConditions().values()) {
                 if (thermostatCondition.getTemperatureControllerId().equals(temperatureController.getName().getUniqueId())) {
                     addDependency(dependencies, DependencyType.Condition, thermostatCondition, level);
