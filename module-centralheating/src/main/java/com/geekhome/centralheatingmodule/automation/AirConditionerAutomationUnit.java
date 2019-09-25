@@ -1,6 +1,7 @@
 package com.geekhome.centralheatingmodule.automation;
 
 import com.geekhome.centralheatingmodule.AirConditioner;
+import com.geekhome.common.IConnectable;
 import com.geekhome.coremodule.automation.ControlMode;
 import com.geekhome.coremodule.automation.ICalculableAutomationUnit;
 import com.geekhome.coremodule.automation.MasterAutomation;
@@ -33,6 +34,19 @@ public class AirConditionerAutomationUnit extends MultistateDeviceAutomationUnit
 
     @Override
     public void calculate(Calendar now) throws Exception {
+        if (_temperatureControlPort == null) {
+            changeStateInternal("discoveryError", ControlMode.Auto);
+            return;
+        }
+
+        if (_temperatureControlPort instanceof IConnectable) {
+            boolean connected = ((IConnectable) _temperatureControlPort).isConnected();
+            if (!connected) {
+                changeStateInternal("communicationError", ControlMode.Auto);
+                return;
+            }
+        }
+
         if (getControlMode() == ControlMode.Auto) {
             if (checkIfAnyBlockPasses("manual")) {
                 changeStateInternal("manual", ControlMode.Auto);

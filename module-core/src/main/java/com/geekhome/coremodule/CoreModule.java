@@ -537,6 +537,8 @@ public class CoreModule extends Module {
                 new Resource("C:Preset4", "Preset 4", "Ustawienie 4"),
                 new Resource("C:Intensity", "Intensity", "Intensywność"),
                 new Resource("C:CannotAddValueConditionsMessage", "Cannot add any value conditions since there're no value devices or value controllers defined yet!", "Aby dodawać nowe warunki wartościowe musi być zdefiniowany conajmniej jedno urządzenie wartościowe (np. termometr, higrometr) oraz sterownik (np. temperatury, wilgotności)!"),
+                new Resource("C:CommunicationError", "Communication error", "Błąd komunikacji"),
+                new Resource("C:DiscoveryError", "Discovery error", "Błąd wykrywania")
         };
     }
 
