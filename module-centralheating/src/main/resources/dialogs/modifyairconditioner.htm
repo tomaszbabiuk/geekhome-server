@@ -1,7 +1,4 @@
 <!-- @Forms\RoomTemplate.htm modifyairconditioner -->
-<!-- @Forms\NamedPortTemplate.htm modifyairconditionerheatingenable HM.GetDigitalOutputPorts() heatingenableportid RES:CH:HeatingEnablePort false -->
-<!-- @Forms\NamedPortTemplate.htm modifyairconditionercoolingenable HM.GetDigitalOutputPorts() coolingenableportid RES:CH:CoolingEnablePort false -->
-<!-- @Forms\NamedPortTemplate.htm modifyairconditionerforcemanual HM.GetDigitalInputPorts() forcemanualportid RES:CH:ForceManualPort false -->
 <!-- @Forms\NamedPortTemplate.htm modifyairconditionertemperaturecontrol HM.GetPowerOutputPorts() temperaturecontrolportid RES:CH:TemperatureControlPort false -->
 <!-- @Forms\TemperatureControllerTemplate.htm modifyairconditioner -->
 <!-- @Forms\CircuitsTemplate.htm modifyairconditioner -->
@@ -17,9 +14,6 @@
             <!-- @Forms\TextField.htm modifyairconditionername name required RES:C:Name -->
             <!-- @Forms\TextField.htm modifyairconditionerdescription description none RES:C:Description -->
             <div data-role="fieldcontain" id="modifyairconditionerroomcontent"></div>
-            <div data-role="fieldcontain" id="modifyairconditionerheatingenableportcontent"></div>
-            <div data-role="fieldcontain" id="modifyairconditionercoolingenableportcontent"></div>
-            <div data-role="fieldcontain" id="modifyairconditionerforcemanualportcontent"></div>
             <div data-role="fieldcontain" id="modifyairconditionertemperaturecontrolportcontent"></div>
             <div data-role="fieldcontain" id="modifyairconditionertemperaturecontrollercontent"></div>
             <!-- @Forms\HiddenField.htm modifyairconditionerid uniqueid -->
@@ -29,9 +23,6 @@
             jQuery('#modifyairconditionerdialog').on('pagetransfer', function (e, args) {
                 var createMode = args.param == null;
                 jQuery('#modifyairconditionerroomcontent').html(jQuery('#modifyairconditionerroomtemplate').tmpl());
-                jQuery('#modifyairconditionerheatingenableportcontent').html(jQuery('#modifyairconditionerheatingenableporttemplate').tmpl());
-                jQuery('#modifyairconditionercoolingenableportcontent').html(jQuery('#modifyairconditionercoolingenableporttemplate').tmpl());
-                jQuery('#modifyairconditionerforcemanualportcontent').html(jQuery('#modifyairconditionerforcemanualporttemplate').tmpl());
                 jQuery('#modifyairconditionertemperaturecontrolportcontent').html(jQuery('#modifyairconditionertemperaturecontrolporttemplate').tmpl());
                 jQuery('#modifyairconditionertemperaturecontrollercontent')
                     .html(jQuery('#modifyairconditionertemperaturecontrollertemplate').tmpl( { CreateMode: createMode } ));
@@ -42,9 +33,6 @@
                 var name = (airConditioner != null) ? airConditioner.Name.Name : '';
                 var description = (airConditioner != null) ? airConditioner.Name.Description : '';
                 var uniqueId = (airConditioner != null) ? airConditioner.Name.UniqueId : '';
-                var heatingEnablePortId = (airConditioner != null) ? airConditioner.HeatingEnablePortId : '';
-                var coolingEnablePortId = (airConditioner != null) ? airConditioner.CoolingEnablePortId : '';
-                var forceManualPortId = (airConditioner != null) ? airConditioner.ForceManualPortId : '';
                 var temperatureControlPortId = (airConditioner != null) ? airConditioner.TemperatureControlPortId : '';
                 var roomId = (airConditioner != null) ? airConditioner.RoomId : '';
                 var temperatureControllerId = (airConditioner != null) ? airConditioner.TemperatureControllerId : '';
@@ -53,9 +41,6 @@
                 jQuery('#modifyairconditionerdialog [name=description]').val(description);
                 jQuery('#modifyairconditionerdialog [name=uniqueid]').val(uniqueId);
                 jQuery('#modifyairconditionerdialog [name=roomid]').val(roomId);
-                jQuery('#modifyairconditionerdialog [name=heatingenableportid]').val(heatingEnablePortId);
-                jQuery('#modifyairconditionerdialog [name=coolingenableportid]').val(coolingEnablePortId);
-                jQuery('#modifyairconditionerdialog [name=forcemanualportid]').val(forceManualPortId);
                 jQuery('#modifyairconditionerdialog [name=temperaturecontrolportid]').val(temperatureControlPortId);
                 jQuery('#modifyradiatordialog [name=temperaturecontrollerid]').val(temperatureControllerId);
             });

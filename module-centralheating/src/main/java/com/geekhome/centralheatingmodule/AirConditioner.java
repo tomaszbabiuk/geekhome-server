@@ -11,39 +11,9 @@ import com.geekhome.httpserver.modules.CollectorCollection;
 
 public class AirConditioner extends MultistateDevice implements IRoomDevice, IPortsDrivenDevice, IBlocksTarget {
 
-    private String _heatingEnablePortId;
-    private String _coolingEnablePortId;
-    private String _forceManualPortId;
     private String _temperatureControlPortId;
     private String _roomId;
     private String _temperatureControllerId;
-
-    @Persistable(name="HeatingEnablePortId")
-    public String getHeatingEnablePortId() {
-        return _heatingEnablePortId;
-    }
-
-    public void setHeatingEnablePortId(String value) {
-        _heatingEnablePortId = value;
-    }
-
-    @Persistable(name="CoolingEnablePortId")
-    public String getCoolingEnablePortId() {
-        return _coolingEnablePortId;
-    }
-
-    public void setCoolingEnablePortId(String value) {
-        _coolingEnablePortId = value;
-    }
-
-    @Persistable(name="ForceManualPortId")
-    public String getForceManualPortId() {
-        return _forceManualPortId;
-    }
-
-    public void setForceManualPortId(String value) {
-        _forceManualPortId = value;
-    }
 
     @Persistable(name="TemperatureControlPortId")
     public String getTemperatureControlPortId() {
@@ -72,14 +42,10 @@ public class AirConditioner extends MultistateDevice implements IRoomDevice, IPo
         _temperatureControllerId = value;
     }
 
-    public AirConditioner(DescriptiveName name, String heatingEnablePortId, String coolingEnablePortId,
-                          String forceManualPortId, String temperatureControlPortId, String roomId,
+    public AirConditioner(DescriptiveName name, String temperatureControlPortId, String roomId,
                           String temperatureControllerId) {
         super(name, "snow", DeviceCategory.Heating);
         setRoomId(roomId);
-        setHeatingEnablePortId(heatingEnablePortId);
-        setCoolingEnablePortId(coolingEnablePortId);
-        setForceManualPortId(forceManualPortId);
         setTemperatureControlPortId(temperatureControlPortId);
         setTemperatureControllerId(temperatureControllerId);
     }
@@ -103,7 +69,7 @@ public class AirConditioner extends MultistateDevice implements IRoomDevice, IPo
 
     @Override
     public String getPortsIds() {
-        return getHeatingEnablePortId() + "," + getCoolingEnablePortId() + "," + getForceManualPortId();
+        return getTemperatureControlPortId();
     }
 
     @Override
@@ -111,6 +77,7 @@ public class AirConditioner extends MultistateDevice implements IRoomDevice, IPo
         JSONArrayList<DescriptiveName> categories = new JSONArrayList<>();
         categories.add(new DescriptiveName(localizationProvider.getValue("CH:BlocksEnablingCooling"), "cooling"));
         categories.add(new DescriptiveName(localizationProvider.getValue("CH:BlocksEnablingHeating"), "heating"));
+        categories.add(new DescriptiveName(localizationProvider.getValue("CH:BlocksEnablingManualMode"), "manual"));
         return categories;
     }
 

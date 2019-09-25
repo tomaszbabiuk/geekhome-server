@@ -1,8 +1,8 @@
 [Version]
 version = 1
-pool = 125
+pool = 130
 comment = Zmiany w konfiguracji
-from = 9/24/19, 3:42 PM
+from = 9/25/19, 9:03 AM
 
 [Floor]
 iconname = house
@@ -17,26 +17,34 @@ description =
 uniqueid = core34
 
 [MultistateCondition]
-deviceid = core113
-statesids = on
 delaytime = 00:00:00
+statesids = on
+deviceid = core126
+name = Tryb ręczny klimy - Wł
+description = 
+uniqueid = core127
+
+[MultistateCondition]
+delaytime = 00:00:00
+statesids = on
+deviceid = core113
 name = Grzanie - Wł
 description = 
 uniqueid = core114
 
 [MultistateCondition]
-deviceid = core111
-statesids = on
 delaytime = 00:00:00
+statesids = on
+deviceid = core111
 name = Chłodzenie - Wł
 description = 
 uniqueid = core112
 
 [ValueCondition]
 value = 10.0
-deviceid = heating74
-operator = 0
 hysteresis = 1.0
+operator = 0
+deviceid = heating74
 name = T1 większe od 10
 description = 
 uniqueid = core76
@@ -61,22 +69,33 @@ uniqueid = core80
 
 [KeySwitch]
 hasnonreadonlystates = true
-roomid = core34
 portid = -
-devicecategory = 1
+roomid = core34
 iconname = trigger
 controltype = 5
+devicecategory = 1
+name = Tryb ręczny klimy
+description = 
+uniqueid = core126
+
+[KeySwitch]
+hasnonreadonlystates = true
+portid = -
+roomid = core34
+iconname = trigger
+controltype = 5
+devicecategory = 1
 name = Grzanie
 description = 
 uniqueid = core113
 
 [KeySwitch]
 hasnonreadonlystates = true
-roomid = core34
 portid = -
-devicecategory = 1
+roomid = core34
 iconname = trigger
 controltype = 5
+devicecategory = 1
 name = Chłodzenie
 description = 
 uniqueid = core111
@@ -96,6 +115,13 @@ description =
 uniqueid = core118
 
 [Block]
+targetid = heating101_manual
+conditionsids = core127
+name = Nowy blok
+description = 
+uniqueid = core128
+
+[Block]
 targetid = auto70_on
 conditionsids = core76
 name = Nowy blok
@@ -103,72 +129,69 @@ description =
 uniqueid = core78
 
 [Geofence]
+iconname = marker_other
 latitude = 50.0
 longitude = 40.0
 radius = 10.0
-iconname = marker_other
 name = kraków
 description = 
 uniqueid = core18
 
 [AirConditioner]
-hasnonreadonlystates = false
-roomid = core34
 temperaturecontrollerid = heating97
-heatingenableportid = GREE:f4911e63af87:heat
-coolingenableportid = GREE:f4911e63af87:cool
-forcemanualportid = INPUT0
-temperaturecontrolportid = POWER-OUT-4
-devicecategory = 1
+temperaturecontrolportid = GREE:f4911e63af87:settemp
+roomid = core34
+hasnonreadonlystates = false
 iconname = snow
 controltype = 7
+devicecategory = 1
 name = K1
 description = asdf
 uniqueid = heating101
 
 [TemperatureController]
 roomid = core34
-initialvalue = 20.0
 modesids = 
+initialvalue = 20.0
 minvalue = 5.0
 maxvalue = 25.0
-devicecategory = 1
 iconname = thermostat
 controltype = 2
+devicecategory = 1
 name = K1
 description = asdf
 uniqueid = heating97
 
 [Thermometer]
-valuetype = 0
-roomid = core34
 portid = TEMP0
-devicecategory = 1
+roomid = core34
+valuetype = 0
 iconname = thermometer
 controltype = 0
+devicecategory = 1
 name = T1
 description = 
 uniqueid = heating74
 
 [IntensityDevice]
-roomid = core34
 portid = POWER-OUT-1
+roomid = core34
 intensitypresetsids = 1,2,3,4
-devicecategory = 4
 iconname = lightbulb
 controltype = 7
+devicecategory = 4
 name = L1
 description = Lampa gdzieś tamrrrrr
 uniqueid = lights44
 
 [OnOffDevice]
+portid = OUTPUT0
+roomid = core34
 hasnonreadonlystates = true
 triggeredmanually = 1
-roomid = core34
-portid = OUTPUT0
-devicecategory = 1
 iconname = power
 controltype = 7
+devicecategory = 1
 name = asdf
 description = asdf
 uniqueid = auto70

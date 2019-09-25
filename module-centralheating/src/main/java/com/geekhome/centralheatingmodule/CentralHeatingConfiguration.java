@@ -351,9 +351,6 @@ public class CentralHeatingConfiguration extends Collector {
         String name = values.getValue("name");
         String description = values.getValue("description");
         String uniqueId = values.getValue("uniqueid");
-        String heatingEnablePortId = values.getValue("heatingenableportid");
-        String coolingEnablePortId = values.getValue("coolingenableportid");
-        String forceManualPortId = values.getValue("forcemanualportid");
         String temperatureControlPortId = values.getValue("temperaturecontrolportid");
         String roomId = values.getValue("roomid");
         String temperatureControllerId = values.getValue("temperaturecontrollerid");
@@ -363,9 +360,9 @@ public class CentralHeatingConfiguration extends Collector {
         }
 
         if (action == CrudAction.AddOrCreate) {
-            addAirConditioner(name, description, heatingEnablePortId, coolingEnablePortId, forceManualPortId, temperatureControlPortId, roomId, temperatureControllerId, uniqueId);
+            addAirConditioner(name, description, temperatureControlPortId, roomId, temperatureControllerId, uniqueId);
         } else {
-            editAirConditioner(name, description, heatingEnablePortId, coolingEnablePortId, forceManualPortId, temperatureControlPortId, roomId, temperatureControllerId, uniqueId);
+            editAirConditioner(name, description, temperatureControlPortId, roomId, temperatureControllerId, uniqueId);
         }
         onInvalidateCache("/CONFIG/AIRCONDITIONERS.JSON");
         onInvalidateCache("/CONFIG/ALLDEVICES.JSON");
@@ -374,25 +371,18 @@ public class CentralHeatingConfiguration extends Collector {
         onModified();
     }
 
-    private void addAirConditioner(String name, String description, String heatingPortId, String coolingPortId,
-                                   String forceManualPortId, String temperatureControlPortId, String roomId,
+    private void addAirConditioner(String name, String description, String temperatureControlPortId, String roomId,
                                    String temperatureControllerId, String uniqueId) throws Exception {
         uniqueId = poolUniqueIdIfEmpty(uniqueId);
         DescriptiveName deviceName = new DescriptiveName(name, uniqueId, description);
-        AirConditioner device = new AirConditioner(deviceName, heatingPortId, coolingPortId, forceManualPortId, temperatureControlPortId, roomId, temperatureControllerId);
+        AirConditioner device = new AirConditioner(deviceName, temperatureControlPortId, roomId, temperatureControllerId);
         getAirConditioners().add(device);
         onInvalidateCache("/DIGITALOUTPUTPORTS.JSON");
     }
 
-    private void editAirConditioner(String name, String description, String heatingPortId, String coolingPortId,
-                                    String forceManualPortId, String temperatureControlPortId, String roomId,
+    private void editAirConditioner(String name, String description, String temperatureControlPortId, String roomId,
                                     String temperatureControllerId, String uniqueId) throws Exception {
         AirConditioner device = getAirConditioners().find(uniqueId);
-        if (!heatingPortId.equals(device.getHeatingEnablePortId()) ||
-            !coolingPortId.equals(device.getCoolingEnablePortId()) ||
-            !forceManualPortId.equals(device.getForceManualPortId())) {
-            onInvalidateCache("/DIGITALOUTPUTPORTS.JSON");
-        }
 
         if (!temperatureControlPortId.equals(device.getTemperatureControlPortId())) {
             onInvalidateCache("/POWEROUTPUTPORTS.JSON");
@@ -400,9 +390,6 @@ public class CentralHeatingConfiguration extends Collector {
 
         device.getName().setName(name);
         device.getName().setDescription(description);
-        device.setHeatingEnablePortId(heatingPortId);
-        device.setCoolingEnablePortId(coolingPortId);
-        device.setForceManualPortId(forceManualPortId);
         device.setTemperatureControlPortId(temperatureControlPortId);
         device.setTemperatureControllerId(temperatureControllerId);
         device.setRoomId(roomId);

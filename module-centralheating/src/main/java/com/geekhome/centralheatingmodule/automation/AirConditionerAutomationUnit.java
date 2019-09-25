@@ -5,7 +5,6 @@ import com.geekhome.coremodule.automation.ControlMode;
 import com.geekhome.coremodule.automation.ICalculableAutomationUnit;
 import com.geekhome.coremodule.automation.MasterAutomation;
 import com.geekhome.coremodule.automation.MultistateDeviceAutomationUnit;
-import com.geekhome.hardwaremanager.IInputPort;
 import com.geekhome.hardwaremanager.IOutputPort;
 import com.geekhome.http.ILocalizationProvider;
 
@@ -14,19 +13,12 @@ import java.util.Calendar;
 public class AirConditionerAutomationUnit extends MultistateDeviceAutomationUnit<AirConditioner> implements ICalculableAutomationUnit {
 
     private final TemperatureMulticontrollerAutomationUnit _temperatureController;
-    private IOutputPort<Boolean> _heatingEnablePort;
-    private IOutputPort<Boolean> _coolingEnablePort;
-    private IInputPort<Boolean> _forceManualPort;
     private IOutputPort<Integer> _temperatureControlPort;
 
-    public AirConditionerAutomationUnit(IOutputPort<Boolean> heatingEnablePort, IOutputPort<Boolean> coolingEnablePort,
-                                        IInputPort<Boolean> forceManualPort, IOutputPort<Integer> temperatureControlPort,
+    public AirConditionerAutomationUnit(IOutputPort<Integer> temperatureControlPort,
                                         AirConditioner airConditioner, MasterAutomation masterAutomation,
                                         ILocalizationProvider localizationProvider) throws Exception {
         super(airConditioner, localizationProvider);
-        _heatingEnablePort = heatingEnablePort;
-        _coolingEnablePort = coolingEnablePort;
-        _forceManualPort = forceManualPort;
         _temperatureControlPort = temperatureControlPort;
         _temperatureController = (TemperatureMulticontrollerAutomationUnit)masterAutomation
                 .findDeviceUnit(airConditioner.getTemperatureControllerId());
@@ -42,7 +34,7 @@ public class AirConditionerAutomationUnit extends MultistateDeviceAutomationUnit
     @Override
     public void calculate(Calendar now) throws Exception {
         if (getControlMode() == ControlMode.Auto) {
-            if (_forceManualPort.read()) {
+            if (checkIfAnyBlockPasses("manual")) {
                 changeStateInternal("manual", ControlMode.Auto);
             } else if (checkIfAnyBlockPasses("heating")) {
                 changeStateInternal("heating", ControlMode.Auto);
@@ -58,28 +50,22 @@ public class AirConditionerAutomationUnit extends MultistateDeviceAutomationUnit
 
     private void execute() throws Exception {
         if (getStateId().equals("manual")) {
-            changeOutputPortStateIfNeeded(_temperatureControlPort, -1); //-1 == manual
+            changeOutputPortStateIfNeeded(_temperatureControlPort, null);
             return;
         }
 
+        int targetTemperature = (int)(double)_temperatureController.getValue();
+
         if (getStateId().equals("heating")) {
-            _coolingEnablePort.write(false);
-            _heatingEnablePort.write(true);
+            changeOutputPortStateIfNeeded(_temperatureControlPort, targetTemperature);
         }
 
         if (getStateId().equals("cooling")) {
-            _coolingEnablePort.write(true);
-            _heatingEnablePort.write(false);
+            changeOutputPortStateIfNeeded(_temperatureControlPort, -targetTemperature);
         }
 
         if (getStateId().equals("nodemand")) {
-            _heatingEnablePort.write(false);
-            _heatingEnablePort.write(false);
-        }
-
-        if (getStateId().equals("heating") || getStateId().equals("cooling")) {
-            double targetTemperature = _temperatureController.getValue();
-            changeOutputPortStateIfNeeded(_temperatureControlPort, (int)targetTemperature);
+            changeOutputPortStateIfNeeded(_temperatureControlPort, 0);
         }
     }
 }

@@ -9,10 +9,9 @@ import com.geekhome.httpserver.OperationMode;
 import org.openhab.binding.greeair.internal.GreeDevice;
 import org.openhab.binding.greeair.internal.GreeDeviceFinder;
 
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
+import java.net.*;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.HashMap;
 
 class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
@@ -33,7 +32,7 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
         _localizationProvider = localizationProvider;
         try {
             _clientSocket = new DatagramSocket();
-            _clientSocket.setSoTimeout(60000);
+            _clientSocket.setSoTimeout(10000);
         } catch (SocketException ex) {
             _logger.error("Cannot create gree adapter", ex);
         }
@@ -49,14 +48,19 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
                            final InputPortsCollection<Double> humidityPorts,
                            final InputPortsCollection<Double> luminosityPorts) throws DiscoveryException {
 
+        _logger.info("Starting Gree air conditioners discovery");
+
         if (_clientSocket == null) {
+            _logger.info("Gree discovery stopped - empty client socket!");
             return;
         }
 
-        _logger.info("Starting Gree discovery");
-
         try {
-            InetAddress broadcastAddress = InetAddress.getByAddress(new byte[]{(byte) 192, (byte) 168, (byte) 1, (byte) 255});
+            InetAddress broadcastAddress = getBroadcastAddress();
+            if (broadcastAddress == null) {
+                _logger.info("Impossible to get local address, is your network address starting from 192.168.x.x?");
+                return;
+            }
 
             GreeDeviceFinder finder = new GreeDeviceFinder(broadcastAddress);
             finder.Scan(_clientSocket);
@@ -73,16 +77,6 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
                 IInputPort<Boolean> forceManualPort = new SynchronizedInputPort<>(greeForceManualPortId, isLightOn);
                 digitalInputPorts.add(forceManualPort);
 
-                String coolingEnablePortId = greeDeviceIdToCoolingEnablePortId(greeDeviceId);
-                boolean isCooling = greeDevice.GetDeviceMode() == 1;
-                IOutputPort<Boolean> coolingEnablePort = new SynchronizedOutputPort<>(coolingEnablePortId, isCooling);
-                digitalOutputPorts.add(coolingEnablePort);
-
-                String heatingEnablePortId = greeDeviceIdToHeatingEnablePortId(greeDeviceId);
-                boolean isHeating = greeDevice.GetDevicePower() == 4;
-                IOutputPort<Boolean> heatingEnablePort = new SynchronizedOutputPort<>(heatingEnablePortId, isHeating);
-                digitalOutputPorts.add(heatingEnablePort);
-
                 String temperatureControlPortId = greeDeviceIdToTemperatureControlPortId(greeDeviceId);
                 int temperature = greeDevice.GetDeviceTempSet();
                 IOutputPort<Integer> temperatureControlPort = new SynchronizedOutputPort<>(temperatureControlPortId, temperature);
@@ -96,16 +90,33 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
         _isOperational = true;
     }
 
+    private InetAddress getBroadcastAddress() throws SocketException, UnknownHostException {
+        Enumeration e = NetworkInterface.getNetworkInterfaces();
+        while(e.hasMoreElements())
+        {
+            NetworkInterface n = (NetworkInterface) e.nextElement();
+            Enumeration ee = n.getInetAddresses();
+            while (ee.hasMoreElements())
+            {
+                InetAddress i = (InetAddress) ee.nextElement();
+                if (i.getAddress()[0] == (byte)192 && i.getAddress()[1] == (byte)168) {
+                    byte[] broadcastAddress = {
+                            i.getAddress()[0],
+                            i.getAddress()[1],
+                            i.getAddress()[2],
+                            (byte)255
+                    };
+
+                    return InetAddress.getByAddress(broadcastAddress);
+                }
+            }
+        }
+
+        return null;
+    }
+
     private String greeDeviceIdToLightPortId(String greeDeviceId) {
         return greeDeviceIdTo(greeDeviceId, "light");
-    }
-
-    private String greeDeviceIdToHeatingEnablePortId(String greeDeviceId) {
-        return greeDeviceIdTo(greeDeviceId, "heat");
-    }
-
-    private String greeDeviceIdToCoolingEnablePortId(String greeDeviceId) {
-        return greeDeviceIdTo(greeDeviceId, "cool");
     }
 
     private String greeDeviceIdToTemperatureControlPortId(String greeDeviceId) {
@@ -161,38 +172,42 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
                             (SynchronizedInputPort<Boolean>) _hardwareManager.findDigitalInputPort(greeDeviceIdToLightPortId(greeDeviceId));
                     lightInput.setValue(isLightOn);
 
-                    //cooling
-                    SynchronizedOutputPort<Boolean> coolingEnablePort =
-                            (SynchronizedOutputPort<Boolean>) _hardwareManager.findDigitalOutputPort(greeDeviceIdToCoolingEnablePortId(greeDeviceId));
-                    boolean shouldCool = coolingEnablePort.read();
-                    if (shouldCool && !isCooling) {
-                        greeDevice.SetDeviceMode(_clientSocket, 1);
-                    }
-
-                    //heating
-                    SynchronizedOutputPort<Boolean> heatingEnablePort =
-                            (SynchronizedOutputPort<Boolean>) _hardwareManager.findDigitalOutputPort(greeDeviceIdToHeatingEnablePortId(greeDeviceId));
-                    boolean shouldHeat = heatingEnablePort.read();
-                    if (shouldHeat && !isHeating) {
-                        greeDevice.SetDeviceMode(_clientSocket, 4);
-                    }
-
-                    //power
-                    boolean shouldBeOn = isCooling || isHeating;
-                    if (shouldBeOn && !isOn) {
-                        greeDevice.SetDevicePower(_clientSocket, 1);
-                    }
-                    if (!shouldBeOn && isOn) {
-                        greeDevice.SetDevicePower(_clientSocket, 0);
-                    }
-
                     //temperature
                     SynchronizedOutputPort<Integer> temperatureControlPort =
                             (SynchronizedOutputPort<Integer>) _hardwareManager.findPowerOutputPort(greeDeviceIdToTemperatureControlPortId(greeDeviceId));
-                    int shouldTempBeSetTo = temperatureControlPort.read();
-                    boolean adjustingTempNeeded = shouldTempBeSetTo != tempSet && shouldTempBeSetTo != -1;
-                    if (shouldBeOn && adjustingTempNeeded) {
-                        greeDevice.SetDeviceTempSet(_clientSocket, shouldTempBeSetTo);
+                    Integer shouldTempBeSetTo = temperatureControlPort.read();
+
+                    //heating
+                    if (shouldTempBeSetTo > 0) {
+                        if (!isHeating) {
+                            greeDevice.SetDeviceMode(_clientSocket, 4);
+                        }
+                        if (!isOn) {
+                            greeDevice.SetDevicePower(_clientSocket, 1);
+                        }
+                        if (tempSet != shouldTempBeSetTo) {
+                            greeDevice.SetDeviceTempSet(_clientSocket, shouldTempBeSetTo);
+                        }
+                    }
+
+                    //cooling
+                    if (shouldTempBeSetTo < 0) {
+                        if (!isCooling) {
+                            greeDevice.SetDeviceMode(_clientSocket, 1);
+                        }
+                        if (!isOn) {
+                            greeDevice.SetDevicePower(_clientSocket, 1);
+                        }
+                        if (tempSet != -shouldTempBeSetTo) {
+                            greeDevice.SetDeviceTempSet(_clientSocket, -shouldTempBeSetTo);
+                        }
+                    }
+
+                    //no demand
+                    if (shouldTempBeSetTo == 0) {
+                        if (isOn) {
+                            greeDevice.SetDevicePower(_clientSocket, 0);
+                        }
                     }
                 }
 

@@ -101,12 +101,8 @@ public class CentralHeatingAutomationModule implements IAutomationModule {
         }
 
         for (AirConditioner airConditioner : _centralHeatingConfiguration.getAirConditioners().values()) {
-            IOutputPort<Boolean> heatingEnablePort = _hardwareManager.tryFindDigitalOutputPort(airConditioner.getHeatingEnablePortId());
-            IOutputPort<Boolean> coolingEnablePort = _hardwareManager.tryFindDigitalOutputPort(airConditioner.getCoolingEnablePortId());
-            IInputPort<Boolean> forceManualPort = _hardwareManager.tryFindDigitalInputPort(airConditioner.getForceManualPortId());
             IOutputPort<Integer> temperatureControlPort = _hardwareManager.tryFindPowerOutputPort(airConditioner.getTemperatureControlPortId());
-            AirConditionerAutomationUnit unit = new AirConditionerAutomationUnit(heatingEnablePort, coolingEnablePort,
-                    forceManualPort, temperatureControlPort, airConditioner, _masterAutomation, _localizationProvider);
+            AirConditionerAutomationUnit unit = new AirConditionerAutomationUnit(temperatureControlPort, airConditioner, _masterAutomation, _localizationProvider);
             devicesList.add(unit);
         }
 
