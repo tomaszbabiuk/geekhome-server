@@ -18,8 +18,8 @@ public class SynchronizedEvaluationResult {
     @SerializedName("deviceId")
     private String _deviceId;
 
-    @SerializedName("controlMode")
-    private int _controlMode;
+    @SerializedName("isAuto")
+    private boolean _auto;
 
     @SerializedName("descriptions")
     private ArrayList<SynchronizedDescription> _descriptions;
@@ -54,12 +54,12 @@ public class SynchronizedEvaluationResult {
         _deviceId = deviceId;
     }
 
-    public int getControlMode() {
-        return _controlMode;
+    public boolean isAuto() {
+        return _auto;
     }
 
-    public void setControlMode(int controlMode) {
-        _controlMode = controlMode;
+    public void setAuto(boolean auto) {
+        _auto = auto;
     }
 
     public ArrayList<SynchronizedDescription> getDescriptions() {

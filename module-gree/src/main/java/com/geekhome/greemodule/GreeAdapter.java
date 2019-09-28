@@ -38,7 +38,7 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
 
         try {
             result = new DatagramSocket();
-            result.setSoTimeout(30 * 1000); //30 sec
+            result.setSoTimeout(15 * 1000); //15 sec
         } catch (SocketException ex) {
             _logger.error("Cannot create gree adapter", ex);
         }
@@ -80,11 +80,17 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
                 greeDevice.BindWithDevice(_clientSocket);
                 greeDevice.getDeviceStatus(_clientSocket);
 
-                String greeForceManualPortId = greeDeviceIdToLightPortId(greeDeviceId);
+                String lightPortId = greeDeviceIdToLightPortId(greeDeviceId);
                 boolean isLightOn = greeDevice.GetDeviceLight() == 1;
-                IInputPort<Boolean> forceManualPort =
-                        new SynchronizedInputPort<>(greeForceManualPortId, isLightOn);
-                digitalInputPorts.add(forceManualPort);
+                IInputPort<Boolean> lightPort =
+                        new ConnectableSynchronizedInputPort<>(lightPortId, isLightOn, true);
+                digitalInputPorts.add(lightPort);
+
+                String turboPortId = greeDeviceIdToTurboPortId(greeDeviceId);
+                boolean isTurboOn = greeDevice.GetDeviceTurbo() == 1;
+                IOutputPort<Boolean> turboPort =
+                        new ConnectableSynchronizedOutputPort<>(turboPortId, isTurboOn, true);
+                digitalOutputPorts.add(turboPort);
 
                 String temperatureControlPortId = greeDeviceIdToTemperatureControlPortId(greeDeviceId);
                 int temperature = greeDevice.GetDeviceTempSet();
@@ -131,6 +137,10 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
         return greeDeviceIdTo(greeDeviceId, "settemp");
     }
 
+    private String greeDeviceIdToTurboPortId(String greeDeviceId) {
+        return greeDeviceIdTo(greeDeviceId, "turbo");
+    }
+
     private String greeDeviceIdTo(String greeDeviceId, String suffix) {
         return "GREE:" + greeDeviceId + ":" + suffix;
     }
@@ -167,67 +177,99 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
         if (_greeDevices != null) {
             if (now.getTimeInMillis() - _lastRefresh > 10000) {
                 for (String greeDeviceId : _greeDevices.keySet()) {
-//                    //light
-//                    SynchronizedInputPort<Boolean> lightInput =
-//                            (SynchronizedInputPort<Boolean>) _hardwareManager.findDigitalInputPort(greeDeviceIdToLightPortId(greeDeviceId));
-//                    lightInput.setValue(isLightOn);
+                    GreeDevice greeDevice = _greeDevices.get(greeDeviceId);
 
-                    //temperature
-                    ConnectableSynchronizedOutputPort<Integer> temperatureControlPort =
-                            (ConnectableSynchronizedOutputPort<Integer>) _hardwareManager.findPowerOutputPort(greeDeviceIdToTemperatureControlPortId(greeDeviceId));
-                    if (temperatureControlPort != null) {
-                        try {
-                            GreeDevice greeDevice = _greeDevices.get(greeDeviceId);
-                            greeDevice.getDeviceStatus(_clientSocket);
-                            boolean isLightOn = greeDevice.GetDeviceLight() == 1;
-                            boolean isCooling = greeDevice.GetDeviceMode() == 1;
-                            boolean isHeating = greeDevice.GetDeviceMode() == 4;
-                            boolean isOn = greeDevice.GetDevicePower() == 1;
-                            int tempSet = greeDevice.GetDeviceTempSet();
-
-                            Integer shouldTempBeSetTo = temperatureControlPort.read();
-
-                            //heating
-                            if (shouldTempBeSetTo > 0) {
-                                if (!isHeating) {
-                                    greeDevice.SetDeviceMode(_clientSocket, 4);
-                                }
-                                if (!isOn) {
-                                    greeDevice.SetDevicePower(_clientSocket, 1);
-                                }
-                                if (tempSet != shouldTempBeSetTo) {
-                                    greeDevice.SetDeviceTempSet(_clientSocket, shouldTempBeSetTo);
-                                }
-                            }
-
-                            //cooling
-                            if (shouldTempBeSetTo < 0) {
-                                if (!isCooling) {
-                                    greeDevice.SetDeviceMode(_clientSocket, 1);
-                                }
-                                if (!isOn) {
-                                    greeDevice.SetDevicePower(_clientSocket, 1);
-                                }
-                                if (tempSet != -shouldTempBeSetTo) {
-                                    greeDevice.SetDeviceTempSet(_clientSocket, -shouldTempBeSetTo);
-                                }
-                            }
-
-                            //no demand
-                            if (shouldTempBeSetTo == 0) {
-                                if (isOn) {
-                                    greeDevice.SetDevicePower(_clientSocket, 0);
-                                }
-                            }
-
-                            temperatureControlPort.setConnected(true);
-                        } catch (Exception ex) {
-                            temperatureControlPort.setConnected(false);
-                        }
-                    }
+                    refreshLight(greeDevice);
+                    refreshTurbo(greeDevice);
+                    refreshTemperature(greeDevice);
                 }
 
                 _lastRefresh = now.getTimeInMillis();
+            }
+        }
+    }
+
+    private void refreshLight(GreeDevice greeDevice) {
+
+        ConnectableSynchronizedOutputPort<Boolean> lightPort =
+                (ConnectableSynchronizedOutputPort<Boolean>) _hardwareManager.tryFindDigitalOutputPort(greeDeviceIdToLightPortId(greeDevice.getId()));
+        if (lightPort != null) {
+            boolean isLightOn = greeDevice.GetDeviceLight() == 1;
+            try {
+                lightPort.setValue(isLightOn);
+                lightPort.setConnected(true);
+            } catch (Exception ex) {
+                lightPort.setConnected(false);
+            }
+        }
+    }
+
+    private void refreshTurbo(GreeDevice greeDevice) {
+        ConnectableSynchronizedOutputPort<Boolean> turboPort =
+                (ConnectableSynchronizedOutputPort<Boolean>) _hardwareManager.tryFindDigitalOutputPort(greeDeviceIdToTurboPortId(greeDevice.getId()));
+        if (turboPort != null) {
+            boolean isTurboOn = greeDevice.GetDeviceTurbo() == 1;
+            boolean shouldUpdateTurbo = turboPort.read() != isTurboOn;
+            if (shouldUpdateTurbo) {
+                try {
+                    greeDevice.SetDeviceTurbo(_clientSocket, turboPort.read() ? 1 : 0);
+                    turboPort.setConnected(true);
+                } catch (Exception ex) {
+                    turboPort.setConnected(false);
+                }
+            }
+        }
+    }
+
+    private void refreshTemperature(GreeDevice greeDevice) {
+        ConnectableSynchronizedOutputPort<Integer> temperatureControlPort =
+                (ConnectableSynchronizedOutputPort<Integer>) _hardwareManager.tryFindPowerOutputPort(greeDeviceIdToTemperatureControlPortId(greeDevice.getId()));
+        if (temperatureControlPort != null) {
+            try {
+                greeDevice.getDeviceStatus(_clientSocket);
+                boolean isCooling = greeDevice.GetDeviceMode() == 1;
+                boolean isHeating = greeDevice.GetDeviceMode() == 4;
+                boolean isOn = greeDevice.GetDevicePower() == 1;
+                int tempSet = greeDevice.GetDeviceTempSet();
+
+                Integer shouldTempBeSetTo = temperatureControlPort.read();
+
+                //heating
+                if (shouldTempBeSetTo > 0) {
+                    if (!isHeating) {
+                        greeDevice.SetDeviceMode(_clientSocket, 4);
+                    }
+                    if (!isOn) {
+                        greeDevice.SetDevicePower(_clientSocket, 1);
+                    }
+                    if (tempSet != shouldTempBeSetTo) {
+                        greeDevice.SetDeviceTempSet(_clientSocket, shouldTempBeSetTo);
+                    }
+                }
+
+                //cooling
+                if (shouldTempBeSetTo < 0) {
+                    if (!isCooling) {
+                        greeDevice.SetDeviceMode(_clientSocket, 1);
+                    }
+                    if (!isOn) {
+                        greeDevice.SetDevicePower(_clientSocket, 1);
+                    }
+                    if (tempSet != -shouldTempBeSetTo) {
+                        greeDevice.SetDeviceTempSet(_clientSocket, -shouldTempBeSetTo);
+                    }
+                }
+
+                //no demand
+                if (shouldTempBeSetTo == 0) {
+                    if (isOn) {
+                        greeDevice.SetDevicePower(_clientSocket, 0);
+                    }
+                }
+
+                temperatureControlPort.setConnected(true);
+            } catch (Exception ex) {
+                temperatureControlPort.setConnected(false);
             }
         }
     }

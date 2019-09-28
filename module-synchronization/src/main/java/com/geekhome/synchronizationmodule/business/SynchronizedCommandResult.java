@@ -2,14 +2,14 @@ package com.geekhome.synchronizationmodule.business;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 public class SynchronizedCommandResult {
     @SerializedName("output")
     private String _output;
 
     @SerializedName("evaluations")
-    private ArrayList<SynchronizedEvaluationResult> _evaluations;
+    private Map<String, SynchronizedEvaluationResult> _evaluations;
 
     @SerializedName("codeRequired")
     private boolean _codeRequired;
@@ -24,7 +24,7 @@ public class SynchronizedCommandResult {
         return _output;
     }
 
-    public ArrayList<SynchronizedEvaluationResult> getEvaluations() {
+    public Map<String, SynchronizedEvaluationResult> getEvaluations() {
         return _evaluations;
     }
 
@@ -32,7 +32,7 @@ public class SynchronizedCommandResult {
         _output = output;
     }
 
-    public void setEvaluations(ArrayList<SynchronizedEvaluationResult> evaluations) {
+    public void setEvaluations(Map<String, SynchronizedEvaluationResult> evaluations) {
         _evaluations = evaluations;
     }
 

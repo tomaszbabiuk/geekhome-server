@@ -5,6 +5,7 @@ import com.geekhome.common.INamedObject;
 import com.geekhome.common.KeyValue;
 import com.geekhome.common.State;
 import com.geekhome.coremodule.*;
+import com.geekhome.coremodule.automation.ControlMode;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.coremodule.automation.IDeviceAutomationUnit;
 import com.geekhome.coremodule.settings.AutomationSettings;
@@ -42,10 +43,10 @@ public class IntegrationFactory {
         }
 
         if (processedCommand.getAutomationUnits() != null) {
-            ArrayList<SynchronizedEvaluationResult> evaluationResults = new ArrayList<>();
+            Map<String, SynchronizedEvaluationResult> evaluationResults = new HashMap<>();
             for (IDeviceAutomationUnit unit : processedCommand.getAutomationUnits()) {
                 SynchronizedEvaluationResult evaluationResult = IntegrationFactory.create(unit, automationSettings);
-                evaluationResults.add(evaluationResult);
+                evaluationResults.put(unit.getDevice().getName().getUniqueId(), evaluationResult);
             }
             result.setEvaluations(evaluationResults);
         }
@@ -166,7 +167,7 @@ public class IntegrationFactory {
         SynchronizedEvaluationResult result = new SynchronizedEvaluationResult();
         result.setValue(evaluationResult.getValue().toString());
         result.setInterfaceValue(evaluationResult.getInterfaceValue());
-        result.setControlMode(evaluationResult.getControlMode().toInt());
+        result.setAuto(evaluationResult.getControlMode() == ControlMode.Auto);
         result.setSignaled(evaluationResult.isSignaled());
         result.setDeviceId(unit.getName().getUniqueId());
 

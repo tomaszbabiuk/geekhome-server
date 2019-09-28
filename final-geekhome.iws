@@ -2,14 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76de2133-c160-40d8-be7b-b8ddd428235e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/ConnectableSynchronizedOutputPort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/IConnectable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/final-geekhome/Configuration.dat.137" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/ConnectableSynchronizedInputPort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/final-geekhome.iws" beforeDir="false" afterPath="$PROJECT_DIR$/final-geekhome.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/AirConditioner.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/AirConditioner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/final-geekhome/Configuration.dat" beforeDir="false" afterPath="$PROJECT_DIR$/final-geekhome/Configuration.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/final-geekhome/Settings.dat" beforeDir="false" afterPath="$PROJECT_DIR$/final-geekhome/Settings.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/installall.sh" beforeDir="false" afterPath="$PROJECT_DIR$/installall.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/automation/AirConditionerAutomationUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/automation/AirConditionerAutomationUnit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/SynchronizedOutputPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/SynchronizedOutputPort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/coremodule/CoreModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/coremodule/CoreModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/commands/IntegrationFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/commands/IntegrationFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-gree/src/main/java/com/geekhome/greemodule/GreeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-gree/src/main/java/com/geekhome/greemodule/GreeAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-synchronization/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/module-synchronization/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-synchronization/src/main/java/com/geekhome/synchronizationmodule/business/SynchronizedCommandResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-synchronization/src/main/java/com/geekhome/synchronizationmodule/business/SynchronizedCommandResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-synchronization/src/main/java/com/geekhome/synchronizationmodule/business/SynchronizedEvaluationResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-synchronization/src/main/java/com/geekhome/synchronizationmodule/business/SynchronizedEvaluationResult.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -157,7 +161,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569405650267</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="supporting communication error and discovery errors">
+      <created>1569409388989</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1569409388989</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -183,6 +194,7 @@
     <MESSAGE value="air conditioners - small progress" />
     <MESSAGE value="air conditioners device automation - ready" />
     <MESSAGE value="using only one port to control gree air conditioner" />
-    <option name="LAST_COMMIT_MESSAGE" value="using only one port to control gree air conditioner" />
+    <MESSAGE value="supporting communication error and discovery errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="supporting communication error and discovery errors" />
   </component>
 </project>

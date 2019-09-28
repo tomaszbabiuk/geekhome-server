@@ -57,9 +57,9 @@ public class AirConditionerAutomationUnit extends MultistateDeviceAutomationUnit
             } else {
                 changeStateInternal("nodemand", ControlMode.Auto);
             }
-
-            execute();
         }
+
+        execute();
     }
 
     private void execute() throws Exception {
