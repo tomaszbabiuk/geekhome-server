@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76de2133-c160-40d8-be7b-b8ddd428235e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/final-geekhome/Configuration.dat.137" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/ConnectableSynchronizedInputPort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/final-geekhome.iws" beforeDir="false" afterPath="$PROJECT_DIR$/final-geekhome.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/final-geekhome/Configuration.dat" beforeDir="false" afterPath="$PROJECT_DIR$/final-geekhome/Configuration.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/final-geekhome/Settings.dat" beforeDir="false" afterPath="$PROJECT_DIR$/final-geekhome/Settings.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/installall.sh" beforeDir="false" afterPath="$PROJECT_DIR$/installall.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/automation/AirConditionerAutomationUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-centralheating/src/main/java/com/geekhome/centralheatingmodule/automation/AirConditionerAutomationUnit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/commands/IntegrationFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/commands/IntegrationFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-gree/src/main/java/com/geekhome/greemodule/GreeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-gree/src/main/java/com/geekhome/greemodule/GreeAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-synchronization/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/module-synchronization/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-synchronization/src/main/java/com/geekhome/synchronizationmodule/business/SynchronizedCommandResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-synchronization/src/main/java/com/geekhome/synchronizationmodule/business/SynchronizedCommandResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-synchronization/src/main/java/com/geekhome/synchronizationmodule/business/SynchronizedEvaluationResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-synchronization/src/main/java/com/geekhome/synchronizationmodule/business/SynchronizedEvaluationResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packageall.sh" beforeDir="false" afterPath="$PROJECT_DIR$/packageall.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +20,7 @@
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="dedicatedModuleDir" value="$PROJECT_DIR$" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
       </MavenImportingSettings>
     </option>
   </component>
@@ -38,12 +31,12 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/module-centralheating/src/main/resources/dialogs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/packageall.sh" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.4868421" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -168,7 +161,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569409388989</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="turbo for gree adapter">
+      <created>1569682037106</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1569682037106</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -195,6 +195,7 @@
     <MESSAGE value="air conditioners device automation - ready" />
     <MESSAGE value="using only one port to control gree air conditioner" />
     <MESSAGE value="supporting communication error and discovery errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="supporting communication error and discovery errors" />
+    <MESSAGE value="turbo for gree adapter" />
+    <option name="LAST_COMMIT_MESSAGE" value="turbo for gree adapter" />
   </component>
 </project>

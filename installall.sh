@@ -73,3 +73,7 @@ cd module-firebase
 mvn clean install
 cd ..
 
+cd module-gree
+mvn clean install
+cd ..
+

@@ -23,6 +23,7 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
     private boolean _isOperational;
     private HashMap<String, GreeDevice> _greeDevices;
     private long _lastRefresh;
+    private boolean _lightRefreshTurn = true;
 
 
     GreeAdapter(final HardwareManager hardwareManager,
@@ -179,9 +180,14 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
                 for (String greeDeviceId : _greeDevices.keySet()) {
                     GreeDevice greeDevice = _greeDevices.get(greeDeviceId);
 
-                    refreshLight(greeDevice);
-                    refreshTurbo(greeDevice);
-                    refreshTemperature(greeDevice);
+                    if (_lightRefreshTurn) {
+                        refreshLight(greeDevice);
+                    } else {
+                        refreshTurbo(greeDevice);
+                        refreshTemperature(greeDevice);
+                    }
+
+                    _lightRefreshTurn = !_lightRefreshTurn;
                 }
 
                 _lastRefresh = now.getTimeInMillis();

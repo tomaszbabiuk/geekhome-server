@@ -148,6 +148,12 @@ mvn clean package -Ddir="../build/to-obfuscate"
 mvn clean
 cd ..
 
+echo Packaging gree module
+cd module-gree
+mvn clean package -Ddir="../build/to-obfuscate"
+mvn clean
+cd ..
+
 echo Packaging geekhome module
 cd final-geekhome
 mvn clean package -Ddir="../build/to-obfuscate"
