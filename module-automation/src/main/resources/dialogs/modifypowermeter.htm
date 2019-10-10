@@ -1,0 +1,49 @@
+<!-- @Forms\PortTemplate.htm modifypowermeter HM.GetPowerInputPorts() false -->
+<!-- @Forms\RoomTemplate.htm modifypowermeter -->
+
+<div data-role="dialog" id="modifypowermeterdialog">
+    <div data-role="header">
+        <h1>
+            <!-- @RES:AUTO:PowerMeter -->
+        </h1>
+    </div>
+    <div data-role="content">
+        <form action="ModifyPowerMeter.post" method="post" data-ajax="false">
+            <!-- @Forms\TextField.htm modifypowermetername name required RES:C:Name -->
+            <!-- @Forms\TextField.htm modifypowermeterdescription description none RES:C:Description -->
+            <!-- @Forms\DeviceCategory.htm modifypowermeterdevicecategory -->
+            <div data-role="fieldcontain" id="modifypowermeterportcontent"></div>
+            <div data-role="fieldcontain" id="modifypowermeterroomcontent"></div>
+            <!-- @Forms\HiddenField.htm modifypowermeterid uniqueid -->
+            <!-- @Forms\SubmitButton.htm RES:C:Save -->
+        </form>
+        <script type="text/javascript" language="javascript">
+            jQuery('#modifypowermeterdialog').on('pagetransfer', function (e, args) {
+                jQuery('#modifypowermeterportcontent').html(jQuery('#modifypowermeterporttemplate').tmpl());
+                jQuery('#modifypowermeterroomcontent').html(jQuery('#modifypowermeterroomtemplate').tmpl());
+
+                var powerMeter = AUTO.FindPowerMeter(args.param);
+
+                var name = (powerMeter != null) ? powerMeter.Name.Name : '';
+                var description = (powerMeter != null) ? powerMeter.Name.Description : '';
+                var uniqueId = (powerMeter != null) ? powerMeter.Name.UniqueId : '';
+                var portId = (powerMeter != null) ? powerMeter.PortId : '';
+                var roomId = (powerMeter != null) ? powerMeter.RoomId : '';
+                var deviceCategory = (powerMeter != null) ? powerMeter.DeviceCategory : '1';
+
+                jQuery('#modifypowermeterdialog [name=name]').val(name);
+                jQuery('#modifypowermeterdialog [name=description]').val(description);
+                jQuery('#modifypowermeterdialog [name=uniqueid]').val(uniqueId);
+                jQuery('#modifypowermeterdialog [name=portid]').val(portId);
+                jQuery('#modifypowermeterdialog [name=roomid]').val(roomId);
+                jQuery('#modifypowermeterdialog [name=devicecategory]').val(deviceCategory);
+
+                jQuery('#modifypowermeterdialog form').validate();
+            });
+
+            jQuery('#modifypowermeterdialog').on('pageaftertransfer', function (e, args) {
+                jQuery('select').selectmenu('refresh');
+            });
+        </script>
+    </div>
+</div>

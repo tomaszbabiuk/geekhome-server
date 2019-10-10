@@ -12,8 +12,6 @@ import com.geekhome.httpserver.modules.CollectorCollection;
 import com.geekhome.httpserver.modules.IAutomationModule;
 import com.geekhome.synchronizationmodule.business.SmartEvent;
 
-import java.util.Calendar;
-
 public class AutomationAutomationModule implements IAutomationModule {
     private final MasterAutomation _masterAutomation;
     private AutomationConfiguration _automationConfiguration;
@@ -67,6 +65,12 @@ public class AutomationAutomationModule implements IAutomationModule {
             } else {
                 unit = new VirtualImpulseSwitchAutomationUnit(impulseSwitch, _localizationProvider);
             }
+            devicesList.add(unit);
+        }
+
+        for (PowerMeter powerMeter : _automationConfiguration.getPowerMeters().values()) {
+            IInputPort<Integer> readValuePort = _hardwareManager.findPowerInputPort(powerMeter.getPortId());
+            PowerMeterAutomationUnit unit = new PowerMeterAutomationUnit(powerMeter, readValuePort);
             devicesList.add(unit);
         }
     }

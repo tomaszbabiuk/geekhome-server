@@ -3,7 +3,8 @@ package com.geekhome.coremodule;
 public enum ValueType {
     Temperature(0),
     Humidity(1),
-    Luminosity(2);
+    Luminosity(2),
+    Power(3);
 
     private int _index;
 

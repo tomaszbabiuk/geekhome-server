@@ -37,6 +37,11 @@ public class AutomationJsonRequestsDispatcher extends JsonRequestsDispatcherBase
             return new JsonResponse(json, true);
         }
 
+        if (originalStringUppercased.equals("/CONFIG/POWERMETERS.JSON")) {
+            JSONObject json = JsonResponse.createJSONResult(_automationConfiguration.getPowerMeters());
+            return new JsonResponse(json, true);
+        }
+
         return null;
     }
 }

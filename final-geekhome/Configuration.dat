@@ -1,191 +1,57 @@
 [Version]
 version = 1
-pool = 137
+pool = 10
 comment = Zmiany w konfiguracji
-from = 9/28/19, 4:42 PM
+from = 10/10/19, 1:39 PM
 
 [Floor]
 iconname = house
 name = P1
 description = 
-uniqueid = core10
+uniqueid = core0
 
-[Room/Floor = core10]
-iconname = dreams
+[Room/Floor = core0]
+iconname = babycrib
 name = R1
 description = 
-uniqueid = core34
-
-[MultistateCondition]
-deviceid = core113
-statesids = on
-delaytime = 00:00:00
-name = Grzanie - Wł
-description = 
-uniqueid = core114
-
-[MultistateCondition]
-deviceid = core111
-statesids = on
-delaytime = 00:00:00
-name = Chłodzenie - Wł
-description = 
-uniqueid = core112
-
-[MultistateCondition]
-deviceid = core133
-statesids = on
-delaytime = 00:00:00
-name = Oświetlenie klimatyzatora - Wł
-description = 
-uniqueid = core134
+uniqueid = core1
 
 [ValueCondition]
-value = 10.0
-deviceid = heating74
+value = 3000.0
+deviceid = auto3
 operator = 0
 hysteresis = 1.0
-name = T1 większe od 10
+name = Power  większe od 1000
 description = 
-uniqueid = core76
-
-[Mode]
-priority = 10
-name = T1
-description = 
-uniqueid = core91
-
-[Alert]
-alertservicesids = 
-name = Al2
-description = 
-uniqueid = core81
-
-[Alert]
-alertservicesids = 
-name = Al1
-description = 
-uniqueid = core80
-
-[KeySwitch]
-hasnonreadonlystates = true
-portid = -
-roomid = core34
-devicecategory = 1
-controltype = 5
-iconname = trigger
-name = Grzanie
-description = 
-uniqueid = core113
-
-[KeySwitch]
-hasnonreadonlystates = true
-portid = -
-roomid = core34
-devicecategory = 1
-controltype = 5
-iconname = trigger
-name = Chłodzenie
-description = 
-uniqueid = core111
-
-[KeySwitch]
-hasnonreadonlystates = true
-portid = GREE:f4911e63af87:light
-roomid = core34
-devicecategory = 1
-controltype = 0
-iconname = trigger
-name = Oświetlenie klimatyzatora
-description = 
-uniqueid = core133
+uniqueid = core5
 
 [Block]
-targetid = heating101_heating
-conditionsids = core114
+targetid = auto6_on
+conditionsids = core5
 name = Nowy blok
 description = 
-uniqueid = core119
-
-[Block]
-targetid = heating101_cooling
-conditionsids = core112
-name = Nowy blok
-description = 
-uniqueid = core118
-
-[Block]
-targetid = heating101_manual
-conditionsids = core134
-name = Nowy blok
-description = 
-uniqueid = core135
-
-[Geofence]
-iconname = marker_other
-latitude = 50.0
-longitude = 40.0
-radius = 10.0
-name = kraków
-description = 
-uniqueid = core18
-
-[Thermometer]
-portid = TEMP0
-roomid = core34
-valuetype = 0
-devicecategory = 1
-controltype = 0
-iconname = thermometer
-name = T1
-description = 
-uniqueid = heating74
-
-[AirConditioner]
-temperaturecontrolportid = GREE:f4911e63af87:settemp
-hasnonreadonlystates = false
-roomid = core34
-temperaturecontrollerid = heating97
-devicecategory = 1
-controltype = 7
-iconname = snow
-name = K1
-description = asdf
-uniqueid = heating101
-
-[TemperatureController]
-roomid = core34
-initialvalue = 20.0
-modesids = 
-minvalue = 5.0
-maxvalue = 25.0
-devicecategory = 1
-controltype = 2
-iconname = thermostat
-name = K1
-description = asdf
-uniqueid = heating97
-
-[IntensityDevice]
-portid = POWER-OUT-1
-roomid = core34
-intensitypresetsids = 1,2,3,4
-devicecategory = 4
-controltype = 7
-iconname = lightbulb
-name = L1
-description = Lampa gdzieś tamrrrrr
-uniqueid = lights44
+uniqueid = core7
 
 [OnOffDevice]
-portid = GREE:f4911e63af87:turbo
+portid = OUTPUT0
+triggeredmanually = 0
 hasnonreadonlystates = true
-roomid = core34
-triggeredmanually = 1
+roomid = core1
 devicecategory = 1
-controltype = 7
-iconname = power
-name = Tryb turbo
+iconname = impeller
+controltype = 0
+name = Grzałka 0
 description = 
-uniqueid = auto132
+uniqueid = auto6
+
+[PowerMeter]
+portid = INV:192.168.1.4
+valuetype = 0
+roomid = core1
+devicecategory = 1
+iconname = meter
+controltype = 0
+name = M1
+description = 
+uniqueid = auto3
 

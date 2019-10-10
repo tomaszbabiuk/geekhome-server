@@ -25,12 +25,18 @@ class ValueConditionAutomationUnit extends EvaluableAutomationUnit {
         }
 
         double correction = _previousEvaluation ? _condition.getHysteresis() : 0;
-        double deviceValue = (double)_deviceUnit.getValue();
+
+        Double deviceValueAsDouble = null;
+        if (_deviceUnit.getValue() instanceof Integer) {
+            deviceValueAsDouble= (Integer)_deviceUnit.getValue() * 1.0;
+        } else {
+            deviceValueAsDouble= (Double)_deviceUnit.getValue();
+        }
 
         if (_condition.getOperator() == EqualityOperator.GreaterOrEqual) {
-            _previousEvaluation = deviceValue >= _condition.getValue() - correction;
+            _previousEvaluation = deviceValueAsDouble >= _condition.getValue() - correction;
         } else {
-            _previousEvaluation = deviceValue < _condition.getValue() + correction;
+            _previousEvaluation = deviceValueAsDouble < _condition.getValue() + correction;
         }
 
         return _previousEvaluation;

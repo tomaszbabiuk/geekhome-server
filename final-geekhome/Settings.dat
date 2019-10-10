@@ -1,7 +1,7 @@
 [Devices]
 
 [Settings]
-FAVORITES.user = lights36,lights44,auto56,lights58
+FAVORITES.user = lights36,lights44,auto56,lights58,auto3
 undefined = 100
 lights58_4 = #fffb00
 lights58_3 = #00fdff
@@ -10,8 +10,8 @@ DS2408Role.BF00000005CED329 = 1
 lights58_2 = #0433ff
 Firebase.Path = temporary_pass
 lights58_1 = #ff0000
-heating97 = 22
 DS2408Role.3D0000000C5B1629 = 1
+heating97 = 22
 lights44_4 = 221
 lights44_3 = 102
 lights44_2 = 46

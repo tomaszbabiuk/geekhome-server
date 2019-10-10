@@ -17,6 +17,7 @@ public class AutomationConfiguration extends Collector {
     private CollectorCollection<ImpulseSwitch> _impulseSwitches;
     private CollectorCollection<NfcCondition> _nfcConditions;
     private final CollectorCollection<IntensityDevice> _intensityDevices;
+    private final CollectorCollection<PowerMeter> _powerMeters;
 
     @ConfigurationSaver(sectionName = "IntensityDevice", hasChildren = false)
     public CollectorCollection<IntensityDevice> getIntensityDevices() {
@@ -38,6 +39,11 @@ public class AutomationConfiguration extends Collector {
         return _impulseSwitches;
     }
 
+    @ConfigurationSaver(sectionName = "PowerMeter", hasChildren = false)
+    public CollectorCollection<PowerMeter> getPowerMeters() {
+        return _powerMeters;
+    }
+
     public AutomationConfiguration(final IdPool pool,
                                    final MasterConfiguration masterConfiguration,
                                    final AutomationSettings automationSettings) {
@@ -48,6 +54,7 @@ public class AutomationConfiguration extends Collector {
         _impulseSwitches = new CollectorCollection<>();
         _nfcConditions = new CollectorCollection<>();
         _intensityDevices = new CollectorCollection<>();
+        _powerMeters = new CollectorCollection<>();
     }
 
     @Override
@@ -56,6 +63,7 @@ public class AutomationConfiguration extends Collector {
         getImpulseSwitches().clear();
         getNfcConditions().clear();
         getIntensityDevices().clear();
+        getPowerMeters().clear();
     }
 
     @Override
@@ -167,6 +175,21 @@ public class AutomationConfiguration extends Collector {
         onModified();
     }
 
+    private void addNfcCondition(String name, String description, String tag, String duration, String uniqueId) {
+        uniqueId = poolUniqueIdIfEmpty(uniqueId);
+        DescriptiveName conditionName = new DescriptiveName(name, uniqueId, description);
+        NfcCondition condition = new NfcCondition(conditionName, tag, duration);
+        getNfcConditions().add(condition);
+    }
+
+    private void editNfcCondition(String name, String description, String tag, String duration, String uniqueId) throws ObjectNotFoundException {
+        NfcCondition condition = getNfcConditions().find(uniqueId);
+        condition.getName().setName(name);
+        condition.getName().setDescription(description);
+        condition.setTag(tag);
+        condition.setDuration(duration);
+    }
+
 
     @ConfigurationLoader(sectionName = "IntensityDevice", parentId = "")
     public void modifyIntensityDevice(CrudAction action, INameValueSet values) throws Exception {
@@ -234,26 +257,55 @@ public class AutomationConfiguration extends Collector {
         }
     }
 
-    private void addNfcCondition(String name, String description, String tag, String duration, String uniqueId) {
-        uniqueId = poolUniqueIdIfEmpty(uniqueId);
-        DescriptiveName conditionName = new DescriptiveName(name, uniqueId, description);
-        NfcCondition condition = new NfcCondition(conditionName, tag, duration);
-        getNfcConditions().add(condition);
+    @SuppressWarnings("WeakerAccess")
+    @ConfigurationLoader(sectionName = "PowerMeter", parentId = "")
+    public void modifyPowerMeter(CrudAction action, INameValueSet values) throws Exception {
+        String name = values.getValue("name");
+        String description = values.getValue("description");
+        String uniqueId = values.getValue("uniqueid");
+        String portId = values.getValue("portid");
+        String roomId = values.getValue("roomid");
+        String deviceCategory = values.getValue("devicecategory");
+        DeviceCategory deviceCategoryParsed = DeviceCategory.fromInt(Integer.parseInt(deviceCategory));
+
+        if (action == CrudAction.AddOrCreate) {
+            addPowerMeter(name, description, portId, roomId, deviceCategoryParsed, uniqueId);
+        } else {
+            editPowerMeter(name, description, portId, roomId, deviceCategoryParsed, uniqueId);
+        }
+        onInvalidateCache("/CONFIG/POWERMETERS.JSON");
+        onInvalidateCache("/CONFIG/ALLDEVICES.JSON");
+        onInvalidateCache("/CONFIG/ALLVALUEDEVICES.JSON");
+        onModified();
     }
 
-    private void editNfcCondition(String name, String description, String tag, String duration, String uniqueId) throws ObjectNotFoundException {
-        NfcCondition condition = getNfcConditions().find(uniqueId);
-        condition.getName().setName(name);
-        condition.getName().setDescription(description);
-        condition.setTag(tag);
-        condition.setDuration(duration);
+    private void addPowerMeter(String name, String description, String portId, String roomId, DeviceCategory deviceCategory, String uniqueId) throws Exception {
+        uniqueId = poolUniqueIdIfEmpty(uniqueId);
+        DescriptiveName deviceName = new DescriptiveName(name, uniqueId, description);
+        PowerMeter device = new PowerMeter(deviceName, portId, roomId, deviceCategory);
+        getPowerMeters().add(device);
+        onInvalidateCache("/POWERINPUTPORTS.JSON");
+        onModified();
     }
-    
+
+    private void editPowerMeter(String name, String description, String portId, String roomId, DeviceCategory deviceCategory, String uniqueId) throws Exception {
+        PowerMeter device = getPowerMeters().find(uniqueId);
+        if (!device.getPortId().equals(portId)) {
+            onInvalidateCache("/POWERINPUTPORTS.JSON");
+        }
+        device.getName().setName(name);
+        device.getName().setDescription(description);
+        device.setPortId(portId);
+        device.setRoomId(roomId);
+        device.setDeviceCategory(deviceCategory);
+    }
+
     @Override
     public void addDevicesCollectors(java.util.ArrayList<CollectorCollection<? extends IDevice>> devicesCollectors) {
         devicesCollectors.add(getOnOffDevices());
         devicesCollectors.add(getImpulseSwitches());
         devicesCollectors.add(getIntensityDevices());
+        devicesCollectors.add(getPowerMeters());
     }
 
     @Override
@@ -268,6 +320,7 @@ public class AutomationConfiguration extends Collector {
         result.add(getImpulseSwitches());
         result.add(getNfcConditions());
         result.add(getIntensityDevices());
+        result.add(getPowerMeters());
 
         return result;
     }

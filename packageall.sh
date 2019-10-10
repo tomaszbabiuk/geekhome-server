@@ -136,12 +136,6 @@ mvn clean package -Ddir="../build/to-obfuscate"
 mvn clean
 cd ..
 
-echo Packaging mdns module
-cd module-mdns
-mvn clean package -Ddir="../build/to-obfuscate"
-mvn clean
-cd ..
-
 echo Packaging mqtt module
 cd module-mqtt
 mvn clean package -Ddir="../build/to-obfuscate"
@@ -150,6 +144,12 @@ cd ..
 
 echo Packaging gree module
 cd module-gree
+mvn clean package -Ddir="../build/to-obfuscate"
+mvn clean
+cd ..
+
+echo Packaging afore module
+cd module-afore
 mvn clean package -Ddir="../build/to-obfuscate"
 mvn clean
 cd ..

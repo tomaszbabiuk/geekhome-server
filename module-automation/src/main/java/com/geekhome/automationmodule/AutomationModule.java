@@ -45,6 +45,7 @@ public class AutomationModule extends Module {
         units.add(new Unit(UnitCategory.ConfigurationDevices, _localizationProvider.getValue("AUTO:OnOffDevices"), "power", "/config/onoffdevices.htm"));
         units.add(new Unit(UnitCategory.ConfigurationDevices, _localizationProvider.getValue("AUTO:IntensityDevices"), "brightness", "/config/intensitydevices.htm"));
         units.add(new Unit(UnitCategory.ConfigurationDevices, _localizationProvider.getValue("AUTO:ImpulseSwitches"), "pulse", "/config/impulseswitches.htm"));
+        units.add(new Unit(UnitCategory.ConfigurationDevices, _localizationProvider.getValue("AUTO:PowerMeters"), "meter", "/config/powermeters.htm"));
         units.add(new Unit(UnitCategory.ConfigurationConditions, _localizationProvider.getValue("AUTO:NfcConditions"), "smartphone", "/config/nfcconditions.htm"));
         return units;
     }
@@ -84,6 +85,11 @@ public class AutomationModule extends Module {
                 new Resource("AUTO:IntensityDevice", "Intensity device", "Urządzenia z regulacją mocy"),
                 new Resource("AUTO:IntensityDeviceDetails", "Intensity device details", "Szczegóły urządzenia z regulacją mocy"),
                 new Resource("AUTO:IntensityDevices", "Intensity device", "Urządzenia z regulacją mocy"),
+                new Resource("AUTO:PowerMeters", "Power meters", "Mierniki mocy"),
+                new Resource("AUTO:PowerMeter", "Power meter", "Miernik mocy"),
+                new Resource("AUTO:AddPowerMeter", "Add power meter", "Dodaj miernik mocy"),
+                new Resource("AUTO:PowerMeterDetails", "Power meter details", "Szczegóły miernika mocy"),
+                new Resource("AUTO:CannotAddPowerMetersMessage", "Cannot add any power meter since there's no rooms defined yet or there's no power meter port available!", "Aby dodawać nowe mierniki prądu musi być zdefiniowany conajmniej jeden port pomiaru prądu!"),
         };
     }
 
@@ -145,6 +151,9 @@ public class AutomationModule extends Module {
                 _automationConfiguration::modifyIntensityDevice, new RedirectionResponse("/config/IntensityDevices.htm"));
         handlers.add(intensityDevicesHandler);
 
+        CrudPostHandler powerMetersHandler = new CrudPostHandler(_masterConfiguration, "POWERMETER",
+                _automationConfiguration::modifyPowerMeter, new RedirectionResponse("/config/PowerMeters.htm"));
+        handlers.add(powerMetersHandler);
 
         return handlers;
     }

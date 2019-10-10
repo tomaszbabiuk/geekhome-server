@@ -3,6 +3,7 @@ var AUTO = {
 	impulseSwitches: null,
 	nfcConditions: null,
     intensityDevices: null,
+    powerMeters: null,
 
 	/* ONOFF DEVICES */
 	GetOnOffDevices: function() {
@@ -50,6 +51,18 @@ var AUTO = {
 
     FindIntensityDevice: function(id) {
         return FindDescriptiveNameObject(id, AUTO.GetIntensityDevices());
+    },
+    
+    /* POWER METERS */
+    GetPowerMeters: function() {
+        if (this.powerMeters == null) {
+            this.powerMeters = SortByDescriptiveName(ajaxInit('/config/powermeters.json').Result);
+        }
+        return this.powerMeters;
+    },
+
+    FindPowerMeter: function(id) {
+        return FindDescriptiveNameObject(id, AUTO.GetPowerMeters());
     },
 }
 

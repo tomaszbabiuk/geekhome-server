@@ -1,0 +1,38 @@
+<!-- @Controls\MasterHeader.htm -->
+<!-- @Controls\Dependencies.htm -->
+<!-- @Controls\DevicesInfo.htm RES:AUTO:CannotAddPowerMetersMessage -->
+<!-- @Controls\PortsInfo.htm false false false true false false false false -->
+
+<script id="powermeterstemplate" type="text/x-jquery-tmpl">
+    <!-- @Controls\HeatingCrudList.htm #powermeterdetailsdialog AUTO.GetPowerMeters() RES:AUTO:PowerMeters -->
+    <div>
+      <!-- @Controls\PageTransferButton.htm #modifypowermeterdialog RES:AUTO:AddPowerMeter -->
+    </div>
+</script>
+
+<div data-role="page" id="powermetersindex">
+    <div data-role="header">
+        <h1><!-- @RES:AUTO:PowerMeters --></h1>
+    </div>
+    <div data-role="content" id="powermeterscontent">
+    </div>
+    <!-- @Controls\ConfigurationFooter.htm -->
+</div>
+
+<script type="text/javascript">
+    jQuery('#powermetersindex').on('pagecreate', function (event) {
+        if (!HM.HasPowerInputPorts()) {
+            jQuery(jQuery('#portsinfotemplate').tmpl()).appendTo('#powermeterscontent');
+        } else if (CORE.CanAddDevices()) {
+            jQuery(jQuery('#powermeterstemplate').tmpl()).appendTo('#powermeterscontent');
+        } else {
+            jQuery(jQuery('#devicesinfotemplate').tmpl()).appendTo('#powermeterscontent');
+        }
+    });
+</script>
+
+<!-- @Dialogs\SaveChanges.htm /config/powermeters.htm -->
+<!-- @Dialogs\DiscardChanges.htm /config/powermeters.htm -->
+<!-- @Dialogs\ModifyPowerMeter.htm -->
+<!-- @Dialogs\AutomationCrudDetails.htm powermeterdetails #modifypowermeterdialog RemovePowerMeter.post AUTO.FindPowerMeter RES:AUTO:PowerMeter RES:AUTO:PowerMeterDetails -->
+<!-- @Controls\MasterFooter.htm -->

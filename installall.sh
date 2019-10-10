@@ -77,3 +77,7 @@ cd module-gree
 mvn clean install
 cd ..
 
+cd module-afore
+mvn clean install
+cd ..
+

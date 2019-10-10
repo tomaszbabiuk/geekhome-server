@@ -99,6 +99,11 @@
             <artifactId>module-gree</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>geekhome.server</groupId>
+            <artifactId>module-afore</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
