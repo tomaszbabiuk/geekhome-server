@@ -15,6 +15,6 @@ public interface IHardwareManagerAdapter extends IMonitorable, INamedObject {
     void refresh(Calendar now) throws Exception;
     RefreshState getRefreshState();
     void resetLatches();
-    void invalidate(OperationMode operationMode) throws Exception;
+    void reconfigure(OperationMode operationMode) throws Exception;
     void stop();
 }

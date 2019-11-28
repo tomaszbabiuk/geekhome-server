@@ -144,7 +144,7 @@ class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCa
     }
 
     @Override
-    public void invalidate(OperationMode operationMode) {
+    public void reconfigure(OperationMode operationMode) {
     }
 
     @Override

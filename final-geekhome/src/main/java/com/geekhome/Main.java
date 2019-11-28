@@ -1,6 +1,6 @@
 package com.geekhome;
 
-import com.geekhome.aforemodule.AforeModule;
+import com.geekhome.shellymodule.AforeModule;
 import com.geekhome.alarmmodule.AlarmModule;
 import com.geekhome.automationmodule.AutomationModule;
 import com.geekhome.centralheatingmodule.CentralHeatingModule;
@@ -8,12 +8,12 @@ import com.geekhome.common.json.JSONArrayList;
 import com.geekhome.coremodule.CoreModule;
 import com.geekhome.emailmodule.EmailModule;
 import com.geekhome.extafreemodule.ExtaFreeModule;
-import com.geekhome.aforemodule.GreeModule;
 import com.geekhome.hardwaremanagermodule.HardwareManagerModule;
 import com.geekhome.httpserver.jetty.HomeServerStarter;
 import com.geekhome.httpserver.modules.IModule;
 import com.geekhome.lightsmodule.LightsModule;
 import com.geekhome.onewiremodule.OneWireModule;
+import com.geekhome.shellymodule.ShellyModule;
 import com.geekhome.usersmodule.UsersModule;
 import com.geekhome.ventilationmodule.VentilationModule;
 import com.geekhome.firebasemodule.FirebaseModule;
@@ -41,7 +41,8 @@ public class Main {
             modules.add(new FirebaseModule(localizationProvider, automationSettings, synchronizer, masterAutomation));
 //            modules.add(new MqttModule(localizationProvider, hardwareManager, args));
 //            modules.add(new GreeModule(hardwareManager, localizationProvider));
-            modules.add(new AforeModule(hardwareManager, localizationProvider));
+//            modules.add(new AforeModule(hardwareManager, localizationProvider));
+            modules.add(new ShellyModule(hardwareManager, localizationProvider));
             return modules;
         });
     }

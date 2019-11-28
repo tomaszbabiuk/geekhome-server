@@ -1,4 +1,4 @@
-package com.geekhome.aforemodule;
+package com.geekhome.shellymodule;
 
 import com.geekhome.common.HardwareManager;
 import com.geekhome.common.IHardwareManagerAdapterFactory;
@@ -8,12 +8,12 @@ import com.geekhome.httpserver.modules.Module;
 
 import java.util.ArrayList;
 
-public class AforeModule extends Module {
+public class GreeModule extends Module {
 
     private HardwareManager _hardwareManager;
     private ILocalizationProvider _localizationProvider;
 
-    public AforeModule(final HardwareManager hardwareManager,
+    public GreeModule(final HardwareManager hardwareManager,
                       final ILocalizationProvider localizationProvider) {
         _hardwareManager = hardwareManager;
         _localizationProvider = localizationProvider;
@@ -31,6 +31,6 @@ public class AforeModule extends Module {
 
     @Override
     public void addSerialAdaptersFactory(ArrayList<IHardwareManagerAdapterFactory> factories) {
-        factories.add(new AforeAdapterFactory(_hardwareManager, _localizationProvider));
+        factories.add(new GreeAdapterFactory(_hardwareManager, _localizationProvider));
     }
 }

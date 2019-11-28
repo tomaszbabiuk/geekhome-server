@@ -1,4 +1,4 @@
-package com.geekhome.aforemodule;
+package com.geekhome.shellymodule;
 
 import com.geekhome.common.HardwareManager;
 import com.geekhome.common.IHardwareManagerAdapter;

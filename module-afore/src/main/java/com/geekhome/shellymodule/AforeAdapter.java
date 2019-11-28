@@ -1,9 +1,8 @@
-package com.geekhome.aforemodule;
+package com.geekhome.shellymodule;
 
 import com.geekhome.common.*;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.logging.LoggingService;
-import com.geekhome.hardwaremanager.IInputPort;
 import com.geekhome.hardwaremanager.InputPortsCollection;
 import com.geekhome.hardwaremanager.OutputPortsCollection;
 import com.geekhome.hardwaremanager.TogglePortsCollection;
@@ -106,7 +105,7 @@ class AforeAdapter extends NamedObject implements IHardwareManagerAdapter {
     }
 
     @Override
-    public void invalidate(OperationMode operationMode) throws Exception {
+    public void reconfigure(OperationMode operationMode) throws Exception {
 
     }
 

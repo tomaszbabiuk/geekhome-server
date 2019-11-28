@@ -104,6 +104,11 @@
             <artifactId>module-afore</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>geekhome.server</groupId>
+            <artifactId>module-shelly</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

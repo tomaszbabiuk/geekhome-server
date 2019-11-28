@@ -81,3 +81,7 @@ cd module-afore
 mvn clean install
 cd ..
 
+cd module-shelly
+mvn clean install
+cd ..
+

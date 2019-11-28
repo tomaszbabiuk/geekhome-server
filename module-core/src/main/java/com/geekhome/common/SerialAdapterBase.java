@@ -36,7 +36,7 @@ public abstract class SerialAdapterBase extends MonitorableBase implements IHard
     }
 
     @Override
-    public void invalidate(OperationMode operationMode) throws Exception {
+    public void reconfigure(OperationMode operationMode) throws Exception {
     }
 
     protected String getSerialPortName() {

@@ -20,17 +20,20 @@
         <module name="module-hardwaremanager" />
         <module name="module-extafree" />
         <module name="module-automation" />
+        <module name="module-afore" />
         <module name="module-lights" />
         <module name="module-onewire" />
         <module name="module-email" />
         <module name="module-firebase" />
         <module name="module-core" />
+        <module name="module-shelly" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="final-geekhome" target="8" />
       <module name="library-http" target="8" />
       <module name="library-onewire" target="8" />
+      <module name="module-afore" target="8" />
       <module name="module-alarm" target="8" />
       <module name="module-automation" target="8" />
       <module name="module-centralheating" target="8" />
@@ -44,6 +47,7 @@
       <module name="module-mqtt" target="7" />
       <module name="module-onewire" target="7" />
       <module name="module-pi4j" target="8" />
+      <module name="module-shelly" target="8" />
       <module name="module-synchronization" target="8" />
       <module name="module-users" target="8" />
       <module name="module-ventilation" target="8" />
@@ -53,6 +57,7 @@
     <file url="file://$PROJECT_DIR$/final-geekhome" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library-http" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library-onewire" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-afore" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-alarm" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-automation" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-centralheating" charset="UTF-8" />
@@ -66,6 +71,7 @@
     <file url="file://$PROJECT_DIR$/module-mqtt" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-onewire" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-pi4j" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-shelly" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-synchronization" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-users" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-ventilation" charset="UTF-8" />
@@ -99,6 +105,8 @@
         <option value="$PROJECT_DIR$/module-users/pom.xml" />
         <option value="$PROJECT_DIR$/module-ventilation/pom.xml" />
         <option value="$PROJECT_DIR$/module-gree/pom.xml" />
+        <option value="$PROJECT_DIR$/module-afore/pom.xml" />
+        <option value="$PROJECT_DIR$/module-shelly/pom.xml" />
       </list>
     </option>
   </component>
@@ -231,6 +239,7 @@
       <module fileurl="file://$PROJECT_DIR$/final-geekhome.iml" filepath="$PROJECT_DIR$/final-geekhome.iml" />
       <module fileurl="file://$PROJECT_DIR$/library-http.iml" filepath="$PROJECT_DIR$/library-http.iml" />
       <module fileurl="file://$PROJECT_DIR$/library-onewire.iml" filepath="$PROJECT_DIR$/library-onewire.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module-afore.iml" filepath="$PROJECT_DIR$/module-afore.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-alarm.iml" filepath="$PROJECT_DIR$/module-alarm.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-automation.iml" filepath="$PROJECT_DIR$/module-automation.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-centralheating.iml" filepath="$PROJECT_DIR$/module-centralheating.iml" />
@@ -244,12 +253,13 @@
       <module fileurl="file://$PROJECT_DIR$/module-mqtt.iml" filepath="$PROJECT_DIR$/module-mqtt.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-onewire.iml" filepath="$PROJECT_DIR$/module-onewire.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-pi4j.iml" filepath="$PROJECT_DIR$/module-pi4j.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module-shelly.iml" filepath="$PROJECT_DIR$/module-shelly.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-synchronization.iml" filepath="$PROJECT_DIR$/module-synchronization.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-users.iml" filepath="$PROJECT_DIR$/module-users.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-ventilation.iml" filepath="$PROJECT_DIR$/module-ventilation.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="VcsDirectoryMappings">
@@ -320,6 +330,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1/activation-1.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: javax.jmdns:jmdns:3.4.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/jmdns/jmdns/3.4.1/jmdns-3.4.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/jmdns/jmdns/3.4.1/jmdns-3.4.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/jmdns/jmdns/3.4.1/jmdns-3.4.1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: javax.mail:mail:1.4.7">

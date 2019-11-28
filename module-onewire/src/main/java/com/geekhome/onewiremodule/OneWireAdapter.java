@@ -175,7 +175,7 @@ class OneWireAdapter extends SerialAdapterBase {
     }
 
     @Override
-    public void invalidate(OperationMode operationMode) throws Exception {
+    public void reconfigure(OperationMode operationMode) throws Exception {
         assignSwitches(operationMode);
     }
 

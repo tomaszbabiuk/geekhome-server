@@ -1,4 +1,4 @@
-package com.geekhome.aforemodule;
+package com.geekhome.shellymodule;
 
 import com.geekhome.common.*;
 import com.geekhome.common.logging.ILogger;
@@ -162,7 +162,7 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
     }
 
     @Override
-    public void invalidate(OperationMode operationMode) {
+    public void reconfigure(OperationMode operationMode) {
     }
 
     @Override

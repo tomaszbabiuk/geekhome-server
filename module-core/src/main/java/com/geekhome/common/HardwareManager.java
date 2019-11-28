@@ -298,7 +298,7 @@ public class HardwareManager implements IHardwareManager {
     public void invalidateAdapters(OperationMode operationMode) throws Exception {
         if (_adapters != null) {
             for (IHardwareManagerAdapter adapter : _adapters) {
-                adapter.invalidate(operationMode);
+                adapter.reconfigure(operationMode);
             }
         }
     }

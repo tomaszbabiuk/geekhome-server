@@ -1,4 +1,4 @@
-package com.geekhome.aforemodule;
+package com.geekhome.shellymodule;
 
 import com.geekhome.common.HardwareManager;
 import com.geekhome.common.IHardwareManagerAdapterFactory;
@@ -8,13 +8,13 @@ import com.geekhome.httpserver.modules.Module;
 
 import java.util.ArrayList;
 
-public class GreeModule extends Module {
+public class ShellyModule extends Module {
 
     private HardwareManager _hardwareManager;
     private ILocalizationProvider _localizationProvider;
 
-    public GreeModule(final HardwareManager hardwareManager,
-                      final ILocalizationProvider localizationProvider) {
+    public ShellyModule(final HardwareManager hardwareManager,
+                        final ILocalizationProvider localizationProvider) {
         _hardwareManager = hardwareManager;
         _localizationProvider = localizationProvider;
     }
@@ -26,11 +26,11 @@ public class GreeModule extends Module {
 
     @Override
     public String getTextResourcesPrefix() {
-        return "MQTT";
+        return "SLY";
     }
 
     @Override
     public void addSerialAdaptersFactory(ArrayList<IHardwareManagerAdapterFactory> factories) {
-        factories.add(new GreeAdapterFactory(_hardwareManager, _localizationProvider));
+        factories.add(new ShellyAdapterFactory(_hardwareManager, _localizationProvider));
     }
 }

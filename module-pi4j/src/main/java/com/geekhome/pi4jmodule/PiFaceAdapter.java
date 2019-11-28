@@ -164,7 +164,7 @@ class PiFaceAdapter extends NamedObject implements IHardwareManagerAdapter {
     }
 
     @Override
-    public void invalidate(OperationMode operationMode) {
+    public void reconfigure(OperationMode operationMode) {
     }
 
     @Override
