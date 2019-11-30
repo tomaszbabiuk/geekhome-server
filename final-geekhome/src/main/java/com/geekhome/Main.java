@@ -1,5 +1,6 @@
 package com.geekhome;
 
+import com.geekhome.moquettemodule.MoquetteModule;
 import com.geekhome.shellymodule.AforeModule;
 import com.geekhome.alarmmodule.AlarmModule;
 import com.geekhome.automationmodule.AutomationModule;
@@ -43,6 +44,7 @@ public class Main {
 //            modules.add(new GreeModule(hardwareManager, localizationProvider));
 //            modules.add(new AforeModule(hardwareManager, localizationProvider));
             modules.add(new ShellyModule(hardwareManager, localizationProvider));
+            modules.add(new MoquetteModule(hardwareManager, localizationProvider));
             return modules;
         });
     }

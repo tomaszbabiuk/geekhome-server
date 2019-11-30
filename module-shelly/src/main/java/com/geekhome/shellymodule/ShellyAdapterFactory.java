@@ -21,8 +21,8 @@ class ShellyAdapterFactory implements IHardwareManagerAdapterFactory {
     @Override
     public ArrayList<? extends IHardwareManagerAdapter> createAdapters() {
         ArrayList<IHardwareManagerAdapter> result = new ArrayList<>();
-        ShellyAdapter mqttAdapter = new ShellyAdapter(_hardwareManager, _localizationProvider);
-        result.add(mqttAdapter);
+        ShellyAdapter adapter = new ShellyAdapter(_hardwareManager, _localizationProvider);
+        result.add(adapter);
 
         return result;
     }
