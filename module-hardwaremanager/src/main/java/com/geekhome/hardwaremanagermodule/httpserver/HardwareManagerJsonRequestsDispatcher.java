@@ -38,8 +38,8 @@ public class HardwareManagerJsonRequestsDispatcher extends JsonRequestsDispatche
 
         if (originalStringUppercased.equals("/READPOWERINPUTPORT.JSON")) {
             String portId = request.getUrl().getQueryString().getValues().getValue("id");
-            IInputPort<Integer> port = _hardwareManager.findPowerInputPort(portId);
-            int value = port.read();
+            IInputPort<Double> port = _hardwareManager.findPowerInputPort(portId);
+            double value = port.read();
             JSONObject json = JsonResponse.createJSONResult(value);
             return new JsonResponse(json, false);
         }

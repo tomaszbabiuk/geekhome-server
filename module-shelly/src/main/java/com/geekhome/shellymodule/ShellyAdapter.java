@@ -28,6 +28,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
     private ILocalizationProvider _localizationProvider;
     private MqttBroker _mqttBroker;
     private ArrayList<ShellyDigitalOutputPort> _ownedDigitalOutputPorts = new ArrayList<>();
+    private ArrayList<ShellyPowerInputPort> _ownedPowerInputPorts = new ArrayList<>();
 
     ShellyAdapter(final HardwareManager hardwareManager,
                   final ILocalizationProvider localizationProvider,
@@ -56,7 +57,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
     @Override
     public void discover(final InputPortsCollection<Boolean> digitalInputPorts,
                          final OutputPortsCollection<Boolean> digitalOutputPorts,
-                         final InputPortsCollection<Integer> powerInputPorts,
+                         final InputPortsCollection<Double> powerInputPorts,
                          final OutputPortsCollection<Integer> powerOutputPorts,
                          final InputPortsCollection<Double> temperaturePorts,
                          final TogglePortsCollection togglePorts,
@@ -90,6 +91,10 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
                                 for (int i=0; i<settingsResponse.getDevice().getNumOutputs(); i++) {
                                     addDigitalOutput(settingsResponse, i);
                                 }
+
+                                for (int i=0; i<settingsResponse.getDevice().getNumMeters(); i++) {
+                                    addPowerInput(settingsResponse, i);
+                                }
                             }
                         } catch (Exception ex) {
                             _logger.warning("Exception during shelly discovery, 99% it's not a shelly device", ex);
@@ -106,6 +111,16 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
                     ShellyDigitalOutputPort output = new ShellyDigitalOutputPort(portId, isOn, readTopic, writeTopic);
                     digitalOutputPorts.add(output);
                     _ownedDigitalOutputPorts.add(output);
+                }
+
+                private void addPowerInput(ShellySettingsResponse settingsResponse, int i) {
+                    String shellyId = settingsResponse.getDevice().getHostname();
+                    String portId = shellyId + ":" + i;
+                    double power = settingsResponse.getMeters().get(i).getPower();
+                    String readTopic = "shellies/"+ shellyId +"/relay/0/power";
+                    ShellyPowerInputPort input = new ShellyPowerInputPort(portId, power, readTopic);
+                    powerInputPorts.add(input);
+                    _ownedPowerInputPorts.add(input);
                 }
             };
 
@@ -226,14 +241,40 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
             int number = Integer.parseInt(topicSplit[3]);
             String portId = shellyId + ":" + number;
 
-            updateDigitalOutputs(topicName, payload, shellyId, portId);
+            if (topicSplit.length == 5) {
+                String measureType = topicSplit[4];
+                if (measureType.equals("power")) {
+                    updatePowerInputs(topicName, payload, shellyId, portId);
+                }
+            } else {
+                updateDigitalOutputs(topicName, payload, shellyId, portId);
+            }
+        }
+    }
+
+    private void updatePowerInputs(String topicName, String payload, String shellyId, String portId) {
+        IInputPort<Double> maybeShellyPower = _hardwareManager.tryFindPowerInputPort(portId);
+        if (maybeShellyPower == null) {
+            _logger.info("Couldn't find shelly port matching topic: " + topicName);
+            return;
+        }
+
+        if (!(maybeShellyPower instanceof ShellyPowerInputPort)) {
+            _logger.info("Incompatible type of shelly power input port " + shellyId + " in hardware manager registry");
+            return;
+        }
+
+        ShellyPowerInputPort shellyPower = (ShellyPowerInputPort)maybeShellyPower;
+        if (topicName.equals(shellyPower.getReadTopic())) {
+            double newValue = shellyPower.convertMqttPayloadToValue(payload);
+            shellyPower.setValue(newValue);
         }
     }
 
     private void updateDigitalOutputs(String topicName, String payload, String shellyId, String portId) {
         IOutputPort<Boolean> maybeShellyOutput = _hardwareManager.tryFindDigitalOutputPort(portId);
         if (maybeShellyOutput == null) {
-            _logger.info("Couldn't find shelly device matching topic: " + topicName);
+            _logger.info("Couldn't find shelly port matching topic: " + topicName);
             return;
         }
 

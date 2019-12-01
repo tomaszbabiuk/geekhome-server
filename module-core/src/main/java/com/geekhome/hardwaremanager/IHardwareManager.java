@@ -12,7 +12,7 @@ public interface IHardwareManager {
     OutputPortsCollection<Boolean> getDigitalOutputPorts();
     InputPortsCollection<Boolean> getDigitalInputPorts();
     OutputPortsCollection<Integer> getPowerOutputPorts();
-    InputPortsCollection<Integer> getPowerInputPorts();
+    InputPortsCollection<Double> getPowerInputPorts();
     InputPortsCollection<Double> getTemperaturePorts();
     InputPortsCollection<Double> getHumidityPorts();
     InputPortsCollection<Double> getLuminosityPorts();
@@ -27,8 +27,8 @@ public interface IHardwareManager {
     IOutputPort<Integer> findPowerOutputPort(String id) throws PortNotFoundException;
     IOutputPort<Integer> tryFindPowerOutputPort(String id);
 
-    IInputPort<Integer> findPowerInputPort(String id) throws PortNotFoundException;
-    IInputPort<Integer> tryFindPowerInputPort(String id);
+    IInputPort<Double> findPowerInputPort(String id) throws PortNotFoundException;
+    IInputPort<Double> tryFindPowerInputPort(String id);
 
     IInputPort<Double> findTemperaturePort(String id) throws PortNotFoundException;
     IInputPort<Double> tryFindTemperaturePort(String id);

@@ -69,7 +69,7 @@ public class AutomationAutomationModule implements IAutomationModule {
         }
 
         for (PowerMeter powerMeter : _automationConfiguration.getPowerMeters().values()) {
-            IInputPort<Integer> readValuePort = _hardwareManager.findPowerInputPort(powerMeter.getPortId());
+            IInputPort<Double> readValuePort = _hardwareManager.findPowerInputPort(powerMeter.getPortId());
             PowerMeterAutomationUnit unit = new PowerMeterAutomationUnit(powerMeter, readValuePort);
             devicesList.add(unit);
         }

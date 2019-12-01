@@ -12,6 +12,10 @@ cd library-update
 mvn clean install
 cd ..
 
+cd library-moquette
+mvn clean install
+cd ..
+
 cd module-synchronization
 mvn clean install
 cd ..
@@ -84,4 +88,3 @@ cd ..
 cd module-shelly
 mvn clean install
 cd ..
-

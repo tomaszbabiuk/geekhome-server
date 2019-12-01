@@ -33,7 +33,7 @@ public class SonoffDiscoveryHelper {
     public void processSonoffDiscovery(final ServiceEvent serviceEvent,
                                        final InputPortsCollection<Boolean> digitalInputPorts,
                                        final OutputPortsCollection<Boolean> digitalOutputPorts,
-                                       final InputPortsCollection<Integer> powerInputPorts,
+                                       final InputPortsCollection<Double> powerInputPorts,
                                        final OutputPortsCollection<Integer> powerOutputPorts,
                                        final InputPortsCollection<Double> temperaturePorts,
                                        final TogglePortsCollection togglePortsCollection,

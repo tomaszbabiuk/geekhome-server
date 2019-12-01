@@ -52,19 +52,19 @@ class AforeAdapter extends NamedObject implements IHardwareManagerAdapter {
     @Override
     public void discover(final InputPortsCollection<Boolean> digitalInputPorts,
                          final OutputPortsCollection<Boolean> digitalOutputPorts,
-                         final InputPortsCollection<Integer> powerInputPorts,
+                         final InputPortsCollection<Double> powerInputPorts,
                          final OutputPortsCollection<Integer> powerOutputPorts,
                          final InputPortsCollection<Double> temperaturePorts,
                          final TogglePortsCollection togglePorts,
                          final InputPortsCollection<Double> humidityPorts,
                          final InputPortsCollection<Double> luminosityPorts) throws DiscoveryException {
 
-        Integer inverterPower = readInverterPower();
-        SynchronizedInputPort<Integer> inverterPort = new SynchronizedInputPort<>(INVERTER_PORT_ID, inverterPower);
+        Double inverterPower = readInverterPower();
+        SynchronizedInputPort<Double> inverterPort = new SynchronizedInputPort<>(INVERTER_PORT_ID, inverterPower);
         powerInputPorts.add(inverterPort);
     }
 
-    private Integer readInverterPower() {
+    private Double readInverterPower() {
         try {
             String inverterResponse = doRequest(_okClient, "http://192.168.1.4/status.html");
 
@@ -72,22 +72,22 @@ class AforeAdapter extends NamedObject implements IHardwareManagerAdapter {
             for (String line : lines) {
                 if (line.contains("webdata_now_p")) {
                     String s = line.substring(line.indexOf("\"") + 1, line.lastIndexOf("\""));
-                    return Integer.valueOf(s);
+                    return Double.valueOf(s);
                 }
             }
         } catch (Exception ex) {
             _logger.warning("A problem reading inverter power: ", ex);
         }
 
-        return 0;
+        return 0.0;
     }
 
     @Override
     public void refresh(Calendar now) throws Exception {
         if (now.getTimeInMillis() - _lastRefresh > 15000) {
 
-            Integer inverterPower = readInverterPower();
-            SynchronizedInputPort<Integer> inverterPort =  (SynchronizedInputPort<Integer>)_hardwareManager.findPowerInputPort(INVERTER_PORT_ID);
+            Double inverterPower = readInverterPower();
+            SynchronizedInputPort<Double> inverterPort =  (SynchronizedInputPort<Double>)_hardwareManager.findPowerInputPort(INVERTER_PORT_ID);
             inverterPort.setValue(inverterPower);
 
             _lastRefresh = now.getTimeInMillis();

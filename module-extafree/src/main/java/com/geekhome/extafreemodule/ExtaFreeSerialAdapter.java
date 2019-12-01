@@ -29,7 +29,7 @@ class ExtaFreeSerialAdapter extends SerialAdapterBase {
 
     @Override
     public void discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
-                         InputPortsCollection<Integer> powerInputPorts, OutputPortsCollection<Integer> powerOutputPorts,
+                         InputPortsCollection<Double> powerInputPorts, OutputPortsCollection<Integer> powerOutputPorts,
                          InputPortsCollection<Double> temperaturePorts, TogglePortsCollection togglePorts,
                          InputPortsCollection<Double> humidityPorts, InputPortsCollection<Double> luminosityPorts) throws DiscoveryException {
         try {

@@ -19,7 +19,7 @@ public class HardwareManager implements IHardwareManager {
     private ILogger _logger = LoggingService.getLogger();
     private InputPortsCollection<Boolean> _digitalInputPorts;
     private OutputPortsCollection<Boolean> _digitalOutputPorts;
-    private InputPortsCollection<Integer> _powerInputPorts;
+    private InputPortsCollection<Double> _powerInputPorts;
     private OutputPortsCollection<Integer> _powerOutputPorts;
     private InputPortsCollection<Double> _temperaturePorts;
     private InputPortsCollection<Double> _humidityPorts;
@@ -71,7 +71,7 @@ public class HardwareManager implements IHardwareManager {
     }
 
     @Override
-    public InputPortsCollection<Integer> getPowerInputPorts() {
+    public InputPortsCollection<Double> getPowerInputPorts() {
         return _powerInputPorts;
     }
 
@@ -126,12 +126,12 @@ public class HardwareManager implements IHardwareManager {
     }
 
     @Override
-    public IInputPort<Integer> findPowerInputPort(String id) throws PortNotFoundException {
+    public IInputPort<Double> findPowerInputPort(String id) throws PortNotFoundException {
         return getPowerInputPorts().find(id);
     }
 
     @Override
-    public IInputPort<Integer> tryFindPowerInputPort(String id) {
+    public IInputPort<Double> tryFindPowerInputPort(String id) {
         return getPowerInputPorts().tryFind(id);
     }
 
@@ -187,7 +187,7 @@ public class HardwareManager implements IHardwareManager {
         for (IOutputPort<Boolean> port : getDigitalOutputPorts().values()) {
             port.initialize(portMapper);
         }
-        for (IInputPort<Integer> port : getPowerInputPorts().values()) {
+        for (IInputPort<Double> port : getPowerInputPorts().values()) {
             port.initialize(portMapper);
         }
         for (IOutputPort<Integer> port : getPowerOutputPorts().values()) {

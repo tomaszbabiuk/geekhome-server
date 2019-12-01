@@ -5,22 +5,22 @@ import com.geekhome.coremodule.automation.DeviceAutomationUnit;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.hardwaremanager.IInputPort;
 
-class PowerMeterAutomationUnit extends DeviceAutomationUnit<Integer, PowerMeter> {
-    private IInputPort<Integer> _port;
+class PowerMeterAutomationUnit extends DeviceAutomationUnit<Double, PowerMeter> {
+    private IInputPort<Double> _port;
 
-    PowerMeterAutomationUnit(PowerMeter powerMeter, IInputPort<Integer> port) {
+    PowerMeterAutomationUnit(PowerMeter powerMeter, IInputPort<Double> port) {
         super(powerMeter);
         _port = port;
     }
 
     @Override
-    public Integer getValue() {
+    public Double getValue() {
         return _port.read();
     }
 
     @Override
     public EvaluationResult buildEvaluationResult() {
-        String interfaceValue = String.format("%d W", getValue());
+        String interfaceValue = String.format("%.2f W", getValue());
         return new EvaluationResult(getValue(), interfaceValue, false);
     }
 }
