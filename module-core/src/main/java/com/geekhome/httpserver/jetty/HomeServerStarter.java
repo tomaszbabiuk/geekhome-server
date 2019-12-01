@@ -16,6 +16,8 @@ import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.OperationMode;
 import com.geekhome.httpserver.SystemInfo;
 import com.geekhome.httpserver.modules.IModule;
+import com.geekhome.moquettemodule.MoquetteBroker;
+import com.geekhome.moquettemodule.MqttBroker;
 
 public class HomeServerStarter {
     public interface BuildModulesDelegate {
@@ -23,7 +25,8 @@ public class HomeServerStarter {
                                             ILocalizationProvider localizationProvider, SystemInfo systemInfo,
                                             MasterConfiguration masterConfiguration, MasterAutomation masterAutomation,
                                             Synchronizer synchronizer, CommandsProcessor commandsProcessor,
-                                            DashboardAlertService dashboardAlertService) throws Exception;
+                                            DashboardAlertService dashboardAlertService,
+                                            MqttBroker mqttBroker) throws Exception;
     }
 
     public static void start(int port, BuildModulesDelegate buildModulesDelegate) {
@@ -39,9 +42,14 @@ public class HomeServerStarter {
             CommandsProcessor commandsProcessor = new CommandsProcessor(systemInfo, masterConfiguration, masterAutomation, localizationProvider);
             Synchronizer synchronizer = new Synchronizer(masterConfiguration, masterAutomation, automationSettings,
                     localizationProvider, systemInfo, commandsProcessor, dashboardAlertService);
+
+            final MoquetteBroker mqttBroker = new MoquetteBroker();
+            mqttBroker.start();
+
             JSONArrayList<IModule> modules = buildModulesDelegate.buildModules(hardwareManager,
                     automationSettings, localizationProvider, systemInfo, masterConfiguration,
-                    masterAutomation, synchronizer, commandsProcessor, dashboardAlertService);
+                    masterAutomation, synchronizer, commandsProcessor, dashboardAlertService,
+                    mqttBroker);
 
             for (IModule module : modules) {
                 localizationProvider.load(module.getResources());

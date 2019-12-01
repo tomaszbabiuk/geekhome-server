@@ -111,7 +111,7 @@
         </dependency>
         <dependency>
             <groupId>geekhome.server</groupId>
-            <artifactId>module-moquette</artifactId>
+            <artifactId>library-moquette</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>

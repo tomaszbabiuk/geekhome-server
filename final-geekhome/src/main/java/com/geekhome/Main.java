@@ -1,7 +1,5 @@
 package com.geekhome;
 
-import com.geekhome.moquettemodule.MoquetteModule;
-import com.geekhome.shellymodule.AforeModule;
 import com.geekhome.alarmmodule.AlarmModule;
 import com.geekhome.automationmodule.AutomationModule;
 import com.geekhome.centralheatingmodule.CentralHeatingModule;
@@ -23,7 +21,7 @@ public class Main {
     public static void main(String[] args) {
         final int port = HomeServerStarter.extractPortFromArgs(args);
 
-        HomeServerStarter.start(port, (hardwareManager, automationSettings, localizationProvider, systemInfo, masterConfiguration, masterAutomation, synchronizer, commandsProcessor, dashboardAlertService) -> {
+        HomeServerStarter.start(port, (hardwareManager, automationSettings, localizationProvider, systemInfo, masterConfiguration, masterAutomation, synchronizer, commandsProcessor, dashboardAlertService, mqttBroker) -> {
             JSONArrayList<IModule> modules = new JSONArrayList<>();
             modules.add(new FullEditionAdaptationModule());
             modules.add(new CoreModule(localizationProvider, systemInfo, masterConfiguration,       masterAutomation, hardwareManager,
@@ -43,8 +41,7 @@ public class Main {
 //            modules.add(new MqttModule(localizationProvider, hardwareManager, args));
 //            modules.add(new GreeModule(hardwareManager, localizationProvider));
 //            modules.add(new AforeModule(hardwareManager, localizationProvider));
-            modules.add(new ShellyModule(hardwareManager, localizationProvider));
-            modules.add(new MoquetteModule(hardwareManager, localizationProvider));
+            modules.add(new ShellyModule(hardwareManager, localizationProvider, mqttBroker));
             return modules;
         });
     }
