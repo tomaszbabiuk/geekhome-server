@@ -104,7 +104,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
 
                 private void addDigitalOutput(ShellySettingsResponse settingsResponse, int i) {
                     String shellyId = settingsResponse.getDevice().getHostname();
-                    String portId = shellyId + ":" + i;
+                    String portId = shellyId + "-OUT-" + i;
                     boolean isOn = settingsResponse.getRelays().get(i).isOn();
                     String readTopic = "shellies/"+ shellyId +"/relay/0";
                     String writeTopic = "shellies/"+ shellyId +"/relay/0/command";
@@ -115,7 +115,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
 
                 private void addPowerInput(ShellySettingsResponse settingsResponse, int i) {
                     String shellyId = settingsResponse.getDevice().getHostname();
-                    String portId = shellyId + ":" + i;
+                    String portId = shellyId + "-PWR-" + i;
                     double power = settingsResponse.getMeters().get(i).getPower();
                     String readTopic = "shellies/"+ shellyId +"/relay/0/power";
                     ShellyPowerInputPort input = new ShellyPowerInputPort(portId, power, readTopic);
@@ -239,14 +239,15 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
             String[] topicSplit = topicName.split("/");
             String shellyId = topicSplit[1];
             int number = Integer.parseInt(topicSplit[3]);
-            String portId = shellyId + ":" + number;
 
             if (topicSplit.length == 5) {
                 String measureType = topicSplit[4];
                 if (measureType.equals("power")) {
+                    String portId = shellyId + "-PWR-" + number;
                     updatePowerInputs(topicName, payload, shellyId, portId);
                 }
             } else {
+                String portId = shellyId + "-OUT-" + number;
                 updateDigitalOutputs(topicName, payload, shellyId, portId);
             }
         }
