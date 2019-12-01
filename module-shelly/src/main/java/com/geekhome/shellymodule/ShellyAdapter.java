@@ -4,9 +4,7 @@ import com.geekhome.common.*;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.utils.Sleeper;
-import com.geekhome.hardwaremanager.InputPortsCollection;
-import com.geekhome.hardwaremanager.OutputPortsCollection;
-import com.geekhome.hardwaremanager.TogglePortsCollection;
+import com.geekhome.hardwaremanager.*;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.OperationMode;
 import com.geekhome.moquettemodule.MqttBroker;
@@ -16,8 +14,9 @@ import okhttp3.*;
 
 import java.io.IOException;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Enumeration;
+import java.util.concurrent.atomic.AtomicInteger;
 
 class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, MqttListener {
 
@@ -28,6 +27,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
     private HardwareManager _hardwareManager;
     private ILocalizationProvider _localizationProvider;
     private MqttBroker _mqttBroker;
+    private ArrayList<ShellyDigitalOutputPort> _ownedDigitalOutputPorts = new ArrayList<>();
 
     ShellyAdapter(final HardwareManager hardwareManager,
                   final ILocalizationProvider localizationProvider,
@@ -36,11 +36,21 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
         _hardwareManager = hardwareManager;
         _localizationProvider = localizationProvider;
         _mqttBroker = mqttBroker;
-        _brokerIP = getLocalNetworkIP();
+        _brokerIP = resolveIpInLan();
         _okClient = createAnonymousClient();
         _gson = new Gson();
         _mqttBroker = mqttBroker;
+    }
 
+    private InetAddress resolveIpInLan() {
+        try {
+            return LanInetAddressHelper.getIpInLan();
+        }
+        catch (Exception ex) {
+            _logger.error("Problem resolving this machine IP in LAN", ex);
+        }
+
+        return null;
     }
 
     @Override
@@ -53,46 +63,70 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
                          final InputPortsCollection<Double> humidityPorts,
                          final InputPortsCollection<Double> luminosityPorts) throws DiscoveryException {
 
-        _logger.info("Starting mDNS discovery");
+        _logger.info("Starting SHELLY discovery");
 
         try {
-
+            final AtomicInteger probedIPs = new AtomicInteger(0);
             Callback shellyCheckCallback = new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-
+                    probedIPs.incrementAndGet();
                 }
 
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
+                public void onResponse(Call call, Response response) {
+                    probedIPs.incrementAndGet();
+
                     if (response.isSuccessful()) {
                         try {
-                            ShellyResponse shellyResponse = _gson.fromJson(response.body().string(), ShellyResponse.class);
+                            ShellySettingsResponse settingsResponse = _gson.fromJson(response.body().string(), ShellySettingsResponse.class);
                             response.body().close();
-                            if (!shellyResponse.getType().isEmpty()) {
+                            if (settingsResponse != null && settingsResponse.getDevice() != null && settingsResponse.getDevice().getType() != null) {
                                 _logger.info("Shelly FOUND: " + response.request().url());
+
+                                //TODO: check if hijacking is needed
                                 hijackShelly(InetAddress.getByName(response.request().url().host()));
+
+                                for (int i=0; i<settingsResponse.getDevice().getNumOutputs(); i++) {
+                                    addDigitalOutput(settingsResponse, i);
+                                }
                             }
                         } catch (Exception ex) {
-                            //ignored - not a shelly device
+                            _logger.warning("Exception during shelly discovery, 99% it's not a shelly device", ex);
                         }
                     }
+                }
+
+                private void addDigitalOutput(ShellySettingsResponse settingsResponse, int i) {
+                    String shellyId = settingsResponse.getDevice().getHostname();
+                    String portId = shellyId + ":" + i;
+                    boolean isOn = settingsResponse.getRelays().get(i).isOn();
+                    String readTopic = "shellies/"+ shellyId +"/relay/0";
+                    String writeTopic = "shellies/"+ shellyId +"/relay/0/command";
+                    ShellyDigitalOutputPort output = new ShellyDigitalOutputPort(portId, isOn, readTopic, writeTopic);
+                    digitalOutputPorts.add(output);
+                    _ownedDigitalOutputPorts.add(output);
                 }
             };
 
             for (int i = 0; i < 256; i++) {
-                InetAddress ipToCheck = InetAddress.getByAddress( new byte[]{
+                InetAddress ipToCheck = InetAddress.getByAddress(new byte[]{
                         _brokerIP.getAddress()[0],
                         _brokerIP.getAddress()[1],
                         _brokerIP.getAddress()[2],
                         (byte) i
                 });
 
-                _logger.info("Checking shelly: " + ipToCheck.getHostAddress());
+                _logger.debug("Checking shelly: " + ipToCheck.getHostAddress());
                 checkIfItsShelly(ipToCheck, shellyCheckCallback);
             }
+
+            while (probedIPs.get() == 255) {
+                Sleeper.trySleep(100);
+            }
+            _logger.info("DONE (SHELLY discovery)");
         } catch (UnknownHostException e) {
-            e.printStackTrace();
+            throw new DiscoveryException("Error discovering shelly devices", e);
         }
     }
 
@@ -103,16 +137,16 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
 
     private void checkIfItsShelly(InetAddress possibleShellyIP, Callback callback) {
         Request request = new Request.Builder()
-                .url("http://" + possibleShellyIP + "/shelly")
+                .url("http://" + possibleShellyIP + "/settings")
                 .build();
 
-            _okClient.newCall(request).enqueue(callback);
-            Sleeper.trySleep(10);
+        _okClient.newCall(request).enqueue(callback);
+        Sleeper.trySleep(10);
     }
 
     private void enableMQTT(InetAddress shellyIP) throws IOException {
         Request request = new Request.Builder()
-                .url("http://" + shellyIP + "/settings/mqtt?mqtt_enable=1&mqtt_server="+ _brokerIP.getHostAddress() +"%3A1883")
+                .url("http://" + shellyIP + "/settings/mqtt?mqtt_enable=1&mqtt_server=" + _brokerIP.getHostAddress() + "%3A1883")
                 .build();
 
         Response response = _okClient.newCall(request).execute();
@@ -134,6 +168,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
 
     @Override
     public void refresh(Calendar now) throws Exception {
+
     }
 
 
@@ -144,6 +179,14 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
 
     @Override
     public void resetLatches() {
+        for (ShellyDigitalOutputPort shellyDigitalOutput : _ownedDigitalOutputPorts) {
+            if (shellyDigitalOutput.didChangeValue()) {
+                String mqttPayload = shellyDigitalOutput.convertValueToMqttPayload(shellyDigitalOutput.getValue());
+                String topic = shellyDigitalOutput.getWriteTopic();
+                _mqttBroker.publish(topic, mqttPayload);
+                shellyDigitalOutput.resetLatch();
+            }
+        }
     }
 
     @Override
@@ -170,43 +213,46 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
         return null;
     }
 
-    private InetAddress getLocalNetworkIP() {
-        try {
-            for (final Enumeration<NetworkInterface> interfaces =
-                 NetworkInterface.getNetworkInterfaces();
-                 interfaces.hasMoreElements(); ) {
-                final NetworkInterface cur = interfaces.nextElement();
-
-                if (cur.isLoopback()) {
-                    continue;
-                }
-
-                for (final InterfaceAddress addr : cur.getInterfaceAddresses()) {
-                    final InetAddress inet_addr = addr.getAddress();
-
-                    if (!(inet_addr instanceof Inet4Address)) {
-                        continue;
-                    }
-
-                    return inet_addr;
-                }
-            }
-        } catch (Exception ex) {
-            _logger.error("Unknown error getting IP address in LAN", ex);
-        }
-
-        return null;
-    }
-
     private static OkHttpClient createAnonymousClient() {
         return new OkHttpClient.Builder().build();
     }
 
     @Override
-    public void onPublish(String topicName, String msgAsString) {
-        _logger.info("MQTT message: " + topicName + ", content: " + msgAsString);
+    public void onPublish(String topicName, String payload) {
+        _logger.info("MQTT message: " + topicName + ", content: " + payload);
+        if (topicName.contains("/relay/")) {
+            String[] topicSplit = topicName.split("/");
+            String shellyId = topicSplit[1];
+            int number = Integer.parseInt(topicSplit[3]);
+            String portId = shellyId + ":" + number;
+
+            updateDigitalOutputs(topicName, payload, shellyId, portId);
+        }
+    }
+
+    private void updateDigitalOutputs(String topicName, String payload, String shellyId, String portId) {
+        IOutputPort<Boolean> maybeShellyOutput = _hardwareManager.tryFindDigitalOutputPort(portId);
+        if (maybeShellyOutput == null) {
+            _logger.info("Couldn't find shelly device matching topic: " + topicName);
+            return;
+        }
+
+        if (!(maybeShellyOutput instanceof ShellyDigitalOutputPort)) {
+            _logger.info("Incompatible type of shelly output port " + shellyId + " in hardware manager registry");
+            return;
+        }
+
+        ShellyDigitalOutputPort shellyOutput = (ShellyDigitalOutputPort)maybeShellyOutput;
+        if (topicName.equals(shellyOutput.getReadTopic())) {
+            boolean newValue = shellyOutput.convertMqttPayloadToValue(payload);
+            shellyOutput.setValue(newValue);
+        }
     }
 }
+
+/*
+shellies/shellyplug-s-376CC2/relay/0/command:on|off
+ */
 
 /*
 {
