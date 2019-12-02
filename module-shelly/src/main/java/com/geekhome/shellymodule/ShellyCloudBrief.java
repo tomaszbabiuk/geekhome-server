@@ -1,0 +1,18 @@
+package com.geekhome.shellymodule;
+
+import com.google.gson.annotations.SerializedName;
+
+/*
+   "cloud":{
+      "enabled":false,
+      "connected":false
+   },
+ */
+public class ShellyCloudBrief {
+    @SerializedName("enabled")
+    private boolean _enabled;
+
+    public boolean isEnabled() {
+        return _enabled;
+    }
+}

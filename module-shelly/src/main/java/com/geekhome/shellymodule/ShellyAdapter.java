@@ -85,8 +85,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
                             if (settingsResponse != null && settingsResponse.getDevice() != null && settingsResponse.getDevice().getType() != null) {
                                 _logger.info("Shelly FOUND: " + response.request().url());
 
-                                //TODO: check if hijacking is needed
-                                hijackShelly(InetAddress.getByName(response.request().url().host()));
+                                hijackShellyIfNeeded(settingsResponse, InetAddress.getByName(response.request().url().host()));
 
                                 for (int i=0; i<settingsResponse.getDevice().getNumOutputs(); i++) {
                                     addDigitalOutput(settingsResponse, i);
@@ -145,9 +144,15 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
         }
     }
 
-    private void hijackShelly(InetAddress shellyIP) throws IOException {
-        disableCloud(shellyIP);
-        enableMQTT(shellyIP);
+    private void hijackShellyIfNeeded(ShellySettingsResponse settings, InetAddress shellyIP) throws IOException {
+        if (settings.getCloud().isEnabled()) {
+            disableCloud(shellyIP);
+        }
+
+        String expectedMqttServerSetting = _brokerIP.getHostAddress() + ":1883";
+        if (!settings.getMqtt().isEnable() || !settings.getMqtt().getServer().equals(expectedMqttServerSetting)) {
+            enableMQTT(shellyIP);
+        }
     }
 
     private void checkIfItsShelly(InetAddress possibleShellyIP, Callback callback) {

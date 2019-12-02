@@ -15,6 +15,12 @@ public class ShellySettingsResponse {
     @SerializedName("meters")
     private ArrayList<ShellyMeterBrief> _meters;
 
+    @SerializedName("mqtt")
+    private ShellyMqttBrief _mqtt;
+
+    @SerializedName("cloud")
+    private ShellyCloudBrief _cloud;
+
     public ShellyDeviceBrief getDevice() {
         return _device;
     }
@@ -25,5 +31,13 @@ public class ShellySettingsResponse {
 
     public ArrayList<ShellyMeterBrief> getMeters() {
         return _meters;
+    }
+
+    public ShellyMqttBrief getMqtt() {
+        return _mqtt;
+    }
+
+    public ShellyCloudBrief getCloud() {
+        return _cloud;
     }
 }
