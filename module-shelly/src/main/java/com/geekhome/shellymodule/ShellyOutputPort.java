@@ -1,17 +1,20 @@
 package com.geekhome.shellymodule;
 
+import com.geekhome.common.IConnectable;
 import com.geekhome.common.SynchronizedOutputPort;
 
-public class ShellyOutputPort<T> extends SynchronizedOutputPort<T> {
+public class ShellyOutputPort<T> extends SynchronizedOutputPort<T> implements IConnectable {
 
     private String _writeTopic;
     private String _readTopic;
     private boolean _valueChanged;
+    private boolean _connected;
 
     public ShellyOutputPort(String id, T initialValue, String readTopic, String writeTopic) {
         super(id, initialValue);
         _readTopic = readTopic;
         _writeTopic = writeTopic;
+        _connected = true;
     }
 
     public String getReadTopic() {
@@ -29,6 +32,8 @@ public class ShellyOutputPort<T> extends SynchronizedOutputPort<T> {
             super.write(value);
             _valueChanged = true;
         }
+
+        _connected = true;
     }
 
     public void resetLatch() {
@@ -38,4 +43,14 @@ public class ShellyOutputPort<T> extends SynchronizedOutputPort<T> {
     public boolean didChangeValue() {
         return _valueChanged;
     }
+
+    @Override
+    public boolean isConnected() {
+        return _connected;
+    }
+
+    public void markDisconnected() {
+        _connected = false;
+    }
+
 }

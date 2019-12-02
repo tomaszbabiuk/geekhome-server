@@ -5,6 +5,7 @@ import io.moquette.broker.Server;
 import io.moquette.broker.config.MemoryConfig;
 import io.moquette.interception.AbstractInterceptHandler;
 import io.moquette.interception.InterceptHandler;
+import io.moquette.interception.messages.InterceptConnectionLostMessage;
 import io.moquette.interception.messages.InterceptPublishMessage;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.mqtt.MqttMessageBuilders;
@@ -64,6 +65,14 @@ public class MoquetteBroker implements MqttBroker {
 
             for (MqttListener listener : listeners) {
                 listener.onPublish(msg.getTopicName(), msgAsString);
+            }
+        }
+
+        @Override
+        public void onConnectionLost(InterceptConnectionLostMessage msg) {
+            String clientID = msg.getClientID();
+            for (MqttListener listener : listeners) {
+                listener.onDisconnected(clientID);
             }
         }
     }

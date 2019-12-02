@@ -98,6 +98,8 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
                         } catch (Exception ex) {
                             _logger.warning("Exception during shelly discovery, 99% it's not a shelly device", ex);
                         }
+                    } else {
+                        response.body().close();
                     }
                 }
 
@@ -188,9 +190,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
 
     @Override
     public void refresh(Calendar now) throws Exception {
-
     }
-
 
     @Override
     public RefreshState getRefreshState() {
@@ -254,6 +254,21 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
             } else {
                 String portId = shellyId + "-OUT-" + number;
                 updateDigitalOutputs(topicName, payload, shellyId, portId);
+            }
+        }
+    }
+
+    @Override
+    public void onDisconnected(String clientID) {
+        for (ShellyDigitalOutputPort output : _ownedDigitalOutputPorts) {
+            if (output.getId().startsWith(clientID)) {
+                output.markDisconnected();
+            }
+        }
+
+        for (ShellyPowerInputPort output : _ownedPowerInputPorts) {
+            if (output.getId().startsWith(clientID)) {
+                output.markDisconnected();
             }
         }
     }
