@@ -29,6 +29,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
     private MqttBroker _mqttBroker;
     private ArrayList<ShellyDigitalOutputPort> _ownedDigitalOutputPorts = new ArrayList<>();
     private ArrayList<ShellyPowerInputPort> _ownedPowerInputPorts = new ArrayList<>();
+    private ArrayList<ShellyPowerOutputPort> _ownedPowerOutputPorts = new ArrayList<>();
 
     ShellyAdapter(final HardwareManager hardwareManager,
                   final ILocalizationProvider localizationProvider,
@@ -46,8 +47,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
     private InetAddress resolveIpInLan() {
         try {
             return LanInetAddressHelper.getIpInLan();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             _logger.error("Problem resolving this machine IP in LAN", ex);
         }
 
@@ -85,14 +85,26 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
                             if (settingsResponse != null && settingsResponse.getDevice() != null && settingsResponse.getDevice().getType() != null) {
                                 _logger.info("Shelly FOUND: " + response.request().url());
 
-                                hijackShellyIfNeeded(settingsResponse, InetAddress.getByName(response.request().url().host()));
+                                InetAddress shellyIP = InetAddress.getByName(response.request().url().host());
 
-                                for (int i=0; i<settingsResponse.getDevice().getNumOutputs(); i++) {
-                                    addDigitalOutput(settingsResponse, i);
+                                hijackShellyIfNeeded(settingsResponse, shellyIP);
+
+                                if (settingsResponse.getRelays() != null) {
+                                    for (int i = 0; i < settingsResponse.getRelays().size(); i++) {
+                                        addDigitalOutput(settingsResponse, i);
+                                    }
                                 }
 
-                                for (int i=0; i<settingsResponse.getDevice().getNumMeters(); i++) {
-                                    addPowerInput(settingsResponse, i);
+                                if (settingsResponse.getLights() != null) {
+                                    for (int i = 0; i < settingsResponse.getLights().size(); i++) {
+                                        addPowerOutput(settingsResponse, i, shellyIP);
+                                    }
+                                }
+
+                                if (settingsResponse.getMeters() != null) {
+                                    for (int i = 0; i < settingsResponse.getDevice().getNumMeters(); i++) {
+                                        addPowerInput(settingsResponse, i);
+                                    }
                                 }
                             }
                         } catch (Exception ex) {
@@ -103,12 +115,24 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
                     }
                 }
 
+                private void addPowerOutput(ShellySettingsResponse settingsResponse, int i, InetAddress shellyIP) throws IOException {
+                    String shellyId = settingsResponse.getDevice().getHostname();
+                    String portId = shellyId + "-PWM-" + i;
+                    boolean isOn = settingsResponse.getLights().get(i).isOn();
+                    int brightness = isOn ? checkBrightness(shellyIP, i) * 256/100 : 0;
+                    String readTopic = "shellies/" + shellyId + "/light/" + i + "/status";
+                    String writeTopic = "shellies/" + shellyId + "/light/" + i + "/set";
+                    ShellyPowerOutputPort output = new ShellyPowerOutputPort(portId, brightness, readTopic, writeTopic);
+                    powerOutputPorts.add(output);
+                    _ownedPowerOutputPorts.add(output);
+                }
+
                 private void addDigitalOutput(ShellySettingsResponse settingsResponse, int i) {
                     String shellyId = settingsResponse.getDevice().getHostname();
                     String portId = shellyId + "-OUT-" + i;
                     boolean isOn = settingsResponse.getRelays().get(i).isOn();
-                    String readTopic = "shellies/"+ shellyId +"/relay/0";
-                    String writeTopic = "shellies/"+ shellyId +"/relay/0/command";
+                    String readTopic = "shellies/" + shellyId + "/relay/" + i;
+                    String writeTopic = "shellies/" + shellyId + "/relay/" + i + "/command";
                     ShellyDigitalOutputPort output = new ShellyDigitalOutputPort(portId, isOn, readTopic, writeTopic);
                     digitalOutputPorts.add(output);
                     _ownedDigitalOutputPorts.add(output);
@@ -118,7 +142,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
                     String shellyId = settingsResponse.getDevice().getHostname();
                     String portId = shellyId + "-PWR-" + i;
                     double power = settingsResponse.getMeters().get(i).getPower();
-                    String readTopic = "shellies/"+ shellyId +"/relay/0/power";
+                    String readTopic = "shellies/" + shellyId + "/relay/" + i + "/power";
                     ShellyPowerInputPort input = new ShellyPowerInputPort(portId, power, readTopic);
                     powerInputPorts.add(input);
                     _ownedPowerInputPorts.add(input);
@@ -188,6 +212,19 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
         }
     }
 
+    private int checkBrightness(InetAddress possibleShellyIP, int channel) throws IOException {
+        Request request = new Request.Builder()
+                .url("http://" + possibleShellyIP + "/light/" + channel)
+                .build();
+
+        Response response = _okClient.newCall(request).execute();
+        String json = response.body().string();
+        response.body().close();
+        ShellyLightResponse responseParsed = _gson.fromJson(json, ShellyLightResponse.class);
+
+        return responseParsed.getBrightness();
+    }
+
     @Override
     public void refresh(Calendar now) throws Exception {
     }
@@ -205,6 +242,15 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
                 String topic = shellyDigitalOutput.getWriteTopic();
                 _mqttBroker.publish(topic, mqttPayload);
                 shellyDigitalOutput.resetLatch();
+            }
+        }
+
+        for (ShellyPowerOutputPort shellyPowerOutputPort : _ownedPowerOutputPorts) {
+            if (shellyPowerOutputPort.didChangeValue()) {
+                String mqttPayload = shellyPowerOutputPort.convertValueToMqttPayload(shellyPowerOutputPort.getValue());
+                String topic = shellyPowerOutputPort.getWriteTopic();
+                _mqttBroker.publish(topic, mqttPayload);
+                shellyPowerOutputPort.resetLatch();
             }
         }
     }
@@ -240,20 +286,30 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
     @Override
     public void onPublish(String topicName, String payload) {
         _logger.info("MQTT message: " + topicName + ", content: " + payload);
-        if (topicName.contains("/relay/")) {
+        boolean isRelayTopic = topicName.contains("/relay/");
+        boolean isLightTopic = topicName.contains("/light/");
+
+        if (isRelayTopic || isLightTopic) {
             String[] topicSplit = topicName.split("/");
             String shellyId = topicSplit[1];
-            int number = Integer.parseInt(topicSplit[3]);
+            int channel = Integer.parseInt(topicSplit[3]);
 
-            if (topicSplit.length == 5) {
-                String measureType = topicSplit[4];
-                if (measureType.equals("power")) {
-                    String portId = shellyId + "-PWR-" + number;
-                    updatePowerInputs(topicName, payload, shellyId, portId);
+            if (isRelayTopic) {
+                if (topicSplit.length == 5) {
+                    String measureType = topicSplit[4];
+                    if (measureType.equals("power")) {
+                        String portId = shellyId + "-PWR-" + channel;
+                        updatePowerInputs(topicName, payload, shellyId, portId);
+                    }
+                } else {
+                    String portId = shellyId + "-OUT-" + channel;
+                    updateDigitalOutputs(topicName, payload, shellyId, portId);
                 }
-            } else {
-                String portId = shellyId + "-OUT-" + number;
-                updateDigitalOutputs(topicName, payload, shellyId, portId);
+            }
+
+            if (isLightTopic) {
+                String portId = shellyId + "-PWM-" + channel;
+                updatePowerOutputs(topicName, payload, shellyId, portId);
             }
         }
     }
@@ -273,6 +329,25 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
         }
     }
 
+    private void updatePowerOutputs(String topicName, String payload, String shellyId, String portId) {
+        IOutputPort<Integer> maybeShellyPower = _hardwareManager.tryFindPowerOutputPort(portId);
+        if (maybeShellyPower == null) {
+            _logger.info("Couldn't find shelly port matching topic: " + topicName);
+            return;
+        }
+
+        if (!(maybeShellyPower instanceof ShellyPowerOutputPort)) {
+            _logger.info("Incompatible type of shelly power output port " + shellyId + " in hardware manager registry");
+            return;
+        }
+
+        ShellyPowerOutputPort shellyPower = (ShellyPowerOutputPort) maybeShellyPower;
+        if (topicName.equals(shellyPower.getReadTopic())) {
+            int newValue = shellyPower.convertMqttPayloadToValue(payload);
+            shellyPower.setValue(newValue);
+        }
+    }
+
     private void updatePowerInputs(String topicName, String payload, String shellyId, String portId) {
         IInputPort<Double> maybeShellyPower = _hardwareManager.tryFindPowerInputPort(portId);
         if (maybeShellyPower == null) {
@@ -285,7 +360,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
             return;
         }
 
-        ShellyPowerInputPort shellyPower = (ShellyPowerInputPort)maybeShellyPower;
+        ShellyPowerInputPort shellyPower = (ShellyPowerInputPort) maybeShellyPower;
         if (topicName.equals(shellyPower.getReadTopic())) {
             double newValue = shellyPower.convertMqttPayloadToValue(payload);
             shellyPower.setValue(newValue);
@@ -304,7 +379,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
             return;
         }
 
-        ShellyDigitalOutputPort shellyOutput = (ShellyDigitalOutputPort)maybeShellyOutput;
+        ShellyDigitalOutputPort shellyOutput = (ShellyDigitalOutputPort) maybeShellyOutput;
         if (topicName.equals(shellyOutput.getReadTopic())) {
             boolean newValue = shellyOutput.convertMqttPayloadToValue(payload);
             shellyOutput.setValue(newValue);
@@ -426,6 +501,34 @@ shellies/shellyplug-s-376CC2/relay/0/command:on|off
          ],
          "total":0
       }
-   ]
+   ],
+   "lights":[
+      {
+         "name":"",
+         "ison":true,
+         "default_state":"off",
+         "auto_on":0.00,
+         "auto_off":0.00,
+         "btn1_on_url":"",
+         "btn1_off_url":"",
+         "btn2_on_url":"",
+         "btn2_off_url":"",
+         "out_on_url":"",
+         "out_off_url":"",
+         "schedule":false,
+         "schedule_rules":[
+
+         ],
+         "btn_type":"edge",
+         "swap_inputs":0
+      }
+   ],
 }
+ */
+
+/*
+
+http://192.168.1.2/light/0
+
+{"ison":false,"mode":"white","brightness":22}
  */
