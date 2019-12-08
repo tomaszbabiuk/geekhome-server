@@ -3,7 +3,7 @@ package com.geekhome.shellymodule;
 import com.geekhome.common.IConnectable;
 import com.geekhome.common.SynchronizedOutputPort;
 
-public class ShellyOutputPort<T> extends SynchronizedOutputPort<T> implements IConnectable {
+public abstract class ShellyOutputPort<T> extends SynchronizedOutputPort<T> implements IConnectable, IShellyOutputPort {
 
     private String _writeTopic;
     private String _readTopic;
@@ -36,10 +36,12 @@ public class ShellyOutputPort<T> extends SynchronizedOutputPort<T> implements IC
         _connected = true;
     }
 
+    @Override
     public void resetLatch() {
         _valueChanged = false;
     }
 
+    @Override
     public boolean didChangeValue() {
         return _valueChanged;
     }

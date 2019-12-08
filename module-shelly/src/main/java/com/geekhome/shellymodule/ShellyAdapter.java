@@ -117,33 +117,25 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
 
                 private void addPowerOutput(ShellySettingsResponse settingsResponse, int i, InetAddress shellyIP) throws IOException {
                     String shellyId = settingsResponse.getDevice().getHostname();
-                    String portId = shellyId + "-PWM-" + i;
                     boolean isOn = settingsResponse.getLights().get(i).isOn();
                     int brightness = isOn ? checkBrightness(shellyIP, i) * 256/100 : 0;
-                    String readTopic = "shellies/" + shellyId + "/light/" + i + "/status";
-                    String writeTopic = "shellies/" + shellyId + "/light/" + i + "/set";
-                    ShellyPowerOutputPort output = new ShellyPowerOutputPort(portId, brightness, readTopic, writeTopic);
+                    ShellyPowerOutputPort output = new ShellyPowerOutputPort(shellyId, i, brightness);
                     powerOutputPorts.add(output);
                     _ownedPowerOutputPorts.add(output);
                 }
 
                 private void addDigitalOutput(ShellySettingsResponse settingsResponse, int i) {
                     String shellyId = settingsResponse.getDevice().getHostname();
-                    String portId = shellyId + "-OUT-" + i;
                     boolean isOn = settingsResponse.getRelays().get(i).isOn();
-                    String readTopic = "shellies/" + shellyId + "/relay/" + i;
-                    String writeTopic = "shellies/" + shellyId + "/relay/" + i + "/command";
-                    ShellyDigitalOutputPort output = new ShellyDigitalOutputPort(portId, isOn, readTopic, writeTopic);
+                    ShellyDigitalOutputPort output = new ShellyDigitalOutputPort(shellyId, i, isOn);
                     digitalOutputPorts.add(output);
                     _ownedDigitalOutputPorts.add(output);
                 }
 
                 private void addPowerInput(ShellySettingsResponse settingsResponse, int i) {
                     String shellyId = settingsResponse.getDevice().getHostname();
-                    String portId = shellyId + "-PWR-" + i;
                     double power = settingsResponse.getMeters().get(i).getPower();
-                    String readTopic = "shellies/" + shellyId + "/relay/" + i + "/power";
-                    ShellyPowerInputPort input = new ShellyPowerInputPort(portId, power, readTopic);
+                    ShellyPowerInputPort input = new ShellyPowerInputPort(shellyId, i, power);
                     powerInputPorts.add(input);
                     _ownedPowerInputPorts.add(input);
                 }
@@ -236,22 +228,21 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
 
     @Override
     public void resetLatches() {
-        for (ShellyDigitalOutputPort shellyDigitalOutput : _ownedDigitalOutputPorts) {
-            if (shellyDigitalOutput.didChangeValue()) {
-                String mqttPayload = shellyDigitalOutput.convertValueToMqttPayload(shellyDigitalOutput.getValue());
-                String topic = shellyDigitalOutput.getWriteTopic();
-                _mqttBroker.publish(topic, mqttPayload);
-                shellyDigitalOutput.resetLatch();
-            }
+        for (ShellyDigitalOutputPort port : _ownedDigitalOutputPorts) {
+            resetShellyLatch(port);
         }
 
-        for (ShellyPowerOutputPort shellyPowerOutputPort : _ownedPowerOutputPorts) {
-            if (shellyPowerOutputPort.didChangeValue()) {
-                String mqttPayload = shellyPowerOutputPort.convertValueToMqttPayload(shellyPowerOutputPort.getValue());
-                String topic = shellyPowerOutputPort.getWriteTopic();
-                _mqttBroker.publish(topic, mqttPayload);
-                shellyPowerOutputPort.resetLatch();
-            }
+        for (ShellyPowerOutputPort port : _ownedPowerOutputPorts) {
+            resetShellyLatch(port);
+        }
+    }
+
+    private void resetShellyLatch(IShellyOutputPort shellyOutput) {
+        if (shellyOutput.didChangeValue()) {
+            String mqttPayload = shellyOutput.convertValueToMqttPayload();
+            String topic = shellyOutput.getWriteTopic();
+            _mqttBroker.publish(topic, mqttPayload);
+            shellyOutput.resetLatch();
         }
     }
 

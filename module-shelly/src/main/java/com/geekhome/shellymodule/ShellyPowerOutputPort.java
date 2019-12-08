@@ -6,23 +6,26 @@ public class ShellyPowerOutputPort extends ShellyOutputPort<Integer> {
 
     private final Gson _gson;
 
-    public ShellyPowerOutputPort(String id, Integer initialValue, String readTopic, String writeTopic) {
-        super(id, initialValue, readTopic, writeTopic);
+    public ShellyPowerOutputPort(String shellyId, int channel, Integer initialValue) {
+        super(shellyId + "-PWM-" + channel, initialValue,
+                "shellies/" + shellyId + "/light/" + channel + "/status",
+                "shellies/" + shellyId + "/light/" + channel + "/set");
+
         _gson = new Gson();
     }
 
     public int convertMqttPayloadToValue(String payload) {
         ShellyLightResponse response = _gson.fromJson(payload, ShellyLightResponse.class);
-        return response.isOn() ? response.getBrightness() * 256/100 : 0;
+        return response.isOn() ? response.getBrightness() * 256 / 100 : 0;
     }
 
-    public String convertValueToMqttPayload(int value) {
-        ShellyLightResponse response = new ShellyLightResponse();
-        if (value == 0) {
-            response.setOn(false);
+    public String convertValueToMqttPayload() {
+        ShellyLightSet response = new ShellyLightSet();
+        if (getValue() == 0) {
+            response.setTurn("off");
         } else {
-            response.setOn(true);
-            response.setBrightness(value * 100/256);
+            response.setTurn("on");
+            response.setBrightness(getValue() * 100 / 256);
         }
 
         return _gson.toJson(response);
