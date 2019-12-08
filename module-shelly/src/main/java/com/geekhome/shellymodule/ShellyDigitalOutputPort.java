@@ -8,6 +8,10 @@ public class ShellyDigitalOutputPort extends ShellyOutputPort<Boolean> {
                 "shellies/" + shellyId + "/relay/" + channel+ "/command");
     }
 
+    public ShellyDigitalOutputPort(ShellySettingsResponse settingsResponse, int channel) {
+        this(settingsResponse.getDevice().getHostname(), channel, settingsResponse.getRelays().get(channel).isOn());
+    }
+
     public boolean convertMqttPayloadToValue(String payload) {
         return payload != null && payload.equals("on");
     }

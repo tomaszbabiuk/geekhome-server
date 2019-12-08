@@ -91,19 +91,26 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
 
                                 if (settingsResponse.getRelays() != null) {
                                     for (int i = 0; i < settingsResponse.getRelays().size(); i++) {
-                                        addDigitalOutput(settingsResponse, i);
+                                        ShellyDigitalOutputPort output = new ShellyDigitalOutputPort(settingsResponse, i);
+                                        digitalOutputPorts.add(output);
+                                        _ownedDigitalOutputPorts.add(output);
                                     }
                                 }
 
                                 if (settingsResponse.getLights() != null) {
                                     for (int i = 0; i < settingsResponse.getLights().size(); i++) {
-                                        addPowerOutput(settingsResponse, i, shellyIP);
+                                        ShellyLightResponse lightResponse = callForLightResponse(shellyIP, i);
+                                        ShellyPowerOutputPort output = new ShellyPowerOutputPort(settingsResponse, lightResponse, i, shellyIP);
+                                        powerOutputPorts.add(output);
+                                        _ownedPowerOutputPorts.add(output);
                                     }
                                 }
 
                                 if (settingsResponse.getMeters() != null) {
                                     for (int i = 0; i < settingsResponse.getDevice().getNumMeters(); i++) {
-                                        addPowerInput(settingsResponse, i);
+                                        ShellyPowerInputPort input = new ShellyPowerInputPort(settingsResponse, i);
+                                        powerInputPorts.add(input);
+                                        _ownedPowerInputPorts.add(input);
                                     }
                                 }
                             }
@@ -113,31 +120,6 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
                     } else {
                         response.body().close();
                     }
-                }
-
-                private void addPowerOutput(ShellySettingsResponse settingsResponse, int i, InetAddress shellyIP) throws IOException {
-                    String shellyId = settingsResponse.getDevice().getHostname();
-                    boolean isOn = settingsResponse.getLights().get(i).isOn();
-                    int brightness = isOn ? checkBrightness(shellyIP, i) * 256/100 : 0;
-                    ShellyPowerOutputPort output = new ShellyPowerOutputPort(shellyId, i, brightness);
-                    powerOutputPorts.add(output);
-                    _ownedPowerOutputPorts.add(output);
-                }
-
-                private void addDigitalOutput(ShellySettingsResponse settingsResponse, int i) {
-                    String shellyId = settingsResponse.getDevice().getHostname();
-                    boolean isOn = settingsResponse.getRelays().get(i).isOn();
-                    ShellyDigitalOutputPort output = new ShellyDigitalOutputPort(shellyId, i, isOn);
-                    digitalOutputPorts.add(output);
-                    _ownedDigitalOutputPorts.add(output);
-                }
-
-                private void addPowerInput(ShellySettingsResponse settingsResponse, int i) {
-                    String shellyId = settingsResponse.getDevice().getHostname();
-                    double power = settingsResponse.getMeters().get(i).getPower();
-                    ShellyPowerInputPort input = new ShellyPowerInputPort(shellyId, i, power);
-                    powerInputPorts.add(input);
-                    _ownedPowerInputPorts.add(input);
                 }
             };
 
@@ -204,7 +186,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
         }
     }
 
-    private int checkBrightness(InetAddress possibleShellyIP, int channel) throws IOException {
+    private ShellyLightResponse callForLightResponse(InetAddress possibleShellyIP, int channel) throws IOException {
         Request request = new Request.Builder()
                 .url("http://" + possibleShellyIP + "/light/" + channel)
                 .build();
@@ -212,9 +194,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
         Response response = _okClient.newCall(request).execute();
         String json = response.body().string();
         response.body().close();
-        ShellyLightResponse responseParsed = _gson.fromJson(json, ShellyLightResponse.class);
-
-        return responseParsed.getBrightness();
+        return _gson.fromJson(json, ShellyLightResponse.class);
     }
 
     @Override

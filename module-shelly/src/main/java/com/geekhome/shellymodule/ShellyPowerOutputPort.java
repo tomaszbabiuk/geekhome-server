@@ -2,9 +2,21 @@ package com.geekhome.shellymodule;
 
 import com.google.gson.Gson;
 
+import java.io.IOException;
+import java.net.InetAddress;
+
 public class ShellyPowerOutputPort extends ShellyOutputPort<Integer> {
 
     private final Gson _gson;
+
+    public ShellyPowerOutputPort(ShellySettingsResponse settingsResponse, ShellyLightResponse lightResponse, int i, InetAddress shellyIP) throws IOException {
+        this(settingsResponse.getDevice().getHostname(), i, calculateBrightness(lightResponse));
+    }
+
+    private static int calculateBrightness(ShellyLightResponse lightResponse) {
+        boolean isOn = lightResponse.isOn();
+        return isOn ? lightResponse.getBrightness() * 256/100 : 0;
+    }
 
     public ShellyPowerOutputPort(String shellyId, int channel, Integer initialValue) {
         super(shellyId + "-PWM-" + channel, initialValue,
@@ -16,7 +28,7 @@ public class ShellyPowerOutputPort extends ShellyOutputPort<Integer> {
 
     public int convertMqttPayloadToValue(String payload) {
         ShellyLightResponse response = _gson.fromJson(payload, ShellyLightResponse.class);
-        return response.isOn() ? response.getBrightness() * 256 / 100 : 0;
+        return calculateBrightness(response);
     }
 
     public String convertValueToMqttPayload() {

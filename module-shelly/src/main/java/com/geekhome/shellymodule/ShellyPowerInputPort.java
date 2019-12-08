@@ -4,7 +4,11 @@ public class ShellyPowerInputPort extends ShellyInputPort<Double> {
     public ShellyPowerInputPort(String shellyId, int channel, Double initialValue) {
         super(shellyId + "-PWR-" + channel, initialValue,
                 "shellies/" + shellyId + "/relay/" + channel + "/power");
+    }
 
+    public ShellyPowerInputPort(ShellySettingsResponse settingsResponse, int channel) {
+        this(settingsResponse.getDevice().getHostname(), channel,
+                settingsResponse.getMeters().get(channel).getPower());
     }
 
     public double convertMqttPayloadToValue(String payload) {
