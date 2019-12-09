@@ -14,7 +14,7 @@ public class ConnectableSynchronizedInputPort<T> extends SynchronizedInputPort<T
         return _connected;
     }
 
-    public void setConnected(boolean connected) {
-        _connected = connected;
+    public void markDisconnected() {
+        _connected = false;
     }
 }

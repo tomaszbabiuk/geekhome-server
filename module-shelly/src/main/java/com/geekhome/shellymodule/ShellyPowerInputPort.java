@@ -1,17 +1,19 @@
 package com.geekhome.shellymodule;
 
-public class ShellyPowerInputPort extends ShellyInputPort<Double> {
-    public ShellyPowerInputPort(String shellyId, int channel, Double initialValue) {
+public class ShellyPowerInputPort extends ShellyInputPort<Double> implements IShellyPort{
+    private ShellyPowerInputPort(String shellyId, int channel, Double initialValue) {
         super(shellyId + "-PWR-" + channel, initialValue,
                 "shellies/" + shellyId + "/relay/" + channel + "/power");
     }
 
-    public ShellyPowerInputPort(ShellySettingsResponse settingsResponse, int channel) {
+    ShellyPowerInputPort(ShellySettingsResponse settingsResponse, int channel) {
         this(settingsResponse.getDevice().getHostname(), channel,
                 settingsResponse.getMeters().get(channel).getPower());
     }
 
-    public double convertMqttPayloadToValue(String payload) {
-        return Double.parseDouble(payload);
+    @Override
+    public void setValueFromMqttPayload(String payload) {
+        double value = Double.parseDouble(payload);
+        setValue(value);
     }
 }

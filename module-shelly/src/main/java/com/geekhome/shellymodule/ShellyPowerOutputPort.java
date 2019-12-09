@@ -9,7 +9,7 @@ public class ShellyPowerOutputPort extends ShellyOutputPort<Integer> {
 
     private final Gson _gson;
 
-    public ShellyPowerOutputPort(ShellySettingsResponse settingsResponse, ShellyLightResponse lightResponse, int i, InetAddress shellyIP) throws IOException {
+    ShellyPowerOutputPort(ShellySettingsResponse settingsResponse, ShellyLightResponse lightResponse, int i, InetAddress shellyIP) throws IOException {
         this(settingsResponse.getDevice().getHostname(), i, calculateBrightness(lightResponse));
     }
 
@@ -18,17 +18,12 @@ public class ShellyPowerOutputPort extends ShellyOutputPort<Integer> {
         return isOn ? lightResponse.getBrightness() * 256/100 : 0;
     }
 
-    public ShellyPowerOutputPort(String shellyId, int channel, Integer initialValue) {
+    private ShellyPowerOutputPort(String shellyId, int channel, Integer initialValue) {
         super(shellyId + "-PWM-" + channel, initialValue,
                 "shellies/" + shellyId + "/light/" + channel + "/status",
                 "shellies/" + shellyId + "/light/" + channel + "/set");
 
         _gson = new Gson();
-    }
-
-    public int convertMqttPayloadToValue(String payload) {
-        ShellyLightResponse response = _gson.fromJson(payload, ShellyLightResponse.class);
-        return calculateBrightness(response);
     }
 
     public String convertValueToMqttPayload() {
@@ -41,5 +36,12 @@ public class ShellyPowerOutputPort extends ShellyOutputPort<Integer> {
         }
 
         return _gson.toJson(response);
+    }
+
+    @Override
+    public void setValueFromMqttPayload(String payload) {
+        ShellyLightResponse response = _gson.fromJson(payload, ShellyLightResponse.class);
+        int value = calculateBrightness(response);
+        setValue(value);
     }
 }

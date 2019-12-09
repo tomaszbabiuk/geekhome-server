@@ -260,34 +260,32 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
         boolean isRelayTopic = topicName.contains("/relay/");
         boolean isLightTopic = topicName.contains("/light/");
 
-        if (isRelayTopic || isLightTopic) {
-            String[] topicSplit = topicName.split("/");
-            String shellyId = topicSplit[1];
-            int channel = Integer.parseInt(topicSplit[3]);
+        if (!isRelayTopic && !isLightTopic) {
+            return;
+        }
 
-            if (isRelayTopic) {
-                if (topicSplit.length == 5) {
-                    String measureType = topicSplit[4];
-                    if (measureType.equals("power")) {
-                        String portId = shellyId + "-PWR-" + channel;
-                        updatePowerInputs(topicName, payload, shellyId, portId);
-                    }
-                } else {
-                    String portId = shellyId + "-OUT-" + channel;
-                    updateDigitalOutputs(topicName, payload, shellyId, portId);
-                }
+        for (IShellyPort port : _ownedPowerOutputPorts) {
+            if (topicName.equals(port.getReadTopic())) {
+                port.setValueFromMqttPayload(payload);
             }
+        }
 
-            if (isLightTopic) {
-                String portId = shellyId + "-PWM-" + channel;
-                updatePowerOutputs(topicName, payload, shellyId, portId);
+        for (IShellyPort port : _ownedPowerInputPorts) {
+            if (topicName.equals(port.getReadTopic())) {
+                port.setValueFromMqttPayload(payload);
+            }
+        }
+
+        for (IShellyPort port : _ownedDigitalOutputPorts) {
+            if (topicName.equals(port.getReadTopic())) {
+                port.setValueFromMqttPayload(payload);
             }
         }
     }
 
     @Override
     public void onDisconnected(String clientID) {
-        for (ShellyDigitalOutputPort output : _ownedDigitalOutputPorts) {
+        for (ShellyPowerOutputPort output : _ownedPowerOutputPorts) {
             if (output.getId().startsWith(clientID)) {
                 output.markDisconnected();
             }
@@ -298,62 +296,11 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
                 output.markDisconnected();
             }
         }
-    }
 
-    private void updatePowerOutputs(String topicName, String payload, String shellyId, String portId) {
-        IOutputPort<Integer> maybeShellyPower = _hardwareManager.tryFindPowerOutputPort(portId);
-        if (maybeShellyPower == null) {
-            _logger.info("Couldn't find shelly port matching topic: " + topicName);
-            return;
-        }
-
-        if (!(maybeShellyPower instanceof ShellyPowerOutputPort)) {
-            _logger.info("Incompatible type of shelly power output port " + shellyId + " in hardware manager registry");
-            return;
-        }
-
-        ShellyPowerOutputPort shellyPower = (ShellyPowerOutputPort) maybeShellyPower;
-        if (topicName.equals(shellyPower.getReadTopic())) {
-            int newValue = shellyPower.convertMqttPayloadToValue(payload);
-            shellyPower.setValue(newValue);
-        }
-    }
-
-    private void updatePowerInputs(String topicName, String payload, String shellyId, String portId) {
-        IInputPort<Double> maybeShellyPower = _hardwareManager.tryFindPowerInputPort(portId);
-        if (maybeShellyPower == null) {
-            _logger.info("Couldn't find shelly port matching topic: " + topicName);
-            return;
-        }
-
-        if (!(maybeShellyPower instanceof ShellyPowerInputPort)) {
-            _logger.info("Incompatible type of shelly power input port " + shellyId + " in hardware manager registry");
-            return;
-        }
-
-        ShellyPowerInputPort shellyPower = (ShellyPowerInputPort) maybeShellyPower;
-        if (topicName.equals(shellyPower.getReadTopic())) {
-            double newValue = shellyPower.convertMqttPayloadToValue(payload);
-            shellyPower.setValue(newValue);
-        }
-    }
-
-    private void updateDigitalOutputs(String topicName, String payload, String shellyId, String portId) {
-        IOutputPort<Boolean> maybeShellyOutput = _hardwareManager.tryFindDigitalOutputPort(portId);
-        if (maybeShellyOutput == null) {
-            _logger.info("Couldn't find shelly port matching topic: " + topicName);
-            return;
-        }
-
-        if (!(maybeShellyOutput instanceof ShellyDigitalOutputPort)) {
-            _logger.info("Incompatible type of shelly output port " + shellyId + " in hardware manager registry");
-            return;
-        }
-
-        ShellyDigitalOutputPort shellyOutput = (ShellyDigitalOutputPort) maybeShellyOutput;
-        if (topicName.equals(shellyOutput.getReadTopic())) {
-            boolean newValue = shellyOutput.convertMqttPayloadToValue(payload);
-            shellyOutput.setValue(newValue);
+        for (ShellyDigitalOutputPort output : _ownedDigitalOutputPorts) {
+            if (output.getId().startsWith(clientID)) {
+                output.markDisconnected();
+            }
         }
     }
 }

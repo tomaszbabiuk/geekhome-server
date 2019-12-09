@@ -1,6 +1,6 @@
 package com.geekhome.shellymodule;
 
-public interface IShellyOutputPort {
+public interface IShellyOutputPort extends IShellyPort {
     void resetLatch();
     boolean didChangeValue();
 
