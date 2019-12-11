@@ -1,15 +1,15 @@
 package com.geekhome.coremodule.automation;
 
-import com.geekhome.common.IPrioritized;
+import com.geekhome.common.*;
 import com.geekhome.common.json.JSONArrayList;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.utils.Sleeper;
+import com.geekhome.coremodule.Alert;
 import com.geekhome.coremodule.DashboardAlertService;
 import com.geekhome.coremodule.MasterConfiguration;
-import com.geekhome.hardwaremanager.IHardwareManager;
-import com.geekhome.hardwaremanager.IOutputPort;
-import com.geekhome.hardwaremanager.ITogglePort;
+import com.geekhome.hardwaremanager.*;
+import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.OperationMode;
 import com.geekhome.httpserver.SystemInfo;
 import com.geekhome.httpserver.modules.CollectorCollection;
@@ -23,9 +23,9 @@ import java.util.Calendar;
 
 public final class MasterAutomation {
 
-    private AutomationCycler _automationCycler;
-
     private static ILogger _logger = LoggingService.getLogger();
+    private ILocalizationProvider _localizationProvider;
+    private AutomationCycler _automationCycler;
     private SystemInfo _systemInfo;
     private MasterConfiguration _masterConfiguration;
     private IHardwareManager _hardwareManager;
@@ -46,9 +46,13 @@ public final class MasterAutomation {
         return _conditions;
     }
 
-    public CollectorCollection<ModeAutomationUnit> getModes() { return _modes; }
+    public CollectorCollection<ModeAutomationUnit> getModes() {
+        return _modes;
+    }
 
-    public CollectorCollection<AlertAutomationUnit> getAlerts() { return _alerts; }
+    public CollectorCollection<AlertAutomationUnit> getAlerts() {
+        return _alerts;
+    }
 
     public CollectorCollection<BlockAutomationUnit> getBlocks() {
         return _blocks;
@@ -58,7 +62,18 @@ public final class MasterAutomation {
         return _modules;
     }
 
-    private void reInitialize() throws Exception {
+    public MasterAutomation(MasterConfiguration masterConfiguration, IHardwareManager hardwareManager,
+                            SystemInfo systemInfo, DashboardAlertService dashboardAlertService,
+                            ILocalizationProvider localizationProvider) {
+        _systemInfo = systemInfo;
+        _masterConfiguration = masterConfiguration;
+        _hardwareManager = hardwareManager;
+        _dashboardAlertService = dashboardAlertService;
+        _localizationProvider = localizationProvider;
+        _automationCycler = new AutomationCycler(this, _systemInfo);
+    }
+
+    private boolean reInitialize(boolean allowShadows) throws Exception {
         _logger.debug("Re-Initializing automation");
 
         getDevices().clear();
@@ -70,52 +85,119 @@ public final class MasterAutomation {
         if (_modules != null) {
             _masterConfiguration.createDynamicObjectsForAllCollectors();
 
-            _logger.debug("Automation reinitialization - creating device automation units");
-            for (IAutomationModule module : _modules) {
-                module.addDeviceAutomationUnits(getDevices());
-            }
+            try {
+                _logger.debug("Automation reinitialization - creating device automation units");
+                for (IAutomationModule module : _modules) {
+                    module.addDeviceAutomationUnits(getDevices());
+                }
 
-            _logger.debug("Automation reinitialization - creating independent condition automation units");
-            for (IAutomationModule module : _modules) {
-                module.addIndependentConditionAutomationUnits(getConditions());
-            }
+                _logger.debug("Automation reinitialization - creating independent condition automation units");
+                for (IAutomationModule module : _modules) {
+                    module.addIndependentConditionAutomationUnits(getConditions());
+                }
 
-            _logger.debug("Automation reinitialization - creating dependent condition automation units");
-            for (IAutomationModule module : _modules) {
-                module.addDependentConditionAutomationUnits(getConditions());
-            }
+                _logger.debug("Automation reinitialization - creating dependent condition automation units");
+                for (IAutomationModule module : _modules) {
+                    module.addDependentConditionAutomationUnits(getConditions());
+                }
 
-            _logger.debug("Automation reinitialization - creating block automation units");
-            for (IAutomationModule module : _modules) {
-                module.addBlocksAutomationUnits(getBlocks());
-            }
+                _logger.debug("Automation reinitialization - creating block automation units");
+                for (IAutomationModule module : _modules) {
+                    module.addBlocksAutomationUnits(getBlocks());
+                }
 
-            _logger.debug("Automation reinitialization - creating mode automation units");
-            for (IAutomationModule module : _modules) {
-                module.addModeAutomationUnits(getModes());
-            }
+                _logger.debug("Automation reinitialization - creating mode automation units");
+                for (IAutomationModule module : _modules) {
+                    module.addModeAutomationUnits(getModes());
+                }
 
-            _logger.debug("Automation reinitialization - initializing modules");
-            for (IAutomationModule module : _modules) {
-                module.initialized();
-            }
+                _logger.debug("Automation reinitialization - initializing modules");
+                for (IAutomationModule module : _modules) {
+                    module.initialized();
+                }
 
-            _logger.debug("Automation reinitialization - creating alerts");
-            for (IAutomationModule module : _modules) {
-                module.addAlertAutomationUnits(getAlerts());
+                _logger.debug("Automation reinitialization - creating alerts");
+                for (IAutomationModule module : _modules) {
+                    module.addAlertAutomationUnits(getAlerts());
+                }
+                _logger.info("Automation reinitialized");
+
+                return true;
+            } catch (PortNotFoundException ex) {
+                if (allowShadows) {
+                    addShadowPort(ex.getUniqueId(), ex.getType());
+                } else {
+                    throw ex;
+                }
             }
         }
 
-        _logger.info("Automation reinitialized");
+        return false;
     }
 
-    public MasterAutomation(MasterConfiguration masterConfiguration, IHardwareManager hardwareManager,
-                            SystemInfo systemInfo, DashboardAlertService dashboardAlertService) {
-        _systemInfo = systemInfo;
-        _masterConfiguration = masterConfiguration;
-        _hardwareManager = hardwareManager;
-        _dashboardAlertService = dashboardAlertService;
-        _automationCycler = new AutomationCycler(this, _systemInfo);
+    @SuppressWarnings("SwitchStatementWithTooFewBranches")
+    private void addShadowPort(String portId, PortType type) {
+        _logger.info("Adding shadow port for " + portId + " of type " + type);
+
+        switch (type) {
+            case DigitalInput: {
+                IInputPort<Boolean> base = new SynchronizedInputPort<>(portId);
+                IInputPort<Boolean> shadow = new ShadowInputPort<>(portId, base);
+                _hardwareManager.getDigitalInputPorts().add(shadow);
+                break;
+            }
+            case DigitalOutput: {
+                IOutputPort<Boolean> base = new SynchronizedOutputPort<>(portId, false);
+                IOutputPort<Boolean> shadow = new ShadowOutputPort<>(portId, base);
+                _hardwareManager.getDigitalOutputPorts().add(shadow);
+                break;
+            }
+            case PowerInput: {
+                IInputPort<Double> base = new SynchronizedInputPort<>(portId);
+                IInputPort<Double> shadow = new ShadowInputPort<>(portId, base);
+                _hardwareManager.getPowerInputPorts().add(shadow);
+                break;
+            }
+            case PowerOutput: {
+                IOutputPort<Integer> base = new SynchronizedOutputPort<>(portId, 0);
+                IOutputPort<Integer> shadow = new ShadowOutputPort<>(portId, base);
+                _hardwareManager.getPowerOutputPorts().add(shadow);
+                break;
+            }
+            case Temperature: {
+                IInputPort<Double> base = new SynchronizedInputPort<>(portId);
+                IInputPort<Double> shadow = new ShadowInputPort<>(portId, base);
+                _hardwareManager.getTemperaturePorts().add(shadow);
+                break;
+            }
+            case Luminosity: {
+                IInputPort<Double> base = new SynchronizedInputPort<>(portId);
+                IInputPort<Double> shadow = new ShadowInputPort<>(portId, base);
+                _hardwareManager.getLuminosityPorts().add(shadow);
+                break;
+            }
+            case Humidity: {
+                IInputPort<Double> base = new SynchronizedInputPort<>(portId);
+                IInputPort<Double> shadow = new ShadowInputPort<>(portId, base);
+                _hardwareManager.getHumidityPorts().add(shadow);
+                break;
+            }
+            case Toggle: {
+                ITogglePort base = new SynchronizedTogglePort(portId);
+                ITogglePort shadow = new ShadowTogglePort<>(portId, base);
+                _hardwareManager.getTogglePorts().add(shadow);
+                break;
+            }
+        }
+
+        raiseShadowPortsUsedAlert();
+    }
+
+    private void raiseShadowPortsUsedAlert() {
+        DescriptiveName alertName = new DescriptiveName(_localizationProvider.getValue("C:ShadowPortsInUse"), "system_shadow");
+        Alert alert = new Alert(alertName, "");
+        _dashboardAlertService.raiseAlert(alert);
+        _hardwareManager.scheduleRediscovery();
     }
 
     private void stopAllDevices() throws Exception {
@@ -139,7 +221,9 @@ public final class MasterAutomation {
 
         if (newOperationMode == OperationMode.Automatic) {
             try {
-                reInitialize();
+                if (!reInitialize(true)) {
+                    reInitialize(false);
+                }
                 _automationCycler.setAutomationEnabled(true);
             } catch (Exception ex) {
                 if (_systemInfo.getOperationMode() == OperationMode.Automatic) {
@@ -248,6 +332,7 @@ public final class MasterAutomation {
             }
 
             _systemInfo.doAutomaticRestartIfScheduled(now);
+            _hardwareManager.doRediscoveryIfScheduled(now);
             Sleeper.trySleep(100);
         }
     }
@@ -267,7 +352,7 @@ public final class MasterAutomation {
     public void initialize(JSONArrayList<IModule> modules) {
         ArrayList<IAutomationModule> automationModules = new ArrayList<>();
         ArrayList<IAutomationHook> automationHooks = new ArrayList<>();
-        for(IModule module : modules) {
+        for (IModule module : modules) {
             addToCollectionIfNotNull(module.createAutomationModule(), automationModules);
             addToCollectionIfNotNull(module.createAutomationHook(), automationHooks);
         }

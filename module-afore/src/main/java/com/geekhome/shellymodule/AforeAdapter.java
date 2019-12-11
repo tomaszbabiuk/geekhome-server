@@ -64,6 +64,11 @@ class AforeAdapter extends NamedObject implements IHardwareManagerAdapter {
         powerInputPorts.add(inverterPort);
     }
 
+    @Override
+    public boolean canBeRediscovered() {
+        return false;
+    }
+
     private Double readInverterPower() {
         try {
             String inverterResponse = doRequest(_okClient, "http://192.168.1.4/status.html");

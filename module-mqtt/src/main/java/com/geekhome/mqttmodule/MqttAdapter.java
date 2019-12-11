@@ -106,6 +106,11 @@ class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCa
         }
     }
 
+    @Override
+    public boolean canBeRediscovered() {
+        return false;
+    }
+
 
     @Override
     public boolean isOperational() {

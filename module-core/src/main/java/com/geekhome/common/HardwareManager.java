@@ -10,6 +10,7 @@ import com.geekhome.httpserver.SystemInfo;
 import com.geekhome.httpserver.modules.IInvalidateCacheListener;
 import com.geekhome.httpserver.modules.IModule;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -28,20 +29,22 @@ public class HardwareManager implements IHardwareManager {
     private IInvalidateCacheListener _invalidateCacheListener;
     private ArrayList<IHardwareManagerAdapter> _adapters = new ArrayList<>();
     private boolean _discoveryPending;
+    private static long REDISCOVERY_TIME = 1 * 60 * 1000;
+    private Long _rediscoveryTime;
 
     public ArrayList<IHardwareManagerAdapter> getAdapters() {
         return _adapters;
     }
 
     public HardwareManager() {
-        _digitalInputPorts = new InputPortsCollection<>();
-        _digitalOutputPorts = new OutputPortsCollection<>();
-        _powerInputPorts = new InputPortsCollection<>();
-        _powerOutputPorts = new OutputPortsCollection<>();
-        _temperaturePorts = new InputPortsCollection<>();
-        _humidityPorts = new InputPortsCollection<>();
-        _luminosityPorts = new InputPortsCollection<>();
-        _togglePorts = new TogglePortsCollection();
+        _digitalInputPorts = new InputPortsCollection<>(PortType.DigitalInput);
+        _digitalOutputPorts = new OutputPortsCollection<>(PortType.DigitalOutput);
+        _powerInputPorts = new InputPortsCollection<>(PortType.PowerInput);
+        _powerOutputPorts = new OutputPortsCollection<>(PortType.PowerOutput);
+        _temperaturePorts = new InputPortsCollection<>(PortType.Temperature);
+        _humidityPorts = new InputPortsCollection<>(PortType.Humidity);
+        _luminosityPorts = new InputPortsCollection<>(PortType.Luminosity);
+        _togglePorts = new TogglePortsCollection(PortType.Toggle);
     }
 
     protected void clear() {
@@ -221,11 +224,11 @@ public class HardwareManager implements IHardwareManager {
                 for (IHardwareManagerAdapter adapter : _adapters) {
                     adapter.resetLatches();
                     if (!adapter.isOperational()) {
-                        throw new Exception("Adapter " + adapter.getName() +" non-operational");
+                        throw new Exception("Adapter " + adapter.getName() + " non-operational");
                     }
                 }
             }
-            refreshTrial ++;
+            refreshTrial++;
             if (refreshTrial == 4) {
                 throw new Exception("Has refresh errors despite retrying!");
             }
@@ -266,6 +269,15 @@ public class HardwareManager implements IHardwareManager {
 
     @Override
     public void discover() {
+        discoverInternal(false);
+    }
+
+    @Override
+    public void rediscover() {
+        discoverInternal(true);
+    }
+
+    private void discoverInternal(boolean rediscovery) {
         _discoveryPending = true;
 
         clear();
@@ -279,16 +291,17 @@ public class HardwareManager implements IHardwareManager {
 
         if (_adapters != null) {
             for (IHardwareManagerAdapter adapter : _adapters) {
-                try {
-                    adapter.discover(
-                            getDigitalInputPorts(), getDigitalOutputPorts(),
-                            getPowerInputPorts(), getPowerOutputPorts(),
-                            getTemperaturePorts(), getTogglePorts(),
-                            getHumidityPorts(), getLuminosityPorts());
+                if (!rediscovery || adapter.canBeRediscovered())
+                    try {
+                        adapter.discover(
+                                getDigitalInputPorts(), getDigitalOutputPorts(),
+                                getPowerInputPorts(), getPowerOutputPorts(),
+                                getTemperaturePorts(), getTogglePorts(),
+                                getHumidityPorts(), getLuminosityPorts());
 
-                } catch (DiscoveryException e) {
-                    _logger.error("Discovery exception", e);
-                }
+                    } catch (DiscoveryException e) {
+                        _logger.error("Discovery exception", e);
+                    }
             }
         }
 
@@ -328,7 +341,7 @@ public class HardwareManager implements IHardwareManager {
         _logger.info("Creating adapters.");
         ArrayList<IHardwareManagerAdapter> result = new ArrayList<>();
 
-        for(IHardwareManagerAdapterFactory factory : adapterFactories) {
+        for (IHardwareManagerAdapterFactory factory : adapterFactories) {
             ArrayList<? extends IHardwareManagerAdapter> adapters = factory.createAdapters();
             for (IHardwareManagerAdapter adapter : adapters) {
                 _logger.info("Adding serial adapter " + adapter.toString());
@@ -345,5 +358,18 @@ public class HardwareManager implements IHardwareManager {
             module.addSerialAdaptersFactory(factories);
         }
         return factories;
+    }
+
+    @Override
+    public void scheduleRediscovery() {
+        _rediscoveryTime = Calendar.getInstance().getTimeInMillis() + REDISCOVERY_TIME;
+    }
+
+    @Override
+    public void doRediscoveryIfScheduled(Calendar now) {
+        if (_rediscoveryTime != null && now.getTimeInMillis() > _rediscoveryTime) {
+            rediscover();
+            _rediscoveryTime = null;
+        }
     }
 }

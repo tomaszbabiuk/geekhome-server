@@ -6,6 +6,12 @@ import org.json.simple.JSONAware;
 import java.util.Hashtable;
 
 public class OutputPortsCollection<T> extends Hashtable<String, IOutputPort<T>> implements JSONAware {
+    private PortType _type;
+
+    public OutputPortsCollection(PortType type) {
+        _type = type;
+    }
+
     public void add(IOutputPort<T> port) {
         put(port.getId(), port);
     }
@@ -23,7 +29,7 @@ public class OutputPortsCollection<T> extends Hashtable<String, IOutputPort<T>> 
             return get(uniqueId);
         }
 
-        throw new PortNotFoundException(uniqueId);
+        throw new PortNotFoundException(uniqueId, _type);
     }
 
     @Override

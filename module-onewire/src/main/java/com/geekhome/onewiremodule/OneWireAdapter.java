@@ -90,6 +90,11 @@ class OneWireAdapter extends SerialAdapterBase {
         }
     }
 
+    @Override
+    public boolean canBeRediscovered() {
+        return false;
+    }
+
     private void addOutputPort(OutputPortsCollection<Boolean> digitalOutputPorts, SwitchDiscoveryInfo di, int channel, String id) {
         SwitchContainerWrapper switchContainer = di.getContainer();
         OneWireOutputPort outputPort = new OneWireOutputPort(id, switchContainer, channel);

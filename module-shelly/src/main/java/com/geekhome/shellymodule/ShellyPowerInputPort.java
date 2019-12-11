@@ -1,6 +1,6 @@
 package com.geekhome.shellymodule;
 
-public class ShellyPowerInputPort extends ShellyInputPort<Double> implements IShellyPort{
+public class ShellyPowerInputPort extends ShellyInputPort<Double> {
     private ShellyPowerInputPort(String shellyId, int channel, Double initialValue) {
         super(shellyId + "-PWR-" + channel, initialValue,
                 "shellies/" + shellyId + "/relay/" + channel + "/power");

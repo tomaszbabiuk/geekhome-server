@@ -187,6 +187,11 @@ class ExtaFreeSerialAdapter extends SerialAdapterBase {
     }
 
     @Override
+    public boolean canBeRediscovered() {
+        return false;
+    }
+
+    @Override
     public void stop() {
         if (_serialPort != null) {
             try {

@@ -64,6 +64,11 @@ class MockedAdapter extends NamedObject implements IHardwareManagerAdapter {
     }
 
     @Override
+    public boolean canBeRediscovered() {
+        return false;
+    }
+
+    @Override
     public boolean isOperational() {
         return true;
     }

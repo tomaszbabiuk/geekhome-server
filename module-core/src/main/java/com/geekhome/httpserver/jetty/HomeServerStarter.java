@@ -38,7 +38,7 @@ public class HomeServerStarter {
             DashboardAlertService dashboardAlertService = new DashboardAlertService(localizationProvider);
             SystemInfo systemInfo = new SystemInfo(OperationMode.Diagnostics, localizationProvider, dashboardAlertService);
             final MasterConfiguration masterConfiguration = new MasterConfiguration(localizationProvider);
-            final MasterAutomation masterAutomation = new MasterAutomation(masterConfiguration, hardwareManager, systemInfo, dashboardAlertService);
+            final MasterAutomation masterAutomation = new MasterAutomation(masterConfiguration, hardwareManager, systemInfo, dashboardAlertService, localizationProvider);
             CommandsProcessor commandsProcessor = new CommandsProcessor(systemInfo, masterConfiguration, masterAutomation, localizationProvider);
             Synchronizer synchronizer = new Synchronizer(masterConfiguration, masterAutomation, automationSettings,
                     localizationProvider, systemInfo, commandsProcessor, dashboardAlertService);

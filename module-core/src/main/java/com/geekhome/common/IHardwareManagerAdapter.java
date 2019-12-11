@@ -12,6 +12,7 @@ public interface IHardwareManagerAdapter extends IMonitorable, INamedObject {
                   InputPortsCollection<Double> powerInputPorts, OutputPortsCollection<Integer> powerOutputPorts,
                   InputPortsCollection<Double> temperaturePorts, TogglePortsCollection togglePorts,
                   InputPortsCollection<Double> humidityPorts, InputPortsCollection<Double> luminosityPorts) throws DiscoveryException;
+    boolean canBeRediscovered();
     void refresh(Calendar now) throws Exception;
     RefreshState getRefreshState();
     void resetLatches();

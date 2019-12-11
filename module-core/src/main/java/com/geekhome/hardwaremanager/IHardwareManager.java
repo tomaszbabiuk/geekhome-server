@@ -48,6 +48,11 @@ public interface IHardwareManager {
     void setAdapters(ArrayList<IHardwareManagerAdapter> adapters);
     void refreshAndWait(Calendar now) throws Exception;
     void discover() throws DiscoveryException;
+    void rediscover() throws DiscoveryException;
     void invalidateAdapters(OperationMode operationMode) throws Exception;
     void setInvalidateCacheListener(IInvalidateCacheListener listener);
+
+    void scheduleRediscovery();
+
+    void doRediscoveryIfScheduled(Calendar now);
 }

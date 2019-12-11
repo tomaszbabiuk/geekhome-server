@@ -144,6 +144,11 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
         }
     }
 
+    @Override
+    public boolean canBeRediscovered() {
+        return true;
+    }
+
     private void hijackShellyIfNeeded(ShellySettingsResponse settings, InetAddress shellyIP) throws IOException {
         if (settings.getCloud().isEnabled()) {
             disableCloud(shellyIP);

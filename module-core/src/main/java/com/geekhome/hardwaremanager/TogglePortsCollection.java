@@ -6,6 +6,12 @@ import org.json.simple.JSONAware;
 import java.util.Hashtable;
 
 public class TogglePortsCollection extends Hashtable<String, ITogglePort> implements JSONAware {
+    private PortType _type;
+
+    public TogglePortsCollection(PortType type) {
+        _type = type;
+    }
+
     public void add(ITogglePort port) {
         put(port.getId(), port);
     }
@@ -15,7 +21,7 @@ public class TogglePortsCollection extends Hashtable<String, ITogglePort> implem
             return get(uniqueId);
         }
 
-        throw new PortNotFoundException(uniqueId);
+        throw new PortNotFoundException(uniqueId, _type);
     }
 
     public ITogglePort tryFind(String uniqueId) {

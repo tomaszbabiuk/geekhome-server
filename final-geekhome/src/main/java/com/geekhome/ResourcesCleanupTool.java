@@ -59,7 +59,7 @@ public class ResourcesCleanupTool {
             SystemInfo systemInfo = new SystemInfo(OperationMode.Diagnostics, localizationProvider, dashboardAlertService);
             MasterConfiguration masterConfiguration = new MasterConfiguration(localizationProvider);
             MasterAutomation masterAutomation = new MasterAutomation(masterConfiguration, hardwareManager,
-                    systemInfo, dashboardAlertService);
+                    systemInfo, dashboardAlertService, localizationProvider);
             CommandsProcessor commandsProcessor = new CommandsProcessor(systemInfo, masterConfiguration,
                     masterAutomation, localizationProvider);
             Synchronizer synchronizer = new Synchronizer(masterConfiguration, masterAutomation, automationSettings,

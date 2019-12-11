@@ -1,10 +1,21 @@
 package com.geekhome.hardwaremanager;
 
 public class PortNotFoundException extends Exception {
-    private String _uniqueId;
 
-    public PortNotFoundException(String uniqueId) {
+    private String _uniqueId;
+    private PortType _type;
+
+    public PortType getType() {
+        return _type;
+    }
+
+    public String getUniqueId() {
+        return _uniqueId;
+    }
+
+    public PortNotFoundException(String uniqueId, PortType type) {
         _uniqueId = uniqueId;
+        _type = type;
     }
 
     @Override
