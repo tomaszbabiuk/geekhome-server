@@ -4,7 +4,9 @@ import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.hardwaremanager.IInputPort;
 
-public class SynchronizedInputPort<T> extends PortBase implements IInputPort<T> {
+import java.util.Calendar;
+
+public class SynchronizedInputPort<T> extends ConnectiblePortBase implements IInputPort<T> {
     private ILogger _logger = LoggingService.getLogger();
     private T _value;
 
@@ -28,6 +30,8 @@ public class SynchronizedInputPort<T> extends PortBase implements IInputPort<T> 
         }
 
         _value = value;
+
+        updateLastSeen(Calendar.getInstance().getTimeInMillis());
     }
 
     public synchronized T getValue() {

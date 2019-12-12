@@ -1,9 +1,9 @@
 package com.geekhome.shellymodule;
 
-import com.geekhome.common.IConnectable;
+import com.geekhome.common.IConnectible;
 import com.geekhome.common.SynchronizedOutputPort;
 
-public abstract class ShellyOutputPort<T> extends SynchronizedOutputPort<T> implements IConnectable, IShellyOutputPort {
+public abstract class ShellyOutputPort<T> extends SynchronizedOutputPort<T> implements IConnectible, IShellyOutputPort {
 
     private String _writeTopic;
     private String _readTopic;

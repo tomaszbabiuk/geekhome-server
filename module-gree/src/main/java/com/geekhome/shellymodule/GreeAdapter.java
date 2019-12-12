@@ -84,19 +84,19 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
                 String lightPortId = greeDeviceIdToLightPortId(greeDeviceId);
                 boolean isLightOn = greeDevice.GetDeviceLight() == 1;
                 IInputPort<Boolean> lightPort =
-                        new ConnectableSynchronizedInputPort<>(lightPortId, isLightOn, true);
+                        new SynchronizedInputPort<>(lightPortId, isLightOn);
                 digitalInputPorts.add(lightPort);
 
                 String turboPortId = greeDeviceIdToTurboPortId(greeDeviceId);
                 boolean isTurboOn = greeDevice.GetDeviceTurbo() == 1;
                 IOutputPort<Boolean> turboPort =
-                        new ConnectableSynchronizedOutputPort<>(turboPortId, isTurboOn, true);
+                        new SynchronizedOutputPort<>(turboPortId, isTurboOn);
                 digitalOutputPorts.add(turboPort);
 
                 String temperatureControlPortId = greeDeviceIdToTemperatureControlPortId(greeDeviceId);
                 int temperature = greeDevice.GetDeviceTempSet();
                 IOutputPort<Integer> temperatureControlPort =
-                        new ConnectableSynchronizedOutputPort<>(temperatureControlPortId, temperature, true);
+                        new SynchronizedOutputPort<>(temperatureControlPortId, temperature);
                 powerOutputPorts.add(temperatureControlPort);
             }
         } catch (Exception ex) {
@@ -105,6 +105,11 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
 
         _lastRefresh = Calendar.getInstance().getTimeInMillis();
         _isOperational = true;
+    }
+
+    @Override
+    public boolean canBeRediscovered() {
+        return false;
     }
 
     private InetAddress getBroadcastAddress() throws SocketException, UnknownHostException {
@@ -197,39 +202,37 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
 
     private void refreshLight(GreeDevice greeDevice) {
 
-        ConnectableSynchronizedOutputPort<Boolean> lightPort =
-                (ConnectableSynchronizedOutputPort<Boolean>) _hardwareManager.tryFindDigitalOutputPort(greeDeviceIdToLightPortId(greeDevice.getId()));
+        SynchronizedOutputPort<Boolean> lightPort =
+                (SynchronizedOutputPort<Boolean>) _hardwareManager.tryFindDigitalOutputPort(greeDeviceIdToLightPortId(greeDevice.getId()));
         if (lightPort != null) {
             boolean isLightOn = greeDevice.GetDeviceLight() == 1;
             try {
                 lightPort.setValue(isLightOn);
-                lightPort.setConnected(true);
             } catch (Exception ex) {
-                lightPort.setConnected(false);
+                lightPort.markDisconnected();
             }
         }
     }
 
     private void refreshTurbo(GreeDevice greeDevice) {
-        ConnectableSynchronizedOutputPort<Boolean> turboPort =
-                (ConnectableSynchronizedOutputPort<Boolean>) _hardwareManager.tryFindDigitalOutputPort(greeDeviceIdToTurboPortId(greeDevice.getId()));
+        SynchronizedOutputPort<Boolean> turboPort =
+                (SynchronizedOutputPort<Boolean>) _hardwareManager.tryFindDigitalOutputPort(greeDeviceIdToTurboPortId(greeDevice.getId()));
         if (turboPort != null) {
             boolean isTurboOn = greeDevice.GetDeviceTurbo() == 1;
             boolean shouldUpdateTurbo = turboPort.read() != isTurboOn;
             if (shouldUpdateTurbo) {
                 try {
                     greeDevice.SetDeviceTurbo(_clientSocket, turboPort.read() ? 1 : 0);
-                    turboPort.setConnected(true);
                 } catch (Exception ex) {
-                    turboPort.setConnected(false);
+                    turboPort.markDisconnected();
                 }
             }
         }
     }
 
     private void refreshTemperature(GreeDevice greeDevice) {
-        ConnectableSynchronizedOutputPort<Integer> temperatureControlPort =
-                (ConnectableSynchronizedOutputPort<Integer>) _hardwareManager.tryFindPowerOutputPort(greeDeviceIdToTemperatureControlPortId(greeDevice.getId()));
+        SynchronizedOutputPort<Integer> temperatureControlPort =
+                (SynchronizedOutputPort<Integer>) _hardwareManager.tryFindPowerOutputPort(greeDeviceIdToTemperatureControlPortId(greeDevice.getId()));
         if (temperatureControlPort != null) {
             try {
                 greeDevice.getDeviceStatus(_clientSocket);
@@ -273,9 +276,8 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
                     }
                 }
 
-                temperatureControlPort.setConnected(true);
             } catch (Exception ex) {
-                temperatureControlPort.setConnected(false);
+                temperatureControlPort.markDisconnected();
             }
         }
     }

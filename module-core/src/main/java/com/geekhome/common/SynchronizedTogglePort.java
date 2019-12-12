@@ -2,7 +2,7 @@ package com.geekhome.common;
 
 import com.geekhome.hardwaremanager.ITogglePort;
 
-public class SynchronizedTogglePort extends PortBase implements ITogglePort {
+public class SynchronizedTogglePort extends ConnectiblePortBase implements ITogglePort {
     public SynchronizedTogglePort(String id) {
         super(id);
     }

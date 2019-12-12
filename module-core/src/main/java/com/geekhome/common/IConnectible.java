@@ -1,6 +1,6 @@
 package com.geekhome.common;
 
-public interface IConnectable {
+public interface IConnectible {
     boolean isConnected();
     void markDisconnected();
 }
