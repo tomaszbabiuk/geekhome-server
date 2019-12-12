@@ -19,4 +19,5 @@ public abstract class AlertServiceBase extends NamedObject implements IAlertServ
         return _isMandatory;
     }
 
+    public abstract void raiseRestartAlert();
 }

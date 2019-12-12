@@ -13,7 +13,15 @@ public class InputPortsCollection<T> extends Hashtable<String, IInputPort<T>> im
     }
 
     public void add(IInputPort<T> port) {
-        put(port.getId(), port);
+        String portId = port.getId();
+        if (containsKey(portId)) {
+            IInputPort<T> existingPort = get(portId);
+            if (existingPort instanceof IShadowInputPort) {
+                ((IShadowInputPort<T>) existingPort).setTarget(port);
+            }
+        } else {
+            put(port.getId(), port);
+        }
     }
 
     public IInputPort<T> find(String uniqueId) throws PortNotFoundException {

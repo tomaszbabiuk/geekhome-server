@@ -53,9 +53,9 @@ public class ResourcesCleanupTool {
         try {
             TextFileAutomationSettingsPersister settingsPersister = new TextFileAutomationSettingsPersister();
             AutomationSettings automationSettings = new AutomationSettings(settingsPersister);
-            HardwareManager hardwareManager = new HardwareManager();
             ILocalizationProvider localizationProvider = new ResourceLocalizationProvider();
             DashboardAlertService dashboardAlertService = new DashboardAlertService(localizationProvider);
+            HardwareManager hardwareManager = new HardwareManager(dashboardAlertService);
             SystemInfo systemInfo = new SystemInfo(OperationMode.Diagnostics, localizationProvider, dashboardAlertService);
             MasterConfiguration masterConfiguration = new MasterConfiguration(localizationProvider);
             MasterAutomation masterAutomation = new MasterAutomation(masterConfiguration, hardwareManager,

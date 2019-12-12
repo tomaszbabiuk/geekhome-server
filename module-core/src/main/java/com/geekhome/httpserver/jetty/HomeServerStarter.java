@@ -33,9 +33,9 @@ public class HomeServerStarter {
         try {
             TextFileAutomationSettingsPersister settingsPersister = new TextFileAutomationSettingsPersister();
             AutomationSettings automationSettings = new AutomationSettings(settingsPersister);
-            HardwareManager hardwareManager = new HardwareManager();
             ILocalizationProvider localizationProvider = new ResourceLocalizationProvider();
             DashboardAlertService dashboardAlertService = new DashboardAlertService(localizationProvider);
+            HardwareManager hardwareManager = new HardwareManager(dashboardAlertService);
             SystemInfo systemInfo = new SystemInfo(OperationMode.Diagnostics, localizationProvider, dashboardAlertService);
             final MasterConfiguration masterConfiguration = new MasterConfiguration(localizationProvider);
             final MasterAutomation masterAutomation = new MasterAutomation(masterConfiguration, hardwareManager, systemInfo, dashboardAlertService, localizationProvider);

@@ -2,7 +2,7 @@ package com.geekhome.hardwaremanager;
 
 import com.geekhome.common.PortBase;
 
-public class ShadowTogglePort<T> extends PortBase implements ITogglePort {
+public class ShadowTogglePort<T> extends PortBase implements IShadowTogglePort {
 
     private ITogglePort _target;
     private ITogglePort _base;
@@ -32,5 +32,10 @@ public class ShadowTogglePort<T> extends PortBase implements ITogglePort {
         }
 
         _base.toggleOff();
+    }
+
+    @Override
+    public boolean hasTarget() {
+        return _target != null;
     }
 }

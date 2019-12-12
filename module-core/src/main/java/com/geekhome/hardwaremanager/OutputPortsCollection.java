@@ -13,8 +13,17 @@ public class OutputPortsCollection<T> extends Hashtable<String, IOutputPort<T>> 
     }
 
     public void add(IOutputPort<T> port) {
-        put(port.getId(), port);
+        String portId = port.getId();
+        if (containsKey(portId)) {
+            IOutputPort<T> existingPort = get(portId);
+            if (existingPort instanceof IShadowOutputPort) {
+                ((IShadowOutputPort<T>) existingPort).setTarget(port);
+            }
+        } else {
+            put(port.getId(), port);
+        }
     }
+
 
     public IOutputPort<T> tryFind(String uniqueId) {
         if (containsKey(uniqueId)) {

@@ -134,9 +134,7 @@ public class SystemInfo {
     }
 
     public void scheduleAutomaticRestart() {
-        DescriptiveName restartAlertName = new DescriptiveName(_localizationProvider.getValue("C:SystemRestartScheduled"), "system_restart");
-        Alert restartAlert = new Alert(restartAlertName, "");
-        _dashboardAlertService.raiseAlert(restartAlert);
+        _dashboardAlertService.raiseRestartAlert();
         _restartTime = Calendar.getInstance().getTimeInMillis() + RESTART_TIME;
     }
 

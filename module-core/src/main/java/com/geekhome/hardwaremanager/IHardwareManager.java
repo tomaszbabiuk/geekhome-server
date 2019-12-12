@@ -51,8 +51,7 @@ public interface IHardwareManager {
     void rediscover() throws DiscoveryException;
     void invalidateAdapters(OperationMode operationMode) throws Exception;
     void setInvalidateCacheListener(IInvalidateCacheListener listener);
-
     void scheduleRediscovery();
-
     void doRediscoveryIfScheduled(Calendar now);
+    void scheduleRediscoveryIfUsingShadows(Calendar now);
 }

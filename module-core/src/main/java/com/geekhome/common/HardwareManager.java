@@ -4,15 +4,16 @@ import com.geekhome.common.json.JSONArrayList;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.utils.Sleeper;
+import com.geekhome.coremodule.DashboardAlertService;
 import com.geekhome.hardwaremanager.*;
 import com.geekhome.httpserver.OperationMode;
 import com.geekhome.httpserver.SystemInfo;
 import com.geekhome.httpserver.modules.IInvalidateCacheListener;
 import com.geekhome.httpserver.modules.IModule;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 public class HardwareManager implements IHardwareManager {
@@ -29,14 +30,16 @@ public class HardwareManager implements IHardwareManager {
     private IInvalidateCacheListener _invalidateCacheListener;
     private ArrayList<IHardwareManagerAdapter> _adapters = new ArrayList<>();
     private boolean _discoveryPending;
-    private static long REDISCOVERY_TIME = 1 * 60 * 1000;
+    private static long REDISCOVERY_TIME = 1 * 20 * 1000;
     private Long _rediscoveryTime;
+    private DashboardAlertService _dashboardAlertService;
 
     public ArrayList<IHardwareManagerAdapter> getAdapters() {
         return _adapters;
     }
 
-    public HardwareManager() {
+    public HardwareManager(DashboardAlertService dashboardAlertService) {
+        _dashboardAlertService = dashboardAlertService;
         _digitalInputPorts = new InputPortsCollection<>(PortType.DigitalInput);
         _digitalOutputPorts = new OutputPortsCollection<>(PortType.DigitalOutput);
         _powerInputPorts = new InputPortsCollection<>(PortType.PowerInput);
@@ -184,29 +187,37 @@ public class HardwareManager implements IHardwareManager {
     }
 
     private void initializePortMapper(IPortMapper portMapper) {
+        iterateAllPorts(port -> port.initialize(portMapper));
+    }
+
+    private interface PortIterateListener {
+        void onIteratePort(IPort port);
+    }
+
+    private void iterateAllPorts(PortIterateListener listener ) {
         for (IInputPort<Boolean> port : getDigitalInputPorts().values()) {
-            port.initialize(portMapper);
+            listener.onIteratePort(port);
         }
         for (IOutputPort<Boolean> port : getDigitalOutputPorts().values()) {
-            port.initialize(portMapper);
+            listener.onIteratePort(port);
         }
         for (IInputPort<Double> port : getPowerInputPorts().values()) {
-            port.initialize(portMapper);
+            listener.onIteratePort(port);
         }
         for (IOutputPort<Integer> port : getPowerOutputPorts().values()) {
-            port.initialize(portMapper);
+            listener.onIteratePort(port);
         }
         for (IInputPort<Double> port : getTemperaturePorts().values()) {
-            port.initialize(portMapper);
+            listener.onIteratePort(port);
         }
         for (IInputPort<Double> port : getHumidityPorts().values()) {
-            port.initialize(portMapper);
+            listener.onIteratePort(port);
         }
         for (IInputPort<Double> port : getLuminosityPorts().values()) {
-            port.initialize(portMapper);
+            listener.onIteratePort(port);
         }
         for (ITogglePort port : getTogglePorts().values()) {
-            port.initialize(portMapper);
+            listener.onIteratePort(port);
         }
     }
 
@@ -269,6 +280,8 @@ public class HardwareManager implements IHardwareManager {
 
     @Override
     public void discover() {
+        clear();
+
         discoverInternal(false);
     }
 
@@ -280,7 +293,6 @@ public class HardwareManager implements IHardwareManager {
     private void discoverInternal(boolean rediscovery) {
         _discoveryPending = true;
 
-        clear();
         onInvalidateCache("/DIGITALINPUTPORTS.JSON");
         onInvalidateCache("/DIGITALOUTPUTPORTS.JSON");
         onInvalidateCache("/POWERINPUTPORTS.JSON");
@@ -368,8 +380,32 @@ public class HardwareManager implements IHardwareManager {
     @Override
     public void doRediscoveryIfScheduled(Calendar now) {
         if (_rediscoveryTime != null && now.getTimeInMillis() > _rediscoveryTime) {
-            rediscover();
-            _rediscoveryTime = null;
+            if (stillGotShadows()) {
+                rediscover();
+                _rediscoveryTime = null;
+            } else {
+                _dashboardAlertService.clearShadowPortsInUse();
+            }
         }
+    }
+
+    @Override
+    public void scheduleRediscoveryIfUsingShadows(Calendar now) {
+        if (_rediscoveryTime == null) {
+            scheduleRediscovery();
+        }
+    }
+
+    private boolean stillGotShadows() {
+        AtomicBoolean result = new AtomicBoolean(false);
+        iterateAllPorts(port -> {
+            if (port instanceof IShadowPort) {
+                if (!((IShadowPort)port).hasTarget()) {
+                    result.set(true);
+                }
+            }
+        });
+
+        return result.get();
     }
 }

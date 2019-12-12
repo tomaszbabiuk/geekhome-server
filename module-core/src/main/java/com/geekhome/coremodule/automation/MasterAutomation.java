@@ -194,9 +194,7 @@ public final class MasterAutomation {
     }
 
     private void raiseShadowPortsUsedAlert() {
-        DescriptiveName alertName = new DescriptiveName(_localizationProvider.getValue("C:ShadowPortsInUse"), "system_shadow");
-        Alert alert = new Alert(alertName, "");
-        _dashboardAlertService.raiseAlert(alert);
+        _dashboardAlertService.raiseShadowPortsInUse();
         _hardwareManager.scheduleRediscovery();
     }
 
@@ -333,6 +331,7 @@ public final class MasterAutomation {
 
             _systemInfo.doAutomaticRestartIfScheduled(now);
             _hardwareManager.doRediscoveryIfScheduled(now);
+            _hardwareManager.scheduleRediscoveryIfUsingShadows(now);
             Sleeper.trySleep(100);
         }
     }

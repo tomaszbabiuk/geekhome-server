@@ -2,7 +2,7 @@ package com.geekhome.hardwaremanager;
 
 import com.geekhome.common.PortBase;
 
-public class ShadowOutputPort<T> extends PortBase implements IOutputPort<T> {
+public class ShadowOutputPort<T> extends PortBase implements IShadowOutputPort<T> {
 
     private IOutputPort<T> _target;
     private IOutputPort<T> _base;
@@ -32,5 +32,10 @@ public class ShadowOutputPort<T> extends PortBase implements IOutputPort<T> {
         }
 
         return _base.read();
+    }
+
+    @Override
+    public boolean hasTarget() {
+        return _target != null;
     }
 }

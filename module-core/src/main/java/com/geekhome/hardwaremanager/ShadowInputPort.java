@@ -2,7 +2,7 @@ package com.geekhome.hardwaremanager;
 
 import com.geekhome.common.PortBase;
 
-public class ShadowInputPort<T> extends PortBase implements IInputPort<T> {
+public class ShadowInputPort<T> extends PortBase implements IShadowInputPort<T> {
 
     private IInputPort<T> _target;
     private IInputPort<T> _base;
@@ -14,6 +14,11 @@ public class ShadowInputPort<T> extends PortBase implements IInputPort<T> {
 
     public void setTarget(IInputPort<T> target) {
         _target = target;
+    }
+
+    @Override
+    public boolean hasTarget() {
+        return _target != null;
     }
 
     @Override

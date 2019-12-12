@@ -13,7 +13,15 @@ public class TogglePortsCollection extends Hashtable<String, ITogglePort> implem
     }
 
     public void add(ITogglePort port) {
-        put(port.getId(), port);
+        String portId = port.getId();
+        if (containsKey(portId)) {
+            ITogglePort existingPort = get(portId);
+            if (existingPort instanceof IShadowTogglePort) {
+                ((IShadowTogglePort) existingPort).setTarget(port);
+            }
+        } else {
+            put(port.getId(), port);
+        }
     }
 
     public ITogglePort find(String uniqueId) throws PortNotFoundException {
