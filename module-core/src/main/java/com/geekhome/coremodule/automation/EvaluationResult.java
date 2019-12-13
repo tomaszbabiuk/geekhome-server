@@ -5,6 +5,7 @@ import com.geekhome.common.Persistable;
 import com.geekhome.common.json.JSONArrayList;
 import com.geekhome.common.json.JSONAwareBase;
 
+import javax.swing.*;
 import java.util.Objects;
 
 public class EvaluationResult extends JSONAwareBase {
@@ -89,21 +90,24 @@ public class EvaluationResult extends JSONAwareBase {
         _descriptions = value;
     }
 
-    public EvaluationResult(Object value, String interfaceValue, boolean isSignaled, JSONArrayList<KeyValue> descriptions, ControlMode controlMode, boolean isAlternating) {
+    public EvaluationResult(Object value, String interfaceValue, boolean isSignaled, boolean isConnected,
+                            JSONArrayList<KeyValue> descriptions, ControlMode controlMode, boolean isAlternating) {
         setDescriptions(descriptions);
         setValue(value);
         setInterfaceValue(interfaceValue);
         setControlMode(controlMode);
         setSignaled(isSignaled);
         setIsAlternating(isAlternating);
+        setConnected(isConnected);
     }
 
-    public EvaluationResult(Object value, String interfaceValue, boolean isSignaled, JSONArrayList<KeyValue> descriptions) {
-        this(value, interfaceValue, isSignaled, descriptions, ControlMode.Auto, false);
+    public EvaluationResult(Object value, String interfaceValue, boolean isSignaled, boolean isConnected,
+                            JSONArrayList<KeyValue> descriptions) {
+        this(value, interfaceValue, isSignaled, isConnected, descriptions, ControlMode.Auto, false);
     }
 
-    public EvaluationResult(Object value, String interfaceValue, boolean isSignaled) {
-        this(value, interfaceValue, isSignaled, new JSONArrayList<>());
+    public EvaluationResult(Object value, String interfaceValue, boolean isSignaled, boolean isConnected) {
+        this(value, interfaceValue, isSignaled, isConnected, new JSONArrayList<>());
     }
 
     @Override

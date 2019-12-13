@@ -2,11 +2,12 @@ package com.geekhome.coremodule.automation;
 
 import com.geekhome.coremodule.KeySwitch;
 import com.geekhome.hardwaremanager.IInputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;
 
-public class KeySwitchAutomationUnit extends VirtualKeySwitchAutomationUnit implements ICalculableAutomationUnit {
+public class KeySwitchAutomationUnit extends VirtualKeySwitchAutomationUnit {
     private IInputPort<Boolean> _inputPort;
 
     public KeySwitchAutomationUnit(IInputPort<Boolean> inputPort, KeySwitch device, ILocalizationProvider localizationProvider) throws Exception {
@@ -21,11 +22,16 @@ public class KeySwitchAutomationUnit extends VirtualKeySwitchAutomationUnit impl
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public void calculateInternal(Calendar now) throws Exception {
         if (_inputPort.read()) {
             changeStateInternal("on", ControlMode.Auto);
         } else {
             changeStateInternal("off", ControlMode.Auto);
         }
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _inputPort };
     }
 }

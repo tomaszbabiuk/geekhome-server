@@ -6,11 +6,12 @@ import com.geekhome.common.json.JSONArrayList;
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;
 
-public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUnit<IntensityDevice> implements ICalculableAutomationUnit, IDeviceAutomationUnit<String> {
+public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUnit<IntensityDevice> implements IDeviceAutomationUnit<String> {
 
     private IOutputPort<Integer> _controlPort;
     private final AutomationSettings _automationSettings;
@@ -31,7 +32,7 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public void calculateInternal(Calendar now) throws Exception {
         if (getControlMode() == ControlMode.Auto) {
             if (checkIfAnyBlockPasses("preset1")) {
                 changeStateInternal("1preset1", ControlMode.Auto);
@@ -93,7 +94,12 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
 
             descriptions.add(new KeyValue(getLocalizationProvider().getValue("C:Intensity"), formatIntensity(intensity)));
         }
-        return new EvaluationResult(getValue(), interfaceValue, isSignaled(), descriptions, getControlMode(), false);
+        return new EvaluationResult(getValue(), interfaceValue, isSignaled(), isConnected(), descriptions, getControlMode(), false);
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _controlPort };
     }
 
     private String formatIntensity(int intensity) {

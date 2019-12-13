@@ -6,7 +6,7 @@ import com.geekhome.common.NamedObject;
 import java.util.Hashtable;
 
 public class BlocksTargetAutomationUnit extends NamedObject implements IBlocksTargetAutomationUnit {
-    public BlocksTargetAutomationUnit(DescriptiveName name) {
+    BlocksTargetAutomationUnit(DescriptiveName name) {
         super(name);
         _evaluations = new Hashtable<>();
 
@@ -16,7 +16,7 @@ public class BlocksTargetAutomationUnit extends NamedObject implements IBlocksTa
 
     public void updateEvaluationsTable(BlockAutomationUnit block, String targetParameter) {
         if (!_evaluations.containsKey(targetParameter)) {
-            _evaluations.put(targetParameter, new Hashtable<String, Boolean>());
+            _evaluations.put(targetParameter, new Hashtable<>());
         }
 
         Hashtable<String, Boolean> evaluationTable = _evaluations.get(targetParameter);

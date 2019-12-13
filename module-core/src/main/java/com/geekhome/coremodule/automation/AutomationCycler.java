@@ -4,10 +4,6 @@ import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.httpserver.OperationMode;
 import com.geekhome.httpserver.SystemInfo;
-import com.geekhome.httpserver.modules.IAutomationHook;
-import com.geekhome.httpserver.modules.IAutomationModule;
-
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AutomationCycler {
@@ -64,9 +60,7 @@ public class AutomationCycler {
     private void doAutomationCycle(Calendar now) throws Exception {
         if (_systemInfo.getOperationMode() == OperationMode.Automatic) {
             for (IDeviceAutomationUnit deviceUnit : _masterAutomation.getDevices().values()) {
-                if (deviceUnit instanceof ICalculableAutomationUnit) {
-                    ((ICalculableAutomationUnit) deviceUnit).calculate(now);
-                }
+                deviceUnit.calculate(now);
             }
 
             doAutomationLoop(now);

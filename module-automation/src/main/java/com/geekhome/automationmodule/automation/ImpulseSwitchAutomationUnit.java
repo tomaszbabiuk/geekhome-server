@@ -2,13 +2,13 @@ package com.geekhome.automationmodule.automation;
 
 import com.geekhome.automationmodule.ImpulseSwitch;
 import com.geekhome.coremodule.automation.ControlMode;
-import com.geekhome.coremodule.automation.ICalculableAutomationUnit;
 import com.geekhome.hardwaremanager.IInputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;
 
-public class ImpulseSwitchAutomationUnit extends VirtualImpulseSwitchAutomationUnit implements ICalculableAutomationUnit {
+public class ImpulseSwitchAutomationUnit extends VirtualImpulseSwitchAutomationUnit {
     private final IInputPort<Boolean> _inputPort;
     private boolean _lastReading;
 
@@ -24,7 +24,7 @@ public class ImpulseSwitchAutomationUnit extends VirtualImpulseSwitchAutomationU
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public void calculateInternal(Calendar now) throws Exception {
         boolean newReading =_inputPort.read();
         if (_lastReading && !newReading) {
             toggleState();
@@ -39,5 +39,10 @@ public class ImpulseSwitchAutomationUnit extends VirtualImpulseSwitchAutomationU
         } else {
             changeStateInternal("off", ControlMode.Auto);
         }
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _inputPort };
     }
 }

@@ -1,16 +1,16 @@
 package com.geekhome.extafreemodule.automation;
 
 import com.geekhome.coremodule.automation.ControlMode;
-import com.geekhome.coremodule.automation.ICalculableAutomationUnit;
 import com.geekhome.coremodule.automation.IDeviceAutomationUnit;
 import com.geekhome.coremodule.automation.MultistateDeviceAutomationUnit;
 import com.geekhome.extafreemodule.ExtaFreeBlind;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.hardwaremanager.ITogglePort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;
 
-public class ExtaFreeBlindAutomationUnit extends MultistateDeviceAutomationUnit<ExtaFreeBlind> implements ICalculableAutomationUnit, IDeviceAutomationUnit<String> {
+public class ExtaFreeBlindAutomationUnit extends MultistateDeviceAutomationUnit<ExtaFreeBlind> implements IDeviceAutomationUnit<String> {
     private final ITogglePort _upPort;
     private final ITogglePort _downPort;
     private String _previousStateId;
@@ -31,7 +31,12 @@ public class ExtaFreeBlindAutomationUnit extends MultistateDeviceAutomationUnit<
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public IPort[] getUsedPorts() {
+        return new IPort[] {_upPort, _downPort};
+    }
+
+    @Override
+    public void calculateInternal(Calendar now) throws Exception {
         if (!getStateId().equals(_previousStateId)) {
             if (getStateId().equals("1slightlyup")) {
                 _stopAt = now.getTimeInMillis() + 1000 * 5;

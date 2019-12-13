@@ -10,7 +10,7 @@ public class ConnectiblePortBase extends PortBase implements IConnectible {
     public ConnectiblePortBase(String id, long connectionLostInterval) {
         super(id);
         _connectionLostInterval = connectionLostInterval;
-        _isConnected = false;
+        _isConnected = true;
     }
 
     @Override

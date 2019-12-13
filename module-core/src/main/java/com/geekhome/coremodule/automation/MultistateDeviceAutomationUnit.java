@@ -76,7 +76,7 @@ public abstract class MultistateDeviceAutomationUnit<D extends MultistateDevice>
 
     @Override
     public EvaluationResult buildEvaluationResult() {
-        return new EvaluationResult(getValue(), getState().getName().getName(), isSignaled(), null, getControlMode(), false);
+        return new EvaluationResult(getValue(), getState().getName().getName(), isSignaled(), isConnected(), null, getControlMode(), false);
     }
 
     protected abstract boolean isSignaled();

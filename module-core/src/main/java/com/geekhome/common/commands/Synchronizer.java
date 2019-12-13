@@ -112,8 +112,8 @@ public class Synchronizer {
     }
 
     private void recalculateDeviceState(IDeviceAutomationUnit deviceUnit) throws Exception {
-        if (_systemInfo.getOperationMode() == OperationMode.Automatic && deviceUnit instanceof ICalculableAutomationUnit) {
-            ((ICalculableAutomationUnit)deviceUnit).calculate(Calendar.getInstance());
+        if (_systemInfo.getOperationMode() == OperationMode.Automatic && deviceUnit != null) {
+            deviceUnit.calculate(Calendar.getInstance());
         }
     }
 

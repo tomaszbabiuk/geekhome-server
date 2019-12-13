@@ -1,17 +1,16 @@
 package com.geekhome.coremodule.automation;
 
-import com.geekhome.common.IConnectible;
 import com.geekhome.coremodule.OnOffDeviceBase;
 import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.modules.ObjectNotFoundException;
 
 import java.util.Calendar;
 
-public class OnOffDeviceAutomationUnit<D extends OnOffDeviceBase> extends MultistateDeviceAutomationUnit<D> implements ICalculableAutomationUnit {
+public class OnOffDeviceAutomationUnit<D extends OnOffDeviceBase> extends MultistateDeviceAutomationUnit<D> {
     private IOutputPort<Boolean> _outputPort;
     private Calendar _lastSwitchingOnTime = null;
-    private boolean _isConnected = true;
 
     protected Calendar getLastSwitchingOnTime() {
         return _lastSwitchingOnTime;
@@ -37,24 +36,12 @@ public class OnOffDeviceAutomationUnit<D extends OnOffDeviceBase> extends Multis
     }
 
     @Override
-    public EvaluationResult buildEvaluationResult() {
-        EvaluationResult result = super.buildEvaluationResult();
-        result.setConnected(_isConnected);
-        return result;
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _outputPort };
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
-        //watch connectivity
-        if (_outputPort instanceof IConnectible) {
-            IConnectible connectible = (IConnectible)_outputPort;
-            _isConnected = connectible.isConnected(now);
-
-            if (!_isConnected) {
-                return;
-            }
-        }
-
+    public void calculateInternal(Calendar now) throws Exception {
         if (getControlMode() == ControlMode.Auto) {
             if (checkIfAnyBlockPasses("on")) {
                 if (!getPort().read()) {

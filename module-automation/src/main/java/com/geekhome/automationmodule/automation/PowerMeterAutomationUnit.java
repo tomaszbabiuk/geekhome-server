@@ -4,6 +4,9 @@ import com.geekhome.automationmodule.PowerMeter;
 import com.geekhome.coremodule.automation.DeviceAutomationUnit;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.hardwaremanager.IInputPort;
+import com.geekhome.hardwaremanager.IPort;
+
+import java.util.Calendar;
 
 class PowerMeterAutomationUnit extends DeviceAutomationUnit<Double, PowerMeter> {
     private IInputPort<Double> _port;
@@ -21,6 +24,16 @@ class PowerMeterAutomationUnit extends DeviceAutomationUnit<Double, PowerMeter> 
     @Override
     public EvaluationResult buildEvaluationResult() {
         String interfaceValue = String.format("%.2f W", getValue());
-        return new EvaluationResult(getValue(), interfaceValue, false);
+        return new EvaluationResult(getValue(), interfaceValue, false, isConnected());
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[0];
+    }
+
+    @Override
+    protected void calculateInternal(Calendar now) throws Exception {
+
     }
 }

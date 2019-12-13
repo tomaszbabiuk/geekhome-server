@@ -5,11 +5,12 @@ import com.geekhome.common.KeyValue;
 import com.geekhome.common.json.JSONArrayList;
 import com.geekhome.coremodule.Duration;
 import com.geekhome.coremodule.automation.*;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;
 
-public class VirtualImpulseSwitchAutomationUnit extends MultistateDeviceAutomationUnit<ImpulseSwitch> implements ICalculableAutomationUnit {
+public class VirtualImpulseSwitchAutomationUnit extends MultistateDeviceAutomationUnit<ImpulseSwitch> {
     private ILocalizationProvider _localizationProvider;
     private long _lastPushed;
     private long _impulseTime;
@@ -24,6 +25,11 @@ public class VirtualImpulseSwitchAutomationUnit extends MultistateDeviceAutomati
             result.setDescriptions(descriptions);
         }
         return result;
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[0];
     }
 
     private static String formatTimeLeft(long seconds) {
@@ -61,7 +67,7 @@ public class VirtualImpulseSwitchAutomationUnit extends MultistateDeviceAutomati
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    protected void calculateInternal(Calendar now) throws Exception {
         if (getStateId().equals("on") && _lastPushed + _impulseTime < now.getTimeInMillis()) {
             changeStateInternal("off", ControlMode.Manual);
         }
