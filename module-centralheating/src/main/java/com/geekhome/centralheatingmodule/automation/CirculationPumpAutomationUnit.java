@@ -13,7 +13,7 @@ import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;
 
-public class CirculationPumpAutomationUnit extends OnOffDeviceAutomationUnit<CirculationPump> implements ICalculableAutomationUnit {
+public class CirculationPumpAutomationUnit extends OnOffDeviceAutomationUnit<CirculationPump> {
     private long _oneMinutesMillis;
     private long _minimumWorkingTime;
     private IThermometerAutomationUnit _thermometerAutomationUnit;
@@ -32,7 +32,7 @@ public class CirculationPumpAutomationUnit extends OnOffDeviceAutomationUnit<Cir
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public void calculateInternal(Calendar now) throws Exception {
         if (getControlMode() == ControlMode.Auto) {
             long nowMillis = now.getTimeInMillis();
             if (checkIfAnyBlockPasses("on")) {

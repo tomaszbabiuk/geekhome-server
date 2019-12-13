@@ -64,8 +64,8 @@ public class MagneticDetectorAutomationUnit<D extends AlarmSensor> extends Alarm
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
-        super.calculate(now);
+    public void calculateInternal(Calendar now) throws Exception {
+        super.calculateInternal(now);
         if (isLineBreached()) {
             if (getStateId().equals("closed-disarmed")) {
                 changeStateInternal("open-disarmed", ControlMode.Auto);

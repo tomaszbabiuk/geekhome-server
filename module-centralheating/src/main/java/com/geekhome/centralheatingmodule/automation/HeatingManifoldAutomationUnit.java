@@ -6,6 +6,7 @@ import com.geekhome.common.json.JSONArrayList;
 import com.geekhome.coremodule.Duration;
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.ArrayList;
@@ -66,7 +67,12 @@ public class HeatingManifoldAutomationUnit extends MultistateDeviceAutomationUni
             }
         }
 
-        return new EvaluationResult(getStateId(), interfaceValue, isSignaled(), descriptions, getControlMode(), false);
+        return new EvaluationResult(getStateId(), interfaceValue, isSignaled(), isConnected(), descriptions, getControlMode(), false);
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _pumpOrFurnaceOutputPort, _actuatorsTransformerPortId};
     }
 
     @Override
@@ -75,7 +81,7 @@ public class HeatingManifoldAutomationUnit extends MultistateDeviceAutomationUni
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public void calculateInternal(Calendar now) throws Exception {
         if (getControlMode() == ControlMode.Auto) {
             if (checkIfAnyBlockPasses("on")) {
                 changeStateInternal("on", ControlMode.Auto);

@@ -2,13 +2,14 @@ package com.geekhome.lightsmodule.automation;
 
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.hardwaremanager.TogglePortWrapper;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.lightsmodule.SevenColorLamp;
 
 import java.util.Calendar;
 
-public class SevenColorLampAutomationUnit extends MultistateDeviceAutomationUnit<SevenColorLamp> implements ICalculableAutomationUnit, IDeviceAutomationUnit<String> {
+public class SevenColorLampAutomationUnit extends MultistateDeviceAutomationUnit<SevenColorLamp> implements IDeviceAutomationUnit<String> {
     private final boolean _hasTogglePorts;
     private IOutputPort<Boolean> _redPort;
     private IOutputPort<Boolean> _greenPort;
@@ -28,7 +29,12 @@ public class SevenColorLampAutomationUnit extends MultistateDeviceAutomationUnit
 
     @Override
     public EvaluationResult buildEvaluationResult() {
-        return new EvaluationResult(getValue(), getState().getName().getName(), isSignaled(), null, getControlMode(), _hasTogglePorts);
+        return new EvaluationResult(getValue(), getState().getName().getName(), isSignaled(), isConnected(), null, getControlMode(), _hasTogglePorts);
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _redPort, _greenPort, _bluePort };
     }
 
     @Override
@@ -37,7 +43,7 @@ public class SevenColorLampAutomationUnit extends MultistateDeviceAutomationUnit
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public void calculateInternal(Calendar now) throws Exception {
         boolean invalidate = !getStateId().equals(_lastState);
 
         if (getControlMode() == ControlMode.Auto) {

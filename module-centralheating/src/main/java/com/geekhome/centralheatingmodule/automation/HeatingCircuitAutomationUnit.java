@@ -7,6 +7,7 @@ import com.geekhome.coremodule.Duration;
 import com.geekhome.coremodule.InactiveState;
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;
@@ -20,6 +21,11 @@ public abstract class HeatingCircuitAutomationUnit <R extends Radiator> extends 
     private long _counter;
     private boolean _isActive;
     private IOutputPort<Boolean> _outputPort;
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _outputPort };
+    }
 
     protected TemperatureMulticontrollerAutomationUnit getTemperatureControllerUnit() {
         return _temperatureControllerUnit;
@@ -52,7 +58,7 @@ public abstract class HeatingCircuitAutomationUnit <R extends Radiator> extends 
         double ambientTempDelta = getAmbientThermometerUnit().getValue() - getTemperatureControllerUnit().getValue();
         descriptions.add(new KeyValue(getLocalizationProvider().getValue("CH:ValveOpening"), calculateOpenningLevel() + "%"));
         descriptions.add(new KeyValue(getLocalizationProvider().getValue("CH:AmbientTemperature"), String.format("%.2f°C (%+.2f°C)", getAmbientThermometerUnit().getValue(), ambientTempDelta)));
-        return new EvaluationResult(getValue(), interfaceValue, isSignaled(), descriptions, getControlMode(), false);
+        return new EvaluationResult(getValue(), interfaceValue, isSignaled(), isConnected(), descriptions, getControlMode(), false);
     }
 
 
@@ -74,9 +80,9 @@ public abstract class HeatingCircuitAutomationUnit <R extends Radiator> extends 
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public void calculateInternal(Calendar now) throws Exception {
         forceToActiveIfNeeded();
-        calculateOpenning(now);
+        calculateOpening(now);
         execute();
     }
 
@@ -110,7 +116,7 @@ public abstract class HeatingCircuitAutomationUnit <R extends Radiator> extends 
         }
     }
 
-    private void calculateOpenning(Calendar now) {
+    private void calculateOpening(Calendar now) {
         long ticksDelta = (now.getTimeInMillis() - _counter);
         _counter = now.getTimeInMillis();
         if (_outputPort.read()) {

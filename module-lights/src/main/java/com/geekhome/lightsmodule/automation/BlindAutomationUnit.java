@@ -5,12 +5,13 @@ import com.geekhome.common.json.JSONArrayList;
 import com.geekhome.coremodule.Duration;
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.lightsmodule.Blind;
 
 import java.util.Calendar;
 
-public class BlindAutomationUnit extends MultistateDeviceAutomationUnit<Blind> implements ICalculableAutomationUnit, IDeviceAutomationUnit<String> {
+public class BlindAutomationUnit extends MultistateDeviceAutomationUnit<Blind> implements IDeviceAutomationUnit<String> {
     private final long _closingTime;
     private final long _comfortSetTime;
     private boolean _positionReset;
@@ -49,11 +50,16 @@ public class BlindAutomationUnit extends MultistateDeviceAutomationUnit<Blind> i
             descriptions.add(new KeyValue(warningKey, warningValue));
         }
 
-        return new EvaluationResult(getValue(), getState().getName().getName(), isSignaled(), descriptions, getControlMode(), isAlternating);
+        return new EvaluationResult(getValue(), getState().getName().getName(), isSignaled(), isConnected(), descriptions, getControlMode(), isAlternating);
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _motorPort, _automaticControlPort };
+    }
+
+    @Override
+    public void calculateInternal(Calendar now) throws Exception {
         if (getControlMode() == ControlMode.Auto) {
             if (checkIfAnyBlockPasses("close")) {
                 if (!getStateId().equals("2closing")) {

@@ -1,16 +1,16 @@
 package com.geekhome.lightsmodule.automation;
 
 import com.geekhome.coremodule.automation.ControlMode;
-import com.geekhome.coremodule.automation.ICalculableAutomationUnit;
 import com.geekhome.coremodule.automation.IDeviceAutomationUnit;
 import com.geekhome.coremodule.automation.MultistateDeviceAutomationUnit;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.hardwaremanager.ITogglePort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.lightsmodule.Blind;
 
 import java.util.Calendar;
 
-public class ToggleBlindAutomationUnit extends MultistateDeviceAutomationUnit<Blind> implements ICalculableAutomationUnit, IDeviceAutomationUnit<String> {
+public class ToggleBlindAutomationUnit extends MultistateDeviceAutomationUnit<Blind> implements IDeviceAutomationUnit<String> {
     private ITogglePort _channelUpPort;
     private ITogglePort _channelDownPort;
     private long _stopAt;
@@ -31,7 +31,12 @@ public class ToggleBlindAutomationUnit extends MultistateDeviceAutomationUnit<Bl
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _channelUpPort, _channelDownPort };
+    }
+
+    @Override
+    public void calculateInternal(Calendar now) throws Exception {
         if (!getStateId().equals(_previousStateId)) {
             if (getStateId().equals("1slightlyup")) {
                 _stopAt = now.getTimeInMillis() + 1000 * 5;

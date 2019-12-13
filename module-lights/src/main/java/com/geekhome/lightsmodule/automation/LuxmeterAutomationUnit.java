@@ -3,7 +3,10 @@ package com.geekhome.lightsmodule.automation;
 import com.geekhome.coremodule.automation.DeviceAutomationUnit;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.hardwaremanager.IInputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.lightsmodule.Luxmeter;
+
+import java.util.Calendar;
 
 class LuxmeterAutomationUnit extends DeviceAutomationUnit<Double, Luxmeter> {
     private IInputPort<Double> _port;
@@ -21,6 +24,15 @@ class LuxmeterAutomationUnit extends DeviceAutomationUnit<Double, Luxmeter> {
     @Override
     public EvaluationResult buildEvaluationResult() {
         String interfaceValue = String.format("%s lux", getValue());
-        return new EvaluationResult(getValue(), interfaceValue, false);
+        return new EvaluationResult(getValue(), interfaceValue, false, isConnected());
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _port };
+    }
+
+    @Override
+    protected void calculateInternal(Calendar now) throws Exception {
     }
 }

@@ -5,11 +5,12 @@ import com.geekhome.coremodule.Duration;
 import com.geekhome.coremodule.InactiveState;
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.hardwaremanager.IInputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;
 
-public class AlarmSensorAutomationUnit<D extends AlarmSensor> extends MultistateDeviceAutomationUnit<D>  implements IMultistateDeviceAutomationUnit, ICalculableAutomationUnit {
+public class AlarmSensorAutomationUnit<D extends AlarmSensor> extends MultistateDeviceAutomationUnit<D> implements IMultistateDeviceAutomationUnit {
     private IInputPort<Boolean> _inputPort;
     private AlarmSensor _sensor;
     private ILocalizationProvider _localizationProvider;
@@ -33,7 +34,7 @@ public class AlarmSensorAutomationUnit<D extends AlarmSensor> extends Multistate
     }
 
     public AlarmSensorAutomationUnit(IInputPort<Boolean> inputPort, D sensor, ILocalizationProvider localizationProvider) throws Exception {
-    super(sensor, localizationProvider);
+        super(sensor, localizationProvider);
         _lastBreachedTime = Calendar.getInstance();
         _inputPort = inputPort;
         _localizationProvider = localizationProvider;
@@ -86,7 +87,13 @@ public class AlarmSensorAutomationUnit<D extends AlarmSensor> extends Multistate
         return isLineBreached();
     }
 
-    public void calculate(Calendar now) throws Exception {
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[]{ _inputPort };
+    }
+
+    @Override
+    public void calculateInternal(Calendar now) throws Exception {
         if (_lineBreached != isLineBreached()) {
             _lastBreachedTime = now;
         }

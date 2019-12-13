@@ -72,7 +72,7 @@ public class SignalizatorAutomationUnit extends SwitchableAutomationUnit<Signali
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public void calculateInternal(Calendar now) throws Exception {
         if (alarmPending()) {
             if (getStateId().equals("off")) {
                 changeStateInternal("on", ControlMode.Auto);

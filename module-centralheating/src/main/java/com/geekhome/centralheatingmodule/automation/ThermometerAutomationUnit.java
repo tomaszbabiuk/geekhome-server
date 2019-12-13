@@ -3,6 +3,7 @@ package com.geekhome.centralheatingmodule.automation;
 import com.geekhome.centralheatingmodule.Thermometer;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.hardwaremanager.IInputPort;
+import com.geekhome.hardwaremanager.IPort;
 
 class ThermometerAutomationUnit extends ThermometerAutomationUnitBase<Thermometer> implements IThermometerAutomationUnit {
     private IInputPort<Double> _port;
@@ -20,6 +21,11 @@ class ThermometerAutomationUnit extends ThermometerAutomationUnitBase<Thermomete
     @Override
     public EvaluationResult buildEvaluationResult() {
         String interfaceValue = String.format("%.2f°C", getValue());
-        return new EvaluationResult(getValue(), interfaceValue, false);
+        return new EvaluationResult(getValue(), interfaceValue, false, isConnected());
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _port };
     }
 }

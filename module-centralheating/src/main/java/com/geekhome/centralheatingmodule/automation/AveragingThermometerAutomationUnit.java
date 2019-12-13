@@ -4,6 +4,7 @@ import com.geekhome.centralheatingmodule.AveragingThermometer;
 import com.geekhome.coremodule.automation.DeviceAutomationUnit;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.coremodule.automation.MasterAutomation;
+import com.geekhome.hardwaremanager.IPort;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,12 @@ public class AveragingThermometerAutomationUnit extends ThermometerAutomationUni
     @Override
     public EvaluationResult buildEvaluationResult() {
         String interfaceValue = String.format("%.2f°C", getValue());
-        return new EvaluationResult(getValue(), interfaceValue, false);
+        return new EvaluationResult(getValue(), interfaceValue, false, isConnected());
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[0];
     }
 
     @Override

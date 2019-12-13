@@ -30,7 +30,7 @@ public class ImpulseSwitchAutomationUnit extends VirtualImpulseSwitchAutomationU
             toggleState();
         }
         _lastReading = newReading;
-        super.calculate(now);
+        super.calculateInternal(now);
     }
 
     private void toggleState() throws Exception {

@@ -5,7 +5,6 @@ import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.utils.Sleeper;
 import com.geekhome.hardwaremanager.*;
-import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.OperationMode;
 import com.geekhome.moquettemodule.MqttBroker;
 import com.geekhome.moquettemodule.MqttListener;
@@ -24,19 +23,13 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
     private final InetAddress _brokerIP;
     private final OkHttpClient _okClient;
     private final Gson _gson;
-    private HardwareManager _hardwareManager;
-    private ILocalizationProvider _localizationProvider;
     private MqttBroker _mqttBroker;
     private ArrayList<ShellyDigitalOutputPort> _ownedDigitalOutputPorts = new ArrayList<>();
     private ArrayList<ShellyPowerInputPort> _ownedPowerInputPorts = new ArrayList<>();
     private ArrayList<ShellyPowerOutputPort> _ownedPowerOutputPorts = new ArrayList<>();
 
-    ShellyAdapter(final HardwareManager hardwareManager,
-                  final ILocalizationProvider localizationProvider,
-                  final MqttBroker mqttBroker) {
+    ShellyAdapter(final MqttBroker mqttBroker) {
         super(new DescriptiveName("Shelly Adapter", "SHELLY"));
-        _hardwareManager = hardwareManager;
-        _localizationProvider = localizationProvider;
         _mqttBroker = mqttBroker;
         _brokerIP = resolveIpInLan();
         _okClient = createAnonymousClient();

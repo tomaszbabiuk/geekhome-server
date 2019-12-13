@@ -3,13 +3,14 @@ package com.geekhome.lightsmodule.automation;
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.lightsmodule.RgbLamp;
 
 import java.awt.*;
 import java.util.Calendar;
 
-public class RgbLampAutomationUnit extends MultistateDeviceAutomationUnit<RgbLamp> implements ICalculableAutomationUnit, IDeviceAutomationUnit<String> {
+public class RgbLampAutomationUnit extends MultistateDeviceAutomationUnit<RgbLamp> implements IDeviceAutomationUnit<String> {
 
     private final IOutputPort<Integer> _redPort;
     private final IOutputPort<Integer> _greenPort;
@@ -38,7 +39,7 @@ public class RgbLampAutomationUnit extends MultistateDeviceAutomationUnit<RgbLam
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public void calculateInternal(Calendar now) throws Exception {
         if (getControlMode() == ControlMode.Auto) {
             if (checkIfAnyBlockPasses("preset1")) {
                 changeStateInternal("1preset1", ControlMode.Auto);
@@ -98,5 +99,10 @@ public class RgbLampAutomationUnit extends MultistateDeviceAutomationUnit<RgbLam
 
     private String formatIntensity(int intensity) {
         return String.format("%d (%.1f%%)", intensity, intensity / 256.0 * 100.0);
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _redPort, _greenPort, _bluePort };
     }
 }

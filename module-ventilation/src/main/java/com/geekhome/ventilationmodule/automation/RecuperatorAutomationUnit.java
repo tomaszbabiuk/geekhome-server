@@ -2,12 +2,13 @@ package com.geekhome.ventilationmodule.automation;
 
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.ventilationmodule.Recuperator;
 
 import java.util.Calendar;
 
-public class RecuperatorAutomationUnit extends MultistateDeviceAutomationUnit<Recuperator> implements ICalculableAutomationUnit, IDeviceAutomationUnit<String> {
+public class RecuperatorAutomationUnit extends MultistateDeviceAutomationUnit<Recuperator> implements IDeviceAutomationUnit<String> {
     private IOutputPort<Boolean> _automationControlPort;
     private IOutputPort<Boolean> _secondGearPort;
     private IOutputPort<Boolean> _thirdGearPort;
@@ -27,7 +28,12 @@ public class RecuperatorAutomationUnit extends MultistateDeviceAutomationUnit<Re
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _automationControlPort, _secondGearPort, _thirdGearPort };
+    }
+
+    @Override
+    public void calculateInternal(Calendar now) throws Exception {
         if (getControlMode() == ControlMode.Auto) {
             boolean enableSecondGear = checkIfAnyBlockPasses("2nd");
             boolean enableThirdGear = checkIfAnyBlockPasses("3rd");

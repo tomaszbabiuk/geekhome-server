@@ -3,14 +3,14 @@ package com.geekhome.centralheatingmodule.automation;
 import com.geekhome.coremodule.Multicontroller;
 import com.geekhome.coremodule.automation.DeviceAutomationUnit;
 import com.geekhome.coremodule.automation.EvaluationResult;
-import com.geekhome.coremodule.automation.ICalculableAutomationUnit;
 import com.geekhome.coremodule.automation.ModeAutomationUnit;
 import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.hardwaremanager.IPort;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class TemperatureMulticontrollerAutomationUnit extends DeviceAutomationUnit<Double, Multicontroller> implements ICalculableAutomationUnit {
+public class TemperatureMulticontrollerAutomationUnit extends DeviceAutomationUnit<Double, Multicontroller> {
     private Multicontroller _temperatureController;
     private AutomationSettings _automationSettings;
     private double _temperature;
@@ -47,7 +47,7 @@ public class TemperatureMulticontrollerAutomationUnit extends DeviceAutomationUn
     }
 
     @Override
-    public void calculate(Calendar now) {
+    public void calculateInternal(Calendar now) {
         if (getModesUnits() != null) {
             for (ModeAutomationUnit unit : getModesUnits()) {
                 if (unit.isPassed()) {
@@ -64,7 +64,12 @@ public class TemperatureMulticontrollerAutomationUnit extends DeviceAutomationUn
     @Override
     public EvaluationResult buildEvaluationResult() {
         String interfaceValue = getValue() + "°C";
-        return new EvaluationResult(getValue(), interfaceValue, false);
+        return new EvaluationResult(getValue(), interfaceValue, false, isConnected());
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[0];
     }
 }
 

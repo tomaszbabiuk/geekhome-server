@@ -8,12 +8,13 @@ import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.coremodule.Duration;
 import com.geekhome.coremodule.automation.*;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class AlarmZoneAutomationUnit extends MultistateDeviceAutomationUnit<AlarmZone> implements ICalculableAutomationUnit {
+public class AlarmZoneAutomationUnit extends MultistateDeviceAutomationUnit<AlarmZone> {
     private static ILogger Logger = LoggingService.getLogger();
     private ArrayList<CodeLockAutomationUnit> _locksUnits;
     private ArrayList<AlarmSensorAutomationUnit> _alarmSensorsUnits;
@@ -23,7 +24,6 @@ public class AlarmZoneAutomationUnit extends MultistateDeviceAutomationUnit<Alar
     private AlarmZoneState _zoneState;
     private AlarmSensorAutomationUnit _sensorThatCausedTheAlarm;
 
-
     @Override
     public EvaluationResult buildEvaluationResult() {
         String interfaceValue = _zoneState.translate(getLocalizationProvider());
@@ -32,7 +32,12 @@ public class AlarmZoneAutomationUnit extends MultistateDeviceAutomationUnit<Alar
             descriptions.add(new KeyValue(getLocalizationProvider().getValue("ALARM:BreachedSensor"), _sensorThatCausedTheAlarm.getName().getName()));
         }
 
-        return new EvaluationResult(getValue(), interfaceValue, isSignaled(), descriptions);
+        return new EvaluationResult(getValue(), interfaceValue, isSignaled(), isConnected(), descriptions);
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[0];
     }
 
     @Override
@@ -105,7 +110,7 @@ public class AlarmZoneAutomationUnit extends MultistateDeviceAutomationUnit<Alar
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public void calculateInternal(Calendar now) throws Exception {
         boolean isArmedAutomatically = checkIfAnyBlockPasses("arm");
         boolean isDisarmedAutomatically = checkIfAnyBlockPasses("disarm") && !isArmedAutomatically;
 

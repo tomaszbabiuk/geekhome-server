@@ -30,7 +30,7 @@ public class HardwareManager implements IHardwareManager {
     private IInvalidateCacheListener _invalidateCacheListener;
     private ArrayList<IHardwareManagerAdapter> _adapters = new ArrayList<>();
     private boolean _discoveryPending;
-    private static long REDISCOVERY_TIME = 1 * 20 * 1000;
+    private static long REDISCOVERY_TIME = 5 * 60 * 1000; //TODO: 30 * 60 * 1000
     private Long _rediscoveryTime;
     private DashboardAlertService _dashboardAlertService;
 

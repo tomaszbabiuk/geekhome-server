@@ -6,7 +6,10 @@ import com.geekhome.common.json.JSONArrayList;
 import com.geekhome.coremodule.automation.DeviceAutomationUnit;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.hardwaremanager.IInputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
+
+import java.util.Calendar;
 
 class ComfortmeterAutomationUnit extends DeviceAutomationUnit<Double, Comfortmeter> implements IThermometerAutomationUnit {
     private final ILocalizationProvider _localizationProvider;
@@ -39,6 +42,15 @@ class ComfortmeterAutomationUnit extends DeviceAutomationUnit<Double, Comfortmet
         descriptions.add(new KeyValue(_localizationProvider.getValue("CH:Temperature"), temperatureValue));
         descriptions.add(new KeyValue(_localizationProvider.getValue("CH:Humidity"), humidityValue));
 
-        return new EvaluationResult(getValue(), comfortmeterValue, false, descriptions);
+        return new EvaluationResult(getValue(), comfortmeterValue, false, isConnected(), descriptions);
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _humidityPort, _temperaturePort };
+    }
+
+    @Override
+    protected void calculateInternal(Calendar now) throws Exception {
     }
 }

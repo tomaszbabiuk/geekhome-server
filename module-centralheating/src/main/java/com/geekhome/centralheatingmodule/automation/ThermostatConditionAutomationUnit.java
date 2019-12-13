@@ -31,7 +31,7 @@ public class ThermostatConditionAutomationUnit extends EvaluableAutomationUnit {
         }
 
         if (_temperatureControllerUnit.getValue() == null) {
-            _temperatureControllerUnit.calculate(null);
+            _temperatureControllerUnit.calculateInternal(null);
         }
 
         double hysteresis = _lastEvaluation ? 0.5 : 0;

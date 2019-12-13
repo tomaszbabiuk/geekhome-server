@@ -16,6 +16,8 @@ import java.util.HashMap;
 
 class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
 
+    private static final int SERVER_TIMEOUT = 15 * 1000;
+    private static final int LAST_SEEN_TIMEOUT = 60 * 1000;
     private DatagramSocket _clientSocket;
     private HardwareManager _hardwareManager;
     private ILocalizationProvider _localizationProvider;
@@ -39,7 +41,7 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
 
         try {
             result = new DatagramSocket();
-            result.setSoTimeout(15 * 1000); //15 sec
+            result.setSoTimeout(SERVER_TIMEOUT); //15 sec
         } catch (SocketException ex) {
             _logger.error("Cannot create gree adapter", ex);
         }
@@ -84,19 +86,19 @@ class GreeAdapter extends NamedObject implements IHardwareManagerAdapter {
                 String lightPortId = greeDeviceIdToLightPortId(greeDeviceId);
                 boolean isLightOn = greeDevice.GetDeviceLight() == 1;
                 IInputPort<Boolean> lightPort =
-                        new SynchronizedInputPort<>(lightPortId, isLightOn);
+                        new SynchronizedInputPort<>(lightPortId, isLightOn, LAST_SEEN_TIMEOUT);
                 digitalInputPorts.add(lightPort);
 
                 String turboPortId = greeDeviceIdToTurboPortId(greeDeviceId);
                 boolean isTurboOn = greeDevice.GetDeviceTurbo() == 1;
                 IOutputPort<Boolean> turboPort =
-                        new SynchronizedOutputPort<>(turboPortId, isTurboOn);
+                        new SynchronizedOutputPort<>(turboPortId, isTurboOn, LAST_SEEN_TIMEOUT);
                 digitalOutputPorts.add(turboPort);
 
                 String temperatureControlPortId = greeDeviceIdToTemperatureControlPortId(greeDeviceId);
                 int temperature = greeDevice.GetDeviceTempSet();
                 IOutputPort<Integer> temperatureControlPort =
-                        new SynchronizedOutputPort<>(temperatureControlPortId, temperature);
+                        new SynchronizedOutputPort<>(temperatureControlPortId, temperature, LAST_SEEN_TIMEOUT);
                 powerOutputPorts.add(temperatureControlPort);
             }
         } catch (Exception ex) {

@@ -1,17 +1,16 @@
 package com.geekhome.centralheatingmodule.automation;
 
 import com.geekhome.centralheatingmodule.AirConditioner;
-import com.geekhome.common.IConnectable;
 import com.geekhome.coremodule.automation.ControlMode;
-import com.geekhome.coremodule.automation.ICalculableAutomationUnit;
 import com.geekhome.coremodule.automation.MasterAutomation;
 import com.geekhome.coremodule.automation.MultistateDeviceAutomationUnit;
 import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;
 
-public class AirConditionerAutomationUnit extends MultistateDeviceAutomationUnit<AirConditioner> implements ICalculableAutomationUnit {
+public class AirConditionerAutomationUnit extends MultistateDeviceAutomationUnit<AirConditioner> {
 
     private final TemperatureMulticontrollerAutomationUnit _temperatureController;
     private IOutputPort<Integer> _temperatureControlPort;
@@ -33,20 +32,12 @@ public class AirConditionerAutomationUnit extends MultistateDeviceAutomationUnit
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
-        if (_temperatureControlPort == null) {
-            changeStateInternal("discoveryError", ControlMode.Auto);
-            return;
-        }
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _temperatureControlPort };
+    }
 
-        if (_temperatureControlPort instanceof IConnectable) {
-            boolean connected = ((IConnectable) _temperatureControlPort).isConnected();
-            if (!connected) {
-                changeStateInternal("communicationError", ControlMode.Auto);
-                return;
-            }
-        }
-
+    @Override
+    public void calculateInternal(Calendar now) throws Exception {
         if (getControlMode() == ControlMode.Auto) {
             if (checkIfAnyBlockPasses("manual")) {
                 changeStateInternal("manual", ControlMode.Auto);

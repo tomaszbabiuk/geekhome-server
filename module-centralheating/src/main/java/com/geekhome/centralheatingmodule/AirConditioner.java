@@ -57,8 +57,6 @@ public class AirConditioner extends MultistateDevice implements IRoomDevice, IPo
         states.add(new State(new DescriptiveName(localizationProvider.getValue("CH:Cooling"),"cooling"), StateType.Control, false));
         states.add(new State(new DescriptiveName(localizationProvider.getValue("CH:Heating"),"heating"), StateType.Control, false));
         states.add(new State(new DescriptiveName(localizationProvider.getValue("CH:Manual"),"manual"), StateType.Control, false));
-        states.add(new State(new DescriptiveName(localizationProvider.getValue("C:CommunicationError"),"communicationError"), StateType.ReadOnly, false));
-        states.add(new State(new DescriptiveName(localizationProvider.getValue("C:DiscoveryError"),"discoveryError"), StateType.ReadOnly, false));
 
         return states;
     }

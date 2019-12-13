@@ -8,11 +8,12 @@ import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.coremodule.automation.ICalculableAutomationUnit;
 import com.geekhome.hardwaremanager.IInputPort;
 import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;
 
-public class CodeLockAutomationUnit extends DeviceAutomationUnit<Boolean, CodeLock> implements ICalculableAutomationUnit {
+public class CodeLockAutomationUnit extends DeviceAutomationUnit<Boolean, CodeLock> {
     private final IOutputPort<Boolean> _statusPort;
     private ILogger _logger = LoggingService.getLogger();
     private IInputPort<Boolean> _armingPort;
@@ -67,7 +68,12 @@ public class CodeLockAutomationUnit extends DeviceAutomationUnit<Boolean, CodeLo
                 ? _localizationProvider.getValue("ALARM:Armed")
                 : _localizationProvider.getValue("ALARM:Disarmed");
 
-        return new EvaluationResult(isArmed(), interfaceValue, isArmed());
+        return new EvaluationResult(isArmed(), interfaceValue, isArmed(), isConnected());
+    }
+
+    @Override
+    public IPort[] getUsedPorts() {
+        return new IPort[] { _armingPort };
     }
 
     public void arm() throws Exception {
@@ -85,7 +91,7 @@ public class CodeLockAutomationUnit extends DeviceAutomationUnit<Boolean, CodeLo
     }
 
     @Override
-    public void calculate(Calendar now) throws Exception {
+    public void calculateInternal(Calendar now) throws Exception {
         boolean newReading = _armingPort.read();
         if (_lastReading != newReading && !newReading) {
             if (isArmed()) {
