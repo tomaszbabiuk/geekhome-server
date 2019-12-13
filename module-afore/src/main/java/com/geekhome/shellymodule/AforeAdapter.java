@@ -60,7 +60,7 @@ class AforeAdapter extends NamedObject implements IHardwareManagerAdapter {
                          final InputPortsCollection<Double> luminosityPorts) throws DiscoveryException {
 
         Double inverterPower = readInverterPower();
-        SynchronizedInputPort<Double> inverterPort = new SynchronizedInputPort<>(INVERTER_PORT_ID, inverterPower);
+        SynchronizedInputPort<Double> inverterPort = new SynchronizedInputPort<>(INVERTER_PORT_ID, inverterPower, 0);
         powerInputPorts.add(inverterPort);
     }
 

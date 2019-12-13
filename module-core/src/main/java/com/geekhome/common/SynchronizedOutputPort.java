@@ -4,8 +4,8 @@ import com.geekhome.hardwaremanager.IOutputPort;
 
 public class SynchronizedOutputPort<T> extends SynchronizedInputPort<T> implements IOutputPort<T> {
 
-    public SynchronizedOutputPort(String id, T initialValue) {
-        super(id, initialValue);
+    public SynchronizedOutputPort(String id, T initialValue, long connectionLostInterval) {
+        super(id, initialValue, connectionLostInterval);
     }
 
     @Override

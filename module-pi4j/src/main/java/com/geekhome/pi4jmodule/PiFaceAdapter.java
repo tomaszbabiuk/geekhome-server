@@ -116,7 +116,7 @@ class PiFaceAdapter extends NamedObject implements IHardwareManagerAdapter {
         Hashtable<Byte, SynchronizedInputPort<Boolean>> inputs = new Hashtable<>();
         for (byte i = 0; i < 8; i++) {
             String portId = String.format("PIFACE-%s-IN%d", _address.getCode(), i);
-            SynchronizedInputPort<Boolean> input = new SynchronizedInputPort<>(portId, false);
+            SynchronizedInputPort<Boolean> input = new SynchronizedInputPort<>(portId, false, 0);
             inputs.put(i, input);
         }
         _inputs = inputs;
@@ -126,7 +126,7 @@ class PiFaceAdapter extends NamedObject implements IHardwareManagerAdapter {
         Hashtable<Byte, SynchronizedOutputPort<Boolean>> outputs = new Hashtable<>();
         for (byte i=0; i<8; i++) {
             String portId = String.format("PIFACE-%s-OUT%d", _address.getCode(), i);
-            SynchronizedOutputPort<Boolean> output = new SynchronizedOutputPort<>(portId, false);
+            SynchronizedOutputPort<Boolean> output = new SynchronizedOutputPort<>(portId, false,0 );
             outputs.put(i, output);
         }
         _outputs = outputs;

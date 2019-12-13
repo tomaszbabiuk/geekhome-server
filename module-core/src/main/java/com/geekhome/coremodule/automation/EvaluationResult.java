@@ -13,6 +13,7 @@ public class EvaluationResult extends JSONAwareBase {
     private JSONArrayList<KeyValue> _descriptions;
     private ControlMode _controlMode;
     private boolean _isSignaled;
+    private boolean _isConnected;
     private boolean _isAlternating;
     private String _colorValue;
 
@@ -30,8 +31,17 @@ public class EvaluationResult extends JSONAwareBase {
         return _isSignaled;
     }
 
-    public void setIsSignaled(boolean value) {
+    public void setSignaled(boolean value) {
         _isSignaled = value;
+    }
+
+    @Persistable(name="IsConnected")
+    public boolean isConnected() {
+        return _isConnected;
+    }
+
+    public void setConnected(boolean value) {
+        _isConnected = value;
     }
 
     @Persistable(name="IsAlternating")
@@ -84,7 +94,7 @@ public class EvaluationResult extends JSONAwareBase {
         setValue(value);
         setInterfaceValue(interfaceValue);
         setControlMode(controlMode);
-        setIsSignaled(isSignaled);
+        setSignaled(isSignaled);
         setIsAlternating(isAlternating);
     }
 

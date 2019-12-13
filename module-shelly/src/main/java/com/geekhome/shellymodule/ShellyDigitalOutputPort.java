@@ -2,14 +2,15 @@ package com.geekhome.shellymodule;
 
 public class ShellyDigitalOutputPort extends ShellyOutputPort<Boolean> {
 
-    private ShellyDigitalOutputPort(String shellyId, int channel, Boolean initialValue) {
+    private ShellyDigitalOutputPort(String shellyId, int channel, Boolean initialValue, long connectionLostInterval) {
         super(shellyId + "-PWM-" + channel, initialValue,
                 "shellies/" + shellyId + "/relay/" + channel,
-                "shellies/" + shellyId + "/relay/" + channel+ "/command");
+                "shellies/" + shellyId + "/relay/" + channel+ "/command", connectionLostInterval);
     }
 
-    ShellyDigitalOutputPort(ShellySettingsResponse settingsResponse, int channel) {
-        this(settingsResponse.getDevice().getHostname(), channel, settingsResponse.getRelays().get(channel).isOn());
+    ShellyDigitalOutputPort(ShellySettingsResponse settingsResponse, int channel, long connectionLostInterval) {
+        this(settingsResponse.getDevice().getHostname(), channel, settingsResponse.getRelays().get(channel).isOn(),
+                connectionLostInterval);
     }
 
     public String convertValueToMqttPayload() {

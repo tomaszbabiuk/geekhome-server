@@ -125,6 +125,9 @@
     {{if IsAlternating}}
         <img src="/css/icons/warning{{if IsSignaled}}_signaled{{/if}}.svg" width="28" height="28" style="float:right" title="<!-- @RES:C:ToggledDeviceWarning -->" />
     {{/if}}
+    {{if IsConnected === false}}
+        <img src="/css/icons/warning{{if IsSignaled}}_signaled{{/if}}.svg" width="28" height="28" style="float:right" title="<!-- @RES:C:DeviceDisconnectedWarning -->" />
+    {{/if}}
     {{if ColorValue != null}}
         <div style="width:50px; height:25px; background:${ColorValue}; border-color:gray; border-width:thin"></div>
     {{/if}}

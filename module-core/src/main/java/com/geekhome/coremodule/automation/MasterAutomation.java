@@ -141,49 +141,49 @@ public final class MasterAutomation {
 
         switch (type) {
             case DigitalInput: {
-                IInputPort<Boolean> base = new SynchronizedInputPort<>(portId);
+                IInputPort<Boolean> base = new SynchronizedInputPort<>(portId, 0);
                 IInputPort<Boolean> shadow = new ShadowInputPort<>(portId, base);
                 _hardwareManager.getDigitalInputPorts().add(shadow);
                 break;
             }
             case DigitalOutput: {
-                IOutputPort<Boolean> base = new SynchronizedOutputPort<>(portId, false);
+                IOutputPort<Boolean> base = new SynchronizedOutputPort<>(portId, false, 0);
                 IOutputPort<Boolean> shadow = new ShadowOutputPort<>(portId, base);
                 _hardwareManager.getDigitalOutputPorts().add(shadow);
                 break;
             }
             case PowerInput: {
-                IInputPort<Double> base = new SynchronizedInputPort<>(portId);
+                IInputPort<Double> base = new SynchronizedInputPort<>(portId, 0);
                 IInputPort<Double> shadow = new ShadowInputPort<>(portId, base);
                 _hardwareManager.getPowerInputPorts().add(shadow);
                 break;
             }
             case PowerOutput: {
-                IOutputPort<Integer> base = new SynchronizedOutputPort<>(portId, 0);
+                IOutputPort<Integer> base = new SynchronizedOutputPort<>(portId, 0, 0);
                 IOutputPort<Integer> shadow = new ShadowOutputPort<>(portId, base);
                 _hardwareManager.getPowerOutputPorts().add(shadow);
                 break;
             }
             case Temperature: {
-                IInputPort<Double> base = new SynchronizedInputPort<>(portId);
+                IInputPort<Double> base = new SynchronizedInputPort<>(portId, 0);
                 IInputPort<Double> shadow = new ShadowInputPort<>(portId, base);
                 _hardwareManager.getTemperaturePorts().add(shadow);
                 break;
             }
             case Luminosity: {
-                IInputPort<Double> base = new SynchronizedInputPort<>(portId);
+                IInputPort<Double> base = new SynchronizedInputPort<>(portId, 0);
                 IInputPort<Double> shadow = new ShadowInputPort<>(portId, base);
                 _hardwareManager.getLuminosityPorts().add(shadow);
                 break;
             }
             case Humidity: {
-                IInputPort<Double> base = new SynchronizedInputPort<>(portId);
+                IInputPort<Double> base = new SynchronizedInputPort<>(portId, 0);
                 IInputPort<Double> shadow = new ShadowInputPort<>(portId, base);
                 _hardwareManager.getHumidityPorts().add(shadow);
                 break;
             }
             case Toggle: {
-                ITogglePort base = new SynchronizedTogglePort(portId);
+                ITogglePort base = new SynchronizedTogglePort(portId, 0);
                 ITogglePort shadow = new ShadowTogglePort<>(portId, base);
                 _hardwareManager.getTogglePorts().add(shadow);
                 break;

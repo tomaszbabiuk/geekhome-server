@@ -2,15 +2,14 @@ package com.geekhome.shellymodule;
 
 import com.google.gson.Gson;
 
-import java.io.IOException;
-import java.net.InetAddress;
-
 public class ShellyPowerOutputPort extends ShellyOutputPort<Integer> {
 
     private final Gson _gson;
 
-    ShellyPowerOutputPort(ShellySettingsResponse settingsResponse, ShellyLightResponse lightResponse, int i, InetAddress shellyIP) throws IOException {
-        this(settingsResponse.getDevice().getHostname(), i, calculateBrightness(lightResponse));
+    ShellyPowerOutputPort(ShellySettingsResponse settingsResponse, ShellyLightResponse lightResponse,
+                          int channel, long connectionLostInterval) {
+        this(settingsResponse.getDevice().getHostname(), channel, calculateBrightness(lightResponse),
+                connectionLostInterval);
     }
 
     private static int calculateBrightness(ShellyLightResponse lightResponse) {
@@ -18,10 +17,11 @@ public class ShellyPowerOutputPort extends ShellyOutputPort<Integer> {
         return isOn ? lightResponse.getBrightness() * 256/100 : 0;
     }
 
-    private ShellyPowerOutputPort(String shellyId, int channel, Integer initialValue) {
+    private ShellyPowerOutputPort(String shellyId, int channel, Integer initialValue, long connectionLostInterval) {
         super(shellyId + "-PWM-" + channel, initialValue,
                 "shellies/" + shellyId + "/light/" + channel + "/status",
-                "shellies/" + shellyId + "/light/" + channel + "/set");
+                "shellies/" + shellyId + "/light/" + channel + "/set",
+                connectionLostInterval);
 
         _gson = new Gson();
     }

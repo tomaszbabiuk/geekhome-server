@@ -10,8 +10,8 @@ public abstract class  TasmotaOutputPort<T> extends SynchronizedOutputPort<T> {
     private String _topic;
     private MqttClientResolver _clientResolver;
 
-    public TasmotaOutputPort(MqttClientResolver client, String id, T initialValue) {
-        super(id, initialValue);
+    public TasmotaOutputPort(MqttClientResolver client, String id, T initialValue, long connectionLostInterval) {
+        super(id, initialValue, connectionLostInterval);
         _clientResolver = client;
         String deviceId = getId();
         int channel = -1;

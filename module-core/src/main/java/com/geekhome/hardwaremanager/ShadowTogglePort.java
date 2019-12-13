@@ -1,14 +1,18 @@
 package com.geekhome.hardwaremanager;
 
+import com.geekhome.common.ConnectiblePortBase;
+import com.geekhome.common.IConnectible;
 import com.geekhome.common.PortBase;
 
-public class ShadowTogglePort<T> extends PortBase implements IShadowTogglePort {
+import java.util.Calendar;
+
+public class ShadowTogglePort<T> extends ConnectiblePortBase implements IShadowTogglePort {
 
     private ITogglePort _target;
     private ITogglePort _base;
 
     public ShadowTogglePort(String id, ITogglePort base) {
-        super(id);
+        super(id, 0);
         _base = base;
     }
 
@@ -37,5 +41,14 @@ public class ShadowTogglePort<T> extends PortBase implements IShadowTogglePort {
     @Override
     public boolean hasTarget() {
         return _target != null;
+    }
+
+    @Override
+    public boolean isConnected(Calendar now) {
+        if (_target != null && _target instanceof IConnectible) {
+            return ((IConnectible)_target).isConnected(now);
+        }
+
+        return false;
     }
 }

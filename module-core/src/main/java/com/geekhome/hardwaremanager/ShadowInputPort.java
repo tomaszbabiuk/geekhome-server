@@ -1,14 +1,17 @@
 package com.geekhome.hardwaremanager;
 
-import com.geekhome.common.PortBase;
+import com.geekhome.common.ConnectiblePortBase;
+import com.geekhome.common.IConnectible;
 
-public class ShadowInputPort<T> extends PortBase implements IShadowInputPort<T> {
+import java.util.Calendar;
+
+public class ShadowInputPort<T> extends ConnectiblePortBase implements IShadowInputPort<T> {
 
     private IInputPort<T> _target;
     private IInputPort<T> _base;
 
     public ShadowInputPort(String id, IInputPort<T> base) {
-        super(id);
+        super(id, 0);
         _base = base;
     }
 
@@ -28,5 +31,14 @@ public class ShadowInputPort<T> extends PortBase implements IShadowInputPort<T> 
         }
 
         return _base.read();
+    }
+
+    @Override
+    public boolean isConnected(Calendar now) {
+        if (_target != null && _target instanceof IConnectible) {
+            return ((IConnectible)_target).isConnected(now);
+        }
+
+        return false;
     }
 }

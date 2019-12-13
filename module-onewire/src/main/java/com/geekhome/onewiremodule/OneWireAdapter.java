@@ -102,13 +102,13 @@ class OneWireAdapter extends SerialAdapterBase {
     }
 
     private void addInputPort(InputPortsCollection<Boolean> digitalInputPorts, String id) {
-        SynchronizedInputPort<Boolean> inputPort = new SynchronizedInputPort<>(id);
+        SynchronizedInputPort<Boolean> inputPort = new SynchronizedInputPort<>(id, 0);
         inputPort.setValue(false);
         digitalInputPorts.add(inputPort);
     }
 
     private void addTemperaturePort(InputPortsCollection<Double> temperaturePorts, TemperatureDiscoveryInfo di) {
-        SynchronizedInputPort<Double> tempPort = new SynchronizedInputPort<>(di.getAddress());
+        SynchronizedInputPort<Double> tempPort = new SynchronizedInputPort<>(di.getAddress(), 0);
         tempPort.setValue(di.getInitialTemperature());
         temperaturePorts.add(tempPort);
         _pipe.add(new AdapterTask(TaskType.RefreshTemperature, di));

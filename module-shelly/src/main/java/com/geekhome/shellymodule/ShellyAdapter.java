@@ -89,9 +89,14 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
 
                                 hijackShellyIfNeeded(settingsResponse, shellyIP);
 
+                                //TODO: check if that's battery powered device to calculate connection interval
+                                boolean isBatteryPowered = false;
+
+                                long connectionLostInterval = isBatteryPowered ? 60*60*1000L : 40*60*1000L;
+
                                 if (settingsResponse.getRelays() != null) {
                                     for (int i = 0; i < settingsResponse.getRelays().size(); i++) {
-                                        ShellyDigitalOutputPort output = new ShellyDigitalOutputPort(settingsResponse, i);
+                                        ShellyDigitalOutputPort output = new ShellyDigitalOutputPort(settingsResponse, i, connectionLostInterval);
                                         digitalOutputPorts.add(output);
                                         _ownedDigitalOutputPorts.add(output);
                                     }
@@ -100,7 +105,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
                                 if (settingsResponse.getLights() != null) {
                                     for (int i = 0; i < settingsResponse.getLights().size(); i++) {
                                         ShellyLightResponse lightResponse = callForLightResponse(shellyIP, i);
-                                        ShellyPowerOutputPort output = new ShellyPowerOutputPort(settingsResponse, lightResponse, i, shellyIP);
+                                        ShellyPowerOutputPort output = new ShellyPowerOutputPort(settingsResponse, lightResponse, i, connectionLostInterval);
                                         powerOutputPorts.add(output);
                                         _ownedPowerOutputPorts.add(output);
                                     }
@@ -108,7 +113,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
 
                                 if (settingsResponse.getMeters() != null) {
                                     for (int i = 0; i < settingsResponse.getDevice().getNumMeters(); i++) {
-                                        ShellyPowerInputPort input = new ShellyPowerInputPort(settingsResponse, i);
+                                        ShellyPowerInputPort input = new ShellyPowerInputPort(settingsResponse, i, connectionLostInterval);
                                         powerInputPorts.add(input);
                                         _ownedPowerInputPorts.add(input);
                                     }
@@ -264,6 +269,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
         _logger.info("MQTT message: " + topicName + ", content: " + payload);
         boolean isRelayTopic = topicName.contains("/relay/");
         boolean isLightTopic = topicName.contains("/light/");
+        long now = Calendar.getInstance().getTimeInMillis();
 
         if (!isRelayTopic && !isLightTopic) {
             return;
@@ -272,18 +278,21 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
         for (IShellyPort port : _ownedPowerOutputPorts) {
             if (topicName.equals(port.getReadTopic())) {
                 port.setValueFromMqttPayload(payload);
+                port.updateLastSeenTimestamp(now);
             }
         }
 
         for (IShellyPort port : _ownedPowerInputPorts) {
             if (topicName.equals(port.getReadTopic())) {
                 port.setValueFromMqttPayload(payload);
+                port.updateLastSeenTimestamp(now);
             }
         }
 
         for (IShellyPort port : _ownedDigitalOutputPorts) {
             if (topicName.equals(port.getReadTopic())) {
                 port.setValueFromMqttPayload(payload);
+                port.updateLastSeenTimestamp(now);
             }
         }
     }

@@ -93,21 +93,21 @@ public class SonoffDiscoveryHelper {
                                      final OutputPortsCollection<Integer> powerOutputPorts,
                                      final Integer initialValue) {
         String portId = serviceEvent.getName() + ":" + channel;
-        SynchronizedOutputPort<Integer> powerOutputPort = new TasmotaPowerOutputPort(_mqttClientResolver, portId, initialValue);
+        SynchronizedOutputPort<Integer> powerOutputPort = new TasmotaPowerOutputPort(_mqttClientResolver, portId, initialValue, 0);
         powerOutputPorts.add(powerOutputPort);
     }
 
     private void addTemperaturePort(final ServiceEvent serviceEvent,
                                     final InputPortsCollection<Double> temperaturePorts,
                                     final double initialTemperature) {
-        SynchronizedInputPort<Double> temperaturePort = new SynchronizedInputPort<>(serviceEvent.getName(), initialTemperature);
+        SynchronizedInputPort<Double> temperaturePort = new SynchronizedInputPort<>(serviceEvent.getName(), initialTemperature, 0);
         temperaturePorts.add(temperaturePort);
     }
 
     private void addHumidityPort(final ServiceEvent serviceEvent,
                                  final InputPortsCollection<Double> humidityPorts,
                                  final double initialHumidity) {
-        SynchronizedInputPort<Double> humidityPort = new SynchronizedInputPort<>(serviceEvent.getName(), initialHumidity);
+        SynchronizedInputPort<Double> humidityPort = new SynchronizedInputPort<>(serviceEvent.getName(), initialHumidity, 0);
         humidityPorts.add(humidityPort);
     }
 
@@ -121,7 +121,7 @@ public class SonoffDiscoveryHelper {
         }
 
         SynchronizedOutputPort<Boolean> outputPort = new TasmotaDigitalOutputPort(_mqttClientResolver,
-                portId, power.asBoolean());
+                portId, power.asBoolean(), 0);
         digitalOutputPorts.add(outputPort);
     }
 }

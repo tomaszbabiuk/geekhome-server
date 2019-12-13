@@ -1,17 +1,26 @@
 package com.geekhome.common;
 
+import java.util.Calendar;
+
 public class ConnectiblePortBase extends PortBase implements IConnectible {
     private boolean _isConnected;
     private long _lastSeenTimestamp;
+    private long _connectionLostInterval;
 
-    public ConnectiblePortBase(String id) {
+    public ConnectiblePortBase(String id, long connectionLostInterval) {
         super(id);
-        _isConnected = true;
+        _connectionLostInterval = connectionLostInterval;
+        _isConnected = false;
     }
 
     @Override
-    public boolean isConnected() {
-        return _isConnected;
+    public boolean isConnected(Calendar now) {
+        if (_connectionLostInterval == 0) {
+            return true;
+        }
+
+        boolean lastSeenTimeElapsed = now.getTimeInMillis() > _lastSeenTimestamp + _connectionLostInterval;
+        return _isConnected && !lastSeenTimeElapsed;
     }
 
     @Override
@@ -19,11 +28,14 @@ public class ConnectiblePortBase extends PortBase implements IConnectible {
         _isConnected = false;
     }
 
-    public long getLastSeenTimestamp() {
-        return _lastSeenTimestamp;
+    @Override
+    public void setConnectionLostInterval(long intervalInMs) {
+        _connectionLostInterval = intervalInMs;
     }
 
-    void updateLastSeen(long timestamp) {
-        _lastSeenTimestamp = timestamp;
+    @Override
+    public void updateLastSeenTimestamp(long lastSeenTimestampInMs) {
+        _lastSeenTimestamp = lastSeenTimestampInMs;
+        _isConnected = true;
     }
 }

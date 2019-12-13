@@ -4,8 +4,8 @@ import com.geekhome.mqttmodule.tasmotaapi.Power;
 
 public class TasmotaDigitalOutputPort extends TasmotaOutputPort<Boolean> {
 
-    public TasmotaDigitalOutputPort(MqttClientResolver clientResolver, String id, Boolean initialValue) {
-        super(clientResolver, id, initialValue);
+    public TasmotaDigitalOutputPort(MqttClientResolver clientResolver, String id, Boolean initialValue, long connectionLostInterval) {
+        super(clientResolver, id, initialValue, connectionLostInterval);
     }
 
     @Override

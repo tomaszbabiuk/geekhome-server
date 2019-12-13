@@ -1,6 +1,8 @@
 package com.geekhome.shellymodule;
 
-public interface IShellyPort {
+import com.geekhome.common.IConnectible;
+
+public interface IShellyPort extends IConnectible {
         String getReadTopic();
         void setValueFromMqttPayload(String payload);
 }
