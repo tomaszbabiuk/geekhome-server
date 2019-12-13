@@ -19,6 +19,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, MqttListener {
 
+    private interface PortIterateListener {
+        void onIteratePort(IShellyPort port);
+    }
+
     private static ILogger _logger = LoggingService.getLogger();
     private final InetAddress _brokerIP;
     private final OkHttpClient _okClient;
@@ -268,46 +272,32 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
             return;
         }
 
-        for (IShellyPort port : _ownedPowerOutputPorts) {
+        iterateAllOwnedPorts(port -> {
             if (topicName.equals(port.getReadTopic())) {
                 port.setValueFromMqttPayload(payload);
                 port.updateLastSeenTimestamp(now);
             }
-        }
-
-        for (IShellyPort port : _ownedPowerInputPorts) {
-            if (topicName.equals(port.getReadTopic())) {
-                port.setValueFromMqttPayload(payload);
-                port.updateLastSeenTimestamp(now);
-            }
-        }
-
-        for (IShellyPort port : _ownedDigitalOutputPorts) {
-            if (topicName.equals(port.getReadTopic())) {
-                port.setValueFromMqttPayload(payload);
-                port.updateLastSeenTimestamp(now);
-            }
-        }
+        });
     }
 
     @Override
     public void onDisconnected(String clientID) {
-        for (ShellyPowerOutputPort output : _ownedPowerOutputPorts) {
-            if (output.getId().startsWith(clientID)) {
-                output.markDisconnected();
+        iterateAllOwnedPorts(port -> {
+            if (port.getId().startsWith(clientID)) {
+                port.markDisconnected();
             }
-        }
+        });
+    }
 
-        for (ShellyPowerInputPort output : _ownedPowerInputPorts) {
-            if (output.getId().startsWith(clientID)) {
-                output.markDisconnected();
-            }
+    private void iterateAllOwnedPorts(PortIterateListener listener ) {
+        for (IShellyPort port : _ownedDigitalOutputPorts) {
+            listener.onIteratePort(port);
         }
-
-        for (ShellyDigitalOutputPort output : _ownedDigitalOutputPorts) {
-            if (output.getId().startsWith(clientID)) {
-                output.markDisconnected();
-            }
+        for (IShellyPort port : _ownedPowerOutputPorts) {
+            listener.onIteratePort(port);
+        }
+        for (IShellyPort port : _ownedPowerInputPorts) {
+            listener.onIteratePort(port);
         }
     }
 }

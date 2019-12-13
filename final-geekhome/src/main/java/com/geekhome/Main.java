@@ -41,7 +41,7 @@ public class Main {
 //            modules.add(new MqttModule(localizationProvider, hardwareManager, args));
 //            modules.add(new GreeModule(hardwareManager, localizationProvider));
 //            modules.add(new AforeModule(hardwareManager, localizationProvider));
-            modules.add(new ShellyModule(hardwareManager, localizationProvider, mqttBroker));
+            modules.add(new ShellyModule(mqttBroker));
             return modules;
         });
     }

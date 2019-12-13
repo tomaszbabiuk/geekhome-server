@@ -18,6 +18,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class HardwareManager implements IHardwareManager {
 
+    private interface PortIterateListener {
+        void onIteratePort(IPort port);
+    }
+
     private ILogger _logger = LoggingService.getLogger();
     private InputPortsCollection<Boolean> _digitalInputPorts;
     private OutputPortsCollection<Boolean> _digitalOutputPorts;
@@ -190,10 +194,6 @@ public class HardwareManager implements IHardwareManager {
         iterateAllPorts(port -> port.initialize(portMapper));
     }
 
-    private interface PortIterateListener {
-        void onIteratePort(IPort port);
-    }
-
     private void iterateAllPorts(PortIterateListener listener ) {
         for (IInputPort<Boolean> port : getDigitalInputPorts().values()) {
             listener.onIteratePort(port);
@@ -340,7 +340,7 @@ public class HardwareManager implements IHardwareManager {
     }
 
     public void initialize(JSONArrayList<IModule> modules, SystemInfo systemInfo) throws Exception {
-        ArrayList<IHardwareManagerAdapterFactory> adapterFactories = extractSerialAdaptersFactories(modules);
+        ArrayList<IHardwareManagerAdapterFactory> adapterFactories = extractAdaptersFactories(modules);
         ArrayList<IHardwareManagerAdapter> adapters = createAdapters(adapterFactories);
         setAdapters(adapters);
 
@@ -364,7 +364,7 @@ public class HardwareManager implements IHardwareManager {
         return result;
     }
 
-    private ArrayList<IHardwareManagerAdapterFactory> extractSerialAdaptersFactories(JSONArrayList<IModule> modules) {
+    private ArrayList<IHardwareManagerAdapterFactory> extractAdaptersFactories(JSONArrayList<IModule> modules) {
         ArrayList<IHardwareManagerAdapterFactory> factories = new ArrayList<>();
         for (IModule module : modules) {
             module.addSerialAdaptersFactory(factories);
