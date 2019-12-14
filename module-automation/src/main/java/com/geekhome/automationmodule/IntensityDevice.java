@@ -60,6 +60,7 @@ public class IntensityDevice extends MultistateDevice implements IRoomDevice, IP
         states.add(new State(new DescriptiveName(localizationProvider.getValue("C:Preset2"), "2preset2"), StateType.Control, false));
         states.add(new State(new DescriptiveName(localizationProvider.getValue("C:Preset3"), "3preset3"), StateType.Control, false));
         states.add(new State(new DescriptiveName(localizationProvider.getValue("C:Preset4"), "4preset4"), StateType.Control, false));
+        states.add(new State(new DescriptiveName(localizationProvider.getValue("C:CustomPreset"), "custom"), StateType.ReadOnly, false));
 
         return states;
     }

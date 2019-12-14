@@ -1,5 +1,6 @@
 package com.geekhome.shellymodule;
 
+import com.geekhome.common.WhoChangeValue;
 import com.google.gson.Gson;
 
 public class ShellyPowerOutputPort extends ShellyOutputPort<Integer> {
@@ -42,6 +43,6 @@ public class ShellyPowerOutputPort extends ShellyOutputPort<Integer> {
     public void setValueFromMqttPayload(String payload) {
         ShellyLightResponse response = _gson.fromJson(payload, ShellyLightResponse.class);
         int value = calculateBrightness(response);
-        setValue(value);
+        setValue(value, WhoChangeValue.User);
     }
 }

@@ -93,7 +93,7 @@ class AforeAdapter extends NamedObject implements IHardwareManagerAdapter {
 
             Double inverterPower = readInverterPower();
             SynchronizedInputPort<Double> inverterPort =  (SynchronizedInputPort<Double>)_hardwareManager.findPowerInputPort(INVERTER_PORT_ID);
-            inverterPort.setValue(inverterPower);
+            inverterPort.setValue(inverterPower, WhoChangeValue.System);
 
             _lastRefresh = now.getTimeInMillis();
         }

@@ -1,10 +1,6 @@
 package com.geekhome.onewiremodule;
 
-import com.geekhome.common.DescriptiveName;
-import com.geekhome.common.DiscoveryException;
-import com.geekhome.common.RefreshState;
-import com.geekhome.common.SerialAdapterBase;
-import com.geekhome.common.SynchronizedInputPort;
+import com.geekhome.common.*;
 import com.geekhome.common.json.JSONArrayList;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
@@ -103,13 +99,13 @@ class OneWireAdapter extends SerialAdapterBase {
 
     private void addInputPort(InputPortsCollection<Boolean> digitalInputPorts, String id) {
         SynchronizedInputPort<Boolean> inputPort = new SynchronizedInputPort<>(id, 0);
-        inputPort.setValue(false);
+        inputPort.setValue(false, WhoChangeValue.System);
         digitalInputPorts.add(inputPort);
     }
 
     private void addTemperaturePort(InputPortsCollection<Double> temperaturePorts, TemperatureDiscoveryInfo di) {
         SynchronizedInputPort<Double> tempPort = new SynchronizedInputPort<>(di.getAddress(), 0);
-        tempPort.setValue(di.getInitialTemperature());
+        tempPort.setValue(di.getInitialTemperature(), WhoChangeValue.System);
         temperaturePorts.add(tempPort);
         _pipe.add(new AdapterTask(TaskType.RefreshTemperature, di));
     }
@@ -200,7 +196,7 @@ class OneWireAdapter extends SerialAdapterBase {
                 SynchronizedInputPort<Double> temperaturePort;
                 try {
                     temperaturePort = (SynchronizedInputPort<Double>) _hardwareManager.findTemperaturePort(discoveryInfo.getAddress());
-                    temperaturePort.setValue(value);
+                    temperaturePort.setValue(value, WhoChangeValue.System);
                 } catch (PortNotFoundException ex) {
                     _logger.error("Cannot refresh temperature value. Making OneWireAdapter non-operational", ex);
                     markAsNonOperational(ex);
@@ -218,9 +214,9 @@ class OneWireAdapter extends SerialAdapterBase {
                     inputPort = (SynchronizedInputPort<Boolean>) _hardwareManager.findDigitalInputPort(portId);
                     boolean prevValue = inputPort.getValue();
                     if (isSensed) {
-                        inputPort.setValue(!prevValue);
+                        inputPort.setValue(!prevValue, WhoChangeValue.System);
                     } else {
-                        inputPort.setValue(!level);
+                        inputPort.setValue(!level, WhoChangeValue.System);
                     }
                     if (prevValue != inputPort.getValue()) {
                         _logger.debug(String.format("Input of: %s-%d has changed, value %b [%b] %s", discoveryInfo.getAddress(), channel, level, prevValue, isSensed ? "SENSED" : ""));
@@ -258,12 +254,5 @@ class OneWireAdapter extends SerialAdapterBase {
     @Override
     public String toString() {
         return "1-wire adapter on " + getSerialPortName();
-    }
-
-    public void enterPincode() throws NoSuchAlgorithmException {
-//        MessageDigest md = MessageDigest.getInstance("SHA-256");
-//        md.update(new byte[] { (byte)234, 34, 54});
-//        md.digest();
-//        return new String(md.digest());
     }
 }

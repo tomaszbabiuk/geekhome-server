@@ -1,6 +1,7 @@
 package com.geekhome.hardwaremanagermodule.httpserver;
 
 import com.geekhome.common.SynchronizedInputPort;
+import com.geekhome.common.WhoChangeValue;
 import com.geekhome.hardwaremanager.IHardwareManager;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
@@ -27,7 +28,7 @@ public class HardwareManagerDebugPostRequestsDispatcher extends PostRequestsDisp
             String value = queryString.getValues().getValue("value");
             SynchronizedInputPort<Boolean> inputPort = (SynchronizedInputPort<Boolean>) _hardwareManager.findDigitalInputPort(id);
             boolean booleanValue = value.toLowerCase().equals("true");
-            inputPort.setValue(booleanValue);
+            inputPort.setValue(booleanValue, WhoChangeValue.System);
             return new JsonResponse(JsonResponse.createJSONResult(true), false);
         }
 
@@ -36,7 +37,7 @@ public class HardwareManagerDebugPostRequestsDispatcher extends PostRequestsDisp
             String value = queryString.getValues().getValue("value");
             SynchronizedInputPort<Double> temperaturePort = (SynchronizedInputPort<Double>) _hardwareManager.findTemperaturePort(id);
             double doubleValue = Double.parseDouble(value);
-            temperaturePort.setValue(doubleValue);
+            temperaturePort.setValue(doubleValue, WhoChangeValue.System);
             return new JsonResponse(JsonResponse.createJSONResult(true), false);
         }
 
@@ -45,7 +46,7 @@ public class HardwareManagerDebugPostRequestsDispatcher extends PostRequestsDisp
             String value = queryString.getValues().getValue("value");
             SynchronizedInputPort<Double> humidityPort = (SynchronizedInputPort<Double>) _hardwareManager.findHumidityPort(id);
             double doubleValue = Double.parseDouble(value);
-            humidityPort.setValue(doubleValue);
+            humidityPort.setValue(doubleValue, WhoChangeValue.System);
             return new JsonResponse(JsonResponse.createJSONResult(true), false);
         }
 
@@ -54,7 +55,7 @@ public class HardwareManagerDebugPostRequestsDispatcher extends PostRequestsDisp
             String value = queryString.getValues().getValue("value");
             SynchronizedInputPort<Double> luminosityPort = (SynchronizedInputPort<Double>) _hardwareManager.findLuminosityPort(id);
             double doubleValue = Double.parseDouble(value);
-            luminosityPort.setValue(doubleValue);
+            luminosityPort.setValue(doubleValue, WhoChangeValue.System);
             return new JsonResponse(JsonResponse.createJSONResult(true), false);
         }
 

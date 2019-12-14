@@ -7,6 +7,7 @@ import com.geekhome.coremodule.automation.*;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.hardwaremanager.IOutputPort;
 import com.geekhome.hardwaremanager.IPort;
+import com.geekhome.hardwaremanager.IUserChangeable;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;
@@ -33,7 +34,28 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
 
     @Override
     public void calculateInternal(Calendar now) throws Exception {
+        if (_controlPort instanceof IUserChangeable) {
+            IUserChangeable userChangeable = (IUserChangeable)_controlPort;
+            if (userChangeable.didUserChangeLastValue()) {
+                boolean changingToPreset1 =  getStateId().equals("preset1") && _controlPort.read() == readPresetSetting(1);
+                boolean changingToPreset2 =  getStateId().equals("preset2") && _controlPort.read() == readPresetSetting(2);
+                boolean changingToPreset3 =  getStateId().equals("preset3") && _controlPort.read() == readPresetSetting(3);
+                boolean changingToPreset4 =  getStateId().equals("preset4") && _controlPort.read() == readPresetSetting(4);
+                if (_controlPort.read() != 0) {
+                    changeStateInternal("custom", ControlMode.Auto);
+                } else {
+                    changeStateInternal("0off", ControlMode.Auto);
+                }
+                userChangeable.resetUserChangeLastValue();
+                return;
+            }
+        }
+
         if (getControlMode() == ControlMode.Auto) {
+            if (getStateId().equals("custom")) {
+                return;
+            }
+
             if (checkIfAnyBlockPasses("preset1")) {
                 changeStateInternal("1preset1", ControlMode.Auto);
             } else if (checkIfAnyBlockPasses("preset2")) {
@@ -59,6 +81,8 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
                 break;
             case "4preset4":
                 changeOutputPortStateIfNeeded(_controlPort, readPresetSetting(4));
+                break;
+            case "custom":
                 break;
             default:
                 changeOutputPortStateIfNeeded(_controlPort, 0);

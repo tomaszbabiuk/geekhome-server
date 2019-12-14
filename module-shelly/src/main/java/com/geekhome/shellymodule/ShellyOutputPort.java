@@ -1,6 +1,7 @@
 package com.geekhome.shellymodule;
 
 import com.geekhome.common.SynchronizedOutputPort;
+import com.geekhome.common.WhoChangeValue;
 
 public abstract class ShellyOutputPort<T> extends SynchronizedOutputPort<T> implements IShellyOutputPort {
 
@@ -39,5 +40,15 @@ public abstract class ShellyOutputPort<T> extends SynchronizedOutputPort<T> impl
     @Override
     public boolean didChangeValue() {
         return _valueChanged;
+    }
+
+    @Override
+    public boolean didUserChangeLastValue() {
+        return getWhoChangeValue() == WhoChangeValue.User;
+    }
+
+    @Override
+    public void resetUserChangeLastValue() {
+        setWhoChangeValue(WhoChangeValue.System);
     }
 }

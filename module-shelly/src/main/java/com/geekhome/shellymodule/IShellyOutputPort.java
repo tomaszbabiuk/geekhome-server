@@ -1,6 +1,8 @@
 package com.geekhome.shellymodule;
 
-public interface IShellyOutputPort extends IShellyPort {
+import com.geekhome.hardwaremanager.IUserChangeable;
+
+public interface IShellyOutputPort extends IShellyPort, IUserChangeable {
     void resetLatch();
     boolean didChangeValue();
 

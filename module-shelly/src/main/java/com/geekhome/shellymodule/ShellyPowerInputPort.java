@@ -1,5 +1,7 @@
 package com.geekhome.shellymodule;
 
+import com.geekhome.common.WhoChangeValue;
+
 public class ShellyPowerInputPort extends ShellyInputPort<Double> {
     private ShellyPowerInputPort(String shellyId, int channel, Double initialValue, long connectionLostInterval) {
         super(shellyId + "-PWR-" + channel, initialValue,
@@ -15,6 +17,6 @@ public class ShellyPowerInputPort extends ShellyInputPort<Double> {
     @Override
     public void setValueFromMqttPayload(String payload) {
         double value = Double.parseDouble(payload);
-        setValue(value);
+        setValue(value, WhoChangeValue.User);
     }
 }
