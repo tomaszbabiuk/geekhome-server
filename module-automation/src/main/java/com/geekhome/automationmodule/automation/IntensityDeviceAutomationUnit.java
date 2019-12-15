@@ -158,6 +158,9 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
             }
 
             descriptions.add(new KeyValue(getLocalizationProvider().getValue("C:Intensity"), formatIntensity(intensity)));
+            if (getControlMode() == ControlMode.ForcedManual) {
+                descriptions.add(new KeyValue(getLocalizationProvider().getValue("C:Warning"), getLocalizationProvider().getValue("C:ForcedManual")));
+            }
         }
         return new EvaluationResult(getValue(), interfaceValue, isSignaled(), isConnected(), descriptions, getControlMode(), false);
     }

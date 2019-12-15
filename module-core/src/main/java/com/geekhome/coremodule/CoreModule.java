@@ -538,7 +538,8 @@ public class CoreModule extends Module {
                 new Resource("C:Intensity", "Intensity", "Intensywność"),
                 new Resource("C:CannotAddValueConditionsMessage", "Cannot add any value conditions since there're no value devices or value controllers defined yet!", "Aby dodawać nowe warunki wartościowe musi być zdefiniowany conajmniej jedno urządzenie wartościowe (np. termometr, higrometr) oraz sterownik (np. temperatury, wilgotności)!"),
                 new Resource("C:ShadowPortsInUse", "Shadow ports in use! System will try to heal in 30 minutes.", "Nie można było stworzyć portów dla niektórych urządzeń (użyto \"cieni\"), system spróbuje naprawić usterkę za ok 30 minut"),
-                new Resource("C:DeviceDisconnectedWarning", "Disconnected", "Rozłączono")
+                new Resource("C:DeviceDisconnectedWarning", "Disconnected", "Rozłączono"),
+                new Resource("C:ForcedManual", "Forced manual", "Wymuszony tryb ręczny")
         };
     }
 
@@ -590,148 +591,67 @@ public class CoreModule extends Module {
         ArrayList<ICrudPostHandler> handlers = new ArrayList<>();
 
         CrudPostHandler floorsHandler = new CrudPostHandler(_masterConfiguration, "FLOOR",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyFloor(action, values);
-                    }
-                }, new RedirectionResponse("/config/RoomsAndFloors.htm"));
+                (action, values) -> _masterConfiguration.modifyFloor(action, values), new RedirectionResponse("/config/RoomsAndFloors.htm"));
         handlers.add(floorsHandler);
 
         CrudPostHandler roomsHandler = new CrudPostHandler(_masterConfiguration, "ROOM",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws
-                            Exception {
-                        _masterConfiguration.modifyRoom(action, values);
-                    }
-                }, new RedirectionResponse("/config/RoomsAndFloors.htm"));
+                (action, values) -> _masterConfiguration.modifyRoom(action, values), new RedirectionResponse("/config/RoomsAndFloors.htm"));
         handlers.add(roomsHandler);
 
         CrudPostHandler multistateConditionsHandler = new CrudPostHandler(_masterConfiguration, "MULTISTATECONDITION",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyMultistateCondition(action, values);
-                    }
-                }, new RedirectionResponse("/config/MultistateConditions.htm"));
+                (action, values) -> _masterConfiguration.modifyMultistateCondition(action, values), new RedirectionResponse("/config/MultistateConditions.htm"));
         handlers.add(multistateConditionsHandler);
 
         CrudPostHandler valueConditionsHandler = new CrudPostHandler(_masterConfiguration, "VALUECONDITION",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyValueCondition(action, values);
-                    }
-                }, new RedirectionResponse("/config/ValueConditions.htm"));
+                (action, values) -> _masterConfiguration.modifyValueCondition(action, values), new RedirectionResponse("/config/ValueConditions.htm"));
         handlers.add(valueConditionsHandler);
 
         CrudPostHandler deltaConditionsHandler = new CrudPostHandler(_masterConfiguration, "DELTACONDITION",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyDeltaCondition(action, values);
-                    }
-                }, new RedirectionResponse("/config/DeltaConditions.htm"));
+                (action, values) -> _masterConfiguration.modifyDeltaCondition(action, values), new RedirectionResponse("/config/DeltaConditions.htm"));
         handlers.add(deltaConditionsHandler);
 
         CrudPostHandler groupConditionsHandler = new CrudPostHandler(_masterConfiguration, "GROUPCONDITION",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyGroupCondition(action, values);
-                    }
-                }, new RedirectionResponse("/config/GroupConditions.htm"));
+                (action, values) -> _masterConfiguration.modifyGroupCondition(action, values), new RedirectionResponse("/config/GroupConditions.htm"));
         handlers.add(groupConditionsHandler);
 
         CrudPostHandler timeConditionsHandler = new CrudPostHandler(_masterConfiguration, "TIMECONDITION",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyTimeCondition(action, values);
-                    }
-                }, new RedirectionResponse("/config/TimeConditions.htm"));
+                (action, values) -> _masterConfiguration.modifyTimeCondition(action, values), new RedirectionResponse("/config/TimeConditions.htm"));
         handlers.add(timeConditionsHandler);
 
         CrudPostHandler geofenceConditionsHandler = new CrudPostHandler(_masterConfiguration, "GEOFENCECONDITION",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyGeofenceCondition(action, values);
-                    }
-                }, new RedirectionResponse("/config/GeofenceConditions.htm"));
+                (action, values) -> _masterConfiguration.modifyGeofenceCondition(action, values), new RedirectionResponse("/config/GeofenceConditions.htm"));
         handlers.add(geofenceConditionsHandler);
 
         CrudPostHandler dateConditionsHandler = new CrudPostHandler(_masterConfiguration, "DATECONDITION",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyDateCondition(action, values);
-                    }
-                }, new RedirectionResponse("/config/DateConditions.htm"));
+                (action, values) -> _masterConfiguration.modifyDateCondition(action, values), new RedirectionResponse("/config/DateConditions.htm"));
         handlers.add(dateConditionsHandler);
 
         CrudPostHandler modesHandler = new CrudPostHandler(_masterConfiguration, "MODE",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyMode(action, values);
-                    }
-                }, new RedirectionResponse("/config/Modes.htm"));
+                (action, values) -> _masterConfiguration.modifyMode(action, values), new RedirectionResponse("/config/Modes.htm"));
         handlers.add(modesHandler);
 
         CrudPostHandler alertsHandler = new CrudPostHandler(_masterConfiguration, "ALERT",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyAlert(action, values);
-                    }
-                }, new RedirectionResponse("/config/Alerts.htm"));
+                (action, values) -> _masterConfiguration.modifyAlert(action, values), new RedirectionResponse("/config/Alerts.htm"));
         handlers.add(alertsHandler);
 
         CrudPostHandler blocksHandler = new CrudPostHandler(_masterConfiguration, "BLOCK",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyBlock(action, values);
-                    }
-                }, null);
+                (action, values) -> _masterConfiguration.modifyBlock(action, values), null);
         handlers.add(blocksHandler);
 
         CrudPostHandler keySwitchesHandler = new CrudPostHandler(_masterConfiguration, "KEYSWITCH",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyKeySwitch(action, values);
-                    }
-                }, new RedirectionResponse("/config/KeySwitches.htm"));
+                (action, values) -> _masterConfiguration.modifyKeySwitch(action, values), new RedirectionResponse("/config/KeySwitches.htm"));
         handlers.add(keySwitchesHandler);
 
         CrudPostHandler readValueCommandsHandler = new CrudPostHandler(_masterConfiguration, "READVALUECOMMAND",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyReadValueCommand(action, values);
-                    }
-                }, new RedirectionResponse("/config/ReadValueCommands.htm"));
+                (action, values) -> _masterConfiguration.modifyReadValueCommand(action, values), new RedirectionResponse("/config/ReadValueCommands.htm"));
         handlers.add(readValueCommandsHandler);
 
         CrudPostHandler changeStateCommandsHandler = new CrudPostHandler(_masterConfiguration, "CHANGESTATECOMMAND",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyChangeStateCommand(action, values);
-                    }
-                }, new RedirectionResponse("/config/ChangeStateCommands.htm"));
+                (action, values) -> _masterConfiguration.modifyChangeStateCommand(action, values), new RedirectionResponse("/config/ChangeStateCommands.htm"));
         handlers.add(changeStateCommandsHandler);
 
         CrudPostHandler geofencesHandler = new CrudPostHandler(_masterConfiguration, "GEOFENCE",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _masterConfiguration.modifyGeofence(action, values);
-                    }
-                }, new RedirectionResponse("/config/Geofences.htm"));
+                (action, values) -> _masterConfiguration.modifyGeofence(action, values), new RedirectionResponse("/config/Geofences.htm"));
         handlers.add(geofencesHandler);
 
         return handlers;
