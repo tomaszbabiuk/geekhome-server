@@ -53,8 +53,7 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
 
         boolean externalChange = valueHasChanged && !stateHasChanged;
 
-        if (valueHasChanged && getControlMode() == ControlMode.Manual) {
-            //try to match manual preset accordingly
+        if (externalChange && getControlMode() == ControlMode.Manual) {
             boolean changingToOff = _controlPort.read() == 0;
             boolean changingToPreset1 = _controlPort.read() == readPresetSetting(1);
             boolean changingToPreset2 = _controlPort.read() == readPresetSetting(2);
@@ -73,24 +72,17 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
             } else {
                 changeStateInternal("5custom", ControlMode.Manual);
             }
-
-            execute();
-            return;
         }
 
         if (externalChange && getControlMode() == ControlMode.ForcedManual) {
             if (_controlPort.read() == 0) {
-                setControlMode(ControlMode.Auto);
-                changeStateInternal("5custom", ControlMode.Auto);
-                return;
+                changeStateInternal("0off", ControlMode.Auto);
             }
         }
 
         if (externalChange && getControlMode() == ControlMode.Auto) {
             if (_controlPort.read() > 0) {
-                setControlMode(ControlMode.ForcedManual);
                 changeStateInternal("5custom", ControlMode.ForcedManual);
-                return;
             }
         }
 
@@ -112,81 +104,6 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
         if (getControlMode() != ControlMode.ForcedManual) {
             execute();
         }
-
-
-
-
-//        if (_controlPort instanceof IUserChangeable) {
-//            IUserChangeable userChangeable = (IUserChangeable) _controlPort;
-//            if (userChangeable.didUserChangeLastValue()) {
-//                if (_controlPort.read() == 0) {
-//                    //forced off
-//                    if (getControlMode() == ControlMode.ForcedManual) {
-//                        //back to auto
-//                        changeStateInternal("0off", ControlMode.Auto);
-//                    } else {
-//                        //stay with current mode
-//                        changeStateInternal("0off", getControlMode());
-//                    }
-//
-//                    // -> execute();
-//                    return;
-//                } else {
-//                    //change value when in manual mode
-//                    if (getControlMode() == ControlMode.Manual) {
-//                        boolean changingToPreset1 = _controlPort.read() == readPresetSetting(1);
-//                        boolean changingToPreset2 = _controlPort.read() == readPresetSetting(2);
-//                        boolean changingToPreset3 = _controlPort.read() == readPresetSetting(3);
-//                        boolean changingToPreset4 = _controlPort.read() == readPresetSetting(4);
-//                        if (changingToPreset1) {
-//                            changeStateInternal("1preset1", getControlMode());
-//                        } else if (changingToPreset2) {
-//                            changeStateInternal("2preset2", getControlMode());
-//                        } else if (changingToPreset3) {
-//                            changeStateInternal("3preset3", getControlMode());
-//                        } else if (changingToPreset4) {
-//                            changeStateInternal("4preset4", getControlMode());
-//                        } else {
-//                            changeStateInternal("5custom", ControlMode.Manual);
-//                        }
-//                    }
-//                }
-//
-//                if (getControlMode() == ControlMode.Auto) {
-//                    boolean shouldEnablePreset1 = checkIfAnyBlockPasses("preset1");
-//                    boolean shouldEnablePreset2 = checkIfAnyBlockPasses("preset2");
-//                    boolean shouldEnablePreset3 = checkIfAnyBlockPasses("preset3");
-//                    boolean shouldEnablePreset4 = checkIfAnyBlockPasses("preset4");
-//                    boolean shouldEnableAnyPreset = shouldEnablePreset1 || shouldEnablePreset2 ||
-//                            shouldEnablePreset3 || shouldEnablePreset4;
-//
-//                    if (shouldEnableAnyPreset) {
-//                        //todo: cease automation to stop for 15 minutes
-//                    } else {
-//                        //we can switch to forced mode
-//                        changeStateInternal("5custom", ControlMode.ForcedManual);
-//                    }
-//                }
-//
-//                userChangeable.resetUserChangeLastValue();
-//                return;
-//            }
-//        }
-
-//        if (getControlMode() == ControlMode.Auto) {
-//            if (checkIfAnyBlockPasses("preset1")) {
-//                changeStateInternal("1preset1", ControlMode.Auto);
-//            } else if (checkIfAnyBlockPasses("preset2")) {
-//                changeStateInternal("2preset2", ControlMode.Auto);
-//            } else if (checkIfAnyBlockPasses("preset3")) {
-//                changeStateInternal("3preset3", ControlMode.Auto);
-//            } else if (checkIfAnyBlockPasses("preset4")) {
-//                changeStateInternal("4preset4", ControlMode.Auto);
-//            } else {
-//                changeStateInternal("0off", ControlMode.Auto);
-//            }
-//        }
-
     }
 
     private void execute() throws Exception {
@@ -234,6 +151,9 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
                     break;
                 case "4preset4":
                     intensity = readPresetSetting(4);
+                    break;
+                case "5custom":
+                    intensity = _controlPort.read();
                     break;
             }
 
