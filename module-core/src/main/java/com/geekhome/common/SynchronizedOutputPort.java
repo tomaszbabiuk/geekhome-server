@@ -10,6 +10,6 @@ public class SynchronizedOutputPort<T> extends SynchronizedInputPort<T> implemen
 
     @Override
     public void write(T value) throws Exception {
-        setValue(value, WhoChangeValue.System);
+        setValue(value);
     }
 }

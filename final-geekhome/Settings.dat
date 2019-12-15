@@ -17,10 +17,10 @@ lights58_3 = #00fdff
 lights58_2 = #0433ff
 heating97 = 22
 lights58_1 = #ff0000
-auto7_4 = 0
-auto7_3 = 0
-auto7_2 = 202
-auto7_1 = 75
+auto7_4 = 85
+auto7_3 = 60
+auto7_2 = 30
+auto7_1 = 10
 
 [Adapters]
 MQTT = sj0jt5hl

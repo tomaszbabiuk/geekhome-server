@@ -99,13 +99,13 @@ class OneWireAdapter extends SerialAdapterBase {
 
     private void addInputPort(InputPortsCollection<Boolean> digitalInputPorts, String id) {
         SynchronizedInputPort<Boolean> inputPort = new SynchronizedInputPort<>(id, 0);
-        inputPort.setValue(false, WhoChangeValue.System);
+        inputPort.setValue(false);
         digitalInputPorts.add(inputPort);
     }
 
     private void addTemperaturePort(InputPortsCollection<Double> temperaturePorts, TemperatureDiscoveryInfo di) {
         SynchronizedInputPort<Double> tempPort = new SynchronizedInputPort<>(di.getAddress(), 0);
-        tempPort.setValue(di.getInitialTemperature(), WhoChangeValue.System);
+        tempPort.setValue(di.getInitialTemperature());
         temperaturePorts.add(tempPort);
         _pipe.add(new AdapterTask(TaskType.RefreshTemperature, di));
     }
@@ -196,7 +196,7 @@ class OneWireAdapter extends SerialAdapterBase {
                 SynchronizedInputPort<Double> temperaturePort;
                 try {
                     temperaturePort = (SynchronizedInputPort<Double>) _hardwareManager.findTemperaturePort(discoveryInfo.getAddress());
-                    temperaturePort.setValue(value, WhoChangeValue.System);
+                    temperaturePort.setValue(value);
                 } catch (PortNotFoundException ex) {
                     _logger.error("Cannot refresh temperature value. Making OneWireAdapter non-operational", ex);
                     markAsNonOperational(ex);
@@ -214,9 +214,9 @@ class OneWireAdapter extends SerialAdapterBase {
                     inputPort = (SynchronizedInputPort<Boolean>) _hardwareManager.findDigitalInputPort(portId);
                     boolean prevValue = inputPort.getValue();
                     if (isSensed) {
-                        inputPort.setValue(!prevValue, WhoChangeValue.System);
+                        inputPort.setValue(!prevValue);
                     } else {
-                        inputPort.setValue(!level, WhoChangeValue.System);
+                        inputPort.setValue(!level);
                     }
                     if (prevValue != inputPort.getValue()) {
                         _logger.debug(String.format("Input of: %s-%d has changed, value %b [%b] %s", discoveryInfo.getAddress(), channel, level, prevValue, isSensed ? "SENSED" : ""));

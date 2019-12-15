@@ -2,7 +2,9 @@ package com.geekhome.coremodule.automation;
 
 public enum ControlMode {
     Manual(0),
-    Auto(1);
+    Auto(1),
+    ForcedManual(2),
+    AutomationBreak(3);
 
     private int _index;
 

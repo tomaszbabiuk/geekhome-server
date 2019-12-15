@@ -97,10 +97,6 @@ public class RgbLampAutomationUnit extends MultistateDeviceAutomationUnit<RgbLam
         return evaluationResult;
     }
 
-    private String formatIntensity(int intensity) {
-        return String.format("%d (%.1f%%)", intensity, intensity / 256.0 * 100.0);
-    }
-
     @Override
     public IPort[] getUsedPorts() {
         return new IPort[] { _redPort, _greenPort, _bluePort };

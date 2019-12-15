@@ -196,9 +196,9 @@ class PiFaceAdapter extends NamedObject implements IHardwareManagerAdapter {
             boolean inputLatchValue = isBitSet(_latchesState, i);
             if (inputBitValue != inputLatchValue) {
                 _logger.debug(String.format("PiFace latch changed! %s, value=%b, latch=%b", inputPort.getId(), inputBitValue, inputLatchValue));
-                inputPort.setValue(!inputPort.getValue(), WhoChangeValue.System);
+                inputPort.setValue(!inputPort.getValue());
             } else {
-                inputPort.setValue(!inputBitValue, WhoChangeValue.System);
+                inputPort.setValue(!inputBitValue);
             }
         }
     }

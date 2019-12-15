@@ -220,7 +220,7 @@ class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCa
             SynchronizedOutputPort<Boolean> outputPort = (SynchronizedOutputPort<Boolean>) _hardwareManager.tryFindDigitalOutputPort(deviceId);
             if (outputPort != null) {
                 boolean state = mqttMessage.equals("ON");
-                outputPort.setValue(state, WhoChangeValue.System);
+                outputPort.setValue(state);
             }
         }
     }
@@ -236,7 +236,7 @@ class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCa
             SynchronizedOutputPort<Integer> outputPort = (SynchronizedOutputPort<Integer>) _hardwareManager.tryFindPowerOutputPort(deviceId);
             if (outputPort != null) {
                 Integer value = Integer.valueOf(mqttMessage);
-                outputPort.setValue(value, WhoChangeValue.System);
+                outputPort.setValue(value);
             }
         }
     }
@@ -250,7 +250,7 @@ class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCa
                 SynchronizedInputPort<Double> temperaturePort =
                         (SynchronizedInputPort<Double>) _hardwareManager.tryFindTemperaturePort(deviceId);
                 if (temperaturePort != null) {
-                    temperaturePort.setValue(temperature, WhoChangeValue.System);
+                    temperaturePort.setValue(temperature);
                 }
             } catch (SensorStatus.StatusExtractionException ignored) {
             }
@@ -260,7 +260,7 @@ class MqttAdapter extends NamedObject implements IHardwareManagerAdapter, MqttCa
                 SynchronizedInputPort<Double> humidityPort =
                         (SynchronizedInputPort<Double>) _hardwareManager.tryFindHumidityPort(deviceId);
                 if (humidityPort != null) {
-                    humidityPort.setValue(humidity, WhoChangeValue.System);
+                    humidityPort.setValue(humidity);
                 }
             } catch (SensorStatus.StatusExtractionException ignored) {
             }

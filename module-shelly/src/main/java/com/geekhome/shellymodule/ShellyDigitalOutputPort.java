@@ -1,7 +1,5 @@
 package com.geekhome.shellymodule;
 
-import com.geekhome.common.WhoChangeValue;
-
 public class ShellyDigitalOutputPort extends ShellyOutputPort<Boolean> {
 
     private ShellyDigitalOutputPort(String shellyId, int channel, Boolean initialValue, long connectionLostInterval) {
@@ -22,6 +20,6 @@ public class ShellyDigitalOutputPort extends ShellyOutputPort<Boolean> {
     @Override
     public void setValueFromMqttPayload(String payload) {
         boolean value = payload != null && payload.equals("on");
-        setValue(value, WhoChangeValue.User);
+        setValue(value);
     }
 }

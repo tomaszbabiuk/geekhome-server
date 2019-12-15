@@ -3,11 +3,12 @@ package com.geekhome.automationmodule.automation;
 import com.geekhome.automationmodule.IntensityDevice;
 import com.geekhome.common.KeyValue;
 import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.logging.ILogger;
+import com.geekhome.common.logging.LoggingService;
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.hardwaremanager.IOutputPort;
 import com.geekhome.hardwaremanager.IPort;
-import com.geekhome.hardwaremanager.IUserChangeable;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;
@@ -16,14 +17,19 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
 
     private IOutputPort<Integer> _controlPort;
     private final AutomationSettings _automationSettings;
+    private final ILogger _logger = LoggingService.getLogger();
+    private int _lastValue;
+    private String _lastStateId;
 
     public IntensityDeviceAutomationUnit(final IntensityDevice device,
-                                    final IOutputPort<Integer> controlPort,
-                                    final ILocalizationProvider localizationProvider,
-                                    final AutomationSettings automationSettings) throws Exception {
+                                         final IOutputPort<Integer> controlPort,
+                                         final ILocalizationProvider localizationProvider,
+                                         final AutomationSettings automationSettings) throws Exception {
         super(device, localizationProvider);
         _controlPort = controlPort;
         _automationSettings = automationSettings;
+        _lastValue = _controlPort.read();
+        _lastStateId = "0off";
         changeStateInternal("0off", ControlMode.Auto);
     }
 
@@ -34,28 +40,62 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
 
     @Override
     public void calculateInternal(Calendar now) throws Exception {
-        if (_controlPort instanceof IUserChangeable) {
-            IUserChangeable userChangeable = (IUserChangeable)_controlPort;
-            if (userChangeable.didUserChangeLastValue()) {
-                boolean changingToPreset1 =  getStateId().equals("preset1") && _controlPort.read() == readPresetSetting(1);
-                boolean changingToPreset2 =  getStateId().equals("preset2") && _controlPort.read() == readPresetSetting(2);
-                boolean changingToPreset3 =  getStateId().equals("preset3") && _controlPort.read() == readPresetSetting(3);
-                boolean changingToPreset4 =  getStateId().equals("preset4") && _controlPort.read() == readPresetSetting(4);
-                if (_controlPort.read() != 0) {
-                    changeStateInternal("custom", ControlMode.Auto);
-                } else {
-                    changeStateInternal("0off", ControlMode.Auto);
-                }
-                userChangeable.resetUserChangeLastValue();
+        boolean valueHasChanged = false;
+        boolean stateHasChanged = false;
+        if (_controlPort.read() != _lastValue) {
+            valueHasChanged = true;
+        }
+        if (!getStateId().equals(_lastStateId)) {
+            stateHasChanged = true;
+        }
+        _lastValue = _controlPort.read();
+        _lastStateId = getStateId();
+
+        boolean externalChange = valueHasChanged && !stateHasChanged;
+
+        if (valueHasChanged && getControlMode() == ControlMode.Manual) {
+            //try to match manual preset accordingly
+            boolean changingToOff = _controlPort.read() == 0;
+            boolean changingToPreset1 = _controlPort.read() == readPresetSetting(1);
+            boolean changingToPreset2 = _controlPort.read() == readPresetSetting(2);
+            boolean changingToPreset3 = _controlPort.read() == readPresetSetting(3);
+            boolean changingToPreset4 = _controlPort.read() == readPresetSetting(4);
+            if (changingToOff) {
+                changeStateInternal("0off", ControlMode.Manual);
+            } else if (changingToPreset1) {
+                changeStateInternal("1preset1", ControlMode.Manual);
+            } else if (changingToPreset2) {
+                changeStateInternal("2preset2", ControlMode.Manual);
+            } else if (changingToPreset3) {
+                changeStateInternal("3preset3", ControlMode.Manual);
+            } else if (changingToPreset4) {
+                changeStateInternal("4preset4", ControlMode.Manual);
+            } else {
+                changeStateInternal("5custom", ControlMode.Manual);
+            }
+
+            execute();
+            return;
+        }
+
+        if (externalChange && getControlMode() == ControlMode.ForcedManual) {
+            if (_controlPort.read() == 0) {
+                setControlMode(ControlMode.Auto);
+                changeStateInternal("5custom", ControlMode.Auto);
                 return;
             }
         }
 
-        if (getControlMode() == ControlMode.Auto) {
-            if (getStateId().equals("custom")) {
+        if (externalChange && getControlMode() == ControlMode.Auto) {
+            if (_controlPort.read() > 0) {
+                setControlMode(ControlMode.ForcedManual);
+                changeStateInternal("5custom", ControlMode.ForcedManual);
                 return;
             }
+        }
 
+        //automatic control (button presses are ignored)
+        if (getControlMode() == ControlMode.Auto) {
             if (checkIfAnyBlockPasses("preset1")) {
                 changeStateInternal("1preset1", ControlMode.Auto);
             } else if (checkIfAnyBlockPasses("preset2")) {
@@ -69,6 +109,87 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
             }
         }
 
+        if (getControlMode() != ControlMode.ForcedManual) {
+            execute();
+        }
+
+
+
+
+//        if (_controlPort instanceof IUserChangeable) {
+//            IUserChangeable userChangeable = (IUserChangeable) _controlPort;
+//            if (userChangeable.didUserChangeLastValue()) {
+//                if (_controlPort.read() == 0) {
+//                    //forced off
+//                    if (getControlMode() == ControlMode.ForcedManual) {
+//                        //back to auto
+//                        changeStateInternal("0off", ControlMode.Auto);
+//                    } else {
+//                        //stay with current mode
+//                        changeStateInternal("0off", getControlMode());
+//                    }
+//
+//                    // -> execute();
+//                    return;
+//                } else {
+//                    //change value when in manual mode
+//                    if (getControlMode() == ControlMode.Manual) {
+//                        boolean changingToPreset1 = _controlPort.read() == readPresetSetting(1);
+//                        boolean changingToPreset2 = _controlPort.read() == readPresetSetting(2);
+//                        boolean changingToPreset3 = _controlPort.read() == readPresetSetting(3);
+//                        boolean changingToPreset4 = _controlPort.read() == readPresetSetting(4);
+//                        if (changingToPreset1) {
+//                            changeStateInternal("1preset1", getControlMode());
+//                        } else if (changingToPreset2) {
+//                            changeStateInternal("2preset2", getControlMode());
+//                        } else if (changingToPreset3) {
+//                            changeStateInternal("3preset3", getControlMode());
+//                        } else if (changingToPreset4) {
+//                            changeStateInternal("4preset4", getControlMode());
+//                        } else {
+//                            changeStateInternal("5custom", ControlMode.Manual);
+//                        }
+//                    }
+//                }
+//
+//                if (getControlMode() == ControlMode.Auto) {
+//                    boolean shouldEnablePreset1 = checkIfAnyBlockPasses("preset1");
+//                    boolean shouldEnablePreset2 = checkIfAnyBlockPasses("preset2");
+//                    boolean shouldEnablePreset3 = checkIfAnyBlockPasses("preset3");
+//                    boolean shouldEnablePreset4 = checkIfAnyBlockPasses("preset4");
+//                    boolean shouldEnableAnyPreset = shouldEnablePreset1 || shouldEnablePreset2 ||
+//                            shouldEnablePreset3 || shouldEnablePreset4;
+//
+//                    if (shouldEnableAnyPreset) {
+//                        //todo: cease automation to stop for 15 minutes
+//                    } else {
+//                        //we can switch to forced mode
+//                        changeStateInternal("5custom", ControlMode.ForcedManual);
+//                    }
+//                }
+//
+//                userChangeable.resetUserChangeLastValue();
+//                return;
+//            }
+//        }
+
+//        if (getControlMode() == ControlMode.Auto) {
+//            if (checkIfAnyBlockPasses("preset1")) {
+//                changeStateInternal("1preset1", ControlMode.Auto);
+//            } else if (checkIfAnyBlockPasses("preset2")) {
+//                changeStateInternal("2preset2", ControlMode.Auto);
+//            } else if (checkIfAnyBlockPasses("preset3")) {
+//                changeStateInternal("3preset3", ControlMode.Auto);
+//            } else if (checkIfAnyBlockPasses("preset4")) {
+//                changeStateInternal("4preset4", ControlMode.Auto);
+//            } else {
+//                changeStateInternal("0off", ControlMode.Auto);
+//            }
+//        }
+
+    }
+
+    private void execute() throws Exception {
         switch (getStateId()) {
             case "1preset1":
                 changeOutputPortStateIfNeeded(_controlPort, readPresetSetting(1));
@@ -82,9 +203,9 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
             case "4preset4":
                 changeOutputPortStateIfNeeded(_controlPort, readPresetSetting(4));
                 break;
-            case "custom":
+            case "5custom":
                 break;
-            default:
+            default: // 0off
                 changeOutputPortStateIfNeeded(_controlPort, 0);
                 break;
         }
@@ -123,10 +244,10 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
 
     @Override
     public IPort[] getUsedPorts() {
-        return new IPort[] { _controlPort };
+        return new IPort[]{_controlPort};
     }
 
     private String formatIntensity(int intensity) {
-        return String.format("%d (%.1f%%)", intensity, intensity/256.0*100.0);
+        return String.format("%d %%", intensity);
     }
 }

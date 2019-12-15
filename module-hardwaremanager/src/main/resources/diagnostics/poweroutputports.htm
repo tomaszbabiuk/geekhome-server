@@ -61,7 +61,7 @@
                 {{/if}}
                 <div>
                     <input data-highlight="true" data-portid="${Id}" type="range" class="wait" id="status-${Id.replace(/:/g,"_")}" 
-                           min="0" max="255" initialvalue="0" value="0" onclick="javascript:doPortAction('${Id}');"/>
+                           min="0" max="100" initialvalue="0" value="0" onclick="javascript:doPortAction('${Id}');"/>
                 </div>
             </li>
         {{/each}}

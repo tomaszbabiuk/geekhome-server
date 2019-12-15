@@ -7,7 +7,6 @@ import com.geekhome.hardwaremanager.IInputPort;
 public class SynchronizedInputPort<T> extends ConnectiblePortBase implements IInputPort<T> {
     private ILogger _logger = LoggingService.getLogger();
     private T _value;
-    private WhoChangeValue _who = WhoChangeValue.System;
 
     public SynchronizedInputPort(String id, long connectionLostInterval) {
         super(id, connectionLostInterval);
@@ -15,7 +14,7 @@ public class SynchronizedInputPort<T> extends ConnectiblePortBase implements IIn
 
     public SynchronizedInputPort(String id, T initialValue, long connectionLostInterval) {
         this(id, connectionLostInterval);
-        setValue(initialValue, WhoChangeValue.System);
+        setValue(initialValue);
     }
 
     @Override
@@ -23,11 +22,9 @@ public class SynchronizedInputPort<T> extends ConnectiblePortBase implements IIn
         return getValue();
     }
 
-    public synchronized void setValue(T value, WhoChangeValue who) {
+    public synchronized void setValue(T value) {
         if (!value.equals(_value)) {
             _logger.activity(getId(), value, _value);
-            _logger.info("WHO --> " + who.toString());
-            _who = who;
         }
 
         _value = value;
@@ -35,13 +32,5 @@ public class SynchronizedInputPort<T> extends ConnectiblePortBase implements IIn
 
     public synchronized T getValue() {
         return _value;
-    }
-
-    protected WhoChangeValue getWhoChangeValue() {
-        return _who;
-    }
-
-    protected void setWhoChangeValue(WhoChangeValue value) {
-        _who = value;
     }
 }

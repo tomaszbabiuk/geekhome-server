@@ -125,7 +125,7 @@ class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, Mqtt
                 }
             };
 
-            for (int i = 0; i < 256; i++) {
+            for (int i = 0; i < 255; i++) {
                 InetAddress ipToCheck = InetAddress.getByAddress(new byte[]{
                         _brokerIP.getAddress()[0],
                         _brokerIP.getAddress()[1],
