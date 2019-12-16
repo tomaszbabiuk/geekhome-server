@@ -86,7 +86,7 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
             if (_controlPort.read() > 0) {
                 changeStateInternal("5custom", ControlMode.ForcedManual);
                 _automationBreakEndsOn = 0;
-            } else {
+            } else if (!getStateId().equals("0off")) {
                 changeStateInternal("0off", ControlMode.AutomationBreak);
                 _automationBreakEndsOn = now.getTimeInMillis() + TIMEOUT_AUTOMATION_BREAK;
             }
