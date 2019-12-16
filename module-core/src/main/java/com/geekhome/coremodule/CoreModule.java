@@ -539,7 +539,9 @@ public class CoreModule extends Module {
                 new Resource("C:CannotAddValueConditionsMessage", "Cannot add any value conditions since there're no value devices or value controllers defined yet!", "Aby dodawać nowe warunki wartościowe musi być zdefiniowany conajmniej jedno urządzenie wartościowe (np. termometr, higrometr) oraz sterownik (np. temperatury, wilgotności)!"),
                 new Resource("C:ShadowPortsInUse", "Shadow ports in use! System will try to heal in 30 minutes.", "Nie można było stworzyć portów dla niektórych urządzeń (użyto \"cieni\"), system spróbuje naprawić usterkę za ok 30 minut"),
                 new Resource("C:DeviceDisconnectedWarning", "Disconnected", "Rozłączono"),
-                new Resource("C:ForcedManual", "Forced manual", "Wymuszony tryb ręczny")
+                new Resource("C:ForcedManual", "Forced manual", "Wymuszony tryb ręczny"),
+                new Resource("C:AutomationWillContinueIn", "Automation will continue in [sec]", "Automatyzacja będzie kontunuowana za [sek]"),
+                new Resource("C:CustomPreset", "Ustawienie indydualne", "Inne ustawienie"),
         };
     }
 

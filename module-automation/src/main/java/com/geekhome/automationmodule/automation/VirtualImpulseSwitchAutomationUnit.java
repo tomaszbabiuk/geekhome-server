@@ -21,7 +21,7 @@ public class VirtualImpulseSwitchAutomationUnit extends MultistateDeviceAutomati
         if (getStateId().equals("on")) {
             JSONArrayList<KeyValue> descriptions = new JSONArrayList<>();
             long timeLeft = _lastPushed + _impulseTime - Calendar.getInstance().getTimeInMillis();
-            descriptions.add(new KeyValue(_localizationProvider.getValue("AUTO:TimeLeft"), formatTimeLeft(timeLeft / 1000)));
+            descriptions.add(new KeyValue(_localizationProvider.getValue("AUTO:TimeLeft"), TimeLeftFormatter.formatTimeLeft(timeLeft / 1000)));
             result.setDescriptions(descriptions);
         }
         return result;
@@ -30,19 +30,6 @@ public class VirtualImpulseSwitchAutomationUnit extends MultistateDeviceAutomati
     @Override
     public IPort[] getUsedPorts() {
         return new IPort[0];
-    }
-
-    private static String formatTimeLeft(long seconds) {
-        long sec = seconds % 60;
-        long min = (seconds - sec) / 60;
-        if (min > 60) {
-            long hours = min / 60;
-            return String.format("~ %dh", hours);
-        } else if (min >0) {
-            return String.format("~ %dm", min);
-        } else {
-            return String.format("%ds", sec);
-        }
     }
 
     @Override

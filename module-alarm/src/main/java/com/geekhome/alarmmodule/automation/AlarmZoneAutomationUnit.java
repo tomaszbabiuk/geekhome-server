@@ -149,7 +149,7 @@ public class AlarmZoneAutomationUnit extends MultistateDeviceAutomationUnit<Alar
         }
 
         if (_zoneState == AlarmZoneState.Leaving) {
-            if (_zoneState == AlarmZoneState.Leaving && now.getTimeInMillis() > _leavingStartedAtTicks + _leavingTicks) {
+            if (now.getTimeInMillis() > _leavingStartedAtTicks + _leavingTicks) {
                 changeZoneState(AlarmZoneState.Armed);
                 return;
             }

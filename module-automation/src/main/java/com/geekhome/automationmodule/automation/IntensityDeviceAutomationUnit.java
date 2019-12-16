@@ -15,11 +15,13 @@ import java.util.Calendar;
 
 public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUnit<IntensityDevice> implements IDeviceAutomationUnit<String> {
 
+    private static final long TIMEOUT_AUTOMATION_BREAK = 60 * 1000;
     private IOutputPort<Integer> _controlPort;
     private final AutomationSettings _automationSettings;
     private final ILogger _logger = LoggingService.getLogger();
     private int _lastValue;
     private String _lastStateId;
+    private long _automationBreakEndsOn = 0;
 
     public IntensityDeviceAutomationUnit(final IntensityDevice device,
                                          final IOutputPort<Integer> controlPort,
@@ -80,10 +82,19 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
             }
         }
 
-        if (externalChange && getControlMode() == ControlMode.Auto) {
+        if (externalChange && (getControlMode() == ControlMode.Auto || getControlMode() == ControlMode.AutomationBreak)) {
             if (_controlPort.read() > 0) {
                 changeStateInternal("5custom", ControlMode.ForcedManual);
+                _automationBreakEndsOn = 0;
+            } else {
+                changeStateInternal("0off", ControlMode.AutomationBreak);
+                _automationBreakEndsOn = now.getTimeInMillis() + TIMEOUT_AUTOMATION_BREAK;
             }
+        }
+
+        if (getControlMode() == ControlMode.AutomationBreak && now.getTimeInMillis() > _automationBreakEndsOn) {
+            setControlMode(ControlMode.Auto);
+            _automationBreakEndsOn = 0;
         }
 
         //automatic control (button presses are ignored)
@@ -158,10 +169,20 @@ public class IntensityDeviceAutomationUnit extends MultistateDeviceAutomationUni
             }
 
             descriptions.add(new KeyValue(getLocalizationProvider().getValue("C:Intensity"), formatIntensity(intensity)));
-            if (getControlMode() == ControlMode.ForcedManual) {
-                descriptions.add(new KeyValue(getLocalizationProvider().getValue("C:Warning"), getLocalizationProvider().getValue("C:ForcedManual")));
-            }
         }
+
+        if (getControlMode() == ControlMode.ForcedManual) {
+            descriptions.add(new KeyValue(getLocalizationProvider().getValue("C:Warning"), getLocalizationProvider().getValue("C:ForcedManual")));
+        }
+
+        if (_automationBreakEndsOn > 0) {
+            long secondsLeft = (_automationBreakEndsOn - Calendar.getInstance().getTimeInMillis())/1000;
+            if (secondsLeft < 0) {
+                secondsLeft = 0;
+            }
+            descriptions.add(new KeyValue(getLocalizationProvider().getValue("C:AutomationWillContinueIn"), TimeLeftFormatter.formatTimeLeft(secondsLeft)));
+        }
+
         return new EvaluationResult(getValue(), interfaceValue, isSignaled(), isConnected(), descriptions, getControlMode(), false);
     }
 
