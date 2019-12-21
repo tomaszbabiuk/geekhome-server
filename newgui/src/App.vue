@@ -4,8 +4,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>
-        geek
-        <span headline>HOME</span>
+        geekHOME
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
@@ -27,10 +26,10 @@
       <v-list dense>
         <v-list-item link v-for="item in navigationItems" :key="item.title" :to="item.route">
           <v-list-item-action>
-            <v-img :src="item.svgIconRef" contain height="25" width="25"></v-img>
+            <v-icon style="fill:#9e9e9e">$vuetify.icon.{{item.icon}}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title class="grey--text" style="fill: red">{{ item.title }}</v-list-item-title>
+            <v-list-item-title class="grey--text">{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -51,14 +50,14 @@ export default {
   data: () => ({
     drawer: false,
     navigationItems: [
-      { title: "Inbox", route: "/inbox", svgIconRef: require("./assets/ic_robot.svg") },
-      { title: "Timeline", route: "/timeline", svgIconRef: require("./assets/ic_timeline.svg") },
-      { title: "Alerts", route: "/alerts", svgIconRef: require("./assets/ic_bell.svg") },
-      { title: "Control", route: "/control", svgIconRef: require("./assets/ic_button.svg") },
-      { title: "House", route: "/house", svgIconRef: require("./assets/ic_house.svg") },
-      { title: "Discover", route: "/discover", svgIconRef: require("./assets/ic_crosshair.svg") },
-      { title: "Settings", route: "/settings", svgIconRef: require("./assets/ic_equalizer.svg") },
-      { title: "Plugins", route: "/plugins", svgIconRef: require("./assets/ic_plugin.svg") }
+      { title: "Inbox", route: "/inbox", icon: "robot" },
+      { title: "Timeline", route: "/timeline", icon: "robot" },
+      { title: "Alerts", route: "/alerts", icon: "robot"},
+      { title: "Control", route: "/control", icon: "robot" },
+      { title: "House", route: "/house", icon: "robot" },
+      { title: "Discover", route: "/discover", icon: "robot"},
+      { title: "Settings", route: "/settings", icon: "robot" },
+      { title: "Plugins", route: "/plugins", icon: "plugin" }
     ]
   })
 };
