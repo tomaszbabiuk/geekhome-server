@@ -50,13 +50,13 @@ export default {
   data: () => ({
     drawer: false,
     navigationItems: [
-      { title: "Inbox", route: "/inbox", icon: "robot" },
-      { title: "Timeline", route: "/timeline", icon: "robot" },
+      { title: "Inbox", route: "/inbox", icon: "inbox" },
+      { title: "Timeline", route: "/timeline", icon: "timeline" },
       { title: "Alerts", route: "/alerts", icon: "bell"},
-      { title: "Control", route: "/control", icon: "robot" },
-      { title: "House", route: "/house", icon: "robot" },
+      { title: "Control", route: "/control", icon: "button" },
+      { title: "House", route: "/house", icon: "house" },
       { title: "Discover", route: "/discover", icon: "robot"},
-      { title: "Settings", route: "/settings", icon: "robot" },
+      { title: "Settings", route: "/settings", icon: "equalizer" },
       { title: "Plugins", route: "/plugins", icon: "plugin" }
     ]
   })
