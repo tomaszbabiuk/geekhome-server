@@ -52,7 +52,7 @@ export default {
     navigationItems: [
       { title: "Inbox", route: "/inbox", icon: "robot" },
       { title: "Timeline", route: "/timeline", icon: "robot" },
-      { title: "Alerts", route: "/alerts", icon: "robot"},
+      { title: "Alerts", route: "/alerts", icon: "bell"},
       { title: "Control", route: "/control", icon: "robot" },
       { title: "House", route: "/house", icon: "robot" },
       { title: "Discover", route: "/discover", icon: "robot"},

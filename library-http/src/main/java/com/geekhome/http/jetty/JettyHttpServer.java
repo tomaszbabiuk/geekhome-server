@@ -11,10 +11,12 @@ import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.eclipse.jetty.servlets.EventSource;
 import org.eclipse.jetty.util.component.AbstractLifeCycle;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -105,5 +107,21 @@ public class JettyHttpServer implements IHttpServer {
         mapping.setPathSpec(mappingPathSpec);
         mapping.setConstraint(constraint);
         return mapping;
+    }
+
+
+
+
+
+    public class MyEventSourceServlet extends org.eclipse.jetty.servlets.EventSourceServlet
+    {
+        @Override
+        protected EventSource newEventSource(HttpServletRequest request)
+        {
+            return new MyEventSource();
+        }
+    }
+
+    private class MyEventSource implements EventSource {
     }
 }
