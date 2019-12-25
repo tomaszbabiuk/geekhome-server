@@ -1,7 +1,7 @@
 package com.geekhome.coremodule.automation;
 
 import com.geekhome.common.EqualityOperator;
-import com.geekhome.coremodule.ValueCondition;
+import com.geekhome.common.configuration.ValueCondition;
 
 import java.util.Calendar;
 

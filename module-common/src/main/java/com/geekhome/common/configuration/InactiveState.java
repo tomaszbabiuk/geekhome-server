@@ -1,4 +1,4 @@
-package com.geekhome.coremodule;
+package com.geekhome.common.configuration;
 
 public enum InactiveState {
     NC(0),

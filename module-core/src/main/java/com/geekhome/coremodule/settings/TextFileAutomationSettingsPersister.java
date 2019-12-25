@@ -19,8 +19,7 @@ public class TextFileAutomationSettingsPersister  {
 
     private static String createFileName() throws IOException {
         String currentDir = new File(".").getCanonicalPath();
-        String fileName = currentDir + File.separator + "Settings.dat";
-        return fileName;
+        return currentDir + File.separator + "Settings.dat";
     }
 
     public void save(Hashtable<String, Hashtable<String, String>> tables) {

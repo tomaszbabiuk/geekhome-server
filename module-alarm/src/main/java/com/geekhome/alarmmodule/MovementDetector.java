@@ -1,7 +1,7 @@
 package com.geekhome.alarmmodule;
 
 import com.geekhome.common.configuration.DescriptiveName;
-import com.geekhome.coremodule.InactiveState;
+import com.geekhome.common.configuration.InactiveState;
 import com.geekhome.http.ILocalizationProvider;
 
 public class MovementDetector extends SinglePortAlarmSensor {

@@ -1,8 +1,6 @@
 package com.geekhome.coremodule;
 
-import com.geekhome.common.configuration.Floor;
-import com.geekhome.common.configuration.IDevice;
-import com.geekhome.common.configuration.CollectorCollection;
+import com.geekhome.common.configuration.*;
 
 public class MasterConfigurationValidation {
     public static boolean canAddChangeStateCommands(MasterConfiguration config) {
@@ -38,7 +36,7 @@ public class MasterConfigurationValidation {
             for (Object item : collection.values())
                 if (item instanceof IDevice) {
                     IDevice device = (IDevice) item;
-                    if (device instanceof  MultistateDevice) {
+                    if (device instanceof MultistateDevice) {
                         return true;
                     }
                 }

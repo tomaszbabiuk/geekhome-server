@@ -3,8 +3,8 @@ package com.geekhome.centralheatingmodule;
 import com.geekhome.common.*;
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.Persistable;
-import com.geekhome.coremodule.OnOffDeviceBase;
-import com.geekhome.coremodule.YesNo;
+import com.geekhome.common.configuration.OnOffDeviceBase;
+import com.geekhome.common.configuration.YesNo;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.common.configuration.CollectorCollection;
 

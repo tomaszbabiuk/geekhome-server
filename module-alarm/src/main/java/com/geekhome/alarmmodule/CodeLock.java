@@ -2,7 +2,7 @@ package com.geekhome.alarmmodule;
 
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.Persistable;
-import com.geekhome.coremodule.IPortsDrivenDevice;
+import com.geekhome.common.configuration.IPortsDrivenDevice;
 
 public class CodeLock extends Lock implements IPortsDrivenDevice {
     private String _armingPortId;

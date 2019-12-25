@@ -1,7 +1,9 @@
-package com.geekhome.coremodule;
+package com.geekhome.common.configuration;
 
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.DeviceCategory;
+import com.geekhome.common.configuration.IPortDrivenDevice;
+import com.geekhome.common.configuration.IRoomDevice;
 import com.geekhome.common.configuration.Persistable;
 
 public abstract class PortRoomMultistateDevice extends MultistateDevice implements IRoomDevice, IPortDrivenDevice {

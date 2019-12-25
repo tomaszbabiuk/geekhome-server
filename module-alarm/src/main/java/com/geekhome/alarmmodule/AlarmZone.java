@@ -1,13 +1,8 @@
 package com.geekhome.alarmmodule;
 
 import com.geekhome.common.*;
-import com.geekhome.common.configuration.DescriptiveName;
-import com.geekhome.common.configuration.IBlocksTarget;
-import com.geekhome.common.configuration.Persistable;
-import com.geekhome.common.configuration.JSONArrayList;
-import com.geekhome.coremodule.*;
+import com.geekhome.common.configuration.*;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.common.configuration.CollectorCollection;
 
 public class AlarmZone extends MultistateDevice implements IMultiroomDevice, IBlocksTarget {
     private String _roomsIds;

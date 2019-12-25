@@ -1,11 +1,8 @@
 package com.geekhome.automationmodule;
 
 import com.geekhome.common.ControlType;
-import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.common.configuration.*;
 import com.geekhome.common.DeviceCategory;
-import com.geekhome.common.configuration.Device;
-import com.geekhome.common.configuration.Persistable;
-import com.geekhome.coremodule.*;
 import com.geekhome.http.ILocalizationProvider;
 
 public class PowerMeter extends Device implements IRoomDevice, IPortDrivenDevice, IValueDevice {

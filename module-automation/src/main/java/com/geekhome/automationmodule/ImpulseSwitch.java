@@ -4,7 +4,7 @@ import com.geekhome.common.ControlType;
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.DeviceCategory;
 import com.geekhome.common.configuration.Persistable;
-import com.geekhome.coremodule.KeySwitch;
+import com.geekhome.common.configuration.KeySwitch;
 
 public class ImpulseSwitch extends KeySwitch {
     private String _impulseTime;

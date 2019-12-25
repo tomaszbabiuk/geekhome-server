@@ -1,6 +1,6 @@
 package com.geekhome.coremodule.automation;
 
-import com.geekhome.coremodule.TimeCondition;
+import com.geekhome.common.configuration.TimeCondition;
 
 import java.util.Calendar;
 

@@ -1,4 +1,4 @@
-package com.geekhome.coremodule;
+package com.geekhome.common.configuration;
 
 import com.geekhome.common.configuration.ConditionBase;
 import com.geekhome.common.configuration.DescriptiveName;

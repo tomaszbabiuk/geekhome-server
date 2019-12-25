@@ -1,7 +1,7 @@
 package com.geekhome.automationmodule.automation;
 
 import com.geekhome.automationmodule.*;
-import com.geekhome.coremodule.OnOffDeviceBase;
+import com.geekhome.common.configuration.OnOffDeviceBase;
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.common.hardwaremanager.IHardwareManager;

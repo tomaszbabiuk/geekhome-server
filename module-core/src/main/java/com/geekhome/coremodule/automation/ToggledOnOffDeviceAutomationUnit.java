@@ -1,7 +1,7 @@
 package com.geekhome.coremodule.automation;
 
 import com.geekhome.common.configuration.JSONArrayList;
-import com.geekhome.coremodule.OnOffDeviceBase;
+import com.geekhome.common.configuration.OnOffDeviceBase;
 import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.common.hardwaremanager.ITogglePort;
 import com.geekhome.http.ILocalizationProvider;

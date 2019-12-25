@@ -1,6 +1,6 @@
 package com.geekhome.coremodule.automation;
 
-import com.geekhome.coremodule.OnOffDeviceBase;
+import com.geekhome.common.configuration.OnOffDeviceBase;
 import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;

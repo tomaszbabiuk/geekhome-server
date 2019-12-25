@@ -1,7 +1,7 @@
 package com.geekhome.coremodule.automation;
 
 import com.geekhome.common.IPrioritized;
-import com.geekhome.coremodule.Mode;
+import com.geekhome.common.configuration.Mode;
 
 import java.util.Calendar;
 

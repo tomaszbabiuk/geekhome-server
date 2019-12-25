@@ -1,7 +1,7 @@
 package com.geekhome.centralheatingmodule;
 
 import com.geekhome.coremodule.MasterConfiguration;
-import com.geekhome.coremodule.Mode;
+import com.geekhome.common.configuration.Mode;
 import com.geekhome.httpserver.modules.DependenciesCheckerModule;
 import com.geekhome.httpserver.modules.Dependency;
 import com.geekhome.httpserver.modules.DependencyType;

@@ -1,10 +1,6 @@
-package com.geekhome.coremodule;
+package com.geekhome.common.configuration;
 
 import com.geekhome.common.*;
-import com.geekhome.common.configuration.DescriptiveName;
-import com.geekhome.common.configuration.IBlocksTarget;
-import com.geekhome.common.configuration.Persistable;
-import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.http.ILocalizationProvider;
 
 public class Mode extends NamedObject implements IPrioritized, IBlocksTarget {

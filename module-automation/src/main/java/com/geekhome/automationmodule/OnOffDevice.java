@@ -2,8 +2,8 @@ package com.geekhome.automationmodule;
 
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.DeviceCategory;
-import com.geekhome.coremodule.OnOffDeviceBase;
-import com.geekhome.coremodule.YesNo;
+import com.geekhome.common.configuration.OnOffDeviceBase;
+import com.geekhome.common.configuration.YesNo;
 import com.geekhome.http.ILocalizationProvider;
 
 public class OnOffDevice extends OnOffDeviceBase {

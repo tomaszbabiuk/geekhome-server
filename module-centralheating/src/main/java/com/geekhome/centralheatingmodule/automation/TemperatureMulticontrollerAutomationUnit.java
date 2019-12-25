@@ -1,6 +1,6 @@
 package com.geekhome.centralheatingmodule.automation;
 
-import com.geekhome.coremodule.Multicontroller;
+import com.geekhome.common.configuration.Multicontroller;
 import com.geekhome.coremodule.automation.DeviceAutomationUnit;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.coremodule.automation.ModeAutomationUnit;

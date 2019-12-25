@@ -3,7 +3,7 @@ package com.geekhome.alarmmodule;
 import com.geekhome.common.*;
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.Persistable;
-import com.geekhome.coremodule.PortRoomMultistateDevice;
+import com.geekhome.common.configuration.PortRoomMultistateDevice;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.common.configuration.CollectorCollection;
 

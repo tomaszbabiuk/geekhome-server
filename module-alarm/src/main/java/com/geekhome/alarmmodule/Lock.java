@@ -5,7 +5,7 @@ import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.DeviceCategory;
 import com.geekhome.common.configuration.Persistable;
 import com.geekhome.common.configuration.Device;
-import com.geekhome.coremodule.IRoomDevice;
+import com.geekhome.common.configuration.IRoomDevice;
 import com.geekhome.http.ILocalizationProvider;
 
 public class Lock extends Device implements IRoomDevice {

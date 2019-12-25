@@ -1,13 +1,11 @@
 package com.geekhome.httpserver;
 
 import com.geekhome.common.*;
-import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.utils.Sleeper;
 import com.geekhome.coremodule.DashboardAlertService;
 import com.geekhome.common.hardwaremanager.*;
-import com.geekhome.httpserver.modules.IModule;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -337,9 +335,8 @@ public class HardwareManager implements IHardwareManager {
         _invalidateCacheListener = listener;
     }
 
-    public void initialize(JSONArrayList<IModule> modules, SystemInfo systemInfo) throws Exception {
-        ArrayList<IHardwareManagerAdapterFactory> adapterFactories = extractAdaptersFactories(modules);
-        ArrayList<IHardwareManagerAdapter> adapters = createAdapters(adapterFactories);
+    public void initialize(ArrayList<IHardwareManagerAdapterFactory> factories, SystemInfo systemInfo) throws Exception {
+        ArrayList<IHardwareManagerAdapter> adapters = createAdapters(factories);
         setAdapters(adapters);
 
         for (IHardwareManagerAdapter adapter : adapters) {
@@ -360,14 +357,6 @@ public class HardwareManager implements IHardwareManager {
         }
 
         return result;
-    }
-
-    private ArrayList<IHardwareManagerAdapterFactory> extractAdaptersFactories(JSONArrayList<IModule> modules) {
-        ArrayList<IHardwareManagerAdapterFactory> factories = new ArrayList<>();
-        for (IModule module : modules) {
-            module.addSerialAdaptersFactory(factories);
-        }
-        return factories;
     }
 
     @Override

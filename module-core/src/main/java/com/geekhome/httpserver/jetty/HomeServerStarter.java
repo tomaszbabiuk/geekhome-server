@@ -1,5 +1,6 @@
 package com.geekhome.httpserver.jetty;
 
+import com.geekhome.common.IHardwareManagerAdapterFactory;
 import com.geekhome.httpserver.HardwareManager;
 import com.geekhome.coremodule.commands.CommandsProcessor;
 import com.geekhome.coremodule.commands.Synchronizer;
@@ -18,6 +19,8 @@ import com.geekhome.httpserver.SystemInfo;
 import com.geekhome.httpserver.modules.IModule;
 import com.geekhome.moquettemodule.MoquetteBroker;
 import com.geekhome.moquettemodule.MqttBroker;
+
+import java.util.ArrayList;
 
 public class HomeServerStarter {
     public interface BuildModulesDelegate {
@@ -60,7 +63,7 @@ public class HomeServerStarter {
             }
 
             systemInfo.initialize(modules);
-            hardwareManager.initialize(modules, systemInfo);
+            hardwareManager.initialize(extractAdaptersFactories(modules), systemInfo);
             masterConfiguration.initialize(modules);
             masterAutomation.initialize(modules);
 
@@ -84,6 +87,14 @@ public class HomeServerStarter {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static ArrayList<IHardwareManagerAdapterFactory> extractAdaptersFactories(JSONArrayList<IModule> modules) {
+        ArrayList<IHardwareManagerAdapterFactory> factories = new ArrayList<>();
+        for (IModule module : modules) {
+            module.addSerialAdaptersFactory(factories);
+        }
+        return factories;
     }
 
     public static int extractPortFromArgs(String[] args) {

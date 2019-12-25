@@ -3,9 +3,9 @@ package com.geekhome.lightsmodule;
 import com.geekhome.common.*;
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.Persistable;
-import com.geekhome.coremodule.IPortsDrivenDevice;
-import com.geekhome.coremodule.IRoomDevice;
-import com.geekhome.coremodule.MultistateDevice;
+import com.geekhome.common.configuration.IPortsDrivenDevice;
+import com.geekhome.common.configuration.IRoomDevice;
+import com.geekhome.common.configuration.MultistateDevice;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.common.configuration.CollectorCollection;
 

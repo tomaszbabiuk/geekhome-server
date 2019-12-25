@@ -1,9 +1,6 @@
 package com.geekhome.coremodule.commands;
 
-import com.geekhome.common.configuration.Alert;
-import com.geekhome.common.configuration.Floor;
-import com.geekhome.common.configuration.Geofence;
-import com.geekhome.common.configuration.IDevice;
+import com.geekhome.common.configuration.*;
 import com.geekhome.synchronizationmodule.business.SmartEventResult;
 import com.geekhome.coremodule.*;
 import com.geekhome.coremodule.automation.*;
@@ -11,7 +8,6 @@ import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.common.OperationMode;
 import com.geekhome.httpserver.SystemInfo;
-import com.geekhome.common.configuration.CollectorCollection;
 import com.geekhome.synchronizationmodule.business.*;
 
 import java.util.*;
