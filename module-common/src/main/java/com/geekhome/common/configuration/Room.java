@@ -1,8 +1,6 @@
-package com.geekhome.coremodule;
+package com.geekhome.common.configuration;
 
-import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.NamedObject;
-import com.geekhome.common.configuration.Persistable;
 
 public class Room extends NamedObject {
     private String _iconName;

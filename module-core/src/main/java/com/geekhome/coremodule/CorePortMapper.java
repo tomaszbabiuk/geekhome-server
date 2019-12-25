@@ -2,7 +2,7 @@ package com.geekhome.coremodule;
 
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.hardwaremanager.IPortMapper;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 
 import java.util.ArrayList;
 

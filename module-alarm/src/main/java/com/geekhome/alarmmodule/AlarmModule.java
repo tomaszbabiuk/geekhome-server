@@ -3,6 +3,7 @@ package com.geekhome.alarmmodule;
 import com.geekhome.alarmmodule.automation.AlarmAutomationModule;
 import com.geekhome.alarmmodule.httpserver.AlarmJsonRequestsDispatcher;
 import com.geekhome.common.CrudAction;
+import com.geekhome.common.configuration.Collector;
 import com.geekhome.coremodule.MasterConfiguration;
 import com.geekhome.http.Resource;
 import com.geekhome.coremodule.automation.MasterAutomation;

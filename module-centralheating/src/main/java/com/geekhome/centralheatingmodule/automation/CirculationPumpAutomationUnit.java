@@ -3,7 +3,7 @@ package com.geekhome.centralheatingmodule.automation;
 import com.geekhome.centralheatingmodule.CirculationPump;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
-import com.geekhome.coremodule.Duration;
+import com.geekhome.common.configuration.Duration;
 import com.geekhome.coremodule.automation.OnOffDeviceAutomationUnit;
 import com.geekhome.coremodule.automation.ControlMode;
 import com.geekhome.coremodule.automation.MasterAutomation;

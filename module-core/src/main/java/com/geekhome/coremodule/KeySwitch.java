@@ -4,7 +4,7 @@ import com.geekhome.common.*;
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.Persistable;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 
 public class KeySwitch extends PortRoomMultistateDevice {
     @Override

@@ -8,7 +8,7 @@ import com.geekhome.coremodule.OnOffDeviceBase;
 import com.geekhome.coremodule.InactiveState;
 import com.geekhome.coremodule.YesNo;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 
 public class Radiator extends OnOffDeviceBase {
     private InactiveState _inactiveState;

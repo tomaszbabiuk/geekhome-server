@@ -2,6 +2,7 @@ package com.geekhome.automationmodule;
 
 import com.geekhome.automationmodule.automation.AutomationAutomationModule;
 import com.geekhome.automationmodule.httpserver.AutomationJsonRequestsDispatcher;
+import com.geekhome.common.configuration.Collector;
 import com.geekhome.coremodule.MasterConfiguration;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.http.Resource;

@@ -1,7 +1,7 @@
 package com.geekhome.coremodule.automation;
 
 import com.geekhome.common.NamedObject;
-import com.geekhome.coremodule.Duration;
+import com.geekhome.common.configuration.Duration;
 import com.geekhome.coremodule.MultistateCondition;
 
 import java.util.Arrays;

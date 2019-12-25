@@ -1,7 +1,7 @@
 package com.geekhome.alarmmodule;
 
 import com.geekhome.coremodule.MasterConfiguration;
-import com.geekhome.coremodule.Room;
+import com.geekhome.common.configuration.Room;
 import com.geekhome.httpserver.modules.DependenciesCheckerModule;
 import com.geekhome.httpserver.modules.Dependency;
 import com.geekhome.httpserver.modules.DependencyType;

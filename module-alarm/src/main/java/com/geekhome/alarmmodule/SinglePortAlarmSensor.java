@@ -7,7 +7,7 @@ import com.geekhome.common.StateType;
 import com.geekhome.coremodule.IPortDrivenDevice;
 import com.geekhome.coremodule.InactiveState;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 
 public class SinglePortAlarmSensor extends AlarmSensor implements IPortDrivenDevice {
     private String _portId;

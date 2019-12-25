@@ -11,7 +11,7 @@ import com.geekhome.common.hardwaremanager.*;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.common.OperationMode;
 import com.geekhome.httpserver.SystemInfo;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 import com.geekhome.httpserver.modules.IAutomationHook;
 import com.geekhome.httpserver.modules.IAutomationModule;
 import com.geekhome.httpserver.modules.IModule;

@@ -1,6 +1,6 @@
 package com.geekhome.coremodule.automation;
 
-import com.geekhome.coremodule.DateCondition;
+import com.geekhome.common.configuration.DateCondition;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;

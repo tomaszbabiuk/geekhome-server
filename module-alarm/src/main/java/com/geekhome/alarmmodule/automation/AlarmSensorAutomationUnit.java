@@ -1,7 +1,7 @@
 package com.geekhome.alarmmodule.automation;
 
 import com.geekhome.alarmmodule.AlarmSensor;
-import com.geekhome.coremodule.Duration;
+import com.geekhome.common.configuration.Duration;
 import com.geekhome.coremodule.InactiveState;
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.common.hardwaremanager.IInputPort;

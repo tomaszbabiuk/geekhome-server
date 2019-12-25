@@ -7,7 +7,7 @@ import com.geekhome.http.ResponseBase;
 import com.geekhome.httpserver.ICrudPostHandler;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.http.jetty.RedirectionResponse;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 
 public class UsersCrudHandler implements ICrudPostHandler {
     private ILocalizationProvider _localizationProvider;

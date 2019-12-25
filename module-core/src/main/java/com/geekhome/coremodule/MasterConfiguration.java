@@ -1,9 +1,7 @@
 package com.geekhome.coremodule;
 
 import com.geekhome.common.*;
-import com.geekhome.common.configuration.DescriptiveName;
-import com.geekhome.common.configuration.IDevice;
-import com.geekhome.common.configuration.JSONArrayList;
+import com.geekhome.common.configuration.*;
 import com.geekhome.http.INameValueSet;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.modules.*;
@@ -880,12 +878,7 @@ public class MasterConfiguration extends Collector implements IMasterDependencie
 
     private void startTrackModifications() {
         for (Collector collector : _collectors) {
-            collector.setModifiedListener(new IEventHandler() {
-                @Override
-                public void execute() {
-                    refreshValidations();
-                }
-            });
+            collector.setModifiedListener(this::refreshValidations);
         }
     }
 
@@ -893,13 +886,8 @@ public class MasterConfiguration extends Collector implements IMasterDependencie
         _collectors = collectors;
 
         for (Collector collector : collectors) {
-            collector.setInvalidateCacheListener(new IInvalidateCacheListener() {
-                @Override
-                public void invalidate(String what) {
-                    //refresh cache
-                    onMasterInvalidateCache(what);
-                }
-            });
+            //refresh cache
+            collector.setInvalidateCacheListener(this::onMasterInvalidateCache);
 
             collector.addDevicesCollectors(_devicesCollectors);
             collector.addConditionsCollectors(_conditionsCollectors);

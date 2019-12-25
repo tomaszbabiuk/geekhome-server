@@ -3,7 +3,7 @@ package com.geekhome.centralheatingmodule;
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.EqualityOperator;
 import com.geekhome.common.configuration.Persistable;
-import com.geekhome.coremodule.ConditionBase;
+import com.geekhome.common.configuration.ConditionBase;
 
 public class ThermostatCondition extends ConditionBase {
     private String _temperatureControllerId;

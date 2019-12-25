@@ -4,7 +4,7 @@ import com.geekhome.coremodule.OnOffDeviceBase;
 import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.ObjectNotFoundException;
+import com.geekhome.common.configuration.ObjectNotFoundException;
 
 import java.util.Calendar;
 

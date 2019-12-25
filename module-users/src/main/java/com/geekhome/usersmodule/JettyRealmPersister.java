@@ -3,8 +3,8 @@ package com.geekhome.usersmodule;
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
-import com.geekhome.httpserver.modules.CollectorCollection;
-import com.geekhome.httpserver.modules.ObjectNotFoundException;
+import com.geekhome.common.configuration.CollectorCollection;
+import com.geekhome.common.configuration.ObjectNotFoundException;
 import org.eclipse.jetty.util.security.Password;
 
 import java.io.*;

@@ -1,9 +1,6 @@
-package com.geekhome.coremodule;
+package com.geekhome.common.configuration;
 
 import com.geekhome.common.*;
-import com.geekhome.common.configuration.DescriptiveName;
-import com.geekhome.common.configuration.IDevice;
-import com.geekhome.common.configuration.Persistable;
 
 public abstract class Device extends NamedObject implements IDevice {
     private String _iconName;

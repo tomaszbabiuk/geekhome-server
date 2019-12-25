@@ -2,10 +2,11 @@ package com.geekhome.coremodule;
 
 import com.geekhome.common.*;
 import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.common.configuration.IBlocksTarget;
 import com.geekhome.common.configuration.Persistable;
 import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 
 public abstract class OnOffDeviceBase extends MultistateDevice implements IPortDrivenDevice, IRoomDevice, IBlocksTarget {
     private String _portId;

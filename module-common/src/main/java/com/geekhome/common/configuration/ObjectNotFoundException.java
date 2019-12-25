@@ -1,4 +1,4 @@
-package com.geekhome.httpserver.modules;
+package com.geekhome.common.configuration;
 
 public class ObjectNotFoundException extends Exception {
     private String _uniqueId;

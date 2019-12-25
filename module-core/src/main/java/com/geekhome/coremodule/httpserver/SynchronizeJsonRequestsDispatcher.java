@@ -9,7 +9,7 @@ import com.geekhome.http.IResponse;
 import com.geekhome.http.ResponseBase;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
-import com.geekhome.httpserver.modules.ObjectNotFoundException;
+import com.geekhome.common.configuration.ObjectNotFoundException;
 import com.geekhome.synchronizationmodule.business.*;
 import com.google.gson.Gson;
 

@@ -3,7 +3,7 @@ package com.geekhome.automationmodule.automation;
 import com.geekhome.automationmodule.ImpulseSwitch;
 import com.geekhome.common.KeyValue;
 import com.geekhome.common.configuration.JSONArrayList;
-import com.geekhome.coremodule.Duration;
+import com.geekhome.common.configuration.Duration;
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;

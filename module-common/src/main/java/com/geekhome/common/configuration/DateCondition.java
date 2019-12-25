@@ -1,7 +1,4 @@
-package com.geekhome.coremodule;
-
-import com.geekhome.common.configuration.DescriptiveName;
-import com.geekhome.common.configuration.Persistable;
+package com.geekhome.common.configuration;
 
 public class DateCondition extends ConditionBase {
     private String _startDate;

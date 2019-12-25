@@ -7,7 +7,7 @@ import com.geekhome.coremodule.IPortsDrivenDevice;
 import com.geekhome.coremodule.IRoomDevice;
 import com.geekhome.coremodule.MultistateDevice;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 
 public class ExtaFreeBlind extends MultistateDevice implements IRoomDevice, IPortsDrivenDevice {
     private String _roomId;

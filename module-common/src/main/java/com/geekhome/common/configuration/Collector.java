@@ -1,10 +1,8 @@
-package com.geekhome.httpserver.modules;
+package com.geekhome.common.configuration;
 
 import com.geekhome.common.IInvalidateCacheListener;
 import com.geekhome.common.INamedObject;
 import com.geekhome.common.IdPool;
-import com.geekhome.coremodule.ICondition;
-import com.geekhome.common.configuration.IDevice;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -12,7 +10,7 @@ import java.util.Hashtable;
 public abstract class Collector {
     private IdPool _pool;
     protected boolean _isModified;
-    private IEventHandler _modifiedListener;
+    private Runnable _modifiedListener;
     private IInvalidateCacheListener _invalidateCacheListener;
 
     public IdPool getPool() {
@@ -31,7 +29,7 @@ public abstract class Collector {
     public void addConditionsCollectors(ArrayList<CollectorCollection<? extends ICondition>> conditionCollectors) {
     }
 
-    public void setModifiedListener(IEventHandler listener) {
+    public void setModifiedListener(Runnable listener) {
         _modifiedListener = listener;
     }
 
@@ -49,7 +47,7 @@ public abstract class Collector {
     protected void onModified() throws Exception {
         setIsModified(true);
         if (_modifiedListener != null) {
-            _modifiedListener.execute();
+            _modifiedListener.run();
         }
     }
 

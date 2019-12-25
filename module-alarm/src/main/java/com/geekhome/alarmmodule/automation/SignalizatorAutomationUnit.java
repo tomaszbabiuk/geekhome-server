@@ -4,7 +4,7 @@ import com.geekhome.alarmmodule.AlarmConfiguration;
 import com.geekhome.alarmmodule.AlarmType;
 import com.geekhome.alarmmodule.AlarmZone;
 import com.geekhome.alarmmodule.Signalizator;
-import com.geekhome.coremodule.Duration;
+import com.geekhome.common.configuration.Duration;
 import com.geekhome.coremodule.automation.ControlMode;
 import com.geekhome.coremodule.automation.ICalculableAutomationUnit;
 import com.geekhome.coremodule.automation.MasterAutomation;

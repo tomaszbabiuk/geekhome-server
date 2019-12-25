@@ -1,9 +1,10 @@
 package com.geekhome.coremodule;
 
+import com.geekhome.common.configuration.Alert;
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.coremodule.commands.AlertServiceBase;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 
 public class DashboardAlertService extends AlertServiceBase {
     private static final String ALERT_SYSTEM_RESTART = "system_restart";

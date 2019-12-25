@@ -1,7 +1,7 @@
 package com.geekhome.coremodule.automation;
 
-import com.geekhome.coremodule.GroupCondition;
-import com.geekhome.coremodule.GroupMatch;
+import com.geekhome.common.configuration.GroupCondition;
+import com.geekhome.common.configuration.GroupMatch;
 
 import java.util.Calendar;
 

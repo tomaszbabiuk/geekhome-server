@@ -1,7 +1,8 @@
 package com.geekhome.coremodule;
 
+import com.geekhome.common.configuration.Floor;
 import com.geekhome.common.configuration.IDevice;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 
 public class MasterConfigurationValidation {
     public static boolean canAddChangeStateCommands(MasterConfiguration config) {

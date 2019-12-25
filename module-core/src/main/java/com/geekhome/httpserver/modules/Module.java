@@ -2,6 +2,7 @@ package com.geekhome.httpserver.modules;
 
 import com.geekhome.common.IHardwareManagerAdapterFactory;
 import com.geekhome.common.IMonitorable;
+import com.geekhome.common.configuration.Collector;
 import com.geekhome.common.configuration.Persistable;
 import com.geekhome.coremodule.commands.IAlertService;
 import com.geekhome.common.configuration.JSONAwareBase;

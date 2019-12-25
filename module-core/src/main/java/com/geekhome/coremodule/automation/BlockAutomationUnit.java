@@ -1,8 +1,7 @@
 package com.geekhome.coremodule.automation;
 
-import com.geekhome.coremodule.Block;
+import com.geekhome.common.configuration.Block;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class BlockAutomationUnit extends EvaluableAutomationUnit {

@@ -6,7 +6,7 @@ import com.geekhome.common.configuration.Persistable;
 import com.geekhome.coremodule.OnOffDeviceBase;
 import com.geekhome.coremodule.YesNo;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 
 public class CirculationPump extends OnOffDeviceBase {
     private String _minimumWorkingTime;

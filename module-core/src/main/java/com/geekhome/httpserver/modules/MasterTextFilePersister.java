@@ -10,9 +10,7 @@ import com.geekhome.common.utils.FileFinder;
 import com.geekhome.common.utils.IFileFoundListener;
 import com.geekhome.http.INameValueSet;
 import com.geekhome.http.NameValueSet;
-import com.geekhome.httpserver.modules.BackupInfo;
-import com.geekhome.httpserver.modules.CollectorCollection;
-import com.geekhome.httpserver.modules.ConfigurationProviderBase;
+import com.geekhome.common.configuration.CollectorCollection;
 
 import java.io.*;
 import java.nio.file.Files;

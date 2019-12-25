@@ -6,7 +6,7 @@ import com.geekhome.common.State;
 import com.geekhome.common.StateType;
 import com.geekhome.coremodule.InactiveState;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 
 public class MagneticDetector extends SinglePortAlarmSensor {
     private String _disarmingMovementDetectorId;

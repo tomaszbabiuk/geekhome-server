@@ -1,10 +1,9 @@
 package com.geekhome.coremodule.commands;
 
-import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.common.configuration.*;
 import com.geekhome.common.INamedObject;
 import com.geekhome.common.KeyValue;
 import com.geekhome.common.State;
-import com.geekhome.common.configuration.IDevice;
 import com.geekhome.coremodule.*;
 import com.geekhome.coremodule.automation.ControlMode;
 import com.geekhome.coremodule.automation.EvaluationResult;
@@ -12,8 +11,8 @@ import com.geekhome.coremodule.automation.IDeviceAutomationUnit;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.SystemInfo;
-import com.geekhome.httpserver.modules.CollectorCollection;
-import com.geekhome.httpserver.modules.ObjectNotFoundException;
+import com.geekhome.common.configuration.CollectorCollection;
+import com.geekhome.common.configuration.ObjectNotFoundException;
 import com.geekhome.synchronizationmodule.business.*;
 
 import java.util.ArrayList;

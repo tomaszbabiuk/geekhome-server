@@ -2,6 +2,7 @@ package com.geekhome.centralheatingmodule;
 
 import com.geekhome.centralheatingmodule.automation.CentralHeatingAutomationModule;
 import com.geekhome.centralheatingmodule.httpserver.CentralHeatingJsonRequestsDispatcher;
+import com.geekhome.common.configuration.Collector;
 import com.geekhome.coremodule.MasterConfiguration;
 import com.geekhome.http.Resource;
 import com.geekhome.coremodule.automation.MasterAutomation;

@@ -8,7 +8,7 @@ import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.common.hardwaremanager.IInputPort;
 import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 import com.geekhome.httpserver.modules.IAutomationModule;
 import com.geekhome.synchronizationmodule.business.SmartEvent;
 

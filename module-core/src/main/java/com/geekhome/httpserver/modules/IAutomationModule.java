@@ -1,9 +1,8 @@
 package com.geekhome.httpserver.modules;
 
+import com.geekhome.common.configuration.CollectorCollection;
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.synchronizationmodule.business.SmartEvent;
-
-import java.util.Calendar;
 
 public interface IAutomationModule {
     void addIndependentConditionAutomationUnits(CollectorCollection<IEvaluableAutomationUnit> conditionsList) throws Exception;

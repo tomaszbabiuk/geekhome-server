@@ -1,8 +1,6 @@
-package com.geekhome.coremodule;
+package com.geekhome.common.configuration;
 
-import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.EqualityOperator;
-import com.geekhome.common.configuration.Persistable;
 
 public class DeltaCondition extends ConditionBase {
     private String _firstDeviceId;

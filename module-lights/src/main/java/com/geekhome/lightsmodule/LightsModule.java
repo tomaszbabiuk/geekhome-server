@@ -1,6 +1,7 @@
 package com.geekhome.lightsmodule;
 
 
+import com.geekhome.common.configuration.Collector;
 import com.geekhome.coremodule.MasterConfiguration;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.http.Resource;

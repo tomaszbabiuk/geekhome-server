@@ -4,12 +4,12 @@ import com.geekhome.common.*;
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.Persistable;
 import com.geekhome.common.configuration.JSONArrayList;
-import com.geekhome.coremodule.IBlocksTarget;
+import com.geekhome.common.configuration.IBlocksTarget;
 import com.geekhome.coremodule.IPortsDrivenDevice;
 import com.geekhome.coremodule.IRoomDevice;
 import com.geekhome.coremodule.MultistateDevice;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 
 public class HeatingManifold extends MultistateDevice implements IRoomDevice, IPortsDrivenDevice, IBlocksTarget {
     private String _minimumWorkingTime;

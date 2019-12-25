@@ -1,9 +1,6 @@
-package com.geekhome.coremodule;
+package com.geekhome.common.configuration;
 
-import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.NamedObject;
-import com.geekhome.common.configuration.Persistable;
-import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.ArrayList;

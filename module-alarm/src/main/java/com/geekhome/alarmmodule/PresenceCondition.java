@@ -3,7 +3,7 @@ package com.geekhome.alarmmodule;
 import com.geekhome.common.*;
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.Persistable;
-import com.geekhome.coremodule.ConditionBase;
+import com.geekhome.common.configuration.ConditionBase;
 
 public class PresenceCondition extends ConditionBase {
     private String movementDetectorsIds;

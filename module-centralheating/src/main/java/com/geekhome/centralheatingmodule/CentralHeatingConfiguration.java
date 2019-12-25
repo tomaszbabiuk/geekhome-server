@@ -2,13 +2,13 @@ package com.geekhome.centralheatingmodule;
 
 import com.geekhome.common.*;
 import com.geekhome.common.configuration.DescriptiveName;
-import com.geekhome.coremodule.ICondition;
+import com.geekhome.common.configuration.ICondition;
 import com.geekhome.common.configuration.IDevice;
 import com.geekhome.coremodule.InactiveState;
 import com.geekhome.http.INameValueSet;
-import com.geekhome.httpserver.modules.Collector;
-import com.geekhome.httpserver.modules.CollectorCollection;
-import com.geekhome.httpserver.modules.ObjectNotFoundException;
+import com.geekhome.common.configuration.Collector;
+import com.geekhome.common.configuration.CollectorCollection;
+import com.geekhome.common.configuration.ObjectNotFoundException;
 
 import java.util.ArrayList;
 

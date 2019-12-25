@@ -4,7 +4,7 @@ import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.coremodule.commands.*;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
-import com.geekhome.coremodule.Alert;
+import com.geekhome.common.configuration.Alert;
 import com.geekhome.coremodule.automation.IDeviceAutomationUnit;
 import com.geekhome.coremodule.automation.MasterAutomation;
 import com.geekhome.coremodule.settings.AutomationSettings;

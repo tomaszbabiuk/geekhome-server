@@ -1,6 +1,6 @@
 package com.geekhome.coremodule.automation;
 
-import com.geekhome.coremodule.GeofenceCondition;
+import com.geekhome.common.configuration.GeofenceCondition;
 
 import java.util.Calendar;
 import java.util.Hashtable;

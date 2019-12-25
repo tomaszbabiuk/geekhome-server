@@ -1,4 +1,4 @@
-package com.geekhome.httpserver.modules;
+package com.geekhome.common.configuration;
 
 import com.geekhome.common.INamedObject;
 import org.json.simple.JSONArray;

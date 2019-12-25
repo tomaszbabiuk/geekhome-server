@@ -4,7 +4,7 @@ import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.http.INameValueSet;
 import com.geekhome.http.NameValueSet;
-import com.geekhome.httpserver.modules.ObjectNotFoundException;
+import com.geekhome.common.configuration.ObjectNotFoundException;
 
 import java.io.*;
 import java.util.Hashtable;

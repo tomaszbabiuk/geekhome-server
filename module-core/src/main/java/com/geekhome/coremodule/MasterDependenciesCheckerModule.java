@@ -1,7 +1,7 @@
 package com.geekhome.coremodule;
 
-import com.geekhome.common.configuration.IDevice;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.*;
+import com.geekhome.common.configuration.CollectorCollection;
 import com.geekhome.httpserver.modules.DependenciesCheckerModule;
 import com.geekhome.httpserver.modules.Dependency;
 import com.geekhome.httpserver.modules.DependencyType;

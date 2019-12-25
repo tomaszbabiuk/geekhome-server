@@ -7,8 +7,8 @@ import com.geekhome.common.logging.ILogger;
 import com.geekhome.coremodule.MultistateDevice;
 import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.CollectorCollection;
-import com.geekhome.httpserver.modules.ObjectNotFoundException;
+import com.geekhome.common.configuration.CollectorCollection;
+import com.geekhome.common.configuration.ObjectNotFoundException;
 
 public abstract class MultistateDeviceAutomationUnit<D extends MultistateDevice> extends DeviceAutomationUnit<String, D> implements IMultistateDeviceAutomationUnit {
     public NamedObject _state;

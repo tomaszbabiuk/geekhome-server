@@ -7,7 +7,7 @@ import com.geekhome.http.IResponse;
 import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
 import com.geekhome.httpserver.JsonResponse;
 import com.geekhome.httpserver.SystemInfo;
-import com.geekhome.httpserver.modules.ObjectNotFoundException;
+import com.geekhome.common.configuration.ObjectNotFoundException;
 import org.json.simple.JSONObject;
 
 import java.util.Objects;

@@ -4,7 +4,7 @@ import com.geekhome.common.ControlType;
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.DeviceCategory;
 import com.geekhome.common.configuration.Persistable;
-import com.geekhome.coremodule.Device;
+import com.geekhome.common.configuration.Device;
 import com.geekhome.coremodule.IRoomDevice;
 import com.geekhome.coremodule.IValueDevice;
 import com.geekhome.coremodule.ValueType;

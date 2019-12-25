@@ -6,7 +6,7 @@ import com.geekhome.extafreemodule.ExtaFreeConfiguration;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.common.hardwaremanager.ITogglePort;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 import com.geekhome.httpserver.modules.IAutomationModule;
 import com.geekhome.synchronizationmodule.business.SmartEvent;
 

@@ -1,10 +1,6 @@
-package com.geekhome.coremodule;
+package com.geekhome.common.configuration;
 
-import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.NamedObject;
-import com.geekhome.common.configuration.IDevice;
-import com.geekhome.common.configuration.Persistable;
-import com.geekhome.httpserver.modules.CollectorCollection;
 
 public class DevicesGroup extends NamedObject {
     private CollectorCollection<IDevice> _devices;

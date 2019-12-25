@@ -1,5 +1,6 @@
 package com.geekhome.coremodule;
 
+import com.geekhome.common.configuration.ConditionBase;
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.Persistable;
 

@@ -1,9 +1,7 @@
 package com.geekhome.coremodule.httpserver;
 
-import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.common.configuration.*;
 import com.geekhome.common.State;
-import com.geekhome.common.configuration.IDevice;
-import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.coremodule.*;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.coremodule.automation.IDeviceAutomationUnit;
@@ -13,7 +11,7 @@ import com.geekhome.http.IResponse;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
 import com.geekhome.httpserver.JsonResponse;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 import org.json.simple.JSONObject;
 
 import java.util.Objects;

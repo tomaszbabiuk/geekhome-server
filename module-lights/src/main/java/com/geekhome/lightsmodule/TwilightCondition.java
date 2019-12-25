@@ -2,7 +2,7 @@ package com.geekhome.lightsmodule;
 
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.Persistable;
-import com.geekhome.coremodule.ConditionBase;
+import com.geekhome.common.configuration.ConditionBase;
 
 public class TwilightCondition extends ConditionBase {
     private double _latitude;

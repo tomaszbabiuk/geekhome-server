@@ -1,6 +1,8 @@
 package com.geekhome.httpserver.modules;
 
 import com.geekhome.common.ConfigurationMetadata;
+import com.geekhome.common.configuration.Collector;
+import com.geekhome.common.configuration.CollectorCollection;
 
 import java.util.ArrayList;
 

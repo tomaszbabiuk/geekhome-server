@@ -1,10 +1,7 @@
-package com.geekhome.coremodule;
+package com.geekhome.common.configuration;
 
 import com.geekhome.common.ConfigurationSaver;
-import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.NamedObject;
-import com.geekhome.common.configuration.Persistable;
-import com.geekhome.httpserver.modules.CollectorCollection;
 import org.json.simple.JSONAware;
 
 public class Floor extends NamedObject implements JSONAware {

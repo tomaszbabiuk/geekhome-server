@@ -1,5 +1,6 @@
 package com.geekhome.coremodule.automation;
 
+import com.geekhome.common.configuration.*;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.coremodule.*;
@@ -7,7 +8,7 @@ import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.common.hardwaremanager.IInputPort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.SystemInfo;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 import com.geekhome.httpserver.modules.IAutomationModule;
 import com.geekhome.synchronizationmodule.business.SmartEvent;
 

@@ -2,6 +2,7 @@ package com.geekhome.extafreemodule;
 
 import com.geekhome.common.CrudAction;
 import com.geekhome.common.IHardwareManagerAdapterFactory;
+import com.geekhome.common.configuration.Collector;
 import com.geekhome.coremodule.MasterConfiguration;
 import com.geekhome.http.Resource;
 import com.geekhome.coremodule.httpserver.CrudPostHandler;

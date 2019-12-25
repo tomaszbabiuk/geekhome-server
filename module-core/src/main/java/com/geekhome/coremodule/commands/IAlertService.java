@@ -1,7 +1,7 @@
 package com.geekhome.coremodule.commands;
 
 import com.geekhome.common.INamedObject;
-import com.geekhome.coremodule.Alert;
+import com.geekhome.common.configuration.Alert;
 
 public interface IAlertService extends INamedObject {
     boolean isMandatory();

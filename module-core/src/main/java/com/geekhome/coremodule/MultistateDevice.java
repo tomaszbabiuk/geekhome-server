@@ -2,9 +2,10 @@ package com.geekhome.coremodule;
 
 import com.geekhome.common.*;
 import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.common.configuration.Device;
 import com.geekhome.common.configuration.Persistable;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 
 public abstract class MultistateDevice extends Device {
     public abstract CollectorCollection<State> buildStates(ILocalizationProvider localizationProvider);

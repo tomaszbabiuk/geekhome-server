@@ -5,7 +5,7 @@ import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.Persistable;
 import com.geekhome.coremodule.*;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.CollectorCollection;
+import com.geekhome.common.configuration.CollectorCollection;
 
 public class AlarmSensor extends MultistateDevice implements IRoomDevice {
     private InactiveState _inactiveState;
