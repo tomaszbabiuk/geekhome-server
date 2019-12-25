@@ -1,6 +1,6 @@
 package com.geekhome.usersmodule;
 
-import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.httpserver.modules.CollectorCollection;

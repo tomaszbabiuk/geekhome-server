@@ -1,12 +1,7 @@
 package com.geekhome.coremodule;
 
-import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.NamedObject;
-import com.geekhome.common.Persistable;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class CommandBase extends NamedObject {
     public CommandBase(DescriptiveName name) {

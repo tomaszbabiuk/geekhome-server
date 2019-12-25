@@ -2,8 +2,8 @@ package com.geekhome.automationmodule.automation;
 
 import com.geekhome.automationmodule.ImpulseSwitch;
 import com.geekhome.coremodule.automation.ControlMode;
-import com.geekhome.hardwaremanager.IInputPort;
-import com.geekhome.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.IInputPort;
+import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;

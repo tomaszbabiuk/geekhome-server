@@ -1,14 +1,12 @@
 package com.geekhome.coremodule;
 
-import com.geekhome.common.CrudAction;
-import com.geekhome.common.commands.IAlertService;
-import com.geekhome.common.commands.Synchronizer;
+import com.geekhome.coremodule.commands.IAlertService;
+import com.geekhome.coremodule.commands.Synchronizer;
 import com.geekhome.coremodule.automation.CoreAutomationModule;
 import com.geekhome.coremodule.automation.MasterAutomation;
 import com.geekhome.coremodule.httpserver.*;
 import com.geekhome.coremodule.settings.AutomationSettings;
-import com.geekhome.hardwaremanager.IHardwareManager;
-import com.geekhome.http.INameValueSet;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.IRequestsDispatcher;
 import com.geekhome.http.Resource;
 import com.geekhome.httpserver.ICrudPostHandler;

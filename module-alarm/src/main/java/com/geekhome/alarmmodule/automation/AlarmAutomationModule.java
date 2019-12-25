@@ -2,15 +2,13 @@ package com.geekhome.alarmmodule.automation;
 
 import com.geekhome.alarmmodule.*;
 import com.geekhome.coremodule.automation.*;
-import com.geekhome.hardwaremanager.IHardwareManager;
-import com.geekhome.hardwaremanager.IInputPort;
-import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.IInputPort;
+import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.modules.CollectorCollection;
 import com.geekhome.httpserver.modules.IAutomationModule;
 import com.geekhome.synchronizationmodule.business.SmartEvent;
-
-import java.util.Calendar;
 
 public class AlarmAutomationModule implements IAutomationModule {
     private MasterAutomation _masterAutomation;

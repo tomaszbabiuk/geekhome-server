@@ -1,8 +1,8 @@
 package com.geekhome.centralheatingmodule;
 
-import com.geekhome.common.DescriptiveName;
-import com.geekhome.common.Persistable;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.common.configuration.Persistable;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.coremodule.InactiveState;
 import com.geekhome.http.ILocalizationProvider;
 

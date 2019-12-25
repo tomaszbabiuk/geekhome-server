@@ -5,7 +5,7 @@ import com.geekhome.coremodule.MasterConfiguration;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.http.Resource;
 import com.geekhome.coremodule.httpserver.CrudPostHandler;
-import com.geekhome.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.IRequestsDispatcher;
 import com.geekhome.httpserver.ICrudPostHandler;
 import com.geekhome.http.ILocalizationProvider;

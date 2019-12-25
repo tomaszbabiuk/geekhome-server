@@ -3,8 +3,8 @@ package com.geekhome.automationmodule.automation;
 import com.geekhome.automationmodule.PowerMeter;
 import com.geekhome.coremodule.automation.DeviceAutomationUnit;
 import com.geekhome.coremodule.automation.EvaluationResult;
-import com.geekhome.hardwaremanager.IInputPort;
-import com.geekhome.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.IInputPort;
+import com.geekhome.common.hardwaremanager.IPort;
 
 import java.util.Calendar;
 

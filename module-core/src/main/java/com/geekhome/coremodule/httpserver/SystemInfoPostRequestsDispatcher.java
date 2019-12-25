@@ -1,5 +1,6 @@
 package com.geekhome.coremodule.httpserver;
 
+import com.geekhome.common.OperationMode;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.QueryString;

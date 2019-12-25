@@ -7,7 +7,7 @@ import com.geekhome.coremodule.MasterConfiguration;
 import com.geekhome.http.Resource;
 import com.geekhome.coremodule.automation.MasterAutomation;
 import com.geekhome.coremodule.httpserver.CrudPostHandler;
-import com.geekhome.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.INameValueSet;
 import com.geekhome.http.IRequestsDispatcher;
 import com.geekhome.httpserver.ICrudPostHandler;

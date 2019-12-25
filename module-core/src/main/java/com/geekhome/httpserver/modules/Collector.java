@@ -1,9 +1,10 @@
 package com.geekhome.httpserver.modules;
 
+import com.geekhome.common.IInvalidateCacheListener;
 import com.geekhome.common.INamedObject;
 import com.geekhome.common.IdPool;
 import com.geekhome.coremodule.ICondition;
-import com.geekhome.coremodule.IDevice;
+import com.geekhome.common.configuration.IDevice;
 
 import java.util.ArrayList;
 import java.util.Hashtable;

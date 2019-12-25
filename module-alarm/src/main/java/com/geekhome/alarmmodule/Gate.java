@@ -1,7 +1,9 @@
 package com.geekhome.alarmmodule;
 
 import com.geekhome.common.*;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.common.configuration.Persistable;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.coremodule.*;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.modules.CollectorCollection;
@@ -42,7 +44,7 @@ public class Gate extends AlarmSensor implements IBlocksTarget, IPortsDrivenDevi
     }
 
     public Gate(DescriptiveName name, String magneticDetectorPortId, String gateControlPortId, String roomId,
-                         InactiveState inactivityState, String delayTime, String pinCode, String iconName) {
+                InactiveState inactivityState, String delayTime, String pinCode, String iconName) {
         super(name, roomId, inactivityState, delayTime, iconName);
         setMagneticDetectorPortId(magneticDetectorPortId);
         setGateControlPortId(gateControlPortId);

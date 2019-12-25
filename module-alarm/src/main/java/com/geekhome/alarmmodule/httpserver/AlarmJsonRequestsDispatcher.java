@@ -2,7 +2,7 @@ package com.geekhome.alarmmodule.httpserver;
 
 import com.geekhome.alarmmodule.AlarmConfiguration;
 import com.geekhome.alarmmodule.AlarmConfigurationValidation;
-import com.geekhome.coremodule.IDevice;
+import com.geekhome.common.configuration.IDevice;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.jetty.JsonRequestsDispatcherBase;

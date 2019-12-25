@@ -4,8 +4,8 @@ import com.geekhome.centralheatingmodule.AirConditioner;
 import com.geekhome.coremodule.automation.ControlMode;
 import com.geekhome.coremodule.automation.MasterAutomation;
 import com.geekhome.coremodule.automation.MultistateDeviceAutomationUnit;
-import com.geekhome.hardwaremanager.IOutputPort;
-import com.geekhome.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.IOutputPort;
+import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;

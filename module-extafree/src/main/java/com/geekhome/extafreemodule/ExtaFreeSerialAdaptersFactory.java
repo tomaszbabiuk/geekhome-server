@@ -1,6 +1,6 @@
 package com.geekhome.extafreemodule;
 
-import com.geekhome.common.IHardwareManagerAdapter;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
 import com.geekhome.common.SerialAdapterFactoryBase;
 import com.geekhome.http.ILocalizationProvider;
 

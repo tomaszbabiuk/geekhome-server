@@ -1,6 +1,8 @@
 package com.geekhome.automationmodule;
 
 import com.geekhome.common.*;
+import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.common.configuration.IDevice;
 import com.geekhome.coremodule.*;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.http.INameValueSet;

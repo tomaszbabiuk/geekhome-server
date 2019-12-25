@@ -1,6 +1,6 @@
 package com.geekhome.coremodule.httpserver;
 
-import com.geekhome.coremodule.IDevice;
+import com.geekhome.common.configuration.IDevice;
 import com.geekhome.coremodule.MasterConfiguration;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.http.IHttpListenerRequest;

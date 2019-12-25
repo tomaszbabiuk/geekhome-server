@@ -1,6 +1,6 @@
 package com.geekhome.hardwaremanagermodule.httpserver;
 
-import com.geekhome.hardwaremanager.*;
+import com.geekhome.common.hardwaremanager.*;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.jetty.JsonRequestsDispatcherBase;

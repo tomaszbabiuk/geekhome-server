@@ -2,8 +2,8 @@ package com.geekhome.lightsmodule.automation;
 
 import com.geekhome.coremodule.automation.DeviceAutomationUnit;
 import com.geekhome.coremodule.automation.EvaluationResult;
-import com.geekhome.hardwaremanager.IInputPort;
-import com.geekhome.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.IInputPort;
+import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.lightsmodule.Luxmeter;
 
 import java.util.Calendar;

@@ -1,9 +1,9 @@
 package com.geekhome.coremodule.automation;
 
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.coremodule.OnOffDeviceBase;
-import com.geekhome.hardwaremanager.IPort;
-import com.geekhome.hardwaremanager.ITogglePort;
+import com.geekhome.common.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.ITogglePort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.modules.ObjectNotFoundException;
 

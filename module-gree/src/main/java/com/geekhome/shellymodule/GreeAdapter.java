@@ -1,11 +1,14 @@
 package com.geekhome.shellymodule;
 
 import com.geekhome.common.*;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.logging.LoggingService;
-import com.geekhome.hardwaremanager.*;
+import com.geekhome.common.hardwaremanager.*;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.OperationMode;
+import com.geekhome.common.OperationMode;
+import com.geekhome.common.NamedObject;
+import com.geekhome.httpserver.HardwareManager;
 import org.openhab.binding.greeair.internal.GreeDevice;
 import org.openhab.binding.greeair.internal.GreeDeviceFinder;
 

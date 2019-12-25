@@ -1,7 +1,7 @@
 package com.geekhome.coremodule;
 
-import com.geekhome.common.Persistable;
-import com.geekhome.common.json.JSONAwareBase;
+import com.geekhome.common.configuration.Persistable;
+import com.geekhome.common.configuration.JSONAwareBase;
 
 public class SystemStatus extends JSONAwareBase {
     private DateTimeInfo _date;

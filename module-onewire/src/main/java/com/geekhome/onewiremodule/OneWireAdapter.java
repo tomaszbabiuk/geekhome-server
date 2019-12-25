@@ -1,19 +1,19 @@
 package com.geekhome.onewiremodule;
 
 import com.geekhome.common.*;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.coremodule.settings.AutomationSettings;
-import com.geekhome.hardwaremanager.IHardwareManager;
-import com.geekhome.hardwaremanager.InputPortsCollection;
-import com.geekhome.hardwaremanager.OutputPortsCollection;
-import com.geekhome.hardwaremanager.PortNotFoundException;
-import com.geekhome.hardwaremanager.TogglePortsCollection;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.InputPortsCollection;
+import com.geekhome.common.hardwaremanager.OutputPortsCollection;
+import com.geekhome.common.hardwaremanager.PortNotFoundException;
+import com.geekhome.common.hardwaremanager.TogglePortsCollection;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.OperationMode;
+import com.geekhome.common.OperationMode;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;

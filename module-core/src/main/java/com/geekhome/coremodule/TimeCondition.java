@@ -1,8 +1,7 @@
 package com.geekhome.coremodule;
 
-import com.geekhome.common.DescriptiveName;
-import com.geekhome.common.NamedObject;
-import com.geekhome.common.Persistable;
+import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.common.configuration.Persistable;
 
 public class TimeCondition extends ConditionBase {
     private String _startTime;

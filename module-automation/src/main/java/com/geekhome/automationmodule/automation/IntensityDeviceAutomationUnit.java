@@ -2,13 +2,13 @@ package com.geekhome.automationmodule.automation;
 
 import com.geekhome.automationmodule.IntensityDevice;
 import com.geekhome.common.KeyValue;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.coremodule.settings.AutomationSettings;
-import com.geekhome.hardwaremanager.IOutputPort;
-import com.geekhome.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.IOutputPort;
+import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;

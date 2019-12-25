@@ -20,6 +20,10 @@ cd module-synchronization
 mvn clean install
 cd ..
 
+cd module-common
+mvn clean install
+cd ..
+
 cd module-core
 mvn clean install
 cd ..

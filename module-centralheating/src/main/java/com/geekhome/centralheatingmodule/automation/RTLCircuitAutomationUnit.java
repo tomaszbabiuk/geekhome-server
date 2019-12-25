@@ -4,7 +4,7 @@ import com.geekhome.centralheatingmodule.RTLCircuit;
 import com.geekhome.common.KeyValue;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.coremodule.automation.MasterAutomation;
-import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.http.ILocalizationProvider;
 
 public class RTLCircuitAutomationUnit extends HeatingCircuitAutomationUnit<RTLCircuit> {

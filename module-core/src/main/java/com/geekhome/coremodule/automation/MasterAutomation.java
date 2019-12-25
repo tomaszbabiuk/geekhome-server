@@ -1,16 +1,15 @@
 package com.geekhome.coremodule.automation;
 
 import com.geekhome.common.*;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.utils.Sleeper;
-import com.geekhome.coremodule.Alert;
 import com.geekhome.coremodule.DashboardAlertService;
 import com.geekhome.coremodule.MasterConfiguration;
-import com.geekhome.hardwaremanager.*;
+import com.geekhome.common.hardwaremanager.*;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.OperationMode;
+import com.geekhome.common.OperationMode;
 import com.geekhome.httpserver.SystemInfo;
 import com.geekhome.httpserver.modules.CollectorCollection;
 import com.geekhome.httpserver.modules.IAutomationHook;

@@ -1,7 +1,7 @@
 package com.geekhome.coremodule;
 
 import com.geekhome.common.KeyValue;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.JSONArrayList;
 
 import java.io.File;
 import java.io.IOException;

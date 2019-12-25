@@ -1,7 +1,7 @@
 package com.geekhome.onewiremodule;
 
-import com.geekhome.common.Persistable;
-import com.geekhome.common.json.JSONAwareBase;
+import com.geekhome.common.configuration.Persistable;
+import com.geekhome.common.configuration.JSONAwareBase;
 
 public class DiscoveryInfo<C extends IOneWireContainer> extends JSONAwareBase {
     private String _name;

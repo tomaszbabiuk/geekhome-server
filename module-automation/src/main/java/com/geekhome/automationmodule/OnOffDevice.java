@@ -1,6 +1,6 @@
 package com.geekhome.automationmodule;
 
-import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.DeviceCategory;
 import com.geekhome.coremodule.OnOffDeviceBase;
 import com.geekhome.coremodule.YesNo;

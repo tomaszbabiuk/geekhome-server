@@ -1,7 +1,7 @@
 package com.geekhome.httpserver;
 
-import com.geekhome.common.Persistable;
-import com.geekhome.common.json.JSONAwareBase;
+import com.geekhome.common.configuration.Persistable;
+import com.geekhome.common.configuration.JSONAwareBase;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.coremodule.DashboardAlertService;

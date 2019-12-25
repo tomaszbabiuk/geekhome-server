@@ -1,11 +1,11 @@
 package com.geekhome.hardwaremanagermodule;
 
-import com.geekhome.common.DescriptiveName;
-import com.geekhome.common.json.JSONArrayList;
-import com.geekhome.hardwaremanager.IHardwareManager;
-import com.geekhome.hardwaremanager.IOutputPort;
-import com.geekhome.hardwaremanager.IPort;
-import com.geekhome.hardwaremanager.ITogglePort;
+import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.common.configuration.JSONArrayList;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.IOutputPort;
+import com.geekhome.common.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.ITogglePort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.modules.IConfigurationValidator;
 

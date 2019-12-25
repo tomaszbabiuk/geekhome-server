@@ -1,7 +1,7 @@
 package com.geekhome.extafreemodule;
 
 import com.geekhome.common.PortBase;
-import com.geekhome.hardwaremanager.ITogglePort;
+import com.geekhome.common.hardwaremanager.ITogglePort;
 
 import java.io.IOException;
 import java.io.OutputStream;

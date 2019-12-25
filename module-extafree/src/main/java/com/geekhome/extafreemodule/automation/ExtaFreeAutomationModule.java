@@ -3,14 +3,12 @@ package com.geekhome.extafreemodule.automation;
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.extafreemodule.ExtaFreeBlind;
 import com.geekhome.extafreemodule.ExtaFreeConfiguration;
-import com.geekhome.hardwaremanager.IHardwareManager;
-import com.geekhome.hardwaremanager.ITogglePort;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.ITogglePort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.modules.CollectorCollection;
 import com.geekhome.httpserver.modules.IAutomationModule;
 import com.geekhome.synchronizationmodule.business.SmartEvent;
-
-import java.util.Calendar;
 
 public class ExtaFreeAutomationModule implements IAutomationModule {
     private ExtaFreeConfiguration _extaFreeConfiguration;

@@ -1,6 +1,6 @@
 package com.geekhome.shellymodule;
 
-import com.geekhome.common.HardwareManager;
+import com.geekhome.httpserver.HardwareManager;
 import com.geekhome.common.IHardwareManagerAdapterFactory;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.http.Resource;

@@ -2,7 +2,7 @@ package com.geekhome.onewiremodule;
 
 import com.geekhome.common.IHardwareManagerAdapterFactory;
 import com.geekhome.coremodule.settings.AutomationSettings;
-import com.geekhome.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.http.Resource;
 import com.geekhome.httpserver.modules.IConfigurationValidator;

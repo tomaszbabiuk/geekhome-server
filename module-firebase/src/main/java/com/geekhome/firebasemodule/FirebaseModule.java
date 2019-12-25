@@ -1,8 +1,8 @@
 package com.geekhome.firebasemodule;
 
 import com.geekhome.common.IMonitorable;
-import com.geekhome.common.commands.IAlertService;
-import com.geekhome.common.commands.Synchronizer;
+import com.geekhome.coremodule.commands.IAlertService;
+import com.geekhome.coremodule.commands.Synchronizer;
 import com.geekhome.coremodule.automation.MasterAutomation;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.firebasemodule.httpserver.FirebaseJsonRequestsDispatcher;

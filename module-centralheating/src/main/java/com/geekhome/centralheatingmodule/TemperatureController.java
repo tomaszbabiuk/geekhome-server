@@ -1,8 +1,8 @@
 package com.geekhome.centralheatingmodule;
 
-import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.DeviceCategory;
-import com.geekhome.common.Persistable;
+import com.geekhome.common.configuration.Persistable;
 import com.geekhome.coremodule.IRoomDevice;
 import com.geekhome.coremodule.Multicontroller;
 import com.geekhome.http.ILocalizationProvider;

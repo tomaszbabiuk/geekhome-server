@@ -4,7 +4,7 @@ import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.math.AverageCollection;
 import com.geekhome.common.math.AverageDouble;
-import com.geekhome.coremodule.IDevice;
+import com.geekhome.common.configuration.IDevice;
 import com.geekhome.coremodule.automation.DeviceAutomationUnit;
 
 import java.util.Calendar;

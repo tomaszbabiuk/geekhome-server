@@ -2,7 +2,7 @@ package com.geekhome.hardwaremanagermodule;
 
 import com.geekhome.common.IHardwareManagerAdapterFactory;
 import com.geekhome.http.Resource;
-import com.geekhome.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.hardwaremanagermodule.httpserver.HardwareManagerDebugPostRequestsDispatcher;
 import com.geekhome.http.IRequestsDispatcher;
 import com.geekhome.http.ILocalizationProvider;

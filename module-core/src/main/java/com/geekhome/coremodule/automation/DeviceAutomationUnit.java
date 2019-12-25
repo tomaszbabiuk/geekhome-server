@@ -1,8 +1,8 @@
 package com.geekhome.coremodule.automation;
 
 import com.geekhome.common.IConnectible;
-import com.geekhome.coremodule.IDevice;
-import com.geekhome.hardwaremanager.IPort;
+import com.geekhome.common.configuration.IDevice;
+import com.geekhome.common.hardwaremanager.IPort;
 
 import java.util.Calendar;
 

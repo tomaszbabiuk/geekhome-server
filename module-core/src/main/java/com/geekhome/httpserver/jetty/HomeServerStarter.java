@@ -1,9 +1,9 @@
 package com.geekhome.httpserver.jetty;
 
-import com.geekhome.common.HardwareManager;
-import com.geekhome.common.commands.CommandsProcessor;
-import com.geekhome.common.commands.Synchronizer;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.httpserver.HardwareManager;
+import com.geekhome.coremodule.commands.CommandsProcessor;
+import com.geekhome.coremodule.commands.Synchronizer;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.coremodule.CorePortMapper;
 import com.geekhome.coremodule.DashboardAlertService;
 import com.geekhome.coremodule.MasterConfiguration;
@@ -11,9 +11,9 @@ import com.geekhome.http.jetty.ResourceLocalizationProvider;
 import com.geekhome.coremodule.automation.MasterAutomation;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.coremodule.settings.TextFileAutomationSettingsPersister;
-import com.geekhome.hardwaremanager.IPortMapper;
+import com.geekhome.common.hardwaremanager.IPortMapper;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.OperationMode;
+import com.geekhome.common.OperationMode;
 import com.geekhome.httpserver.SystemInfo;
 import com.geekhome.httpserver.modules.IModule;
 import com.geekhome.moquettemodule.MoquetteBroker;

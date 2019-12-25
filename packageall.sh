@@ -58,6 +58,12 @@ mvn clean package -Ddir="../build/to-obfuscate"
 mvn clean
 cd ..
 
+echo Packaging common module
+cd module-common
+mvn clean package -Ddir="../build/to-obfuscate"
+mvn clean
+cd ..
+
 echo Packaging core module
 cd module-core
 mvn clean package -Ddir="../build/to-obfuscate"

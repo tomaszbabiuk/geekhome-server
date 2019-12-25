@@ -2,8 +2,7 @@ package com.geekhome.onewiremodule;
 
 import com.dalsemi.onewire.OneWireException;
 import com.dalsemi.onewire.container.OneWireContainer28;
-import com.dalsemi.onewire.container.TemperatureContainer;
-import com.geekhome.common.Persistable;
+import com.geekhome.common.configuration.Persistable;
 
 public class TemperatureDiscoveryInfo extends DiscoveryInfo<TemperatureContainerWrapper> {
     private final Double _initialTemperature;

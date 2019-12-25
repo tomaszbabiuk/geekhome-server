@@ -1,9 +1,9 @@
 package com.geekhome.coremodule;
 
 import com.geekhome.common.ConfigurationSaver;
-import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.NamedObject;
-import com.geekhome.common.Persistable;
+import com.geekhome.common.configuration.Persistable;
 import com.geekhome.httpserver.modules.CollectorCollection;
 import org.json.simple.JSONAware;
 

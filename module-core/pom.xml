@@ -12,6 +12,11 @@
     <dependencies>
         <dependency>
             <groupId>geekhome.server</groupId>
+            <artifactId>module-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>geekhome.server</groupId>
             <artifactId>module-synchronization</artifactId>
             <version>1.0</version>
         </dependency>

@@ -1,6 +1,6 @@
 package com.geekhome.coremodule;
 
-import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.http.ILocalizationProvider;
 
 public class AlwaysOnCondition extends ConditionBase {

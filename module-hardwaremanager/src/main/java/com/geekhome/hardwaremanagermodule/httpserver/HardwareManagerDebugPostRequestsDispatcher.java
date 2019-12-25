@@ -1,7 +1,7 @@
 package com.geekhome.hardwaremanagermodule.httpserver;
 
 import com.geekhome.common.SynchronizedInputPort;
-import com.geekhome.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.QueryString;

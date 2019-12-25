@@ -6,9 +6,8 @@ import com.geekhome.common.logging.ILogger;
 import com.geekhome.coremodule.Duration;
 import com.geekhome.coremodule.automation.OnOffDeviceAutomationUnit;
 import com.geekhome.coremodule.automation.ControlMode;
-import com.geekhome.coremodule.automation.ICalculableAutomationUnit;
 import com.geekhome.coremodule.automation.MasterAutomation;
-import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;

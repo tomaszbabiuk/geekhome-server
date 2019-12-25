@@ -2,11 +2,11 @@ package com.geekhome.centralheatingmodule.automation;
 
 import com.geekhome.centralheatingmodule.Comfortmeter;
 import com.geekhome.common.KeyValue;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.coremodule.automation.DeviceAutomationUnit;
 import com.geekhome.coremodule.automation.EvaluationResult;
-import com.geekhome.hardwaremanager.IInputPort;
-import com.geekhome.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.IInputPort;
+import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;

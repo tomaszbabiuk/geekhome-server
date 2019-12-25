@@ -1,6 +1,6 @@
 package com.geekhome.emailmodule.httpserver;
 
-import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.NamedObject;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.emailmodule.EmailModule;
@@ -12,7 +12,6 @@ import com.geekhome.httpserver.modules.CollectorCollection;
 import org.json.simple.JSONObject;
 
 import java.util.Collection;
-import java.util.Hashtable;
 
 public class EmailJsonRequestsDispatcher extends JsonRequestsDispatcherBase {
     private AutomationSettings _automationSettings;

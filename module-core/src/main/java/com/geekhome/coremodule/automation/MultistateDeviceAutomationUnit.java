@@ -5,7 +5,7 @@ import com.geekhome.common.State;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.coremodule.MultistateDevice;
-import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.modules.CollectorCollection;
 import com.geekhome.httpserver.modules.ObjectNotFoundException;

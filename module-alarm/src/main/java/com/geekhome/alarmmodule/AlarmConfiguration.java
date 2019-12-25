@@ -1,8 +1,9 @@
 package com.geekhome.alarmmodule;
 
 import com.geekhome.common.*;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.coremodule.ICondition;
-import com.geekhome.coremodule.IDevice;
+import com.geekhome.common.configuration.IDevice;
 import com.geekhome.coremodule.InactiveState;
 import com.geekhome.http.INameValueSet;
 import com.geekhome.httpserver.modules.Collector;
@@ -10,7 +11,6 @@ import com.geekhome.httpserver.modules.CollectorCollection;
 import com.geekhome.httpserver.modules.ObjectNotFoundException;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 public class AlarmConfiguration extends Collector {
     private CollectorCollection<SinglePortAlarmSensor> _alarmSensors;

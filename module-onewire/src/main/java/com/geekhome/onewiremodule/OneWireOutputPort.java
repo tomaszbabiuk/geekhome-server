@@ -1,7 +1,7 @@
 package com.geekhome.onewiremodule;
 
 import com.geekhome.common.PortBase;
-import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.common.hardwaremanager.IOutputPort;
 
 public class OneWireOutputPort extends PortBase implements IOutputPort<Boolean> {
     private SwitchContainerWrapper _switchContainer;

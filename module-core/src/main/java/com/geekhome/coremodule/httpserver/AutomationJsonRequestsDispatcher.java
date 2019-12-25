@@ -1,8 +1,9 @@
 package com.geekhome.coremodule.httpserver;
 
-import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.State;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.IDevice;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.coremodule.*;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.coremodule.automation.IDeviceAutomationUnit;

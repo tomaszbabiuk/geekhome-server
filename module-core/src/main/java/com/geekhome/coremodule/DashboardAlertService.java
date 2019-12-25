@@ -1,7 +1,7 @@
 package com.geekhome.coremodule;
 
-import com.geekhome.common.DescriptiveName;
-import com.geekhome.common.commands.AlertServiceBase;
+import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.coremodule.commands.AlertServiceBase;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.modules.CollectorCollection;
 

@@ -3,8 +3,8 @@ package com.geekhome.lightsmodule.automation;
 import com.geekhome.coremodule.automation.ControlMode;
 import com.geekhome.coremodule.automation.IDeviceAutomationUnit;
 import com.geekhome.coremodule.automation.MultistateDeviceAutomationUnit;
-import com.geekhome.hardwaremanager.IPort;
-import com.geekhome.hardwaremanager.ITogglePort;
+import com.geekhome.common.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.ITogglePort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.lightsmodule.Blind;
 

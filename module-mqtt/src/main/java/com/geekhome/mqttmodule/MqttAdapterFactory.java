@@ -1,8 +1,8 @@
 package com.geekhome.mqttmodule;
 
-import com.geekhome.common.IHardwareManagerAdapter;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
 import com.geekhome.common.IHardwareManagerAdapterFactory;
-import com.geekhome.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.ArrayList;

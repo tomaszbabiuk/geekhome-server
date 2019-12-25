@@ -1,9 +1,9 @@
 package com.geekhome.onewiremodule;
 
-import com.geekhome.common.IHardwareManagerAdapter;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
 import com.geekhome.common.SerialAdapterFactoryBase;
 import com.geekhome.coremodule.settings.AutomationSettings;
-import com.geekhome.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.ILocalizationProvider;
 
 class OneWireSerialAdaptersFactory extends SerialAdapterFactoryBase {

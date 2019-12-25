@@ -2,7 +2,7 @@ package com.geekhome.coremodule.automation;
 
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
-import com.geekhome.httpserver.OperationMode;
+import com.geekhome.common.OperationMode;
 import com.geekhome.httpserver.SystemInfo;
 import java.util.Calendar;
 

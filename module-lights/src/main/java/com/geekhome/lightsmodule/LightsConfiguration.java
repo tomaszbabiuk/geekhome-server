@@ -1,8 +1,9 @@
 package com.geekhome.lightsmodule;
 
 import com.geekhome.common.*;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.coremodule.ICondition;
-import com.geekhome.coremodule.IDevice;
+import com.geekhome.common.configuration.IDevice;
 import com.geekhome.coremodule.settings.AutomationSettings;
 import com.geekhome.http.INameValueSet;
 import com.geekhome.httpserver.modules.Collector;

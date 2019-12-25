@@ -1,7 +1,8 @@
 package com.geekhome.coremodule.httpserver;
 
 import com.geekhome.common.INamedObject;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.IDevice;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.coremodule.*;
 import com.geekhome.http.IHttpListenerRequest;

@@ -1,9 +1,9 @@
 package com.geekhome.coremodule;
 
 import com.geekhome.common.ControlType;
-import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.DeviceCategory;
-import com.geekhome.common.Persistable;
+import com.geekhome.common.configuration.Persistable;
 
 public abstract class Multicontroller extends Device {
     private String _modesIds;

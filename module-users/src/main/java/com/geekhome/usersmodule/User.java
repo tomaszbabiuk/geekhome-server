@@ -1,6 +1,6 @@
 package com.geekhome.usersmodule;
 
-import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.NamedObject;
 
 public class User extends NamedObject {

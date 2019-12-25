@@ -1,8 +1,8 @@
 package com.geekhome.coremodule.automation;
 
 import com.geekhome.coremodule.OnOffDeviceBase;
-import com.geekhome.hardwaremanager.IOutputPort;
-import com.geekhome.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.IOutputPort;
+import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.modules.ObjectNotFoundException;
 

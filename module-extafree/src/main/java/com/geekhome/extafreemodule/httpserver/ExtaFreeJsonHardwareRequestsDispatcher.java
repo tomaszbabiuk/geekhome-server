@@ -2,8 +2,8 @@ package com.geekhome.extafreemodule.httpserver;
 
 import com.geekhome.common.utils.Sleeper;
 import com.geekhome.extafreemodule.PairingType;
-import com.geekhome.hardwaremanager.IHardwareManager;
-import com.geekhome.hardwaremanager.ITogglePort;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.ITogglePort;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.jetty.JsonRequestsDispatcherBase;

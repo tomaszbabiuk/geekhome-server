@@ -1,11 +1,12 @@
 package com.geekhome.mqttmodule;
 
 import com.geekhome.common.*;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.logging.LoggingService;
-import com.geekhome.hardwaremanager.*;
+import com.geekhome.common.hardwaremanager.*;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.OperationMode;
+import com.geekhome.common.OperationMode;
 import com.geekhome.mqttmodule.tasmotaapi.GsonProvider;
 import com.geekhome.mqttmodule.tasmotaapi.SensorStatus;
 import org.eclipse.paho.client.mqttv3.*;

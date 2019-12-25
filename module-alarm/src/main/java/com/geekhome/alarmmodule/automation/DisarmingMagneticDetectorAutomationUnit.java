@@ -4,7 +4,7 @@ import com.geekhome.alarmmodule.MagneticDetector;
 import com.geekhome.common.KeyValue;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.coremodule.automation.MasterAutomation;
-import com.geekhome.hardwaremanager.IInputPort;
+import com.geekhome.common.hardwaremanager.IInputPort;
 import com.geekhome.http.ILocalizationProvider;
 
 public class DisarmingMagneticDetectorAutomationUnit extends MagneticDetectorAutomationUnit {

@@ -1,6 +1,6 @@
 package com.geekhome.alarmmodule;
 
-import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.coremodule.InactiveState;
 import com.geekhome.http.ILocalizationProvider;
 

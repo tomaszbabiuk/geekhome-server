@@ -1,7 +1,8 @@
 package com.geekhome.firebasemodule;
 
 import com.geekhome.common.*;
-import com.geekhome.common.commands.*;
+import com.geekhome.coremodule.commands.*;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.utils.Sleeper;
@@ -23,8 +24,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

@@ -5,7 +5,7 @@ import com.geekhome.coremodule.automation.DeviceAutomationUnit;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.coremodule.automation.ModeAutomationUnit;
 import com.geekhome.coremodule.settings.AutomationSettings;
-import com.geekhome.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.IPort;
 
 import java.util.ArrayList;
 import java.util.Calendar;

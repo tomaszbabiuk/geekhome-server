@@ -2,14 +2,12 @@ package com.geekhome.lightsmodule.automation;
 
 import com.geekhome.coremodule.automation.*;
 import com.geekhome.coremodule.settings.AutomationSettings;
-import com.geekhome.hardwaremanager.*;
+import com.geekhome.common.hardwaremanager.*;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.modules.CollectorCollection;
 import com.geekhome.httpserver.modules.IAutomationModule;
 import com.geekhome.lightsmodule.*;
 import com.geekhome.synchronizationmodule.business.SmartEvent;
-
-import java.util.Calendar;
 
 public class LightsAutomationModule implements IAutomationModule {
     private LightsConfiguration _lightsConfiguration;

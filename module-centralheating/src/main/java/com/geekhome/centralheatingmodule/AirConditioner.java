@@ -1,7 +1,9 @@
 package com.geekhome.centralheatingmodule;
 
 import com.geekhome.common.*;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.common.configuration.Persistable;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.coremodule.IBlocksTarget;
 import com.geekhome.coremodule.IPortsDrivenDevice;
 import com.geekhome.coremodule.IRoomDevice;

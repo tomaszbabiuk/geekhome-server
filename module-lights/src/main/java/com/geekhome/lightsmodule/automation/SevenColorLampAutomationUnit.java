@@ -1,9 +1,9 @@
 package com.geekhome.lightsmodule.automation;
 
 import com.geekhome.coremodule.automation.*;
-import com.geekhome.hardwaremanager.IOutputPort;
-import com.geekhome.hardwaremanager.IPort;
-import com.geekhome.hardwaremanager.TogglePortWrapper;
+import com.geekhome.common.hardwaremanager.IOutputPort;
+import com.geekhome.common.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.TogglePortWrapper;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.lightsmodule.SevenColorLamp;
 

@@ -1,14 +1,14 @@
 package com.geekhome.extafreemodule;
 
-import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.DiscoveryException;
 import com.geekhome.common.RefreshState;
 import com.geekhome.common.SerialAdapterBase;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
-import com.geekhome.hardwaremanager.InputPortsCollection;
-import com.geekhome.hardwaremanager.OutputPortsCollection;
-import com.geekhome.hardwaremanager.TogglePortsCollection;
+import com.geekhome.common.hardwaremanager.InputPortsCollection;
+import com.geekhome.common.hardwaremanager.OutputPortsCollection;
+import com.geekhome.common.hardwaremanager.TogglePortsCollection;
 import com.geekhome.http.ILocalizationProvider;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;

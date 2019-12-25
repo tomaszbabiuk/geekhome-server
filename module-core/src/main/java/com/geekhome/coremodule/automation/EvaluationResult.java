@@ -1,11 +1,10 @@
 package com.geekhome.coremodule.automation;
 
 import com.geekhome.common.KeyValue;
-import com.geekhome.common.Persistable;
-import com.geekhome.common.json.JSONArrayList;
-import com.geekhome.common.json.JSONAwareBase;
+import com.geekhome.common.configuration.Persistable;
+import com.geekhome.common.configuration.JSONArrayList;
+import com.geekhome.common.configuration.JSONAwareBase;
 
-import javax.swing.*;
 import java.util.Objects;
 
 public class EvaluationResult extends JSONAwareBase {

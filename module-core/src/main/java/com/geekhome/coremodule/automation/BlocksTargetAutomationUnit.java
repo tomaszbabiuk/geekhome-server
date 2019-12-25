@@ -1,6 +1,6 @@
 package com.geekhome.coremodule.automation;
 
-import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.NamedObject;
 
 import java.util.Hashtable;

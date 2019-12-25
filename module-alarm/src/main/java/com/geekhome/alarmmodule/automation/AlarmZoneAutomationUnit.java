@@ -3,12 +3,12 @@ package com.geekhome.alarmmodule.automation;
 import com.geekhome.alarmmodule.AlarmZone;
 import com.geekhome.common.CodeInvalidException;
 import com.geekhome.common.KeyValue;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.coremodule.Duration;
 import com.geekhome.coremodule.automation.*;
-import com.geekhome.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.ArrayList;

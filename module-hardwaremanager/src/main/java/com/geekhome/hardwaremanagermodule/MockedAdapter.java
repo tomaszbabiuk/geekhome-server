@@ -1,11 +1,13 @@
 package com.geekhome.hardwaremanagermodule;
 
 import com.geekhome.common.*;
-import com.geekhome.hardwaremanager.InputPortsCollection;
-import com.geekhome.hardwaremanager.OutputPortsCollection;
-import com.geekhome.hardwaremanager.TogglePortsCollection;
+import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
+import com.geekhome.common.hardwaremanager.InputPortsCollection;
+import com.geekhome.common.hardwaremanager.OutputPortsCollection;
+import com.geekhome.common.hardwaremanager.TogglePortsCollection;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.OperationMode;
+import com.geekhome.common.OperationMode;
 
 import java.util.Calendar;
 

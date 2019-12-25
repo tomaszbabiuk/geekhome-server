@@ -1,6 +1,7 @@
 package com.geekhome.httpserver.modules;
 
 import com.geekhome.common.*;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.http.INameValueSet;
 import com.geekhome.http.NameValueSet;
 

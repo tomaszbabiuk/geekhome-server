@@ -2,10 +2,10 @@ package com.geekhome.onewiremodule;
 
 import com.dalsemi.onewire.OneWireException;
 import com.dalsemi.onewire.container.SwitchContainer;
-import com.geekhome.common.Persistable;
-import com.geekhome.hardwaremanager.IHardwareManager;
-import com.geekhome.hardwaremanager.IInputPort;
-import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.common.configuration.Persistable;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.IInputPort;
+import com.geekhome.common.hardwaremanager.IOutputPort;
 
 public class SwitchDiscoveryInfo extends DiscoveryInfo<SwitchContainerWrapper> {
     enum Direction {

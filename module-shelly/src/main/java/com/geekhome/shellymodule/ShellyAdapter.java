@@ -1,11 +1,12 @@
 package com.geekhome.shellymodule;
 
 import com.geekhome.common.*;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.utils.Sleeper;
-import com.geekhome.hardwaremanager.*;
-import com.geekhome.httpserver.OperationMode;
+import com.geekhome.common.hardwaremanager.*;
+import com.geekhome.common.OperationMode;
 import com.geekhome.moquettemodule.MqttBroker;
 import com.geekhome.moquettemodule.MqttListener;
 import com.google.gson.Gson;

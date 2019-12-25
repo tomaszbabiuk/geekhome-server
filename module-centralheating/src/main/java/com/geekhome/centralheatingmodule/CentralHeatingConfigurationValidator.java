@@ -1,7 +1,7 @@
 package com.geekhome.centralheatingmodule;
 
 import com.geekhome.common.PortBase;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.modules.IConfigurationValidator;
 

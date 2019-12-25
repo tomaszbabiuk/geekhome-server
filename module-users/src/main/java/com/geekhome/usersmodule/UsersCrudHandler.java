@@ -1,6 +1,6 @@
 package com.geekhome.usersmodule;
 
-import com.geekhome.common.DescriptiveName;
+import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.http.INameValueSet;
 import com.geekhome.http.QueryString;
 import com.geekhome.http.ResponseBase;

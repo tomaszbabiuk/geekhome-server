@@ -1,5 +1,6 @@
 package com.geekhome.httpserver;
 
+import com.geekhome.common.OperationMode;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.http.IResponse;

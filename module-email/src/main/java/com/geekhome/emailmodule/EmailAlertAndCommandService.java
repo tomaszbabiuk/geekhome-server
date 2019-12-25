@@ -1,7 +1,7 @@
 package com.geekhome.emailmodule;
 
-import com.geekhome.common.DescriptiveName;
-import com.geekhome.common.commands.*;
+import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.coremodule.commands.*;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.coremodule.Alert;

@@ -3,14 +3,14 @@ package com.geekhome.alarmmodule.automation;
 import com.geekhome.alarmmodule.Gate;
 import com.geekhome.common.CodeInvalidException;
 import com.geekhome.common.KeyValue;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.coremodule.automation.ControlMode;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.coremodule.automation.ICalculableAutomationUnit;
-import com.geekhome.hardwaremanager.IInputPort;
-import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.common.hardwaremanager.IInputPort;
+import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;

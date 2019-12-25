@@ -1,7 +1,7 @@
 package com.geekhome.coremodule.automation;
 
-import com.geekhome.common.commands.IAlertService;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.coremodule.commands.IAlertService;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.coremodule.Alert;
 import com.geekhome.httpserver.SystemInfo;
 

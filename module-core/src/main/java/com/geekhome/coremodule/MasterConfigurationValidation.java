@@ -1,5 +1,6 @@
 package com.geekhome.coremodule;
 
+import com.geekhome.common.configuration.IDevice;
 import com.geekhome.httpserver.modules.CollectorCollection;
 
 public class MasterConfigurationValidation {

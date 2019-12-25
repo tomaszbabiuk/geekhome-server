@@ -2,7 +2,7 @@ package com.geekhome.centralheatingmodule.automation;
 
 import com.geekhome.centralheatingmodule.Radiator;
 import com.geekhome.coremodule.automation.MasterAutomation;
-import com.geekhome.hardwaremanager.IOutputPort;
+import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.http.ILocalizationProvider;
 
 public class RadiatorAutomationUnit extends HeatingCircuitAutomationUnit<Radiator> {

@@ -8,7 +8,7 @@ import com.geekhome.coremodule.httpserver.CrudPostHandler;
 import com.geekhome.extafreemodule.automation.ExtaFreeAutomationModule;
 import com.geekhome.extafreemodule.httpserver.ExtaFreeJsonHardwareRequestsDispatcher;
 import com.geekhome.extafreemodule.httpserver.ExtaFreeJsonRequestsDispatcher;
-import com.geekhome.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.INameValueSet;
 import com.geekhome.http.IRequestsDispatcher;
 import com.geekhome.httpserver.ICrudPostHandler;

@@ -1,7 +1,9 @@
 package com.geekhome.centralheatingmodule;
 
 import com.geekhome.common.*;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.DescriptiveName;
+import com.geekhome.common.configuration.Persistable;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.coremodule.OnOffDeviceBase;
 import com.geekhome.coremodule.InactiveState;
 import com.geekhome.coremodule.YesNo;
@@ -57,7 +59,7 @@ public class Radiator extends OnOffDeviceBase {
     }
 
     public Radiator(DescriptiveName name, String portId, String roomId, InactiveState inactiveState,
-                               String activationTime, String ambientThermometerId, String temperatureControllerId) {
+                    String activationTime, String ambientThermometerId, String temperatureControllerId) {
         this(name, portId, roomId, inactiveState, activationTime, ambientThermometerId, temperatureControllerId, "radiator");
     }
 

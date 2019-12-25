@@ -1,7 +1,7 @@
 package com.geekhome.shellymodule;
 
 import com.geekhome.common.IConnectible;
-import com.geekhome.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.IPort;
 
 public interface IShellyPort extends IConnectible, IPort {
         String getReadTopic();

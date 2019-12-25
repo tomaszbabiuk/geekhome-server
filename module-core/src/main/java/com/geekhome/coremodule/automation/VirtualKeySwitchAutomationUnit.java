@@ -1,7 +1,7 @@
 package com.geekhome.coremodule.automation;
 
 import com.geekhome.coremodule.KeySwitch;
-import com.geekhome.hardwaremanager.IPort;
+import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;
 
 import java.util.Calendar;

@@ -1,6 +1,6 @@
 package com.geekhome.hardwaremanagermodule;
 
-import com.geekhome.common.IHardwareManagerAdapter;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
 import com.geekhome.common.IHardwareManagerAdapterFactory;
 import com.geekhome.http.ILocalizationProvider;
 

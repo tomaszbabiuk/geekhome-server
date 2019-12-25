@@ -1,8 +1,8 @@
 package com.geekhome.httpserver;
 
-import com.geekhome.common.Persistable;
-import com.geekhome.common.json.JSONArrayList;
-import com.geekhome.common.json.JSONAwareBase;
+import com.geekhome.common.configuration.Persistable;
+import com.geekhome.common.configuration.JSONArrayList;
+import com.geekhome.common.configuration.JSONAwareBase;
 import com.geekhome.coremodule.MasterConfiguration;
 
 public class ConfigInfo extends JSONAwareBase {

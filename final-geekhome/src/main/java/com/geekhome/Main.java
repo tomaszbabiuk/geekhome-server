@@ -3,7 +3,7 @@ package com.geekhome;
 import com.geekhome.alarmmodule.AlarmModule;
 import com.geekhome.automationmodule.AutomationModule;
 import com.geekhome.centralheatingmodule.CentralHeatingModule;
-import com.geekhome.common.json.JSONArrayList;
+import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.coremodule.CoreModule;
 import com.geekhome.emailmodule.EmailModule;
 import com.geekhome.extafreemodule.ExtaFreeModule;
