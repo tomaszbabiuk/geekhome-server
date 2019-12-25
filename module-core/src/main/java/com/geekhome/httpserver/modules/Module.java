@@ -4,7 +4,7 @@ import com.geekhome.common.IHardwareManagerAdapterFactory;
 import com.geekhome.common.IMonitorable;
 import com.geekhome.common.configuration.Collector;
 import com.geekhome.common.configuration.Persistable;
-import com.geekhome.coremodule.commands.IAlertService;
+import com.geekhome.common.alerts.IAlertService;
 import com.geekhome.common.configuration.JSONAwareBase;
 import com.geekhome.http.IRequestsDispatcher;
 import com.geekhome.httpserver.ICrudPostHandler;

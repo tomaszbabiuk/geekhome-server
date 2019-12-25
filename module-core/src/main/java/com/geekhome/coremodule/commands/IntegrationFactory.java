@@ -3,7 +3,7 @@ package com.geekhome.coremodule.commands;
 import com.geekhome.common.configuration.*;
 import com.geekhome.common.INamedObject;
 import com.geekhome.common.KeyValue;
-import com.geekhome.common.State;
+import com.geekhome.common.configuration.State;
 import com.geekhome.coremodule.*;
 import com.geekhome.coremodule.automation.ControlMode;
 import com.geekhome.coremodule.automation.EvaluationResult;

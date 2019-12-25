@@ -2,12 +2,14 @@ package com.geekhome.httpserver;
 
 import com.geekhome.common.IMonitorable;
 import com.geekhome.common.OperationMode;
-import com.geekhome.coremodule.commands.IAlertService;
+import com.geekhome.common.alerts.IAlertService;
 import com.geekhome.common.configuration.JSONArrayList;
+import com.geekhome.common.hardwaremanager.IHardwareManager;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.utils.Sleeper;
-import com.geekhome.coremodule.DashboardAlertService;
+import com.geekhome.common.alerts.DashboardAlertService;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.httpserver.modules.IModule;
 import org.json.simple.JSONAware;
@@ -78,13 +80,17 @@ public class SystemInfo {
         setOperationMode(operationMode);
     }
 
-    public void initialize(JSONArrayList<IModule> modules) throws Exception {
+    public void initialize(JSONArrayList<IModule> modules, IHardwareManager hardwareManager) throws Exception {
         _modules = modules;
 
         JSONArrayList<IAlertService> alertServices = new JSONArrayList<>();
         for(IModule module : modules) {
             module.addAlertService(alertServices);
             module.addMonitorable(_monitorables);
+        }
+
+        for (IHardwareManagerAdapter adapter : hardwareManager.getAdapters()) {
+            registerMonitorable(adapter);
         }
         registerAlertServices(alertServices);
     }

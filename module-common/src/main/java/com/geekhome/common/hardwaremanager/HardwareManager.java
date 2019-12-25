@@ -1,11 +1,10 @@
-package com.geekhome.httpserver;
+package com.geekhome.common.hardwaremanager;
 
 import com.geekhome.common.*;
+import com.geekhome.common.alerts.DashboardAlertService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.utils.Sleeper;
-import com.geekhome.coremodule.DashboardAlertService;
-import com.geekhome.common.hardwaremanager.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -335,13 +334,9 @@ public class HardwareManager implements IHardwareManager {
         _invalidateCacheListener = listener;
     }
 
-    public void initialize(ArrayList<IHardwareManagerAdapterFactory> factories, SystemInfo systemInfo) throws Exception {
+    public void initialize(ArrayList<IHardwareManagerAdapterFactory> factories) throws Exception {
         ArrayList<IHardwareManagerAdapter> adapters = createAdapters(factories);
         setAdapters(adapters);
-
-        for (IHardwareManagerAdapter adapter : adapters) {
-            systemInfo.registerMonitorable(adapter);
-        }
     }
 
     private ArrayList<IHardwareManagerAdapter> createAdapters(ArrayList<IHardwareManagerAdapterFactory> adapterFactories) throws Exception {

@@ -10,7 +10,7 @@ import com.geekhome.common.hardwaremanager.OutputPortsCollection;
 import com.geekhome.common.hardwaremanager.TogglePortsCollection;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.common.OperationMode;
-import com.geekhome.httpserver.HardwareManager;
+import com.geekhome.common.hardwaremanager.HardwareManager;
 import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

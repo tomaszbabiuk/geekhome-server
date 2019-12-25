@@ -1,12 +1,13 @@
 package com.geekhome.httpserver.jetty;
 
 import com.geekhome.common.IHardwareManagerAdapterFactory;
-import com.geekhome.httpserver.HardwareManager;
+import com.geekhome.common.hardwaremanager.HardwareManager;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
 import com.geekhome.coremodule.commands.CommandsProcessor;
 import com.geekhome.coremodule.commands.Synchronizer;
 import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.coremodule.CorePortMapper;
-import com.geekhome.coremodule.DashboardAlertService;
+import com.geekhome.common.alerts.DashboardAlertService;
 import com.geekhome.coremodule.MasterConfiguration;
 import com.geekhome.http.jetty.ResourceLocalizationProvider;
 import com.geekhome.coremodule.automation.MasterAutomation;
@@ -62,8 +63,8 @@ public class HomeServerStarter {
                 module.initialize();
             }
 
-            systemInfo.initialize(modules);
-            hardwareManager.initialize(extractAdaptersFactories(modules), systemInfo);
+            hardwareManager.initialize(extractAdaptersFactories(modules));
+            systemInfo.initialize(modules, hardwareManager);
             masterConfiguration.initialize(modules);
             masterAutomation.initialize(modules);
 

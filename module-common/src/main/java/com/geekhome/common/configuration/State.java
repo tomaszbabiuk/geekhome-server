@@ -1,9 +1,8 @@
-package com.geekhome.common;
+package com.geekhome.common.configuration;
 
-import com.geekhome.common.configuration.DescriptiveName;
-import com.geekhome.common.configuration.Persistable;
+import com.geekhome.common.NamedObject;
 
-public class State extends NamedObject  {
+public class State extends NamedObject {
     private StateType _type;
     private boolean _codeRequired;
 

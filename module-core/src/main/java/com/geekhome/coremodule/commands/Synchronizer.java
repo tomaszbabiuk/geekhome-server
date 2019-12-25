@@ -1,6 +1,7 @@
 package com.geekhome.coremodule.commands;
 
 import com.geekhome.common.configuration.*;
+import com.geekhome.common.alerts.DashboardAlertService;
 import com.geekhome.synchronizationmodule.business.SmartEventResult;
 import com.geekhome.coremodule.*;
 import com.geekhome.coremodule.automation.*;

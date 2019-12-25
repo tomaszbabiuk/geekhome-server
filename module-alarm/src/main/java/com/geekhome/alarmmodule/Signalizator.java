@@ -1,11 +1,8 @@
 package com.geekhome.alarmmodule;
 
 import com.geekhome.common.*;
-import com.geekhome.common.configuration.DescriptiveName;
-import com.geekhome.common.configuration.Persistable;
-import com.geekhome.common.configuration.PortRoomMultistateDevice;
+import com.geekhome.common.configuration.*;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.common.configuration.CollectorCollection;
 
 import java.util.Arrays;
 

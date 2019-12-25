@@ -1,7 +1,7 @@
 package com.geekhome.coremodule.automation;
 
 import com.geekhome.common.NamedObject;
-import com.geekhome.common.State;
+import com.geekhome.common.configuration.State;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.configuration.MultistateDevice;

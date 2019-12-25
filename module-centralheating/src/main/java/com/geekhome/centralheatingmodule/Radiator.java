@@ -1,14 +1,8 @@
 package com.geekhome.centralheatingmodule;
 
 import com.geekhome.common.*;
-import com.geekhome.common.configuration.DescriptiveName;
-import com.geekhome.common.configuration.Persistable;
-import com.geekhome.common.configuration.JSONArrayList;
-import com.geekhome.common.configuration.OnOffDeviceBase;
-import com.geekhome.common.configuration.InactiveState;
-import com.geekhome.common.configuration.YesNo;
+import com.geekhome.common.configuration.*;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.common.configuration.CollectorCollection;
 
 public class Radiator extends OnOffDeviceBase {
     private InactiveState _inactiveState;

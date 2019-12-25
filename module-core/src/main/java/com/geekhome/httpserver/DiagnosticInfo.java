@@ -4,7 +4,7 @@ import com.geekhome.common.configuration.Persistable;
 import com.geekhome.common.configuration.JSONAwareBase;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
-import com.geekhome.coremodule.DashboardAlertService;
+import com.geekhome.common.alerts.DashboardAlertService;
 
 public class DiagnosticInfo extends JSONAwareBase {
     private static ILogger _logger = LoggingService.getLogger();

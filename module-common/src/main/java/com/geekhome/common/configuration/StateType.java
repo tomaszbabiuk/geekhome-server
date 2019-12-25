@@ -1,4 +1,4 @@
-package com.geekhome.common;
+package com.geekhome.common.configuration;
 
 public enum StateType {
     ReadOnly(0),

@@ -1,7 +1,8 @@
 package com.geekhome.coremodule;
 
 import com.geekhome.common.configuration.Collector;
-import com.geekhome.coremodule.commands.IAlertService;
+import com.geekhome.common.alerts.DashboardAlertService;
+import com.geekhome.common.alerts.IAlertService;
 import com.geekhome.coremodule.commands.Synchronizer;
 import com.geekhome.coremodule.automation.CoreAutomationModule;
 import com.geekhome.coremodule.automation.MasterAutomation;

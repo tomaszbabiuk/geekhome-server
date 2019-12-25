@@ -8,7 +8,7 @@ import com.geekhome.common.hardwaremanager.*;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.common.OperationMode;
 import com.geekhome.common.NamedObject;
-import com.geekhome.httpserver.HardwareManager;
+import com.geekhome.common.hardwaremanager.HardwareManager;
 import org.openhab.binding.greeair.internal.GreeDevice;
 import org.openhab.binding.greeair.internal.GreeDeviceFinder;
 

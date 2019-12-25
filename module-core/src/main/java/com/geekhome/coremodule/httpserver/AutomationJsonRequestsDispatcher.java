@@ -1,7 +1,7 @@
 package com.geekhome.coremodule.httpserver;
 
 import com.geekhome.common.configuration.*;
-import com.geekhome.common.State;
+import com.geekhome.common.configuration.State;
 import com.geekhome.coremodule.*;
 import com.geekhome.coremodule.automation.EvaluationResult;
 import com.geekhome.coremodule.automation.IDeviceAutomationUnit;

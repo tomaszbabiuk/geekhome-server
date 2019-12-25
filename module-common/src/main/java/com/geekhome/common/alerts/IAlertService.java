@@ -1,4 +1,4 @@
-package com.geekhome.coremodule.commands;
+package com.geekhome.common.alerts;
 
 import com.geekhome.common.INamedObject;
 import com.geekhome.common.configuration.Alert;

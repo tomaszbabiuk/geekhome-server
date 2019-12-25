@@ -2,8 +2,8 @@ package com.geekhome.alarmmodule;
 
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.Persistable;
-import com.geekhome.common.State;
-import com.geekhome.common.StateType;
+import com.geekhome.common.configuration.State;
+import com.geekhome.common.configuration.StateType;
 import com.geekhome.common.configuration.InactiveState;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.common.configuration.CollectorCollection;
