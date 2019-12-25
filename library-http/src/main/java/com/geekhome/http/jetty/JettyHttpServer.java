@@ -11,15 +11,11 @@ import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.handler.AbstractHandler;
-import org.eclipse.jetty.servlets.EventSource;
-import org.eclipse.jetty.util.component.AbstractLifeCycle;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class JettyHttpServer implements IHttpServer {
     private final int _port;
@@ -45,6 +41,9 @@ public class JettyHttpServer implements IHttpServer {
 
         _server = new Server(threadPool);
 
+        _server.setHandler(_handler);
+
+        /*
         //SSL
         ServerConnector connector = new ServerConnector(_server);
         connector.setPort(_port);
@@ -61,6 +60,7 @@ public class JettyHttpServer implements IHttpServer {
 
         //AUTHORIZATION
         LoginService loginService = new HashLoginService("geekHOME", getRealmPath());
+
         _server.addBean(loginService);
         _server.addBean(new CustomErrorHandler());
 
@@ -79,6 +79,8 @@ public class JettyHttpServer implements IHttpServer {
                 connector,
         });
 
+
+         */
         try {
             _server.start();
             _server.join();
@@ -107,21 +109,5 @@ public class JettyHttpServer implements IHttpServer {
         mapping.setPathSpec(mappingPathSpec);
         mapping.setConstraint(constraint);
         return mapping;
-    }
-
-
-
-
-
-    public class MyEventSourceServlet extends org.eclipse.jetty.servlets.EventSourceServlet
-    {
-        @Override
-        protected EventSource newEventSource(HttpServletRequest request)
-        {
-            return new MyEventSource();
-        }
-    }
-
-    private class MyEventSource implements EventSource {
     }
 }

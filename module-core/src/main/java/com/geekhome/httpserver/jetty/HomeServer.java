@@ -14,7 +14,13 @@ import com.geekhome.http.IResponseCache;
 import com.geekhome.httpserver.*;
 import com.geekhome.httpserver.modules.IInvalidateCacheListener;
 import com.geekhome.httpserver.modules.IModule;
+import org.eclipse.jetty.server.handler.HandlerCollection;
+import org.eclipse.jetty.servlet.ServletHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,8 +65,16 @@ public class HomeServer {
         requestsDispatchers.add(new CrudPostRequestsDispatcher(crudPostHandlers, "CONFIG/"));
         requestsDispatchers.add(new CrudPostRequestsDispatcher(crudPostHandlers, "SETTINGS/"));
         requestsDispatchers.add(new ErrorRequestsDispatcher(404, localizationProvider, contentProvider));
-        JettyWebHandler handler = new JettyWebHandler(requestsDispatchers, cache, localizationProvider, contentProvider);
-        return new JettyHttpServer(port, handler);
+        JettyWebHandler webHandler = new JettyWebHandler(requestsDispatchers, cache, localizationProvider, contentProvider);
+
+        ServletHandler servletHolder = new ServletHandler();
+        servletHolder.addServletWithMapping(AutomationEventSourceServlet.class, "/dupa");
+
+        HandlerCollection handlers = new HandlerCollection();
+        handlers.addHandler(webHandler);
+//        handlers.addHandler(servletHolder);
+
+        return new JettyHttpServer(port, webHandler);
     }
 
     public HomeServer(int port, MasterConfiguration masterConfiguration, IHardwareManager hardwareManager,

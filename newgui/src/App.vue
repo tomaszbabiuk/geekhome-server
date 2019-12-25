@@ -55,7 +55,7 @@ export default {
       { title: "Alerts", route: "/alerts", icon: "bell"},
       { title: "Control", route: "/control", icon: "button" },
       { title: "House", route: "/house", icon: "house" },
-      { title: "Discover", route: "/discover", icon: "robot"},
+      { title: "Discover", route: "/discover", icon: "crosshair"},
       { title: "Settings", route: "/settings", icon: "equalizer" },
       { title: "Plugins", route: "/plugins", icon: "plugin" }
     ]
