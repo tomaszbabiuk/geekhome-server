@@ -1,6 +1,7 @@
 package com.geekhome;
 
 
+import com.geekhome.http.jetty.JettyHttpServer;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ContextHandler;
@@ -10,18 +11,19 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.resource.PathResource;
 
+import java.io.IOException;
 import java.nio.file.Paths;
 
 public class Main2 {
     public static void main(String[] args) {
-        Server server = new Server(80);
+//        Server server = new Server(80);
 
         ResourceHandler rh0 = new ResourceHandler();
         rh0.setDirectoriesListed(false);
 
         ContextHandler context2 = new ContextHandler();
         context2.setContextPath("/");
-        context2.setBaseResource(new PathResource(Paths.get("src/main/resources/web")));
+        context2.setBaseResource(new PathResource(Paths.get("src/main/resources/dist")));
         context2.setHandler(rh0);
 
         ServletContextHandler context0 = new ServletContextHandler(ServletContextHandler.SESSIONS);
@@ -35,13 +37,22 @@ public class Main2 {
         ContextHandlerCollection contexts = new ContextHandlerCollection();
         contexts.setHandlers(new Handler[] { context2, context1, context0 });
 
-        server.setHandler(contexts);
 
+        JettyHttpServer server = new JettyHttpServer(80, contexts);
         try {
             server.start();
-            server.join();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+//        server.setHandler(contexts);
+//
+//        try {
+//            server.start();
+//            server.join();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }

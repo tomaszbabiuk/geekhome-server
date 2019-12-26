@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <packaging>jar</packaging>
     <groupId>geekhome.server</groupId>
-    <artifactId>final-geekhome2</artifactId>
+    <artifactId>module-core-vuetify</artifactId>
     <version>1.0</version>
+    <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>geekhome.server</groupId>
+            <artifactId>module-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>geekhome.server</groupId>
+            <artifactId>module-synchronization</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>geekhome.server</groupId>
+            <artifactId>library-http</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>geekhome.server</groupId>
+            <artifactId>library-moquette</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.5</version>
+        </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-http</artifactId>
@@ -34,23 +65,6 @@
             <artifactId>jetty-util</artifactId>
             <version>${jetty_version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-servlets</artifactId>
-            <version>${jetty_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-servlet</artifactId>
-            <version>${jetty_version}</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>geekhome.server</groupId>
-            <artifactId>module-core-vuetify</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -62,19 +76,6 @@
                 <configuration>
                     <source>8</source>
                     <target>8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.geekhome.Main</mainClass>
-                        </manifest>
-                    </archive>
                 </configuration>
             </plugin>
             <plugin>
@@ -91,6 +92,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <jetty_version>9.4.24.v20191120</jetty_version>
+        <jetty_version>9.4.2.v20170220</jetty_version>
     </properties>
 </project>

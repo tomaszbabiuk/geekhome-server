@@ -1,7 +1,7 @@
-package com.geekhome.http.jetty;
+package com.geekhome.coremodule.httpserver;
 
 import com.geekhome.http.IHttpServer;
-import com.geekhome.http.IRequestsDispatcher;
+import com.geekhome.http.jetty.CustomErrorHandler;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
