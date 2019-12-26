@@ -5,10 +5,10 @@ import com.geekhome.alarmmodule.AlarmType;
 import com.geekhome.alarmmodule.AlarmZone;
 import com.geekhome.alarmmodule.Signalizator;
 import com.geekhome.common.configuration.Duration;
-import com.geekhome.coremodule.automation.ControlMode;
-import com.geekhome.coremodule.automation.ICalculableAutomationUnit;
-import com.geekhome.coremodule.automation.MasterAutomation;
-import com.geekhome.coremodule.automation.SwitchableAutomationUnit;
+import com.geekhome.common.automation.ControlMode;
+import com.geekhome.common.automation.ICalculableAutomationUnit;
+import com.geekhome.common.automation.MasterAutomation;
+import com.geekhome.common.automation.SwitchableAutomationUnit;
 import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.http.ILocalizationProvider;
 

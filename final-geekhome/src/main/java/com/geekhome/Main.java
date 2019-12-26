@@ -21,11 +21,12 @@ public class Main {
     public static void main(String[] args) {
         final int port = HomeServerStarter.extractPortFromArgs(args);
 
-        HomeServerStarter.start(port, (hardwareManager, automationSettings, localizationProvider, systemInfo, masterConfiguration, masterAutomation, synchronizer, commandsProcessor, dashboardAlertService, mqttBroker) -> {
+        HomeServerStarter.start(port, (hardwareManager, automationSettings, localizationProvider, systemInfo, masterConfiguration,
+                                       masterAutomation, synchronizer, commandsProcessor, dashboardAlertService, mqttBroker, navigationTree) -> {
             JSONArrayList<IModule> modules = new JSONArrayList<>();
             modules.add(new FullEditionAdaptationModule());
-            modules.add(new CoreModule(localizationProvider, systemInfo, masterConfiguration,       masterAutomation, hardwareManager,
-                    automationSettings, synchronizer, dashboardAlertService));
+            modules.add(new CoreModule(localizationProvider, systemInfo, masterConfiguration, masterAutomation, hardwareManager,
+                    automationSettings, synchronizer, dashboardAlertService, navigationTree));
             modules.add(new UsersModule(localizationProvider));
             modules.add(new HardwareManagerModule(true, localizationProvider, hardwareManager));
             modules.add(new LightsModule(localizationProvider, masterConfiguration, hardwareManager, automationSettings));

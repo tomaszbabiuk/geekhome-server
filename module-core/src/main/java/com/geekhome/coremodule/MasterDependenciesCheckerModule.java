@@ -2,9 +2,9 @@ package com.geekhome.coremodule;
 
 import com.geekhome.common.configuration.*;
 import com.geekhome.common.configuration.CollectorCollection;
-import com.geekhome.httpserver.modules.DependenciesCheckerModule;
-import com.geekhome.httpserver.modules.Dependency;
-import com.geekhome.httpserver.modules.DependencyType;
+import com.geekhome.common.configuration.DependenciesCheckerModule;
+import com.geekhome.common.configuration.Dependency;
+import com.geekhome.common.configuration.DependencyType;
 
 import java.util.ArrayList;
 

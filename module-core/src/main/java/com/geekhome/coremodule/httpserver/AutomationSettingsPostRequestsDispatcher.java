@@ -1,6 +1,6 @@
 package com.geekhome.coremodule.httpserver;
 
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.QueryString;

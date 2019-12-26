@@ -1,9 +1,12 @@
 package com.geekhome.lightsmodule;
 
 
+import com.geekhome.common.automation.IAutomationModule;
 import com.geekhome.common.configuration.Collector;
-import com.geekhome.coremodule.MasterConfiguration;
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.configuration.DependenciesCheckerModule;
+import com.geekhome.common.configuration.IConfigurationValidator;
+import com.geekhome.common.configuration.MasterConfiguration;
+import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.http.Resource;
 import com.geekhome.coremodule.httpserver.CrudPostHandler;
 import com.geekhome.common.hardwaremanager.IHardwareManager;

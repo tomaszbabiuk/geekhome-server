@@ -11,20 +11,21 @@ import com.geekhome.common.utils.FileFinder;
 import com.geekhome.common.utils.IFileFoundListener;
 import com.geekhome.coremodule.CoreModule;
 import com.geekhome.common.alerts.DashboardAlertService;
-import com.geekhome.coremodule.MasterConfiguration;
+import com.geekhome.common.configuration.MasterConfiguration;
 import com.geekhome.emailmodule.EmailModule;
 import com.geekhome.extafreemodule.ExtaFreeModule;
 import com.geekhome.hardwaremanagermodule.HardwareManagerModule;
 import com.geekhome.http.Resource;
 import com.geekhome.http.jetty.ResourceLocalizationProvider;
-import com.geekhome.coremodule.automation.MasterAutomation;
-import com.geekhome.coremodule.settings.AutomationSettings;
-import com.geekhome.coremodule.settings.TextFileAutomationSettingsPersister;
+import com.geekhome.common.automation.MasterAutomation;
+import com.geekhome.common.settings.AutomationSettings;
+import com.geekhome.common.settings.TextFileAutomationSettingsPersister;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.common.OperationMode;
-import com.geekhome.httpserver.SystemInfo;
+import com.geekhome.common.automation.SystemInfo;
 import com.geekhome.httpserver.modules.IModule;
+import com.geekhome.httpserver.modules.NavigationTree;
 import com.geekhome.lightsmodule.LightsModule;
 import com.geekhome.mqttmodule.MqttModule;
 import com.geekhome.onewiremodule.OneWireModule;
@@ -55,17 +56,18 @@ public class ResourcesCleanupTool {
             ILocalizationProvider localizationProvider = new ResourceLocalizationProvider();
             DashboardAlertService dashboardAlertService = new DashboardAlertService(localizationProvider);
             HardwareManager hardwareManager = new HardwareManager(dashboardAlertService);
-            SystemInfo systemInfo = new SystemInfo(OperationMode.Diagnostics, localizationProvider, dashboardAlertService);
+            SystemInfo systemInfo = new SystemInfo(OperationMode.Diagnostics, dashboardAlertService);
+            NavigationTree navigationTree = new NavigationTree();
             MasterConfiguration masterConfiguration = new MasterConfiguration(localizationProvider);
             MasterAutomation masterAutomation = new MasterAutomation(masterConfiguration, hardwareManager,
-                    systemInfo, dashboardAlertService, localizationProvider);
+                    systemInfo, dashboardAlertService);
             CommandsProcessor commandsProcessor = new CommandsProcessor(systemInfo, masterConfiguration,
                     masterAutomation, localizationProvider);
             Synchronizer synchronizer = new Synchronizer(masterConfiguration, masterAutomation, automationSettings,
                     localizationProvider, systemInfo, commandsProcessor, dashboardAlertService);
             JSONArrayList<IModule> modules = buildModules(hardwareManager, automationSettings,
                     localizationProvider, systemInfo, masterConfiguration, masterAutomation,
-                    synchronizer, commandsProcessor, dashboardAlertService);
+                    synchronizer, commandsProcessor, dashboardAlertService, navigationTree);
 
             _warnings = 0;
             for (IModule module : modules) {
@@ -170,10 +172,11 @@ public class ResourcesCleanupTool {
                                                        ILocalizationProvider localizationProvider, SystemInfo systemInfo,
                                                        MasterConfiguration masterConfiguration, MasterAutomation masterAutomation,
                                                        Synchronizer synchronizer, CommandsProcessor commandsProcessor,
-                                                       DashboardAlertService dashboardAlertService) throws Exception {
+                                                       DashboardAlertService dashboardAlertService,
+                                                       NavigationTree navigationTree) throws Exception {
         JSONArrayList<IModule> modules = new JSONArrayList<>();
         modules.add(new CoreModule(localizationProvider, systemInfo, masterConfiguration, masterAutomation, hardwareManager,
-                automationSettings, synchronizer, dashboardAlertService));
+                automationSettings, synchronizer, dashboardAlertService, navigationTree));
         modules.add(new UsersModule(localizationProvider));
         modules.add(new HardwareManagerModule(true, localizationProvider, hardwareManager));
         modules.add(new LightsModule(localizationProvider, masterConfiguration, hardwareManager, automationSettings));

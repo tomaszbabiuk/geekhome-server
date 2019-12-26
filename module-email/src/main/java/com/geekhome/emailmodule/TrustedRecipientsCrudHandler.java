@@ -1,6 +1,6 @@
 package com.geekhome.emailmodule;
 
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.http.INameValueSet;
 import com.geekhome.http.QueryString;
 import com.geekhome.http.ResponseBase;

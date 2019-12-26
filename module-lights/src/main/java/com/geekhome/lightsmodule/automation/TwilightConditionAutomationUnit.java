@@ -1,7 +1,7 @@
 package com.geekhome.lightsmodule.automation;
 
 import com.geekhome.lightsmodule.TwilightCondition;
-import com.geekhome.coremodule.automation.EvaluableAutomationUnit;
+import com.geekhome.common.automation.EvaluableAutomationUnit;
 
 import java.util.Calendar;
 import java.util.TimeZone;

@@ -4,8 +4,8 @@ import com.geekhome.centralheatingmodule.ThermostatCondition;
 import com.geekhome.common.EqualityOperator;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
-import com.geekhome.coremodule.automation.EvaluableAutomationUnit;
-import com.geekhome.coremodule.automation.MasterAutomation;
+import com.geekhome.common.automation.EvaluableAutomationUnit;
+import com.geekhome.common.automation.MasterAutomation;
 
 import java.util.Calendar;
 

@@ -11,7 +11,7 @@ import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
 import com.geekhome.httpserver.ConfigInfo;
 import com.geekhome.httpserver.DiagnosticInfo;
 import com.geekhome.httpserver.JsonResponse;
-import com.geekhome.httpserver.modules.Dependency;
+import com.geekhome.common.configuration.Dependency;
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 

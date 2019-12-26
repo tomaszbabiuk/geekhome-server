@@ -1,11 +1,11 @@
 package com.geekhome.ventilationmodule.automation;
 
-import com.geekhome.coremodule.automation.*;
+import com.geekhome.common.automation.*;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.common.configuration.CollectorCollection;
-import com.geekhome.httpserver.modules.IAutomationModule;
+import com.geekhome.common.automation.IAutomationModule;
 import com.geekhome.synchronizationmodule.business.SmartEvent;
 import com.geekhome.ventilationmodule.Recuperator;
 import com.geekhome.ventilationmodule.VentilationConfiguration;

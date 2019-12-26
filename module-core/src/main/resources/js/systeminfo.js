@@ -1,5 +1,4 @@
 var SI = {
-    modules: null,
     isDateReliable: null,
     alertServices: null,
 
@@ -16,13 +15,6 @@ var SI = {
             success: callback,
             async: true
         });
-    },
-
-    GetModules: function () {
-        if (this.modules == null) {
-            this.modules = ajaxInit('/systeminfo/modules.json');
-        }
-        return this.modules;
     },
 
     GetAlertServices: function () {
@@ -69,20 +61,5 @@ var SI = {
             success: callback,
             async: true
         });
-    },
-
-	GetUnits: function(category) {
-		var result = [];
-		for (var iModule in this.GetModules()) {
-			var module = this.GetModules()[iModule];
-            for (var iUnit in module.Units) {
-				var unit = module.Units[iUnit];
-                if (unit.Category == category) {
-					result.push(unit);
-                }
-            }
-		}
-
-		return result;
-	}
+    }
 }

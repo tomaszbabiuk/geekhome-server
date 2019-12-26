@@ -1,10 +1,11 @@
 package com.geekhome.httpserver.jetty;
 
 import com.geekhome.common.configuration.JSONArrayList;
+import com.geekhome.common.automation.SystemInfo;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.http.jetty.*;
-import com.geekhome.coremodule.MasterConfiguration;
+import com.geekhome.common.configuration.MasterConfiguration;
 import com.geekhome.coremodule.PhotosDispatcher;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.IHttpServer;

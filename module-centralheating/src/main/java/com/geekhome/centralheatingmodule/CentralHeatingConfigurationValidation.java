@@ -1,6 +1,6 @@
 package com.geekhome.centralheatingmodule;
 
-import com.geekhome.coremodule.MasterConfiguration;
+import com.geekhome.common.configuration.MasterConfiguration;
 import com.geekhome.coremodule.MasterConfigurationValidation;
 
 public class CentralHeatingConfigurationValidation extends MasterConfigurationValidation {

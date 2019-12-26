@@ -2,11 +2,12 @@ package com.geekhome.automationmodule;
 
 import com.geekhome.automationmodule.automation.AutomationAutomationModule;
 import com.geekhome.automationmodule.httpserver.AutomationJsonRequestsDispatcher;
+import com.geekhome.common.automation.IAutomationModule;
 import com.geekhome.common.configuration.Collector;
-import com.geekhome.coremodule.MasterConfiguration;
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.configuration.MasterConfiguration;
+import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.http.Resource;
-import com.geekhome.coremodule.automation.MasterAutomation;
+import com.geekhome.common.automation.MasterAutomation;
 import com.geekhome.coremodule.httpserver.CrudPostHandler;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.IRequestsDispatcher;

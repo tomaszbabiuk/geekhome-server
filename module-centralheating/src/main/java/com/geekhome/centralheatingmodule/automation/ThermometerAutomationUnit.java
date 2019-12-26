@@ -1,7 +1,7 @@
 package com.geekhome.centralheatingmodule.automation;
 
 import com.geekhome.centralheatingmodule.Thermometer;
-import com.geekhome.coremodule.automation.EvaluationResult;
+import com.geekhome.common.automation.EvaluationResult;
 import com.geekhome.common.hardwaremanager.IInputPort;
 import com.geekhome.common.hardwaremanager.IPort;
 

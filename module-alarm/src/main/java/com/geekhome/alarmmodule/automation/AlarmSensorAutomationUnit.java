@@ -3,7 +3,7 @@ package com.geekhome.alarmmodule.automation;
 import com.geekhome.alarmmodule.AlarmSensor;
 import com.geekhome.common.configuration.Duration;
 import com.geekhome.common.configuration.InactiveState;
-import com.geekhome.coremodule.automation.*;
+import com.geekhome.common.automation.*;
 import com.geekhome.common.hardwaremanager.IInputPort;
 import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;

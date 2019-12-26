@@ -4,9 +4,9 @@ import com.geekhome.centralheatingmodule.CirculationPump;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.configuration.Duration;
-import com.geekhome.coremodule.automation.OnOffDeviceAutomationUnit;
-import com.geekhome.coremodule.automation.ControlMode;
-import com.geekhome.coremodule.automation.MasterAutomation;
+import com.geekhome.common.automation.OnOffDeviceAutomationUnit;
+import com.geekhome.common.automation.ControlMode;
+import com.geekhome.common.automation.MasterAutomation;
 import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.http.ILocalizationProvider;
 

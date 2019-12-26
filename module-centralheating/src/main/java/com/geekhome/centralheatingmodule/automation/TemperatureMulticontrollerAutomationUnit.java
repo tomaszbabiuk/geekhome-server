@@ -1,10 +1,10 @@
 package com.geekhome.centralheatingmodule.automation;
 
 import com.geekhome.common.configuration.Multicontroller;
-import com.geekhome.coremodule.automation.DeviceAutomationUnit;
-import com.geekhome.coremodule.automation.EvaluationResult;
-import com.geekhome.coremodule.automation.ModeAutomationUnit;
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.automation.DeviceAutomationUnit;
+import com.geekhome.common.automation.EvaluationResult;
+import com.geekhome.common.automation.ModeAutomationUnit;
+import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.common.hardwaremanager.IPort;
 
 import java.util.ArrayList;

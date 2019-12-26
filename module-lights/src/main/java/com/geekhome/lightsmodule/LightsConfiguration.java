@@ -4,7 +4,7 @@ import com.geekhome.common.*;
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.ICondition;
 import com.geekhome.common.configuration.IDevice;
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.http.INameValueSet;
 import com.geekhome.common.configuration.Collector;
 import com.geekhome.common.configuration.CollectorCollection;

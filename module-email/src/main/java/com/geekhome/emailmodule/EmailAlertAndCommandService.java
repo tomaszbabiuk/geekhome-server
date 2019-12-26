@@ -6,9 +6,9 @@ import com.geekhome.coremodule.commands.*;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.configuration.Alert;
-import com.geekhome.coremodule.automation.IDeviceAutomationUnit;
-import com.geekhome.coremodule.automation.MasterAutomation;
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.automation.IDeviceAutomationUnit;
+import com.geekhome.common.automation.MasterAutomation;
+import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.http.ILocalizationProvider;
 
 import javax.mail.Address;

@@ -2,8 +2,8 @@ package com.geekhome.alarmmodule.automation;
 
 import com.geekhome.alarmmodule.MagneticDetector;
 import com.geekhome.common.KeyValue;
-import com.geekhome.coremodule.automation.EvaluationResult;
-import com.geekhome.coremodule.automation.MasterAutomation;
+import com.geekhome.common.automation.EvaluationResult;
+import com.geekhome.common.automation.MasterAutomation;
 import com.geekhome.common.hardwaremanager.IInputPort;
 import com.geekhome.http.ILocalizationProvider;
 

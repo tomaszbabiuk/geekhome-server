@@ -2,12 +2,15 @@ package com.geekhome.centralheatingmodule;
 
 import com.geekhome.centralheatingmodule.automation.CentralHeatingAutomationModule;
 import com.geekhome.centralheatingmodule.httpserver.CentralHeatingJsonRequestsDispatcher;
+import com.geekhome.common.automation.IAutomationModule;
 import com.geekhome.common.configuration.Collector;
-import com.geekhome.coremodule.MasterConfiguration;
+import com.geekhome.common.configuration.DependenciesCheckerModule;
+import com.geekhome.common.configuration.IConfigurationValidator;
+import com.geekhome.common.configuration.MasterConfiguration;
 import com.geekhome.http.Resource;
-import com.geekhome.coremodule.automation.MasterAutomation;
+import com.geekhome.common.automation.MasterAutomation;
 import com.geekhome.coremodule.httpserver.CrudPostHandler;
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.IRequestsDispatcher;
 import com.geekhome.httpserver.ICrudPostHandler;

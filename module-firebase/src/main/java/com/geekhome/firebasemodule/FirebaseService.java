@@ -6,7 +6,7 @@ import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.utils.Sleeper;
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.firebasemodule.sse.FirebaseSse;
 import com.geekhome.firebasemodule.sse.FirebaseSseListener;
 import com.geekhome.http.ILocalizationProvider;

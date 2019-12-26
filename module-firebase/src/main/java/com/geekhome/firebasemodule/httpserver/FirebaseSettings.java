@@ -1,6 +1,6 @@
 package com.geekhome.firebasemodule.httpserver;
 
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.settings.AutomationSettings;
 
 public class FirebaseSettings {
     private final String _host;

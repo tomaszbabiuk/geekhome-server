@@ -2,10 +2,9 @@ package com.geekhome.coremodule.httpserver;
 
 import com.geekhome.common.configuration.*;
 import com.geekhome.common.configuration.State;
-import com.geekhome.coremodule.*;
-import com.geekhome.coremodule.automation.EvaluationResult;
-import com.geekhome.coremodule.automation.IDeviceAutomationUnit;
-import com.geekhome.coremodule.automation.MasterAutomation;
+import com.geekhome.common.automation.EvaluationResult;
+import com.geekhome.common.automation.IDeviceAutomationUnit;
+import com.geekhome.common.automation.MasterAutomation;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.ILocalizationProvider;

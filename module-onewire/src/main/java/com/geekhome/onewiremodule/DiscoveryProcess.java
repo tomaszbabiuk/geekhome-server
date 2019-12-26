@@ -9,7 +9,7 @@ import com.dalsemi.onewire.container.OneWireContainer28;
 import com.dalsemi.onewire.container.SwitchContainer;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.settings.AutomationSettings;
 
 import java.util.ArrayList;
 import java.util.Enumeration;

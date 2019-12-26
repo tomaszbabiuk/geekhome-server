@@ -1,6 +1,6 @@
 package com.geekhome.ventilationmodule.automation;
 
-import com.geekhome.coremodule.automation.*;
+import com.geekhome.common.automation.*;
 import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;

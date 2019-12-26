@@ -2,7 +2,7 @@ package com.geekhome.automationmodule.automation;
 
 import com.geekhome.automationmodule.NfcCondition;
 import com.geekhome.common.configuration.Duration;
-import com.geekhome.coremodule.automation.EvaluableAutomationUnit;
+import com.geekhome.common.automation.EvaluableAutomationUnit;
 
 import java.util.Calendar;
 

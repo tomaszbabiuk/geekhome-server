@@ -4,7 +4,7 @@ import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
 import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.IConfigurationValidator;
+import com.geekhome.common.configuration.IConfigurationValidator;
 
 public class OneWireConfigurationValidator implements IConfigurationValidator {
     private ILocalizationProvider _localizationProvider;

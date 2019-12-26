@@ -1,7 +1,7 @@
 package com.geekhome.alarmmodule.automation;
 
 import com.geekhome.alarmmodule.AlarmSensor;
-import com.geekhome.coremodule.automation.ControlMode;
+import com.geekhome.common.automation.ControlMode;
 import com.geekhome.common.hardwaremanager.IInputPort;
 import com.geekhome.http.ILocalizationProvider;
 

@@ -1,8 +1,8 @@
 package com.geekhome.centralheatingmodule.automation;
 
 import com.geekhome.centralheatingmodule.AveragingThermometer;
-import com.geekhome.coremodule.automation.EvaluationResult;
-import com.geekhome.coremodule.automation.MasterAutomation;
+import com.geekhome.common.automation.EvaluationResult;
+import com.geekhome.common.automation.MasterAutomation;
 import com.geekhome.common.hardwaremanager.IPort;
 
 import java.util.ArrayList;

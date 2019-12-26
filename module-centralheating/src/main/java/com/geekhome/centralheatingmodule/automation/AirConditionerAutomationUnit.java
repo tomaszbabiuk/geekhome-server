@@ -1,9 +1,9 @@
 package com.geekhome.centralheatingmodule.automation;
 
 import com.geekhome.centralheatingmodule.AirConditioner;
-import com.geekhome.coremodule.automation.ControlMode;
-import com.geekhome.coremodule.automation.MasterAutomation;
-import com.geekhome.coremodule.automation.MultistateDeviceAutomationUnit;
+import com.geekhome.common.automation.ControlMode;
+import com.geekhome.common.automation.MasterAutomation;
+import com.geekhome.common.automation.MultistateDeviceAutomationUnit;
 import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.http.ILocalizationProvider;

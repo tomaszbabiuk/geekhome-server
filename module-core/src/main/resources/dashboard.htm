@@ -463,7 +463,7 @@
 
     function createUnitsNavItems(category) {
         var result = [];
-        var units = SI.GetUnits(category);
+        var units = NT.GetUnits(category);
         for (var iUnit in units) {
             var unit = units[iUnit];
             result.push(createUnitNavItem(unit));

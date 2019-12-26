@@ -1,6 +1,6 @@
 package com.geekhome.emailmodule.httpserver;
 
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.settings.AutomationSettings;
 import org.eclipse.jetty.util.security.Password;
 
 public class EmailSettings {

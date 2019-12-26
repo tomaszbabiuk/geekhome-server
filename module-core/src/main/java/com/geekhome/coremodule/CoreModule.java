@@ -1,20 +1,23 @@
 package com.geekhome.coremodule;
 
+import com.geekhome.common.automation.IAutomationModule;
 import com.geekhome.common.configuration.Collector;
 import com.geekhome.common.alerts.DashboardAlertService;
 import com.geekhome.common.alerts.IAlertService;
+import com.geekhome.common.configuration.DependenciesCheckerModule;
+import com.geekhome.common.configuration.MasterConfiguration;
 import com.geekhome.coremodule.commands.Synchronizer;
-import com.geekhome.coremodule.automation.CoreAutomationModule;
-import com.geekhome.coremodule.automation.MasterAutomation;
+import com.geekhome.common.automation.CoreAutomationModule;
+import com.geekhome.common.automation.MasterAutomation;
 import com.geekhome.coremodule.httpserver.*;
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.IRequestsDispatcher;
 import com.geekhome.http.Resource;
 import com.geekhome.httpserver.ICrudPostHandler;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.http.jetty.RedirectionResponse;
-import com.geekhome.httpserver.SystemInfo;
+import com.geekhome.common.automation.SystemInfo;
 import com.geekhome.httpserver.modules.*;
 import com.geekhome.httpserver.modules.Module;
 
@@ -30,10 +33,11 @@ public class CoreModule extends Module {
     private AutomationSettings _settings;
     private Synchronizer _synchronizer;
     private DashboardAlertService _dashboardAlertService;
+    private NavigationTree _navigationTree;
 
     public CoreModule(ILocalizationProvider localizationProvider, SystemInfo systemInfo, MasterConfiguration masterConfiguration,
                       MasterAutomation masterAutomation, IHardwareManager hardwareManager, AutomationSettings settings,
-                      Synchronizer synchronizer, DashboardAlertService dashboardAlertService) {
+                      Synchronizer synchronizer, DashboardAlertService dashboardAlertService, NavigationTree navigationTree) {
         _localizationProvider = localizationProvider;
         _systemInfo = systemInfo;
         _masterAutomation = masterAutomation;
@@ -42,6 +46,7 @@ public class CoreModule extends Module {
         _settings = settings;
         _synchronizer = synchronizer;
         _dashboardAlertService = dashboardAlertService;
+        _navigationTree = navigationTree;
     }
 
     @Override
@@ -564,6 +569,7 @@ public class CoreModule extends Module {
         dispatchers.add(new BackupJsonRequestsDispatcher(_masterConfiguration));
         dispatchers.add(new SynchronizeJsonRequestsDispatcher(_synchronizer, _localizationProvider));
         dispatchers.add(new SystemInfoJsonRequestsDispatcher(_systemInfo, _settings));
+        dispatchers.add(new NavigationTreeJsonRequestsDispatcher(_navigationTree));
         dispatchers.add(new SystemInfoPostRequestsDispatcher(_systemInfo));
         dispatchers.add(new MasterConfigurationPostRequestsDispatcher(_masterConfiguration));
         dispatchers.add(new AutomationPostRequestsDispatcher(_masterAutomation));
@@ -678,6 +684,7 @@ public class CoreModule extends Module {
                         "JS\\CORE.RESOURCES.JS",
                         "JS\\FUNCTIONS.JS",
                         "JS\\SYSTEMINFO.JS",
+                        "JS\\NAVIGATIONTREE.JS",
                         "JS\\CORECONFIG.JS",
                         "JS\\BACKUPS.JS",
                         "JS\\ACTIVATION.JS"

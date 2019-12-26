@@ -1,7 +1,7 @@
 package com.geekhome.coremodule.commands;
 
 import com.geekhome.common.configuration.IDevice;
-import com.geekhome.coremodule.automation.IDeviceAutomationUnit;
+import com.geekhome.common.automation.IDeviceAutomationUnit;
 
 import java.util.ArrayList;
 

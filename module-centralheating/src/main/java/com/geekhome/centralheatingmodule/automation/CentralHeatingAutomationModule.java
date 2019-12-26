@@ -2,14 +2,14 @@ package com.geekhome.centralheatingmodule.automation;
 
 import com.geekhome.centralheatingmodule.*;
 import com.geekhome.common.configuration.Multicontroller;
-import com.geekhome.coremodule.automation.*;
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.automation.*;
+import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.common.hardwaremanager.IInputPort;
 import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.common.configuration.CollectorCollection;
-import com.geekhome.httpserver.modules.IAutomationModule;
+import com.geekhome.common.automation.IAutomationModule;
 import com.geekhome.synchronizationmodule.business.SmartEvent;
 
 import java.util.ArrayList;

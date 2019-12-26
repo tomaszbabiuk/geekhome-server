@@ -1,6 +1,7 @@
 package com.geekhome.hardwaremanagermodule;
 
 import com.geekhome.common.IHardwareManagerAdapterFactory;
+import com.geekhome.common.configuration.IConfigurationValidator;
 import com.geekhome.http.Resource;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.hardwaremanagermodule.httpserver.HardwareManagerDebugPostRequestsDispatcher;

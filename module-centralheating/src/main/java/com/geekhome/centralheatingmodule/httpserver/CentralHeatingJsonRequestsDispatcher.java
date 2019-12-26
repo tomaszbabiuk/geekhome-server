@@ -2,7 +2,7 @@ package com.geekhome.centralheatingmodule.httpserver;
 
 import com.geekhome.centralheatingmodule.CentralHeatingConfiguration;
 import com.geekhome.centralheatingmodule.CentralHeatingConfigurationValidation;
-import com.geekhome.coremodule.MasterConfiguration;
+import com.geekhome.common.configuration.MasterConfiguration;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.jetty.JsonRequestsDispatcherBase;

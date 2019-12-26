@@ -1,23 +1,26 @@
 package com.geekhome.httpserver.jetty;
 
 import com.geekhome.common.IHardwareManagerAdapterFactory;
+import com.geekhome.common.IMonitorable;
+import com.geekhome.common.alerts.IAlertService;
+import com.geekhome.common.automation.IAutomationHook;
+import com.geekhome.common.automation.IAutomationModule;
+import com.geekhome.common.configuration.*;
 import com.geekhome.common.hardwaremanager.HardwareManager;
-import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
 import com.geekhome.coremodule.commands.CommandsProcessor;
 import com.geekhome.coremodule.commands.Synchronizer;
-import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.coremodule.CorePortMapper;
 import com.geekhome.common.alerts.DashboardAlertService;
-import com.geekhome.coremodule.MasterConfiguration;
 import com.geekhome.http.jetty.ResourceLocalizationProvider;
-import com.geekhome.coremodule.automation.MasterAutomation;
-import com.geekhome.coremodule.settings.AutomationSettings;
-import com.geekhome.coremodule.settings.TextFileAutomationSettingsPersister;
+import com.geekhome.common.automation.MasterAutomation;
+import com.geekhome.common.settings.AutomationSettings;
+import com.geekhome.common.settings.TextFileAutomationSettingsPersister;
 import com.geekhome.common.hardwaremanager.IPortMapper;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.common.OperationMode;
-import com.geekhome.httpserver.SystemInfo;
+import com.geekhome.common.automation.SystemInfo;
 import com.geekhome.httpserver.modules.IModule;
+import com.geekhome.httpserver.modules.NavigationTree;
 import com.geekhome.moquettemodule.MoquetteBroker;
 import com.geekhome.moquettemodule.MqttBroker;
 
@@ -30,7 +33,7 @@ public class HomeServerStarter {
                                             MasterConfiguration masterConfiguration, MasterAutomation masterAutomation,
                                             Synchronizer synchronizer, CommandsProcessor commandsProcessor,
                                             DashboardAlertService dashboardAlertService,
-                                            MqttBroker mqttBroker) throws Exception;
+                                            MqttBroker mqttBroker, NavigationTree navigationTree) throws Exception;
     }
 
     public static void start(int port, BuildModulesDelegate buildModulesDelegate) {
@@ -40,9 +43,10 @@ public class HomeServerStarter {
             ILocalizationProvider localizationProvider = new ResourceLocalizationProvider();
             DashboardAlertService dashboardAlertService = new DashboardAlertService(localizationProvider);
             HardwareManager hardwareManager = new HardwareManager(dashboardAlertService);
-            SystemInfo systemInfo = new SystemInfo(OperationMode.Diagnostics, localizationProvider, dashboardAlertService);
+            SystemInfo systemInfo = new SystemInfo(OperationMode.Diagnostics, dashboardAlertService);
+            NavigationTree navigationTree = new NavigationTree();
             final MasterConfiguration masterConfiguration = new MasterConfiguration(localizationProvider);
-            final MasterAutomation masterAutomation = new MasterAutomation(masterConfiguration, hardwareManager, systemInfo, dashboardAlertService, localizationProvider);
+            final MasterAutomation masterAutomation = new MasterAutomation(masterConfiguration, hardwareManager, systemInfo, dashboardAlertService);
             CommandsProcessor commandsProcessor = new CommandsProcessor(systemInfo, masterConfiguration, masterAutomation, localizationProvider);
             Synchronizer synchronizer = new Synchronizer(masterConfiguration, masterAutomation, automationSettings,
                     localizationProvider, systemInfo, commandsProcessor, dashboardAlertService);
@@ -53,7 +57,9 @@ public class HomeServerStarter {
             JSONArrayList<IModule> modules = buildModulesDelegate.buildModules(hardwareManager,
                     automationSettings, localizationProvider, systemInfo, masterConfiguration,
                     masterAutomation, synchronizer, commandsProcessor, dashboardAlertService,
-                    mqttBroker);
+                    mqttBroker, navigationTree);
+
+            navigationTree.setModules(modules);
 
             for (IModule module : modules) {
                 localizationProvider.load(module.getResources());
@@ -64,9 +70,10 @@ public class HomeServerStarter {
             }
 
             hardwareManager.initialize(extractAdaptersFactories(modules));
-            systemInfo.initialize(modules, hardwareManager);
-            masterConfiguration.initialize(modules);
-            masterAutomation.initialize(modules);
+            systemInfo.initialize(extractMonitorables(modules), extractAlertServices(modules));
+            masterConfiguration.initialize(extractDependenciesCheckers(modules), extractCollectors(modules),
+                    extractConfigurationValidators(modules));
+            masterAutomation.initialize(extractAutomationModules(modules), extractAutomationHooks(modules));
 
             hardwareManager.discover();
 
@@ -90,12 +97,84 @@ public class HomeServerStarter {
         }
     }
 
+    //TODO: refactor all extract functions to one lambda
+    private static ArrayList<IAutomationModule> extractAutomationModules(JSONArrayList<IModule> modules) {
+        ArrayList<IAutomationModule> result = new ArrayList<>();
+
+        for (IModule module : modules) {
+            addToCollectionIfNotNull(module.createAutomationModule(), result);
+        }
+
+        return result;
+    }
+
+    private static ArrayList<IAutomationHook> extractAutomationHooks(JSONArrayList<IModule> modules) {
+        ArrayList<IAutomationHook> result = new ArrayList<>();
+
+        for (IModule module : modules) {
+            addToCollectionIfNotNull(module.createAutomationHook(), result);
+        }
+
+        return result;
+    }
+
     private static ArrayList<IHardwareManagerAdapterFactory> extractAdaptersFactories(JSONArrayList<IModule> modules) {
         ArrayList<IHardwareManagerAdapterFactory> factories = new ArrayList<>();
         for (IModule module : modules) {
             module.addSerialAdaptersFactory(factories);
         }
         return factories;
+    }
+
+    private static JSONArrayList<IAlertService> extractAlertServices(JSONArrayList<IModule> modules) throws Exception {
+        JSONArrayList<IAlertService> result = new JSONArrayList<>();
+        for (IModule module : modules) {
+            module.addAlertService(result);
+        }
+
+        return result;
+    }
+
+    private static JSONArrayList<IMonitorable> extractMonitorables(JSONArrayList<IModule> modules) throws Exception {
+        JSONArrayList<IMonitorable> result = new JSONArrayList<>();
+        for (IModule module : modules) {
+            module.addMonitorable(result);
+        }
+
+        return result;
+    }
+
+    private static ArrayList<IConfigurationValidator> extractConfigurationValidators(ArrayList<IModule> modules) {
+        JSONArrayList<IConfigurationValidator> result = new JSONArrayList<>();
+        for (IModule module : modules) {
+            addToCollectionIfNotNull(module.createConfigurationValidator(), result);
+        }
+
+        return result;
+    }
+
+    private static ArrayList<Collector> extractCollectors(ArrayList<IModule> modules) {
+        JSONArrayList<Collector> result = new JSONArrayList<>();
+        for (IModule module : modules) {
+            addToCollectionIfNotNull(module.createCollector(), result);
+        }
+
+        return result;
+    }
+
+    private static ArrayList<DependenciesCheckerModule> extractDependenciesCheckers(ArrayList<IModule> modules) {
+        JSONArrayList<DependenciesCheckerModule> result = new JSONArrayList<>();
+        for (IModule module : modules) {
+            addToCollectionIfNotNull(module.createDependenciesCheckerModule(), result);
+        }
+
+        return result;
+    }
+
+    private static <T> void addToCollectionIfNotNull(T obj, ArrayList<T> collection) {
+        if (obj != null) {
+            collection.add(obj);
+        }
     }
 
     public static int extractPortFromArgs(String[] args) {

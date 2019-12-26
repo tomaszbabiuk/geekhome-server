@@ -1,12 +1,12 @@
 package com.geekhome.coremodule.httpserver;
 
 import com.geekhome.coremodule.SystemStatus;
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
 import com.geekhome.httpserver.JsonResponse;
-import com.geekhome.httpserver.SystemInfo;
+import com.geekhome.common.automation.SystemInfo;
 import com.geekhome.common.configuration.ObjectNotFoundException;
 import org.json.simple.JSONObject;
 
@@ -36,10 +36,6 @@ public class SystemInfoJsonRequestsDispatcher extends JsonRequestsDispatcherBase
         if (originalStringUppercased.equals("/SYSTEMINFO/ISDATERELIABLE.JSON")) {
             JSONObject json = JsonResponse.createJSONResult(SystemInfo.isDateReliable());
             return new JsonResponse(json, false);
-        }
-
-        if (originalStringUppercased.equals("/SYSTEMINFO/MODULES.JSON")) {
-            return new JsonResponse(_systemInfo.getModules(), true);
         }
 
         if (originalStringUppercased.equals("/SYSTEMINFO/MONITORABLES.JSON")) {

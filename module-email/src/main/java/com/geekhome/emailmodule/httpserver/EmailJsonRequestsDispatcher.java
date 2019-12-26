@@ -2,7 +2,7 @@ package com.geekhome.emailmodule.httpserver;
 
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.NamedObject;
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.emailmodule.EmailModule;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;

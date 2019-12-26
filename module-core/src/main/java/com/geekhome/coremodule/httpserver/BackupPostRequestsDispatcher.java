@@ -1,6 +1,6 @@
 package com.geekhome.coremodule.httpserver;
 
-import com.geekhome.coremodule.MasterConfiguration;
+import com.geekhome.common.configuration.MasterConfiguration;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.QueryString;

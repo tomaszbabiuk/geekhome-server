@@ -1,8 +1,9 @@
 package com.geekhome.ventilationmodule;
 
 import com.geekhome.common.CrudAction;
+import com.geekhome.common.automation.IAutomationModule;
 import com.geekhome.common.configuration.Collector;
-import com.geekhome.coremodule.MasterConfiguration;
+import com.geekhome.common.configuration.MasterConfiguration;
 import com.geekhome.http.Resource;
 import com.geekhome.coremodule.httpserver.CrudPostHandler;
 import com.geekhome.common.hardwaremanager.IHardwareManager;

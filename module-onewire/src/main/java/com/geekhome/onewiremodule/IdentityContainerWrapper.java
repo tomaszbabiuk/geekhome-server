@@ -1,7 +1,7 @@
 package com.geekhome.onewiremodule;
 
 import com.dalsemi.onewire.container.OneWireContainer01;
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.settings.AutomationSettings;
 
 class IdentityContainerWrapper extends ContainerWrapperBase {
 

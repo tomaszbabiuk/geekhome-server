@@ -1,7 +1,7 @@
 package com.geekhome.centralheatingmodule.automation;
 import com.geekhome.centralheatingmodule.Hygrometer;
-import com.geekhome.coremodule.automation.DeviceAutomationUnit;
-import com.geekhome.coremodule.automation.EvaluationResult;
+import com.geekhome.common.automation.DeviceAutomationUnit;
+import com.geekhome.common.automation.EvaluationResult;
 import com.geekhome.common.hardwaremanager.IInputPort;
 import com.geekhome.common.hardwaremanager.IPort;
 

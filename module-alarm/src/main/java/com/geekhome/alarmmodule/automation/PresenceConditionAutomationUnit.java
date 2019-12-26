@@ -3,8 +3,8 @@ package com.geekhome.alarmmodule.automation;
 import com.geekhome.alarmmodule.PresenceCondition;
 import com.geekhome.common.PresenceType;
 import com.geekhome.common.configuration.Duration;
-import com.geekhome.coremodule.automation.EvaluableAutomationUnit;
-import com.geekhome.coremodule.automation.MasterAutomation;
+import com.geekhome.common.automation.EvaluableAutomationUnit;
+import com.geekhome.common.automation.MasterAutomation;
 
 import java.util.Calendar;
 

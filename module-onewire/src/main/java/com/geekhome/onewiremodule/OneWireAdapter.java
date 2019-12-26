@@ -5,7 +5,7 @@ import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
-import com.geekhome.coremodule.settings.AutomationSettings;
+import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.common.hardwaremanager.InputPortsCollection;
 import com.geekhome.common.hardwaremanager.OutputPortsCollection;

@@ -7,7 +7,7 @@ import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.common.hardwaremanager.ITogglePort;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.IConfigurationValidator;
+import com.geekhome.common.configuration.IConfigurationValidator;
 
 class HardwareManagerConfigurationValidator implements IConfigurationValidator {
     private ILocalizationProvider _localizationProvider;

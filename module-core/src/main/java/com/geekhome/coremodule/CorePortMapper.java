@@ -1,10 +1,7 @@
 package com.geekhome.coremodule;
 
-import com.geekhome.common.configuration.DescriptiveName;
-import com.geekhome.common.configuration.IPortDrivenDevice;
-import com.geekhome.common.configuration.IPortsDrivenDevice;
+import com.geekhome.common.configuration.*;
 import com.geekhome.common.hardwaremanager.IPortMapper;
-import com.geekhome.common.configuration.CollectorCollection;
 
 import java.util.ArrayList;
 

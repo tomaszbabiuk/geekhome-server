@@ -1,7 +1,7 @@
 package com.geekhome.coremodule.httpserver;
 
 import com.geekhome.common.CodeInvalidException;
-import com.geekhome.coremodule.automation.*;
+import com.geekhome.common.automation.*;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.QueryString;
