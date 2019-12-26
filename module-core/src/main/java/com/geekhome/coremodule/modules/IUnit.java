@@ -1,4 +1,4 @@
-package com.geekhome.httpserver.modules;
+package com.geekhome.coremodule.modules;
 
 public interface IUnit {
     UnitCategory getCategory();

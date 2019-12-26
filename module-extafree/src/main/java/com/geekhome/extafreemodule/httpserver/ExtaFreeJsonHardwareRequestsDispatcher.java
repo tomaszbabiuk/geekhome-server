@@ -7,7 +7,7 @@ import com.geekhome.common.hardwaremanager.ITogglePort;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
-import com.geekhome.httpserver.JsonResponse;
+import com.geekhome.coremodule.httpserver.JsonResponse;
 
 public class ExtaFreeJsonHardwareRequestsDispatcher extends JsonRequestsDispatcherBase {
     private IHardwareManager _hardwareManager;

@@ -1,4 +1,4 @@
-package com.geekhome.httpserver.modules;
+package com.geekhome.coremodule.modules;
 
 import com.geekhome.common.IHardwareManagerAdapterFactory;
 import com.geekhome.common.IMonitorable;
@@ -7,7 +7,7 @@ import com.geekhome.common.automation.IAutomationModule;
 import com.geekhome.common.configuration.*;
 import com.geekhome.common.alerts.IAlertService;
 import com.geekhome.http.IRequestsDispatcher;
-import com.geekhome.httpserver.ICrudPostHandler;
+import com.geekhome.coremodule.httpserver.ICrudPostHandler;
 
 import java.util.ArrayList;
 

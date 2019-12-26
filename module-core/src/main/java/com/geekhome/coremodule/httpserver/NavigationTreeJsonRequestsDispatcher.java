@@ -4,8 +4,7 @@ import com.geekhome.common.configuration.ObjectNotFoundException;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
-import com.geekhome.httpserver.JsonResponse;
-import com.geekhome.httpserver.modules.NavigationTree;
+import com.geekhome.coremodule.modules.NavigationTree;
 
 public class NavigationTreeJsonRequestsDispatcher extends JsonRequestsDispatcherBase {
     private NavigationTree _navigationTree;

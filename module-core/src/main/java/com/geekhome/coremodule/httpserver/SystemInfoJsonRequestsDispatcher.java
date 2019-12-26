@@ -5,7 +5,6 @@ import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
-import com.geekhome.httpserver.JsonResponse;
 import com.geekhome.common.automation.SystemInfo;
 import com.geekhome.common.configuration.ObjectNotFoundException;
 import org.json.simple.JSONObject;

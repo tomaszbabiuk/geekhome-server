@@ -7,9 +7,9 @@ import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.hardwaremanagermodule.httpserver.HardwareManagerDebugPostRequestsDispatcher;
 import com.geekhome.http.IRequestsDispatcher;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.*;
+import com.geekhome.coremodule.modules.*;
 import com.geekhome.hardwaremanagermodule.httpserver.HardwareManagerJsonRequestsDispatcher;
-import com.geekhome.httpserver.modules.Module;
+import com.geekhome.coremodule.modules.Module;
 
 import java.util.ArrayList;
 

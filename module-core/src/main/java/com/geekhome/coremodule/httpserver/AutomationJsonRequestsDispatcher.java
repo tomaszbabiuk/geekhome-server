@@ -9,7 +9,6 @@ import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
-import com.geekhome.httpserver.JsonResponse;
 import com.geekhome.common.configuration.CollectorCollection;
 import org.json.simple.JSONObject;
 

@@ -2,12 +2,12 @@ package com.geekhome.usersmodule;
 
 import com.geekhome.http.Resource;
 import com.geekhome.http.IRequestsDispatcher;
-import com.geekhome.httpserver.ICrudPostHandler;
+import com.geekhome.coremodule.httpserver.ICrudPostHandler;
 import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.httpserver.modules.IUnit;
-import com.geekhome.httpserver.modules.Module;
-import com.geekhome.httpserver.modules.Unit;
-import com.geekhome.httpserver.modules.UnitCategory;
+import com.geekhome.coremodule.modules.IUnit;
+import com.geekhome.coremodule.modules.Module;
+import com.geekhome.coremodule.modules.Unit;
+import com.geekhome.coremodule.modules.UnitCategory;
 import com.geekhome.usersmodule.httpserver.UsersJsonRequestsDispatcher;
 
 import java.util.ArrayList;

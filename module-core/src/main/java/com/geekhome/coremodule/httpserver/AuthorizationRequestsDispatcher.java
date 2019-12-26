@@ -1,4 +1,4 @@
-package com.geekhome.httpserver;
+package com.geekhome.coremodule.httpserver;
 
 import com.geekhome.common.OperationMode;
 import com.geekhome.common.automation.SystemInfo;

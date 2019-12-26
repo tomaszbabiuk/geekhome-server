@@ -6,7 +6,7 @@ import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.http.Resource;
 import com.geekhome.common.configuration.IConfigurationValidator;
-import com.geekhome.httpserver.modules.Module;
+import com.geekhome.coremodule.modules.Module;
 
 import java.util.ArrayList;
 

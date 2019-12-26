@@ -5,8 +5,8 @@ import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.QueryString;
-import com.geekhome.httpserver.JsonResponse;
-import com.geekhome.httpserver.PostRequestsDispatcherBase;
+import com.geekhome.coremodule.httpserver.JsonResponse;
+import com.geekhome.coremodule.httpserver.PostRequestsDispatcherBase;
 
 public class HardwareManagerDebugPostRequestsDispatcher extends PostRequestsDispatcherBase {
 

@@ -4,7 +4,7 @@ import com.geekhome.automationmodule.AutomationConfiguration;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
-import com.geekhome.httpserver.JsonResponse;
+import com.geekhome.coremodule.httpserver.JsonResponse;
 import org.json.simple.JSONObject;
 
 public class AutomationJsonRequestsDispatcher extends JsonRequestsDispatcherBase {

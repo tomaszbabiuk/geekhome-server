@@ -5,8 +5,6 @@ import com.geekhome.common.automation.*;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.QueryString;
-import com.geekhome.httpserver.JsonResponse;
-import com.geekhome.httpserver.PostRequestsDispatcherBase;
 
 public class AutomationPostRequestsDispatcher extends PostRequestsDispatcherBase {
     private MasterAutomation _masterAutomation;

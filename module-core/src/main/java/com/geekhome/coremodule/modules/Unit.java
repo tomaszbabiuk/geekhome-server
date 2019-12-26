@@ -1,4 +1,4 @@
-package com.geekhome.httpserver.modules;
+package com.geekhome.coremodule.modules;
 
 import org.json.simple.JSONObject;
 

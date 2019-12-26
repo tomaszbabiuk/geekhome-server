@@ -1,4 +1,4 @@
-package com.geekhome.httpserver.jetty;
+package com.geekhome.coremodule.jetty;
 
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;

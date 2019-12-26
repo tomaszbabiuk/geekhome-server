@@ -4,7 +4,7 @@ import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IResponse;
 import com.geekhome.http.QueryString;
-import com.geekhome.httpserver.PostRequestsDispatcherBase;
+import com.geekhome.coremodule.httpserver.PostRequestsDispatcherBase;
 import com.geekhome.http.jetty.RedirectionResponse;
 import org.eclipse.jetty.util.security.Password;
 

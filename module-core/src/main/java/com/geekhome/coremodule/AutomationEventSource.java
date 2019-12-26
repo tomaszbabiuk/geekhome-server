@@ -1,4 +1,4 @@
-package com.geekhome.httpserver.jetty;
+package com.geekhome.coremodule;
 
 import org.eclipse.jetty.servlets.EventSource;
 

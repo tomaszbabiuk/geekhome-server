@@ -1,4 +1,4 @@
-package com.geekhome.httpserver;
+package com.geekhome.coremodule.httpserver;
 
 import com.geekhome.http.IHttpListenerRequest;
 import com.geekhome.http.IRequestsDispatcher;

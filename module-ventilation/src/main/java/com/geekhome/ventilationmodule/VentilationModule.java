@@ -9,11 +9,11 @@ import com.geekhome.coremodule.httpserver.CrudPostHandler;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.http.INameValueSet;
 import com.geekhome.http.IRequestsDispatcher;
-import com.geekhome.httpserver.ICrudPostHandler;
+import com.geekhome.coremodule.httpserver.ICrudPostHandler;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.http.jetty.RedirectionResponse;
-import com.geekhome.httpserver.modules.*;
-import com.geekhome.httpserver.modules.Module;
+import com.geekhome.coremodule.modules.*;
+import com.geekhome.coremodule.modules.Module;
 import com.geekhome.ventilationmodule.automation.VentilationAutomationModule;
 import com.geekhome.ventilationmodule.httpserver.VentilationJsonRequestsDispatcher;
 

@@ -1,9 +1,13 @@
-package com.geekhome.httpserver.jetty;
+package com.geekhome.coremodule.jetty;
 
 import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.common.automation.SystemInfo;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
+import com.geekhome.coremodule.httpserver.AuthorizationRequestsDispatcher;
+import com.geekhome.coremodule.httpserver.CrudPostRequestsDispatcher;
+import com.geekhome.coremodule.httpserver.ICrudPostHandler;
+import com.geekhome.coremodule.httpserver.ResponseCache;
 import com.geekhome.http.jetty.*;
 import com.geekhome.common.configuration.MasterConfiguration;
 import com.geekhome.coremodule.PhotosDispatcher;
@@ -12,9 +16,8 @@ import com.geekhome.http.IHttpServer;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.http.IRequestsDispatcher;
 import com.geekhome.http.IResponseCache;
-import com.geekhome.httpserver.*;
 import com.geekhome.common.IInvalidateCacheListener;
-import com.geekhome.httpserver.modules.IModule;
+import com.geekhome.coremodule.modules.IModule;
 
 import java.io.IOException;
 import java.util.ArrayList;

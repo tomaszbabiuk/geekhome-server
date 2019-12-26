@@ -1,4 +1,4 @@
-package com.geekhome.httpserver.jetty;
+package com.geekhome.coremodule.jetty;
 
 import com.geekhome.common.IHardwareManagerAdapterFactory;
 import com.geekhome.common.IMonitorable;
@@ -19,8 +19,8 @@ import com.geekhome.common.hardwaremanager.IPortMapper;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.common.OperationMode;
 import com.geekhome.common.automation.SystemInfo;
-import com.geekhome.httpserver.modules.IModule;
-import com.geekhome.httpserver.modules.NavigationTree;
+import com.geekhome.coremodule.modules.IModule;
+import com.geekhome.coremodule.modules.NavigationTree;
 import com.geekhome.moquettemodule.MoquetteBroker;
 import com.geekhome.moquettemodule.MqttBroker;
 

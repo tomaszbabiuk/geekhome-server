@@ -11,8 +11,8 @@ import com.geekhome.firebasemodule.httpserver.FirebasePostRequestsDispatcher;
 import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.http.IRequestsDispatcher;
 import com.geekhome.http.Resource;
-import com.geekhome.httpserver.modules.*;
-import com.geekhome.httpserver.modules.Module;
+import com.geekhome.coremodule.modules.*;
+import com.geekhome.coremodule.modules.Module;
 
 import java.util.ArrayList;
 
