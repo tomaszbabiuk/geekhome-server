@@ -1,7 +1,7 @@
 package com.geekhome.centralheatingmodule;
 
 import com.geekhome.common.configuration.MasterConfiguration;
-import com.geekhome.coremodule.MasterConfigurationValidation;
+import com.geekhome.common.configuration.MasterConfigurationValidation;
 
 public class CentralHeatingConfigurationValidation extends MasterConfigurationValidation {
     public static boolean canAddAveragingThermometers(MasterConfiguration masterConfiguration, CentralHeatingConfiguration centralHeatingConfiguration) {

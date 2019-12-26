@@ -1,5 +1,6 @@
 package com.geekhome.coremodule;
 
+import com.geekhome.common.DateTimeInfo;
 import com.geekhome.common.configuration.Persistable;
 import com.geekhome.common.configuration.JSONAwareBase;
 

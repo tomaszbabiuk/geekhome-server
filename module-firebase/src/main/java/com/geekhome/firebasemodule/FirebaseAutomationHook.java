@@ -1,6 +1,6 @@
 package com.geekhome.firebasemodule;
 
-import com.geekhome.coremodule.commands.Synchronizer;
+import com.geekhome.common.commands.Synchronizer;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.automation.AlertAutomationUnit;

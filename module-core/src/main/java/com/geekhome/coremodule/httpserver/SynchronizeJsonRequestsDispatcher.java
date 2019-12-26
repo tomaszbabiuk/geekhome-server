@@ -1,6 +1,6 @@
 package com.geekhome.coremodule.httpserver;
 
-import com.geekhome.coremodule.commands.Synchronizer;
+import com.geekhome.common.commands.Synchronizer;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.http.IHttpListenerRequest;

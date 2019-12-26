@@ -1,6 +1,4 @@
-package com.geekhome.coremodule;
-
-import com.geekhome.common.configuration.*;
+package com.geekhome.common.configuration;
 
 public class MasterConfigurationValidation {
     public static boolean canAddChangeStateCommands(MasterConfiguration config) {

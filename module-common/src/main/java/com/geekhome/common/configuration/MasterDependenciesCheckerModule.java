@@ -1,17 +1,11 @@
-package com.geekhome.coremodule;
-
-import com.geekhome.common.configuration.*;
-import com.geekhome.common.configuration.CollectorCollection;
-import com.geekhome.common.configuration.DependenciesCheckerModule;
-import com.geekhome.common.configuration.Dependency;
-import com.geekhome.common.configuration.DependencyType;
+package com.geekhome.common.configuration;
 
 import java.util.ArrayList;
 
-class MasterDependenciesCheckerModule extends DependenciesCheckerModule {
+public class MasterDependenciesCheckerModule extends DependenciesCheckerModule {
     private MasterConfiguration _masterConfiguration;
 
-    MasterDependenciesCheckerModule(MasterConfiguration masterConfiguration) {
+    public MasterDependenciesCheckerModule(MasterConfiguration masterConfiguration) {
         super(masterConfiguration);
         _masterConfiguration = masterConfiguration;
     }

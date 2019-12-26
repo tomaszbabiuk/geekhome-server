@@ -1,4 +1,4 @@
-package com.geekhome.coremodule.commands;
+package com.geekhome.common.commands;
 
 import com.geekhome.http.ILocalizationProvider;
 

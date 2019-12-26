@@ -1,8 +1,8 @@
 package com.geekhome.emailmodule;
 
 import com.geekhome.common.*;
-import com.geekhome.coremodule.commands.AwaitingMessage;
-import com.geekhome.coremodule.commands.FailedMessage;
+import com.geekhome.common.commands.AwaitingMessage;
+import com.geekhome.common.commands.FailedMessage;
 import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;

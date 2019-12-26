@@ -1,4 +1,4 @@
-package com.geekhome.coremodule.commands;
+package com.geekhome.common.commands;
 
 import com.geekhome.common.CodeInvalidException;
 import com.geekhome.common.logging.LoggingService;

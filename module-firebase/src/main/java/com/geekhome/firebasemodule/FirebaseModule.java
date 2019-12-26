@@ -3,7 +3,7 @@ package com.geekhome.firebasemodule;
 import com.geekhome.common.IMonitorable;
 import com.geekhome.common.alerts.IAlertService;
 import com.geekhome.common.automation.IAutomationHook;
-import com.geekhome.coremodule.commands.Synchronizer;
+import com.geekhome.common.commands.Synchronizer;
 import com.geekhome.common.automation.MasterAutomation;
 import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.firebasemodule.httpserver.FirebaseJsonRequestsDispatcher;

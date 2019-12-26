@@ -1,4 +1,4 @@
-package com.geekhome.coremodule;
+package com.geekhome.common;
 
 import com.geekhome.common.configuration.Persistable;
 import com.geekhome.common.configuration.JSONAwareBase;

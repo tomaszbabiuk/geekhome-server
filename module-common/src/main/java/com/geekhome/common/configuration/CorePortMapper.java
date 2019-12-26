@@ -1,6 +1,5 @@
-package com.geekhome.coremodule;
+package com.geekhome.common.configuration;
 
-import com.geekhome.common.configuration.*;
 import com.geekhome.common.hardwaremanager.IPortMapper;
 
 import java.util.ArrayList;

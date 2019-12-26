@@ -1,4 +1,4 @@
-package com.geekhome.httpserver;
+package com.geekhome.common.configuration;
 
 import com.geekhome.common.configuration.Persistable;
 import com.geekhome.common.configuration.JSONAwareBase;

@@ -1,7 +1,7 @@
 package com.geekhome.emailmodule;
 
 import com.geekhome.common.IMonitorable;
-import com.geekhome.coremodule.commands.CommandsProcessor;
+import com.geekhome.common.commands.CommandsProcessor;
 import com.geekhome.common.alerts.IAlertService;
 import com.geekhome.http.Resource;
 import com.geekhome.common.automation.MasterAutomation;
