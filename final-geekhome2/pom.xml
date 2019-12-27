@@ -9,6 +9,7 @@
     <version>1.0</version>
 
     <dependencies>
+        <!-- JETTY -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-http</artifactId>
@@ -45,7 +46,19 @@
             <version>${jetty_version}</version>
         </dependency>
 
+        <!-- JERSEY -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>2.25</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet-core</artifactId>
+            <version>2.25</version>
+        </dependency>
 
+        <!-- GEEKHOME -->
         <dependency>
             <groupId>geekhome.server</groupId>
             <artifactId>module-core-vuetify</artifactId>
