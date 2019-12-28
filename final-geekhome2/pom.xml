@@ -58,12 +58,20 @@
             <version>2.25</version>
         </dependency>
 
-        <!-- GEEKHOME -->
+        <!-- geekHOME -->
         <dependency>
             <groupId>geekhome.server</groupId>
-            <artifactId>module-core-vuetify</artifactId>
+            <artifactId>module-common</artifactId>
             <version>1.0</version>
         </dependency>
+
+        <!-- PLUGINS -->
+        <dependency>
+            <groupId>org.pf4j</groupId>
+            <artifactId>pf4j</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

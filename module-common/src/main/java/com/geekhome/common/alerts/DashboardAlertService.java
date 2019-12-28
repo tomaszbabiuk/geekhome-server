@@ -2,7 +2,7 @@ package com.geekhome.common.alerts;
 
 import com.geekhome.common.configuration.Alert;
 import com.geekhome.common.configuration.DescriptiveName;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.common.configuration.CollectorCollection;
 
 public class DashboardAlertService extends AlertServiceBase {

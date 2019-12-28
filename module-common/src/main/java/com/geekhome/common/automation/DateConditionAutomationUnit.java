@@ -1,7 +1,7 @@
 package com.geekhome.common.automation;
 
 import com.geekhome.common.configuration.DateCondition;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 import java.util.Calendar;
 import java.util.HashMap;

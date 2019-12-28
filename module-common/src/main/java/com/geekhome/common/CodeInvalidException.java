@@ -1,7 +1,7 @@
 package com.geekhome.common;
 
 import com.geekhome.common.configuration.IDevice;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 public class CodeInvalidException extends Exception {
     private final String _message;

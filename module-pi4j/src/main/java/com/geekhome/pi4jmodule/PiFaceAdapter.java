@@ -9,7 +9,7 @@ import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
 import com.geekhome.common.hardwaremanager.InputPortsCollection;
 import com.geekhome.common.hardwaremanager.OutputPortsCollection;
 import com.geekhome.common.hardwaremanager.TogglePortsCollection;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.common.OperationMode;
 import com.pi4j.wiringpi.Spi;
 

@@ -3,7 +3,7 @@ package com.geekhome.automationmodule;
 import com.geekhome.common.*;
 import com.geekhome.common.configuration.*;
 import com.geekhome.common.settings.AutomationSettings;
-import com.geekhome.http.INameValueSet;
+import com.geekhome.common.INameValueSet;
 
 import java.util.ArrayList;
 

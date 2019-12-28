@@ -3,7 +3,7 @@ package com.geekhome.ventilationmodule.automation;
 import com.geekhome.common.automation.*;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.common.hardwaremanager.IOutputPort;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.common.configuration.CollectorCollection;
 import com.geekhome.common.automation.IAutomationModule;
 import com.geekhome.synchronizationmodule.business.SmartEvent;

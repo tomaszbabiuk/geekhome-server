@@ -5,7 +5,7 @@ import com.geekhome.common.DeviceCategory;
 import com.geekhome.common.configuration.Persistable;
 import com.geekhome.common.configuration.IRoomDevice;
 import com.geekhome.common.configuration.Multicontroller;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 public class TemperatureController extends Multicontroller implements IRoomDevice {
     private String _roomId;

@@ -3,7 +3,7 @@ package com.geekhome.ventilationmodule.automation;
 import com.geekhome.common.automation.*;
 import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.common.hardwaremanager.IPort;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.ventilationmodule.Recuperator;
 
 import java.util.Calendar;

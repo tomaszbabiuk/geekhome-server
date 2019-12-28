@@ -3,7 +3,7 @@ package com.geekhome.centralheatingmodule;
 import com.geekhome.common.ControlType;
 import com.geekhome.common.configuration.*;
 import com.geekhome.common.DeviceCategory;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 public class Comfortmeter extends Device implements IRoomDevice, IPortsDrivenDevice, IValueDevice {
     private String _temperaturePortId;

@@ -17,11 +17,6 @@
         </dependency>
         <dependency>
             <groupId>geekhome.server</groupId>
-            <artifactId>library-http</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>geekhome.server</groupId>
             <artifactId>library-moquette</artifactId>
             <version>1.0</version>
         </dependency>
@@ -59,6 +54,13 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-util</artifactId>
             <version>${jetty_version}</version>
+        </dependency>
+
+        <!-- PLUGINS -->
+        <dependency>
+            <groupId>org.pf4j</groupId>
+            <artifactId>pf4j</artifactId>
+            <version>3.2.0</version>
         </dependency>
     </dependencies>
 

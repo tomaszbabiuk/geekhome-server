@@ -1,6 +1,6 @@
 package com.geekhome.alarmmodule;
 
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 public enum AlarmType {
     Burglary(0),

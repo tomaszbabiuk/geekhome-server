@@ -1,6 +1,6 @@
 package com.geekhome.common.commands;
 
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

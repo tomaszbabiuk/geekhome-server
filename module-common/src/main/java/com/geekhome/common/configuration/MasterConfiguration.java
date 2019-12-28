@@ -1,8 +1,7 @@
 package com.geekhome.common.configuration;
 
 import com.geekhome.common.*;
-import com.geekhome.http.INameValueSet;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 import java.io.IOException;
 import java.util.ArrayList;

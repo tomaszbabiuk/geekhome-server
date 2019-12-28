@@ -3,7 +3,7 @@ package com.geekhome.common.configuration;
 import com.geekhome.common.DeviceCategory;
 import com.geekhome.common.ControlType;
 import com.geekhome.common.INamedObject;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import org.json.simple.JSONAware;
 
 public interface IDevice extends INamedObject, JSONAware {

@@ -5,7 +5,7 @@ import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.ICondition;
 import com.geekhome.common.configuration.IDevice;
 import com.geekhome.common.configuration.InactiveState;
-import com.geekhome.http.INameValueSet;
+import com.geekhome.common.INameValueSet;
 import com.geekhome.common.configuration.Collector;
 import com.geekhome.common.configuration.CollectorCollection;
 import com.geekhome.common.configuration.ObjectNotFoundException;

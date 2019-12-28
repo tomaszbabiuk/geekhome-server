@@ -8,7 +8,7 @@ import com.geekhome.common.configuration.Device;
 import com.geekhome.common.configuration.IRoomDevice;
 import com.geekhome.common.configuration.IValueDevice;
 import com.geekhome.common.configuration.ValueType;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 public class AveragingThermometer extends Device implements IRoomDevice, IValueDevice {
     private String _thermometersIds;

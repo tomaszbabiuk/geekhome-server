@@ -1,8 +1,8 @@
 package com.geekhome.ventilationmodule.httpserver;
 
-import com.geekhome.http.IHttpListenerRequest;
-import com.geekhome.http.IResponse;
-import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
+import com.geekhome.coremodule.httpserver.IHttpListenerRequest;
+import com.geekhome.coremodule.httpserver.IResponse;
+import com.geekhome.coremodule.jetty.JsonRequestsDispatcherBase;
 import com.geekhome.coremodule.httpserver.JsonResponse;
 import com.geekhome.ventilationmodule.VentilationConfiguration;
 import org.json.simple.JSONObject;

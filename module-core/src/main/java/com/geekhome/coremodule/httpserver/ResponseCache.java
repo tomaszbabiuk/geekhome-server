@@ -2,8 +2,6 @@ package com.geekhome.coremodule.httpserver;
 
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
-import com.geekhome.http.IResponse;
-import com.geekhome.http.IResponseCache;
 
 import java.util.Hashtable;
 

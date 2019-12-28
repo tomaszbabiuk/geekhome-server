@@ -5,7 +5,7 @@ import com.geekhome.common.automation.IDeviceAutomationUnit;
 import com.geekhome.common.automation.MultistateDeviceAutomationUnit;
 import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.common.hardwaremanager.ITogglePort;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.lightsmodule.Blind;
 
 import java.util.Calendar;

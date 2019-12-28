@@ -4,7 +4,7 @@ import com.geekhome.automationmodule.ImpulseSwitch;
 import com.geekhome.common.automation.ControlMode;
 import com.geekhome.common.hardwaremanager.IInputPort;
 import com.geekhome.common.hardwaremanager.IPort;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 import java.util.Calendar;
 

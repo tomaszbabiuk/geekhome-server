@@ -1,14 +1,11 @@
 package com.geekhome.coremodule.httpserver;
 
+import com.geekhome.common.INameValueSet;
 import com.geekhome.common.commands.Synchronizer;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
-import com.geekhome.http.IHttpListenerRequest;
-import com.geekhome.http.INameValueSet;
-import com.geekhome.http.IResponse;
-import com.geekhome.http.ResponseBase;
-import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
+import com.geekhome.common.localization.ILocalizationProvider;
+import com.geekhome.coremodule.jetty.JsonRequestsDispatcherBase;
 import com.geekhome.common.configuration.ObjectNotFoundException;
 import com.geekhome.synchronizationmodule.business.*;
 import com.google.gson.Gson;

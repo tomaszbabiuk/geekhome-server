@@ -1,11 +1,11 @@
 package com.geekhome.emailmodule.httpserver;
 
 import com.geekhome.common.settings.AutomationSettings;
-import com.geekhome.http.IHttpListenerRequest;
-import com.geekhome.http.IResponse;
-import com.geekhome.http.QueryString;
+import com.geekhome.coremodule.httpserver.IHttpListenerRequest;
+import com.geekhome.coremodule.httpserver.IResponse;
+import com.geekhome.coremodule.httpserver.QueryString;
 import com.geekhome.coremodule.httpserver.PostRequestsDispatcherBase;
-import com.geekhome.http.jetty.RedirectionResponse;
+import com.geekhome.coremodule.jetty.RedirectionResponse;
 import org.eclipse.jetty.util.security.Password;
 
 public class EmailPostRequestsDispatcher extends PostRequestsDispatcherBase {

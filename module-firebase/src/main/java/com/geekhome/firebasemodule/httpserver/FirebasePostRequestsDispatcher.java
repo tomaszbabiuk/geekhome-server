@@ -1,11 +1,11 @@
 package com.geekhome.firebasemodule.httpserver;
 
 import com.geekhome.common.settings.AutomationSettings;
-import com.geekhome.http.IHttpListenerRequest;
-import com.geekhome.http.IResponse;
-import com.geekhome.http.QueryString;
+import com.geekhome.coremodule.httpserver.IHttpListenerRequest;
+import com.geekhome.coremodule.httpserver.IResponse;
+import com.geekhome.coremodule.httpserver.QueryString;
 import com.geekhome.coremodule.httpserver.PostRequestsDispatcherBase;
-import com.geekhome.http.jetty.RedirectionResponse;
+import com.geekhome.coremodule.jetty.RedirectionResponse;
 
 public class FirebasePostRequestsDispatcher extends PostRequestsDispatcherBase {
     private AutomationSettings _automationSettings;

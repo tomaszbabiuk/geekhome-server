@@ -6,7 +6,7 @@ import com.geekhome.common.automation.IAutomationHook;
 import com.geekhome.common.automation.IAutomationModule;
 import com.geekhome.common.configuration.*;
 import com.geekhome.common.alerts.IAlertService;
-import com.geekhome.http.IRequestsDispatcher;
+import com.geekhome.coremodule.httpserver.IRequestsDispatcher;
 import com.geekhome.coremodule.httpserver.ICrudPostHandler;
 
 import java.util.ArrayList;

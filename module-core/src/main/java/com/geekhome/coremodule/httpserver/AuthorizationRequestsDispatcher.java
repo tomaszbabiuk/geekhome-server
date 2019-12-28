@@ -2,12 +2,9 @@ package com.geekhome.coremodule.httpserver;
 
 import com.geekhome.common.OperationMode;
 import com.geekhome.common.automation.SystemInfo;
-import com.geekhome.http.IHttpListenerRequest;
-import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.http.IResponse;
-import com.geekhome.http.IUContentProvider;
-import com.geekhome.http.jetty.RequestsDispatcherBase;
-import com.geekhome.http.jetty.UPagesResponse;
+import com.geekhome.common.localization.ILocalizationProvider;
+import com.geekhome.coremodule.jetty.RequestsDispatcherBase;
+import com.geekhome.coremodule.jetty.UPagesResponse;
 
 public class AuthorizationRequestsDispatcher extends RequestsDispatcherBase {
     private SystemInfo _systemInfo;

@@ -9,7 +9,7 @@ import com.geekhome.common.utils.Sleeper;
 import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.firebasemodule.sse.FirebaseSse;
 import com.geekhome.firebasemodule.sse.FirebaseSseListener;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.firebasemodule.httpserver.FirebaseSettings;
 import com.geekhome.synchronizationmodule.business.ReceivedSynchronizationRequest;
 import com.geekhome.synchronizationmodule.business.SynchronizationContentType;

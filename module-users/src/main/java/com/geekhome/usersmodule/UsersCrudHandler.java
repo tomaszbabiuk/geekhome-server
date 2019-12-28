@@ -1,12 +1,12 @@
 package com.geekhome.usersmodule;
 
 import com.geekhome.common.configuration.DescriptiveName;
-import com.geekhome.http.INameValueSet;
-import com.geekhome.http.QueryString;
-import com.geekhome.http.ResponseBase;
+import com.geekhome.common.INameValueSet;
+import com.geekhome.coremodule.httpserver.QueryString;
+import com.geekhome.coremodule.httpserver.ResponseBase;
 import com.geekhome.coremodule.httpserver.ICrudPostHandler;
-import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.http.jetty.RedirectionResponse;
+import com.geekhome.common.localization.ILocalizationProvider;
+import com.geekhome.coremodule.jetty.RedirectionResponse;
 import com.geekhome.common.configuration.CollectorCollection;
 
 public class UsersCrudHandler implements ICrudPostHandler {

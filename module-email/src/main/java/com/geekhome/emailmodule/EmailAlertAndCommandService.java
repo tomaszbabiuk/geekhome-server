@@ -9,7 +9,7 @@ import com.geekhome.common.configuration.Alert;
 import com.geekhome.common.automation.IDeviceAutomationUnit;
 import com.geekhome.common.automation.MasterAutomation;
 import com.geekhome.common.settings.AutomationSettings;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 import javax.mail.Address;
 import java.util.Collection;

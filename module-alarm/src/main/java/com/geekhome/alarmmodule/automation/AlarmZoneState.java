@@ -1,6 +1,6 @@
 package com.geekhome.alarmmodule.automation;
 
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 public enum AlarmZoneState {
     Disarmed(0),

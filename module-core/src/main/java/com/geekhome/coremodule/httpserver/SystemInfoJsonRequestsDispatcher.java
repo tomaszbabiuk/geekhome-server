@@ -1,10 +1,8 @@
 package com.geekhome.coremodule.httpserver;
 
-import com.geekhome.coremodule.SystemStatus;
+import com.geekhome.common.automation.SystemStatus;
 import com.geekhome.common.settings.AutomationSettings;
-import com.geekhome.http.IHttpListenerRequest;
-import com.geekhome.http.IResponse;
-import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
+import com.geekhome.coremodule.jetty.JsonRequestsDispatcherBase;
 import com.geekhome.common.automation.SystemInfo;
 import com.geekhome.common.configuration.ObjectNotFoundException;
 import org.json.simple.JSONObject;

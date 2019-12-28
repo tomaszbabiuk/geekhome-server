@@ -1,9 +1,9 @@
 package com.geekhome.common.settings;
 
+import com.geekhome.common.INameValueSet;
+import com.geekhome.common.NameValueSet;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
-import com.geekhome.http.INameValueSet;
-import com.geekhome.http.NameValueSet;
 import com.geekhome.common.configuration.ObjectNotFoundException;
 
 import java.io.*;

@@ -3,7 +3,7 @@ package com.geekhome.automationmodule;
 import com.geekhome.common.ControlType;
 import com.geekhome.common.configuration.*;
 import com.geekhome.common.DeviceCategory;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 public class PowerMeter extends Device implements IRoomDevice, IPortDrivenDevice, IValueDevice {
     private String _portId;

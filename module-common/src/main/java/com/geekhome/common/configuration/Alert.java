@@ -1,7 +1,7 @@
 package com.geekhome.common.configuration;
 
 import com.geekhome.common.NamedObject;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 import java.util.ArrayList;
 import java.util.Date;

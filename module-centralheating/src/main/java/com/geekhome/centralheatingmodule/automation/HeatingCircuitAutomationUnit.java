@@ -8,7 +8,7 @@ import com.geekhome.common.configuration.InactiveState;
 import com.geekhome.common.automation.*;
 import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.common.hardwaremanager.IPort;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 import java.util.Calendar;
 

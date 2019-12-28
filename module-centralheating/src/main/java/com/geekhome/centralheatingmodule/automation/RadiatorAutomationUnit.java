@@ -3,7 +3,7 @@ package com.geekhome.centralheatingmodule.automation;
 import com.geekhome.centralheatingmodule.Radiator;
 import com.geekhome.common.automation.MasterAutomation;
 import com.geekhome.common.hardwaremanager.IOutputPort;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 public class RadiatorAutomationUnit extends HeatingCircuitAutomationUnit<Radiator> {
     public RadiatorAutomationUnit(IOutputPort<Boolean> outputPort, Radiator radiator, MasterAutomation masterAutomation, ILocalizationProvider localizationProvider) throws Exception {

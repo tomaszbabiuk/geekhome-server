@@ -4,7 +4,7 @@ import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.configuration.Persistable;
 import com.geekhome.common.configuration.JSONArrayList;
 import com.geekhome.common.configuration.InactiveState;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 public class UnderfloorCircuit extends Radiator {
     private Double _minFloorTemperature;

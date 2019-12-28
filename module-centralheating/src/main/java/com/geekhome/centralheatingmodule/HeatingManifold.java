@@ -2,7 +2,7 @@ package com.geekhome.centralheatingmodule;
 
 import com.geekhome.common.*;
 import com.geekhome.common.configuration.*;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 public class HeatingManifold extends MultistateDevice implements IRoomDevice, IPortsDrivenDevice, IBlocksTarget {
     private String _minimumWorkingTime;

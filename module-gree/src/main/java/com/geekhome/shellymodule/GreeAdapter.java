@@ -5,7 +5,7 @@ import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.hardwaremanager.*;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.common.OperationMode;
 import com.geekhome.common.NamedObject;
 import com.geekhome.common.hardwaremanager.HardwareManager;

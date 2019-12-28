@@ -1,7 +1,7 @@
 package com.geekhome.ventilationmodule;
 
 import com.geekhome.common.configuration.JSONArrayList;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.common.configuration.IConfigurationValidator;
 
 public class VentilationConfigurationValidator implements IConfigurationValidator {

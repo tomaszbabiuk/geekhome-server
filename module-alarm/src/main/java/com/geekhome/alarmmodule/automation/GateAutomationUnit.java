@@ -11,7 +11,7 @@ import com.geekhome.common.automation.EvaluationResult;
 import com.geekhome.common.automation.ICalculableAutomationUnit;
 import com.geekhome.common.hardwaremanager.IInputPort;
 import com.geekhome.common.hardwaremanager.IOutputPort;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 import java.util.Calendar;
 

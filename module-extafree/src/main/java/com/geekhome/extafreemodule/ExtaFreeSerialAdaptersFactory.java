@@ -2,7 +2,7 @@ package com.geekhome.extafreemodule;
 
 import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
 import com.geekhome.common.SerialAdapterFactoryBase;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 class ExtaFreeSerialAdaptersFactory extends SerialAdapterFactoryBase {
     private final ILocalizationProvider _localizationProvider;

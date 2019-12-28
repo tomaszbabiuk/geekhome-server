@@ -1,6 +1,6 @@
 package com.geekhome;
 
-import com.geekhome.http.Resource;
+import com.geekhome.common.localization.Resource;
 import com.geekhome.coremodule.modules.Module;
 
 public class FullEditionAdaptationModule extends Module {

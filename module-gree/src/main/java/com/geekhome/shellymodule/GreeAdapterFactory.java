@@ -2,7 +2,7 @@ package com.geekhome.shellymodule;
 
 import com.geekhome.common.IHardwareManagerAdapterFactory;
 import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.common.hardwaremanager.HardwareManager;
 
 import java.util.ArrayList;

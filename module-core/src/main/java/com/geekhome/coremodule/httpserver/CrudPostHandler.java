@@ -1,11 +1,9 @@
 package com.geekhome.coremodule.httpserver;
 
 import com.geekhome.common.CrudAction;
+import com.geekhome.common.INameValueSet;
 import com.geekhome.common.configuration.MasterConfiguration;
-import com.geekhome.http.INameValueSet;
-import com.geekhome.http.QueryString;
-import com.geekhome.http.ResponseBase;
-import com.geekhome.http.jetty.RedirectionResponse;
+import com.geekhome.coremodule.jetty.RedirectionResponse;
 
 public class CrudPostHandler implements ICrudPostHandler {
     public interface ICrudModificationFunction {

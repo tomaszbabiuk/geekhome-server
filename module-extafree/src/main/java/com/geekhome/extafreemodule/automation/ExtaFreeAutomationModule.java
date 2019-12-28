@@ -5,7 +5,7 @@ import com.geekhome.extafreemodule.ExtaFreeBlind;
 import com.geekhome.extafreemodule.ExtaFreeConfiguration;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.common.hardwaremanager.ITogglePort;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.common.configuration.CollectorCollection;
 import com.geekhome.common.automation.IAutomationModule;
 import com.geekhome.synchronizationmodule.business.SmartEvent;

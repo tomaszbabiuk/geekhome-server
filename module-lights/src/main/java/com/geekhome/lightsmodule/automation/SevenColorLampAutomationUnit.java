@@ -4,7 +4,7 @@ import com.geekhome.common.automation.*;
 import com.geekhome.common.hardwaremanager.IOutputPort;
 import com.geekhome.common.hardwaremanager.IPort;
 import com.geekhome.common.hardwaremanager.TogglePortWrapper;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.lightsmodule.SevenColorLamp;
 
 import java.util.Calendar;

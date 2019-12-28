@@ -1,8 +1,5 @@
 package com.geekhome.coremodule.httpserver;
 
-import com.geekhome.http.IHttpListenerResponse;
-import com.geekhome.http.ResponseBase;
-
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 

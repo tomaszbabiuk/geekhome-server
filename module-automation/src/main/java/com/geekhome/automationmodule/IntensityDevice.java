@@ -2,7 +2,7 @@ package com.geekhome.automationmodule;
 
 import com.geekhome.common.*;
 import com.geekhome.common.configuration.*;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 public class IntensityDevice extends MultistateDevice implements IRoomDevice, IPortsDrivenDevice, IBlocksTarget {
 

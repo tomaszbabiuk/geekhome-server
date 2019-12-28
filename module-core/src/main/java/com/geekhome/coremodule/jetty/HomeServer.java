@@ -8,14 +8,13 @@ import com.geekhome.coremodule.httpserver.AuthorizationRequestsDispatcher;
 import com.geekhome.coremodule.httpserver.CrudPostRequestsDispatcher;
 import com.geekhome.coremodule.httpserver.ICrudPostHandler;
 import com.geekhome.coremodule.httpserver.ResponseCache;
-import com.geekhome.http.jetty.*;
 import com.geekhome.common.configuration.MasterConfiguration;
 import com.geekhome.coremodule.PhotosDispatcher;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
-import com.geekhome.http.IHttpServer;
-import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.http.IRequestsDispatcher;
-import com.geekhome.http.IResponseCache;
+import com.geekhome.coremodule.httpserver.IHttpServer;
+import com.geekhome.common.localization.ILocalizationProvider;
+import com.geekhome.coremodule.httpserver.IRequestsDispatcher;
+import com.geekhome.coremodule.httpserver.IResponseCache;
 import com.geekhome.common.IInvalidateCacheListener;
 import com.geekhome.coremodule.modules.IModule;
 

@@ -8,8 +8,8 @@ import com.geekhome.common.configuration.Collector;
 import com.geekhome.common.alerts.IAlertService;
 import com.geekhome.common.configuration.DependenciesCheckerModule;
 import com.geekhome.common.configuration.IConfigurationValidator;
-import com.geekhome.http.Resource;
-import com.geekhome.http.IRequestsDispatcher;
+import com.geekhome.common.localization.Resource;
+import com.geekhome.coremodule.httpserver.IRequestsDispatcher;
 import com.geekhome.coremodule.httpserver.ICrudPostHandler;
 
 import java.util.ArrayList;

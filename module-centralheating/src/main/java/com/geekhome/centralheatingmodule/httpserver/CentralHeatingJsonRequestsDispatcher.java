@@ -3,9 +3,9 @@ package com.geekhome.centralheatingmodule.httpserver;
 import com.geekhome.centralheatingmodule.CentralHeatingConfiguration;
 import com.geekhome.centralheatingmodule.CentralHeatingConfigurationValidation;
 import com.geekhome.common.configuration.MasterConfiguration;
-import com.geekhome.http.IHttpListenerRequest;
-import com.geekhome.http.IResponse;
-import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
+import com.geekhome.coremodule.httpserver.IHttpListenerRequest;
+import com.geekhome.coremodule.httpserver.IResponse;
+import com.geekhome.coremodule.jetty.JsonRequestsDispatcherBase;
 import com.geekhome.coremodule.httpserver.JsonResponse;
 import org.json.simple.JSONObject;
 

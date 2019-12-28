@@ -1,12 +1,12 @@
 package com.geekhome.emailmodule;
 
 import com.geekhome.common.settings.AutomationSettings;
-import com.geekhome.http.INameValueSet;
-import com.geekhome.http.QueryString;
-import com.geekhome.http.ResponseBase;
+import com.geekhome.common.INameValueSet;
+import com.geekhome.coremodule.httpserver.QueryString;
+import com.geekhome.coremodule.httpserver.ResponseBase;
 import com.geekhome.coremodule.httpserver.ICrudPostHandler;
-import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.http.jetty.RedirectionResponse;
+import com.geekhome.common.localization.ILocalizationProvider;
+import com.geekhome.coremodule.jetty.RedirectionResponse;
 
 class TrustedRecipientsCrudHandler implements ICrudPostHandler {
     private AutomationSettings _automationSettings;

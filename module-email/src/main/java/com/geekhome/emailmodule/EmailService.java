@@ -9,7 +9,7 @@ import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.utils.Sleeper;
 import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.emailmodule.httpserver.EmailSettings;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;

@@ -1,10 +1,10 @@
 package com.geekhome.coremodule;
 
-import com.geekhome.http.jetty.IOUtils;
-import com.geekhome.http.IHttpListenerRequest;
-import com.geekhome.http.IResponse;
-import com.geekhome.http.ResponseBase;
-import com.geekhome.http.jetty.RequestsDispatcherBase;
+import com.geekhome.coremodule.jetty.IOUtils;
+import com.geekhome.coremodule.httpserver.IHttpListenerRequest;
+import com.geekhome.coremodule.httpserver.IResponse;
+import com.geekhome.coremodule.httpserver.ResponseBase;
+import com.geekhome.coremodule.jetty.RequestsDispatcherBase;
 
 import java.io.*;
 

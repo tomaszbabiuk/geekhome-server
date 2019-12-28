@@ -2,9 +2,9 @@ package com.geekhome.hardwaremanagermodule.httpserver;
 
 import com.geekhome.common.SynchronizedInputPort;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
-import com.geekhome.http.IHttpListenerRequest;
-import com.geekhome.http.IResponse;
-import com.geekhome.http.QueryString;
+import com.geekhome.coremodule.httpserver.IHttpListenerRequest;
+import com.geekhome.coremodule.httpserver.IResponse;
+import com.geekhome.coremodule.httpserver.QueryString;
 import com.geekhome.coremodule.httpserver.JsonResponse;
 import com.geekhome.coremodule.httpserver.PostRequestsDispatcherBase;
 

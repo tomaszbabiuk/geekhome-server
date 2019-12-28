@@ -1,9 +1,6 @@
 package com.geekhome.coremodule.httpserver;
 
 
-import com.geekhome.http.QueryString;
-import com.geekhome.http.ResponseBase;
-
 public interface ICrudPostHandler
 {
     String getKeyword();

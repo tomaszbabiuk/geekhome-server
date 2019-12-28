@@ -5,10 +5,8 @@ import com.geekhome.common.configuration.State;
 import com.geekhome.common.automation.EvaluationResult;
 import com.geekhome.common.automation.IDeviceAutomationUnit;
 import com.geekhome.common.automation.MasterAutomation;
-import com.geekhome.http.IHttpListenerRequest;
-import com.geekhome.http.IResponse;
-import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.http.jetty.JsonRequestsDispatcherBase;
+import com.geekhome.common.localization.ILocalizationProvider;
+import com.geekhome.coremodule.jetty.JsonRequestsDispatcherBase;
 import com.geekhome.common.configuration.CollectorCollection;
 import org.json.simple.JSONObject;
 

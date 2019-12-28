@@ -1,7 +1,5 @@
 package com.geekhome.common;
 
-import com.geekhome.http.INameValueSet;
-
 public class SectionMetadata {
     private String _name;
     private String _parentUniqueId;

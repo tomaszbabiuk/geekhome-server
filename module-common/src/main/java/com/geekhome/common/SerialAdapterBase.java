@@ -5,8 +5,7 @@ import com.geekhome.common.configuration.DescriptiveName;
 import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
-import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.common.OperationMode;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 public abstract class SerialAdapterBase extends MonitorableBase implements IHardwareManagerAdapter {
     private final ILocalizationProvider _localizationProvider;

@@ -5,7 +5,7 @@ import com.geekhome.common.KeyValue;
 import com.geekhome.common.automation.EvaluationResult;
 import com.geekhome.common.automation.MasterAutomation;
 import com.geekhome.common.hardwaremanager.IOutputPort;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 public class UnderfloorCircuitAutomationUnit extends HeatingCircuitAutomationUnit<UnderfloorCircuit> {
     private final IThermometerAutomationUnit _floorThermometerUnit;

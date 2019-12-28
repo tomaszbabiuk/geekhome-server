@@ -8,9 +8,9 @@ import com.geekhome.common.automation.MasterAutomation;
 import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.firebasemodule.httpserver.FirebaseJsonRequestsDispatcher;
 import com.geekhome.firebasemodule.httpserver.FirebasePostRequestsDispatcher;
-import com.geekhome.http.ILocalizationProvider;
-import com.geekhome.http.IRequestsDispatcher;
-import com.geekhome.http.Resource;
+import com.geekhome.common.localization.ILocalizationProvider;
+import com.geekhome.coremodule.httpserver.IRequestsDispatcher;
+import com.geekhome.common.localization.Resource;
 import com.geekhome.coremodule.modules.*;
 import com.geekhome.coremodule.modules.Module;
 

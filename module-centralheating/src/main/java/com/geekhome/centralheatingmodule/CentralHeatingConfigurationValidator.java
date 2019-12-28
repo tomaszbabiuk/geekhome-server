@@ -2,7 +2,7 @@ package com.geekhome.centralheatingmodule;
 
 import com.geekhome.common.PortBase;
 import com.geekhome.common.configuration.JSONArrayList;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.common.configuration.IConfigurationValidator;
 
 import java.util.Arrays;

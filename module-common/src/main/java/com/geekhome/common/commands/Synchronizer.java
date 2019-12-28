@@ -5,7 +5,7 @@ import com.geekhome.common.alerts.DashboardAlertService;
 import com.geekhome.synchronizationmodule.business.SmartEventResult;
 import com.geekhome.common.automation.*;
 import com.geekhome.common.settings.AutomationSettings;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.common.OperationMode;
 import com.geekhome.common.automation.SystemInfo;
 import com.geekhome.synchronizationmodule.business.*;

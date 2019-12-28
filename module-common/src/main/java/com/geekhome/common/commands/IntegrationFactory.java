@@ -8,7 +8,7 @@ import com.geekhome.common.automation.ControlMode;
 import com.geekhome.common.automation.EvaluationResult;
 import com.geekhome.common.automation.IDeviceAutomationUnit;
 import com.geekhome.common.settings.AutomationSettings;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.common.automation.SystemInfo;
 import com.geekhome.common.configuration.CollectorCollection;
 import com.geekhome.common.configuration.ObjectNotFoundException;

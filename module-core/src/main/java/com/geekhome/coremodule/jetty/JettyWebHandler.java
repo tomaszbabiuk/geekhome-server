@@ -1,9 +1,11 @@
 package com.geekhome.coremodule.jetty;
 
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
-import com.geekhome.http.*;
-import com.geekhome.http.jetty.*;
+import com.geekhome.coremodule.httpserver.IRequestsDispatcher;
+import com.geekhome.coremodule.httpserver.IResponseCache;
+import com.geekhome.coremodule.httpserver.IUContentProvider;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 

@@ -7,7 +7,6 @@ import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.utils.Sleeper;
 import com.geekhome.common.alerts.DashboardAlertService;
 import com.geekhome.common.hardwaremanager.*;
-import com.geekhome.http.ILocalizationProvider;
 import com.geekhome.common.OperationMode;
 import com.geekhome.common.configuration.CollectorCollection;
 import com.geekhome.synchronizationmodule.business.SmartEvent;

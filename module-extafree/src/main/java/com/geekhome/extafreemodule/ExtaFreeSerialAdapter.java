@@ -9,7 +9,7 @@ import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.hardwaremanager.InputPortsCollection;
 import com.geekhome.common.hardwaremanager.OutputPortsCollection;
 import com.geekhome.common.hardwaremanager.TogglePortsCollection;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 

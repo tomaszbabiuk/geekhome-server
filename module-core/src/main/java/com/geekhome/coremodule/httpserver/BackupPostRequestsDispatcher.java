@@ -1,10 +1,7 @@
 package com.geekhome.coremodule.httpserver;
 
 import com.geekhome.common.configuration.MasterConfiguration;
-import com.geekhome.http.IHttpListenerRequest;
-import com.geekhome.http.IResponse;
-import com.geekhome.http.QueryString;
-import com.geekhome.http.jetty.RedirectionResponse;
+import com.geekhome.coremodule.jetty.RedirectionResponse;
 
 public class BackupPostRequestsDispatcher extends PostRequestsDispatcherBase {
     private MasterConfiguration _masterConfiguration;

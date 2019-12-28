@@ -2,7 +2,7 @@ package com.geekhome.ventilationmodule;
 
 import com.geekhome.common.*;
 import com.geekhome.common.configuration.*;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 
 public class Recuperator extends MultistateDevice implements IRoomDevice, IPortsDrivenDevice, IBlocksTarget {
     private String _automaticControlPortId;

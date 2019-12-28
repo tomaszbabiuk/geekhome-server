@@ -11,7 +11,7 @@ import com.geekhome.common.hardwaremanager.InputPortsCollection;
 import com.geekhome.common.hardwaremanager.OutputPortsCollection;
 import com.geekhome.common.hardwaremanager.PortNotFoundException;
 import com.geekhome.common.hardwaremanager.TogglePortsCollection;
-import com.geekhome.http.ILocalizationProvider;
+import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.common.OperationMode;
 
 import java.util.ArrayList;
