@@ -11,6 +11,7 @@ import com.geekhome.moquettemodule.MqttBroker;
 import com.geekhome.moquettemodule.MqttListener;
 import com.google.gson.Gson;
 import okhttp3.*;
+import org.pf4j.Extension;
 
 import java.io.IOException;
 import java.net.*;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Extension
 class ShellyAdapter extends NamedObject implements IHardwareManagerAdapter, MqttListener {
 
     private interface PortIterateListener {

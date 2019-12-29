@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-cd library-http
-mvn clean install
-cd ..
-
 cd library-onewire
 mvn clean install
 cd ..
@@ -24,7 +20,7 @@ cd module-common
 mvn clean install
 cd ..
 
-cd module-core
+cd module-core-jqm
 mvn clean install
 cd ..
 
@@ -90,5 +86,9 @@ mvn clean install
 cd ..
 
 cd module-shelly
+mvn clean install
+cd ..
+
+cd module-shelly-jqm
 mvn clean install
 cd ..

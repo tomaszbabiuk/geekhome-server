@@ -1,21 +1,21 @@
 package com.geekhome.ventilationmodule;
 
-import com.geekhome.common.CrudAction;
 import com.geekhome.common.automation.IAutomationModule;
 import com.geekhome.common.configuration.Collector;
 import com.geekhome.common.configuration.MasterConfiguration;
 import com.geekhome.common.localization.Resource;
-import com.geekhome.coremodule.httpserver.CrudPostHandler;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
-import com.geekhome.common.INameValueSet;
-import com.geekhome.coremodule.httpserver.IRequestsDispatcher;
-import com.geekhome.coremodule.httpserver.ICrudPostHandler;
 import com.geekhome.common.localization.ILocalizationProvider;
+import com.geekhome.coremodule.httpserver.CrudPostHandler;
+import com.geekhome.coremodule.httpserver.ICrudPostHandler;
+import com.geekhome.coremodule.httpserver.IRequestsDispatcher;
 import com.geekhome.coremodule.jetty.RedirectionResponse;
-import com.geekhome.coremodule.modules.*;
-import com.geekhome.coremodule.modules.Module;
+import com.geekhome.coremodule.modules.IUnit;
+import com.geekhome.coremodule.modules.Unit;
+import com.geekhome.coremodule.modules.UnitCategory;
 import com.geekhome.ventilationmodule.automation.VentilationAutomationModule;
 import com.geekhome.ventilationmodule.httpserver.VentilationJsonRequestsDispatcher;
+import com.geekhome.coremodule.modules.Module;
 
 import java.util.ArrayList;
 
@@ -103,12 +103,7 @@ public class VentilationModule extends Module {
         ArrayList<ICrudPostHandler> handlers = new ArrayList<>();
 
         CrudPostHandler recuperatorsHandler = new CrudPostHandler(_masterConfiguration, "RECUPERATOR",
-                new CrudPostHandler.ICrudModificationFunction() {
-                    @Override
-                    public void execute(CrudAction action, INameValueSet values) throws Exception {
-                        _ventilationConfiguration.modifyRecuperator(action, values);
-                    }
-                }, new RedirectionResponse("/config/Recuperators.htm"));
+                (action, values) -> _ventilationConfiguration.modifyRecuperator(action, values), new RedirectionResponse("/config/Recuperators.htm"));
         handlers.add(recuperatorsHandler);
 
         return handlers;

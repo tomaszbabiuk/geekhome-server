@@ -3,7 +3,7 @@ var NT = {
 
     GetModules: function () {
         if (this.modules == null) {
-            this.modules = ajaxInit('/systeminfo/modules.json');
+            this.modules = ajaxInit('/navigationtree/modules.json');
         }
         return this.modules;
     },

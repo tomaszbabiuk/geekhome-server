@@ -11,7 +11,7 @@
     <dependencies>
         <dependency>
             <groupId>geekhome.server</groupId>
-            <artifactId>module-core</artifactId>
+            <artifactId>module-core-jqm</artifactId>
             <version>1.0</version>
         </dependency>
 

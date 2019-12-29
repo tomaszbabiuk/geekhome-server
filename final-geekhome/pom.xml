@@ -21,7 +21,7 @@
         </dependency>
         <dependency>
             <groupId>geekhome.server</groupId>
-            <artifactId>module-core</artifactId>
+            <artifactId>module-core-jqm</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
@@ -106,7 +106,7 @@
         </dependency>
         <dependency>
             <groupId>geekhome.server</groupId>
-            <artifactId>module-shelly</artifactId>
+            <artifactId>module-shelly-jqm</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
