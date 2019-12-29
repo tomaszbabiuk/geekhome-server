@@ -1,11 +1,11 @@
 package com.geekhome.coremodule.modules;
 
-import com.geekhome.common.IHardwareManagerAdapterFactory;
 import com.geekhome.common.IMonitorable;
 import com.geekhome.common.automation.IAutomationHook;
 import com.geekhome.common.automation.IAutomationModule;
 import com.geekhome.common.configuration.*;
 import com.geekhome.common.alerts.IAlertService;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapterFactory;
 import com.geekhome.coremodule.httpserver.IRequestsDispatcher;
 import com.geekhome.coremodule.httpserver.ICrudPostHandler;
 

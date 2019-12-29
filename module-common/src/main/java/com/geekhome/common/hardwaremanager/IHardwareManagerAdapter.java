@@ -9,7 +9,7 @@ import org.pf4j.ExtensionPoint;
 
 import java.util.Calendar;
 
-public interface IHardwareManagerAdapter extends ExtensionPoint, IMonitorable, INamedObject {
+public interface IHardwareManagerAdapter extends IMonitorable, INamedObject {
     void discover(InputPortsCollection<Boolean> digitalInputPorts, OutputPortsCollection<Boolean> digitalOutputPorts,
                   InputPortsCollection<Double> powerInputPorts, OutputPortsCollection<Integer> powerOutputPorts,
                   InputPortsCollection<Double> temperaturePorts, TogglePortsCollection togglePorts,

@@ -1,6 +1,7 @@
 package com.geekhome.common;
 
 import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapterFactory;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 

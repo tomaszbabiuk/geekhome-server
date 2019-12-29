@@ -1,6 +1,6 @@
 package com.geekhome.hardwaremanagermodule;
 
-import com.geekhome.common.IHardwareManagerAdapterFactory;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapterFactory;
 import com.geekhome.common.configuration.IConfigurationValidator;
 import com.geekhome.common.localization.Resource;
 import com.geekhome.common.hardwaremanager.IHardwareManager;

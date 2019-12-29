@@ -1,7 +1,7 @@
 package com.geekhome.shellymodule;
 
 import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
-import com.geekhome.common.IHardwareManagerAdapterFactory;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapterFactory;
 import com.geekhome.moquettemodule.MqttBroker;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package com.geekhome.shellymodule;
 
-import com.geekhome.common.IHardwareManagerAdapterFactory;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapterFactory;
 import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
 import com.geekhome.common.localization.ILocalizationProvider;
 import com.geekhome.common.hardwaremanager.HardwareManager;

@@ -1,6 +1,6 @@
 package com.geekhome.onewiremodule;
 
-import com.geekhome.common.IHardwareManagerAdapterFactory;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapterFactory;
 import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.common.hardwaremanager.IHardwareManager;
 import com.geekhome.common.localization.ILocalizationProvider;

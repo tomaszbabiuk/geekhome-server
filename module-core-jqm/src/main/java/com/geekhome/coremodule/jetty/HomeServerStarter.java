@@ -1,6 +1,5 @@
 package com.geekhome.coremodule.jetty;
 
-import com.geekhome.common.IHardwareManagerAdapterFactory;
 import com.geekhome.common.IMonitorable;
 import com.geekhome.common.alerts.IAlertService;
 import com.geekhome.common.automation.IAutomationHook;
@@ -12,6 +11,7 @@ import com.geekhome.common.commands.Synchronizer;
 import com.geekhome.common.configuration.CorePortMapper;
 import com.geekhome.common.alerts.DashboardAlertService;
 import com.geekhome.common.automation.MasterAutomation;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapterFactory;
 import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.common.settings.TextFileAutomationSettingsPersister;
 import com.geekhome.common.hardwaremanager.IPortMapper;

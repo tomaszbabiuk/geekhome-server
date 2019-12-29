@@ -1,7 +1,7 @@
 package com.geekhome.pi4jmodule;
 
 import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
-import com.geekhome.common.IHardwareManagerAdapterFactory;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapterFactory;
 import com.geekhome.common.logging.LoggingService;
 import com.geekhome.common.logging.ILogger;
 import com.geekhome.common.localization.ILocalizationProvider;
