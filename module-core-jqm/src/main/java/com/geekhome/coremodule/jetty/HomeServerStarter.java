@@ -12,6 +12,7 @@ import com.geekhome.common.configuration.CorePortMapper;
 import com.geekhome.common.alerts.DashboardAlertService;
 import com.geekhome.common.automation.MasterAutomation;
 import com.geekhome.common.hardwaremanager.IHardwareManagerAdapterFactory;
+import com.geekhome.common.localization.ResourceLocalizationProvider;
 import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.common.settings.TextFileAutomationSettingsPersister;
 import com.geekhome.common.hardwaremanager.IPortMapper;

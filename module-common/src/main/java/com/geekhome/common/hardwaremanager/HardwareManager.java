@@ -8,6 +8,7 @@ import com.geekhome.common.utils.Sleeper;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
@@ -334,12 +335,12 @@ public class HardwareManager implements IHardwareManager {
         _invalidateCacheListener = listener;
     }
 
-    public void initialize(ArrayList<IHardwareManagerAdapterFactory> factories) throws Exception {
+    public void initialize(List<IHardwareManagerAdapterFactory> factories) throws Exception {
         ArrayList<IHardwareManagerAdapter> adapters = createAdapters(factories);
         setAdapters(adapters);
     }
 
-    private ArrayList<IHardwareManagerAdapter> createAdapters(ArrayList<IHardwareManagerAdapterFactory> adapterFactories) throws Exception {
+    private ArrayList<IHardwareManagerAdapter> createAdapters(List<IHardwareManagerAdapterFactory> adapterFactories) throws Exception {
         _logger.info("Creating adapters.");
         ArrayList<IHardwareManagerAdapter> result = new ArrayList<>();
 

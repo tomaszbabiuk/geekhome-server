@@ -16,7 +16,7 @@ import com.geekhome.emailmodule.EmailModule;
 import com.geekhome.extafreemodule.ExtaFreeModule;
 import com.geekhome.hardwaremanagermodule.HardwareManagerModule;
 import com.geekhome.common.localization.Resource;
-import com.geekhome.coremodule.jetty.ResourceLocalizationProvider;
+import com.geekhome.common.localization.ResourceLocalizationProvider;
 import com.geekhome.common.automation.MasterAutomation;
 import com.geekhome.common.settings.AutomationSettings;
 import com.geekhome.common.settings.TextFileAutomationSettingsPersister;

@@ -1,8 +1,4 @@
-package com.geekhome.coremodule.jetty;
-
-import com.geekhome.common.localization.ILocalizationProvider;
-import com.geekhome.common.localization.Language;
-import com.geekhome.common.localization.Resource;
+package com.geekhome.common.localization;
 
 import java.util.Hashtable;
 
@@ -24,5 +20,4 @@ public class ResourceLocalizationProvider implements ILocalizationProvider {
         Resource resource = _resources.get(key);
         return resource != null ? resource.getValue(Language.PL) : key;
     }
-
 }

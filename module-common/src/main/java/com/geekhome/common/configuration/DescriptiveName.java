@@ -1,17 +1,24 @@
 package com.geekhome.common.configuration;
 
 import com.geekhome.common.PersistableReflector;
+import com.google.gson.annotations.SerializedName;
 import org.json.simple.JSONAware;
 
 public class DescriptiveName implements JSONAware {
-    private String name;
-    private String description;
-    private String uniqueId;
+
+    @SerializedName("name")
+    private String _name;
+
+    @SerializedName("description")
+    private String _description;
+
+    @SerializedName("uniqueId")
+    private String _uniqueId;
 
     public DescriptiveName(String name, String uid, String description) {
-        this.name = name;
-        this.uniqueId = uid;
-        this.description = description;
+        this._name = name;
+        this._uniqueId = uid;
+        this._description = description;
     }
 
     public DescriptiveName(String name, String uid, boolean descriptionEqualsName) {
@@ -29,29 +36,29 @@ public class DescriptiveName implements JSONAware {
 
     @Persistable(name = "Name")
     public String getName() {
-        return name;
+        return _name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this._name = name;
     }
 
     @Persistable(name = "Description")
     public String getDescription() {
-        return description;
+        return _description;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this._description = description;
     }
 
     @Persistable(name = "UniqueId")
     public String getUniqueId() {
-        return uniqueId;
+        return _uniqueId;
     }
 
     public void setUniqueId(String uniqueId) {
-        this.uniqueId = uniqueId;
+        this._uniqueId = uniqueId;
     }
 
     @Override
