@@ -1,6 +1,30 @@
 package com.geekhome.common.configurable;
 
-public class CombinedValidator {
+import com.geekhome.common.localization.Resource;
+
+public class CombinedValidator<T> implements Validator<T> {
+
+    private Validator<T>[] _validators;
+
+    public CombinedValidator(Validator<T> ... validators) {
+        _validators = validators;
+    }
+
+    @Override
+    public Resource getReason() {
+        return null;
+    }
+
+    @Override
+    public boolean validate(T fieldValue) {
+        for (Validator<T> validator : _validators) {
+            if (!validator.validate(fieldValue)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
 
 /*

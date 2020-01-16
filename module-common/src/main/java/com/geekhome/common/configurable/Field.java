@@ -6,6 +6,7 @@ public abstract class Field<T> {
     private Resource _name;
     private Resource _hint;
     private Class<T> _clazz;
+    private final FieldBuilder<String> _builder;
     private FieldBuilder<T> _fieldBuilder;
     private Validator<T> _validator;
     private T _value;
@@ -22,10 +23,6 @@ public abstract class Field<T> {
         return _clazz;
     }
 
-    public FieldBuilder<T> getFieldBuilder() {
-        return _fieldBuilder;
-    }
-
     public Validator<T> getValidator() {
         return _validator;
     }
@@ -36,6 +33,26 @@ public abstract class Field<T> {
 
     public void setValue(T value) {
         _value = value;
+    }
+
+    public String toPersistableString() {
+        if (_value == null) {
+            return null;
+        }
+
+        return _fieldBuilder.toPersistableString(getValue());
+    }
+
+    public void setValueFromString(String valueAsString) {
+        _value = (valueAsString == null) ? null : _fieldBuilder.fromPersistableString(valueAsString);
+    }
+
+    protected Field(Resource name, Resource hint, Class<T> clazz, FieldBuilder<String> builder, Validator<T> validator) {
+        _name = name;
+        _hint = hint;
+        _clazz = clazz;
+        _builder = builder;
+        _validator = validator;
     }
 }
 

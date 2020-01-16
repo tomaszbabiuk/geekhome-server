@@ -1,6 +1,19 @@
 package com.geekhome.common.configurable;
 
-public class RequiredValidator {
+import com.geekhome.common.localization.Resource;
+
+public class RequiredValidator implements Validator<String> {
+    @Override
+    public Resource getReason() {
+        return new Resource("validator_required_field",
+                "This field is required",
+                "To pole jest wymagane");
+    }
+
+    @Override
+    public boolean validate(String fieldValue) {
+        return fieldValue != null && !fieldValue.isEmpty();
+    }
 }
 
 /*

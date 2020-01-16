@@ -1,6 +1,12 @@
 package com.geekhome.common.configurable;
 
-public class ConfigurationPersistingService {
+import java.util.List;
+
+public interface ConfigurationPersistingService {
+    void save(List<Field<?>> fields, Long objectId, Long parentId, String className);
+    List<Configurable> loadConfigurablesWithNoParent();
+    List<Configurable> loadChildren();
+    Configurable loadInstance(Long instanceId);
 }
 
 /*

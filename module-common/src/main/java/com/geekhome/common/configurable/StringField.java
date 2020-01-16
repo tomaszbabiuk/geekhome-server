@@ -1,6 +1,12 @@
 package com.geekhome.common.configurable;
 
-public class StringField {
+import com.geekhome.common.localization.Resource;
+
+public class StringField extends Field<String> {
+
+    public StringField(Resource name, Resource hint, Validator<String> validator) {
+        super(name, hint, String.class, new StringFieldBuilder(), validator);
+    }
 }
 
 /*
