@@ -2,9 +2,9 @@ package com.geekhome.common.configurable;
 
 import com.geekhome.common.localization.Resource;
 
-public class StringField extends Field<String> {
+public class StringField extends FieldDefinition<String> {
 
-    public StringField(Resource name, Resource hint, Validator<String> validator) {
+    public StringField(String name, Resource hint, Validator<String> validator) {
         super(name, hint, String.class, new StringFieldBuilder(), validator);
     }
 }
