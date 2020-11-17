@@ -1,0 +1,31 @@
+plugins {
+    id 'application'
+}
+
+dependencies {
+    compile project(':library-onewire:')
+    compile project(':module-common:')
+    compile project(':module-core-jqm:')
+    compile project(':module-synchronization:')
+    compile project(':module-alarm:')
+    compile project(':module-automation:')
+    compile project(':module-centralheating:')
+    compile project(':module-email:')
+    compile project(':module-extafree:')
+    compile project(':module-hardwaremanager:')
+    compile project(':module-lights:')
+    compile project(':module-onewire:')
+    compile project(':module-pi4j:')
+    compile project(':module-users:')
+    compile project(':module-ventilation:')
+    compile project(':module-firebase:')
+    compile project(':module-mqtt:')
+    compile project(':module-gree:')
+    compile project(':module-afore:')
+    compile project(':module-shelly-jqm:')
+    compile project(':library-moquette:')
+}
+
+application {
+    mainClassName = 'com.geekhome.Main'
+}

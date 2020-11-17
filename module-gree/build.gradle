@@ -1,0 +1,7 @@
+dependencies {
+    compile project(':module-synchronization')
+    compile project(':module-core-jqm')
+    compile 'org.jmdns:jmdns:3.5.1'
+    compile 'com.squareup.okhttp3:okhttp:3.12.0'
+    compile 'com.google.code.gson:gson:2.8.2'
+}

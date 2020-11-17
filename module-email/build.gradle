@@ -1,0 +1,5 @@
+dependencies {
+    compile project(':module-synchronization')
+    compile project(':module-core-jqm')
+    compile 'javax.mail:mail:1.4.7'
+}

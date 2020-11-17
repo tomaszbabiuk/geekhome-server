@@ -1,0 +1,4 @@
+dependencies {
+    compile project(':module-core-jqm')
+    compile 'com.squareup.okhttp3:okhttp:3.12.0'
+}

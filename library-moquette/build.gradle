@@ -1,0 +1,3 @@
+dependencies {
+    compile 'io.moquette:moquette-broker:0.12.1'
+}

@@ -8,3 +8,9 @@ build/output/
 build/to-obfuscate/
 .idea/
 final-geekhome/target/
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build

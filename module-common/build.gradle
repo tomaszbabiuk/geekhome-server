@@ -1,0 +1,14 @@
+dependencies {
+    compile project(':module-synchronization')
+    compile project(':library-moquette')
+    compile 'com.googlecode.json-simple:json-simple:1.1.1'
+    compile 'org.apache.logging.log4j:log4j-core:2.5'
+    compile "org.eclipse.jetty:jetty-http:${jetty_version}"
+    compile "org.eclipse.jetty:jetty-io:${jetty_version}"
+    compile "org.eclipse.jetty:jetty-security:${jetty_version}"
+    compile "org.eclipse.jetty:jetty-server:${jetty_version}"
+    compile "org.eclipse.jetty:jetty-util:${jetty_version}"
+    compile 'org.pf4j:pf4j:3.2.0'
+    implementation "com.google.code.gson:gson:${gson_version}"
+
+}

@@ -1,0 +1,5 @@
+dependencies {
+    compile project(':module-synchronization')
+    compile project(':module-core-jqm')
+    compile 'com.pi4j:pi4j-core:1.1'
+}

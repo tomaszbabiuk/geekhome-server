@@ -6,27 +6,27 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="module-centralheating" />
-        <module name="module-synchronization" />
-        <module name="final-geekhome" />
-        <module name="module-alarm" />
-        <module name="module-pi4j" />
-        <module name="library-http" />
-        <module name="library-onewire" />
-        <module name="module-ventilation" />
-        <module name="module-users" />
-        <module name="module-gree" />
-        <module name="module-mqtt" />
-        <module name="module-hardwaremanager" />
         <module name="module-extafree" />
-        <module name="module-automation" />
-        <module name="module-afore" />
-        <module name="module-lights" />
-        <module name="module-onewire" />
-        <module name="module-email" />
-        <module name="module-firebase" />
         <module name="module-core" />
+        <module name="module-mqtt" />
+        <module name="module-automation" />
         <module name="module-shelly" />
+        <module name="final-geekhome" />
+        <module name="module-ventilation" />
+        <module name="module-onewire" />
+        <module name="library-http" />
+        <module name="module-gree" />
+        <module name="module-users" />
+        <module name="module-centralheating" />
+        <module name="module-afore" />
+        <module name="module-pi4j" />
+        <module name="module-lights" />
+        <module name="module-firebase" />
+        <module name="module-hardwaremanager" />
+        <module name="module-synchronization" />
+        <module name="module-alarm" />
+        <module name="library-onewire" />
+        <module name="module-email" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -55,26 +55,54 @@
   </component>
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/final-geekhome" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/library-http" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/final-geekhome/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/final-geekhome/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library-onewire" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/library-onewire/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-afore" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-afore/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-alarm" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-alarm/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-alarm/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-automation" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-automation/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-automation/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-centralheating" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/module-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-centralheating/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-centralheating/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-email" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-email/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-email/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-extafree" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-extafree/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-extafree/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-firebase" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-firebase/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-firebase/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-gree" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-gree/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-hardwaremanager" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-hardwaremanager/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-hardwaremanager/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-lights" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-lights/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-lights/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-mqtt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-mqtt/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-onewire" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-onewire/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-pi4j" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-pi4j/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-shelly" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-shelly/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-synchronization" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-synchronization/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-users" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-users/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-users/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/module-ventilation" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-ventilation/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module-ventilation/src/main/resources" charset="UTF-8" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="InspectionProjectProfileManager">
@@ -233,6 +261,26 @@
   </component>
   <component name="ProjectCodeStyleConfiguration">
     <option name="PREFERRED_PROJECT_CODE_STYLE" value="Default" />
+    <code_scheme name="Project" version="173">
+      <JetCodeStyleSettings>
+        <option name="PACKAGES_TO_USE_STAR_IMPORTS">
+          <value>
+            <package name="java.util" alias="false" withSubpackages="false" />
+            <package name="kotlinx.android.synthetic" alias="false" withSubpackages="true" />
+            <package name="io.ktor" alias="false" withSubpackages="true" />
+          </value>
+        </option>
+        <option name="PACKAGES_IMPORT_LAYOUT">
+          <value>
+            <package name="" alias="false" withSubpackages="true" />
+            <package name="java" alias="false" withSubpackages="true" />
+            <package name="javax" alias="false" withSubpackages="true" />
+            <package name="kotlin" alias="false" withSubpackages="true" />
+            <package name="" alias="true" withSubpackages="true" />
+          </value>
+        </option>
+      </JetCodeStyleSettings>
+    </code_scheme>
   </component>
   <component name="ProjectModuleManager">
     <modules>
@@ -262,10 +310,97 @@
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jitpack" />
+      <option name="name" value="jitpack" />
+      <option name="url" value="https://jitpack.io" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="gcm-server-repository" />
+      <option name="name" value="gcm-server-repository" />
+      <option name="url" value="https://github.com/slorber/gcm-server-repository/raw/master/releases/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Repository Switchboard" />
+      <option name="url" value="http://repo1.maven.org/maven2" />
+    </remote-repository>
+  </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="libraryTable">
+    <library name="Maven: com.bugsnag:bugsnag:3.6.2">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bugsnag/bugsnag/3.6.2/bugsnag-3.6.2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bugsnag/bugsnag/3.6.2/bugsnag-3.6.2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/bugsnag/bugsnag/3.6.2/bugsnag-3.6.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.8">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.8.8/jackson-annotations-2.8.8.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.8.8/jackson-annotations-2.8.8-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.8.8/jackson-annotations-2.8.8-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.8">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.8.8/jackson-core-2.8.8.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.8.8/jackson-core-2.8.8-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.8.8/jackson-core-2.8.8-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.8">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.8.8/jackson-databind-2.8.8.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.8.8/jackson-databind-2.8.8-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.8.8/jackson-databind-2.8.8-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.github.zafarkhaja:java-semver:0.9.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/github/zafarkhaja/java-semver/0.9.0/java-semver-0.9.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/github/zafarkhaja/java-semver/0.9.0/java-semver-0.9.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/github/zafarkhaja/java-semver/0.9.0/java-semver-0.9.0-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: com.google.code.gson:gson:2.8.2">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.2/gson-2.8.2.jar!/" />
@@ -286,6 +421,39 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.h2database:h2-mvstore:1.4.196">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/h2database/h2-mvstore/1.4.196/h2-mvstore-1.4.196.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/h2database/h2-mvstore/1.4.196/h2-mvstore-1.4.196-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/h2database/h2-mvstore/1.4.196/h2-mvstore-1.4.196-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.librato.metrics:librato-java:2.1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/librato/metrics/librato-java/2.1.0/librato-java-2.1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/librato/metrics/librato-java/2.1.0/librato-java-2.1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/librato/metrics/librato-java/2.1.0/librato-java-2.1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.librato.metrics:metrics-librato:5.1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/librato/metrics/metrics-librato/5.1.0/metrics-librato-5.1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/librato/metrics/metrics-librato/5.1.0/metrics-librato-5.1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/librato/metrics/metrics-librato/5.1.0/metrics-librato-5.1.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: com.pi4j:pi4j-core:1.1">
@@ -321,6 +489,215 @@
         <root url="jar://$MAVEN_REPOSITORY$/com/squareup/okio/okio/1.15.0/okio-1.15.0-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: com.zaxxer:HikariCP:2.4.7">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/zaxxer/HikariCP/2.4.7/HikariCP-2.4.7.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/zaxxer/HikariCP/2.4.7/HikariCP-2.4.7-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/zaxxer/HikariCP/2.4.7/HikariCP-2.4.7-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: commons-codec:commons-codec:1.10">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.10/commons-codec-1.10.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.10/commons-codec-1.10-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.10/commons-codec-1.10-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: geekhome.server:library-moquette:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/geekhome/server/library-moquette/1.0/library-moquette-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/geekhome/server/library-moquette/1.0/library-moquette-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/geekhome/server/library-moquette/1.0/library-moquette-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: geekhome.server:module-common:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/geekhome/server/module-common/1.0/module-common-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/geekhome/server/module-common/1.0/module-common-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/geekhome/server/module-common/1.0/module-common-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: geekhome.server:module-core-jqm:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/geekhome/server/module-core-jqm/1.0/module-core-jqm-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/geekhome/server/module-core-jqm/1.0/module-core-jqm-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/geekhome/server/module-core-jqm/1.0/module-core-jqm-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: geekhome.server:module-shelly-jqm:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/geekhome/server/module-shelly-jqm/1.0/module-shelly-jqm-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/geekhome/server/module-shelly-jqm/1.0/module-shelly-jqm-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/geekhome/server/module-shelly-jqm/1.0/module-shelly-jqm-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: io.dropwizard.metrics:metrics-core:3.2.2">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/dropwizard/metrics/metrics-core/3.2.2/metrics-core-3.2.2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/io/dropwizard/metrics/metrics-core/3.2.2/metrics-core-3.2.2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/dropwizard/metrics/metrics-core/3.2.2/metrics-core-3.2.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: io.dropwizard.metrics:metrics-jvm:3.2.2">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/dropwizard/metrics/metrics-jvm/3.2.2/metrics-jvm-3.2.2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/io/dropwizard/metrics/metrics-jvm/3.2.2/metrics-jvm-3.2.2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/dropwizard/metrics/metrics-jvm/3.2.2/metrics-jvm-3.2.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: io.moquette:moquette-broker:0.12.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/moquette/moquette-broker/0.12.1/moquette-broker-0.12.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/io/moquette/moquette-broker/0.12.1/moquette-broker-0.12.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/moquette/moquette-broker/0.12.1/moquette-broker-0.12.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: io.netty:netty-buffer:4.1.22.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-buffer/4.1.22.Final/netty-buffer-4.1.22.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-buffer/4.1.22.Final/netty-buffer-4.1.22.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-buffer/4.1.22.Final/netty-buffer-4.1.22.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: io.netty:netty-codec-http:4.1.22.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec-http/4.1.22.Final/netty-codec-http-4.1.22.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec-http/4.1.22.Final/netty-codec-http-4.1.22.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec-http/4.1.22.Final/netty-codec-http-4.1.22.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: io.netty:netty-codec-mqtt:4.1.22.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec-mqtt/4.1.22.Final/netty-codec-mqtt-4.1.22.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec-mqtt/4.1.22.Final/netty-codec-mqtt-4.1.22.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec-mqtt/4.1.22.Final/netty-codec-mqtt-4.1.22.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: io.netty:netty-codec:4.1.22.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec/4.1.22.Final/netty-codec-4.1.22.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec/4.1.22.Final/netty-codec-4.1.22.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec/4.1.22.Final/netty-codec-4.1.22.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: io.netty:netty-common:4.1.22.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-common/4.1.22.Final/netty-common-4.1.22.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-common/4.1.22.Final/netty-common-4.1.22.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-common/4.1.22.Final/netty-common-4.1.22.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: io.netty:netty-handler:4.1.22.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-handler/4.1.22.Final/netty-handler-4.1.22.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-handler/4.1.22.Final/netty-handler-4.1.22.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-handler/4.1.22.Final/netty-handler-4.1.22.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: io.netty:netty-resolver:4.1.22.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-resolver/4.1.22.Final/netty-resolver-4.1.22.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-resolver/4.1.22.Final/netty-resolver-4.1.22.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-resolver/4.1.22.Final/netty-resolver-4.1.22.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: io.netty:netty-transport-native-epoll:linux-x86_64:4.1.22.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-transport-native-epoll/4.1.22.Final/netty-transport-native-epoll-4.1.22.Final-linux-x86_64.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-transport-native-epoll/4.1.22.Final/netty-transport-native-epoll-4.1.22.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-transport-native-epoll/4.1.22.Final/netty-transport-native-epoll-4.1.22.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: io.netty:netty-transport-native-unix-common:4.1.22.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-transport-native-unix-common/4.1.22.Final/netty-transport-native-unix-common-4.1.22.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-transport-native-unix-common/4.1.22.Final/netty-transport-native-unix-common-4.1.22.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-transport-native-unix-common/4.1.22.Final/netty-transport-native-unix-common-4.1.22.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: io.netty:netty-transport:4.1.22.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-transport/4.1.22.Final/netty-transport-4.1.22.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-transport/4.1.22.Final/netty-transport-4.1.22.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-transport/4.1.22.Final/netty-transport-4.1.22.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: javax.activation:activation:1.1">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1/activation-1.1.jar!/" />
@@ -330,17 +707,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1/activation-1.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: javax.jmdns:jmdns:3.4.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/jmdns/jmdns/3.4.1/jmdns-3.4.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/jmdns/jmdns/3.4.1/jmdns-3.4.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/jmdns/jmdns/3.4.1/jmdns-3.4.1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: javax.mail:mail:1.4.7">
@@ -374,6 +740,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.10/junit-4.10-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: log4j:log4j:1.2.17">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.17/log4j-1.2.17.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.17/log4j-1.2.17-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.apache.logging.log4j:log4j-api:2.5">
@@ -497,6 +874,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/jmdns/jmdns/3.5.1/jmdns-3.5.1-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: org.pf4j:pf4j:3.2.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/pf4j/pf4j/3.2.0/pf4j-3.2.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/pf4j/pf4j/3.2.0/pf4j-3.2.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/pf4j/pf4j/3.2.0/pf4j-3.2.0-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: org.slf4j:slf4j-api:1.7.16">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.16/slf4j-api-1.7.16.jar!/" />
@@ -506,6 +894,39 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.16/slf4j-api-1.7.16-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.slf4j:slf4j-api:1.7.25">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.slf4j:slf4j-api:1.7.5">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.slf4j:slf4j-log4j12:1.7.5">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j12/1.7.5/slf4j-log4j12-1.7.5.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j12/1.7.5/slf4j-log4j12-1.7.5-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j12/1.7.5/slf4j-log4j12-1.7.5-sources.jar!/" />
       </SOURCES>
     </library>
   </component>

@@ -1,33 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="76de2133-c160-40d8-be7b-b8ddd428235e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/module-shelly/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module-shelly/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module-shelly/src/main/java/com/geekhome/shellymodule/ShellyAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module-shelly/src/main/java/com/geekhome/shellymodule/ShellyAdapterFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module-shelly/src/main/java/com/geekhome/shellymodule/ShellyModule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/final-geekhome/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/geekhome/server/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/geekhome/server/AppTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/final-geekhome.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/final-geekhome.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/final-geekhome.iws" beforeDir="false" afterPath="$PROJECT_DIR$/final-geekhome.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/final-geekhome/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/final-geekhome/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/final-geekhome/src/main/java/com/geekhome/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/final-geekhome/src/main/java/com/geekhome/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/installall.sh" beforeDir="false" afterPath="$PROJECT_DIR$/installall.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-afore/src/main/java/com/geekhome/aforemodule/AforeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-afore/src/main/java/com/geekhome/shellymodule/AforeAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-afore/src/main/java/com/geekhome/aforemodule/AforeAdapterFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-afore/src/main/java/com/geekhome/shellymodule/AforeAdapterFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-afore/src/main/java/com/geekhome/aforemodule/AforeModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-afore/src/main/java/com/geekhome/shellymodule/AforeModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/HardwareManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/HardwareManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/IHardwareManagerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/IHardwareManagerAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/SerialAdapterBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-core/src/main/java/com/geekhome/common/SerialAdapterBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-gree/src/main/java/com/geekhome/aforemodule/GreeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-gree/src/main/java/com/geekhome/shellymodule/GreeAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-gree/src/main/java/com/geekhome/aforemodule/GreeAdapterFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-gree/src/main/java/com/geekhome/shellymodule/GreeAdapterFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-gree/src/main/java/com/geekhome/aforemodule/GreeModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-gree/src/main/java/com/geekhome/shellymodule/GreeModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-hardwaremanager/src/main/java/com/geekhome/hardwaremanagermodule/MockedAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-hardwaremanager/src/main/java/com/geekhome/hardwaremanagermodule/MockedAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-mqtt/src/main/java/com/geekhome/mqttmodule/MqttAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-mqtt/src/main/java/com/geekhome/mqttmodule/MqttAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-onewire/src/main/java/com/geekhome/onewiremodule/OneWireAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-onewire/src/main/java/com/geekhome/onewiremodule/OneWireAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-pi4j/src/main/java/com/geekhome/pi4jmodule/PiFaceAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-pi4j/src/main/java/com/geekhome/pi4jmodule/PiFaceAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packageall.sh" beforeDir="false" afterPath="$PROJECT_DIR$/packageall.sh" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +28,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="dedicatedModuleDir" value="$PROJECT_DIR$" />
@@ -48,10 +44,15 @@
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/final-geekhome.iws" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.4868421" />
@@ -59,6 +60,9 @@
     <property name="settings.editor.selected.configurable" value="project.propCompiler" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/final-geekhome" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.geekhome.common" />
       <recent name="com.geekhome.centralheatingmodule.automation" />
@@ -66,21 +70,10 @@
       <recent name="com.geekhome.greemodule" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/module-centralheating/src/main/resources/dialogs" />
       <recent name="$PROJECT_DIR$/module-centralheating/src/main/resources/config" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="geekhome" type="Application" factoryName="Application">
@@ -93,6 +86,7 @@
       </method>
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -196,13 +190,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -217,6 +210,40 @@
     <MESSAGE value="supporting communication error and discovery errors" />
     <MESSAGE value="turbo for gree adapter" />
     <option name="LAST_COMMIT_MESSAGE" value="turbo for gree adapter" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1562" height="328" key="GridCell.Tab.0.bottom" timestamp="1605635128722">
+      <screen x="72" y="27" width="1608" height="1023" />
+    </state>
+    <state width="1562" height="328" key="GridCell.Tab.0.bottom/72.27.1608.1023@72.27.1608.1023" timestamp="1605635128722" />
+    <state width="1562" height="328" key="GridCell.Tab.0.center" timestamp="1605635128721">
+      <screen x="72" y="27" width="1608" height="1023" />
+    </state>
+    <state width="1562" height="328" key="GridCell.Tab.0.center/72.27.1608.1023@72.27.1608.1023" timestamp="1605635128721" />
+    <state width="1562" height="328" key="GridCell.Tab.0.left" timestamp="1605635128720">
+      <screen x="72" y="27" width="1608" height="1023" />
+    </state>
+    <state width="1562" height="328" key="GridCell.Tab.0.left/72.27.1608.1023@72.27.1608.1023" timestamp="1605635128720" />
+    <state width="1562" height="328" key="GridCell.Tab.0.right" timestamp="1605635128721">
+      <screen x="72" y="27" width="1608" height="1023" />
+    </state>
+    <state width="1562" height="328" key="GridCell.Tab.0.right/72.27.1608.1023@72.27.1608.1023" timestamp="1605635128721" />
+    <state width="1562" height="328" key="GridCell.Tab.1.bottom" timestamp="1605635128724">
+      <screen x="72" y="27" width="1608" height="1023" />
+    </state>
+    <state width="1562" height="328" key="GridCell.Tab.1.bottom/72.27.1608.1023@72.27.1608.1023" timestamp="1605635128724" />
+    <state width="1562" height="328" key="GridCell.Tab.1.center" timestamp="1605635128722">
+      <screen x="72" y="27" width="1608" height="1023" />
+    </state>
+    <state width="1562" height="328" key="GridCell.Tab.1.center/72.27.1608.1023@72.27.1608.1023" timestamp="1605635128722" />
+    <state width="1562" height="328" key="GridCell.Tab.1.left" timestamp="1605635128722">
+      <screen x="72" y="27" width="1608" height="1023" />
+    </state>
+    <state width="1562" height="328" key="GridCell.Tab.1.left/72.27.1608.1023@72.27.1608.1023" timestamp="1605635128722" />
+    <state width="1562" height="328" key="GridCell.Tab.1.right" timestamp="1605635128723">
+      <screen x="72" y="27" width="1608" height="1023" />
+    </state>
+    <state width="1562" height="328" key="GridCell.Tab.1.right/72.27.1608.1023@72.27.1608.1023" timestamp="1605635128723" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

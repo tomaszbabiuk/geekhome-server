@@ -1,0 +1,3 @@
+dependencies {
+    compile 'org.bidib.jbidib.org.qbang.rxtx:rxtxcomm:2.2'
+}

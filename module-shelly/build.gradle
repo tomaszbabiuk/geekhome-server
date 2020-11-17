@@ -1,0 +1,7 @@
+dependencies {
+    compile project(':module-core-jqm')
+    compile project(':library-moquette')
+    compile 'com.pi4j:pi4j-core:1.1'
+    compile 'com.squareup.okhttp3:okhttp:3.12.0'
+    compile "com.google.code.gson:gson:${gson_version}"
+}

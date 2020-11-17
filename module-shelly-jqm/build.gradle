@@ -1,0 +1,6 @@
+dependencies {
+    compile project(':module-shelly')
+    compile project(':module-core-jqm')
+    compile 'com.squareup.okhttp3:okhttp:3.12.0'
+    compile "com.google.code.gson:gson:${gson_version}"
+}

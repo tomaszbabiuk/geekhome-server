@@ -1,0 +1,5 @@
+dependencies {
+    compile project(':module-synchronization')
+    compile project(':module-core-jqm')
+    compile project(':module-common')
+}
