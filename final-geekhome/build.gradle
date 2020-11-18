@@ -1,5 +1,6 @@
 plugins {
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
 dependencies {
@@ -25,6 +26,8 @@ dependencies {
     compile project(':module-shelly-jqm:')
     compile project(':library-moquette:')
 }
+
+mainClassName = 'com.geekhome.Main'
 
 application {
     mainClassName = 'com.geekhome.Main'

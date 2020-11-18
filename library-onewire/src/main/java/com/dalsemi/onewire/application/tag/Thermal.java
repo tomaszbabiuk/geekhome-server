@@ -88,7 +88,7 @@ public class Thermal
       //theTemperature = (double)(Math.round(theTemperature * 100))/100; // avoid Math for TINI?
       theTemperature = roundDouble(theTemperature * 100)/100;
       // make string out of results
-      returnString = theTemperature + " °C"; 
+      returnString = theTemperature + " Â°C";
       
       return returnString;
    }
