@@ -29,57 +29,53 @@ If you have problem running java version like:
 Error occurred during initialization of VM
 Server VM is only supported on ARMv7+ VFP
 ```
-
 run
 ```bash 
 sudo update-alternatives --config java
 ```
 and manually select java 8
 
-# Installing RXTX drivers (optional - only if you're using 1-wire to serial adapter or 1-wire to RS485 adapter)
+# Installing geekHOME
+```bash
+cd /home/pi
+mkdir geekhome
+cd geekhome
+wget https://github.com/tomaszbabiuk/geekhome-server/releases/download/v1.0.0/geekhome-server-1.0.0.tar.xz
+tar xf geekhome-server-1.0.0.tar.xz
+rm -rf geekhome-server-1.0.0.tar.xz
+sudo ./install_on_raspberry_pi.sh
+sudo reboot
+```
+
+# Optional installation steps
+## Installing RXTX drivers 
+Required only if you're using serial to 1-wire adapter or serial to RS485 adapter.
 ```bash
 sudo apt-get install librxtx-java
 sudo reboot
 ```
 
-# Enabling PiFace (optional - only if you're using PiFace attached to your Raspberry Pi)
+## Enabling PiFace
+Required only if you're using PiFace attached to your Raspberry Pi.
 ```bash
 curl -s get.pi4j.com | sudo bash
 ```
 
-# Installing git
-```bash
-sudo apt update
-sudo apt install git
-git --version
-```
-
-# Installing geekHOME
-```bash
-cd /home/pi
-git clone https://github.com/tomaszbabiuk/geekhome-server.git
-cd geekhome-server
-sudo ./install_on_raspberry_pi.sh
-```
-
 The long history of geekHOME
 ============================
-GeekHOME was created in 2009. In the beginning the system was running on .NET Microframework boards.
-The code was written in C#. To render pages, a new framework called microASP was created (the remaining of this framework are still used in the project).
-There was no OpenHAB or Raspberry pi back than.
+GeekHOME was created in 2009. The code was written in C# because the system was designed to run .NET Microframework boards.
+To render pages, a new framework called microASP was created (and is still used in the project).
+There was no OpenHAB or Raspberry Pi back than.
 
-On 2010 the first prototype came to a light. It was running on FEZ Cobra board from GHI electronics. Cobra was 10 times more expensive than the first Raspberry Pi and probably 100 times slower than the Pi.
-The most important part was a "blocks based" automation system that proved itself to control my house for months without a break. I still keep that Cobra in my drawer to remember the "hard and expensive times".
-The system consisted of FEZ Cobra board, connected to two 12-channel relay boards. I was using a bare IO lines on FEZ Cobra to read the signals from alarm sensors and DS18B20 sensor for temperature readings.
-Everything was connected in the "star" topology. It was a massive amount of wires - totally not-maintainable.
+On 2010 the first prototype running on FEZ Cobra board from GHI electronics has been developed. The Cobra was 100 times slower than the first version of Raspberry Pi (and it was also 10x more expensive).
+To control the building the Cobra was connected to two 16-channel relay boards. To read temperature and input signals from alarm sensor the bare IO lines was used.
+It was working... but the solution had one big problem: everything was connected in the "star" topology. The amount of cables was unmaintainable.
 
-On 2012 I run into a small company in Poland producing a complete set of automation boards based on 1-wire interface. It was a change to get rid of "star" topology and use a bus to reduce wiring. I decided to base my next prototype on 1-wire and 1-wire is still supported. It's the most reliable, elegant and still a cheap solution if you want to control your house using wires.
-In the meantime Raspberry Pi came up and was able to run a full set of Java. Microsoft stopped supporting .NET Micro Framework and .NETMF boards were much more expensive than Pi.
+On 2012 the "start topology" problem was fixed. I run into a small company in Poland producing a complete set of automation boards based on 1-wire. It was a game changer! Using a bus reduced the wiring and made installation simpler. 
+The prototype two is using 1-wire boards only. It's the most reliable, elegant and still a cheap solution for a wired smarthome.
 
-On 2013 the system was rewritten to Java. The only things left was a microASP framework and already proved in the battle "block automation" core.
+On 2013 Microsoft gave up on .NETMF and Raspberry Pi came up. The geekHOME has been totally rewritten to java. 
+The only things left was from previous solution was a microASP framework and "block automation" core that proved itself in the battle.
 
-The years 2014-2016 was filled with testing and stabilization. I was working mostly on Android application that was able to connect to geekHOME server via Parse cloud.
-The OpenHAB and similar solutions was becoming more and more popular. People started to notice the market of DIY Home Automation products. The IoT started to be "a thing".
-I wanted to share my product with community on 2016 but that wasn't the best time for my family. I had to take care of them and "freeze" the project for better times.
-
-To be continued...
+The years 2014-2016 was filled with testing and stabilization. Most of the work related to Android application for controlling the house outside local network.
+In the meantime, "OpenHAB" and similar solutions become popular. People started to notice the market of DIY Home Automation.

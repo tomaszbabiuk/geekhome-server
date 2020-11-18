@@ -1,0 +1,1 @@
+SUBSYSTEMS=="usb", DRIVERS=="usb", ATTRS{product}=="USB <-> RS485 (MP01512A)", ATTRS{manufacturer}=="MERA-PROJEKT", SYMLINK+="geekhome/extafree/%s{serial}"

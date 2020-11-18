@@ -1,0 +1,145 @@
+
+:FTP server:
+>sudo apt-get install vsftpd
+>sudo nano /etc/vsftpd.conf
+
+Edit or uncomment the following lines to secure VSFTPD
+Anonymous_enable=NO
+Local_enable=YES
+Write_enable=YES
+Ascii_upload_enable=YES
+Ascii_download_enable=YES
+
+>sudo nano reboot
+
+:Midnight Commander:
+>sudo apt-get install mc
+
+
+:RXTX:
+>sudo apt-get install librxtx-java
+>sudo reboot
+
+
+
+:GEEKHOME SERVER (deprecated)
+>sudo nano /etc/rc.local
+# Starting Geekhome server
+chdir /home/pi/geekhome
+java -Xdebug -Xrunjdwp:transport=dt_socket,address=9000,server=y,suspend=n -Dfile.encoding=UTF-8 -Dlog4j.configurationFile=/home/pi/geekhome/log4j2.xml -Djava.library.path=/usr/lib/jni -cp "/home/pi/geekhome/serverbin/*" com.geekhome.Main
+java -Xdebug -Xrunjdwp:transport=dt_socket,address=9001,server=y,suspend=n -Dfile.encoding=UTF-8 -Djava.library.path=/usr/lib/jni -cp "/home/pi/geekhome/updatebin/*" com.geekhome.Main
+
+
+:UDEV rules - debugging commands:
+>sudo udevadm info -q path -n /dev/ttyUSB0
+- returns full usb id of device
+
+>sudo udevadm info -a -p (deviceid)
+- returns all properties of the device
+
+>sudo nano /etc/udev/rules.d/50-geekhome-extafree.rules
+SUBSYSTEMS=="usb", DRIVERS=="usb", ATTRS{product}=="USB <-> RS485 (MP01512A)", ATTRS{manufacturer}=="MERA-PROJEKT", SYMLINK+="geekhome/extafree/%s{serial}"
+SUBSYSTEMS=="usb", DRIVERS=="usb", ATTRS{product}=="USB <-> RS485 (MP01501B)", ATTRS{manufacturer}=="MERA-PROJEKT", SYMLINK+="geekhome/extafree/%s{serial}"
+
+>sudo nano /etc/udev/rules.d/51-geekhome-1wire.rules
+SUBSYSTEMS=="usb", DRIVERS=="usb", ATTRS{product}=="USB <-> 1Wire (MP00206)", ATTRS{manufacturer}=="MERA-PROJEKT", SYMLINK+="geekhome/1wire/%s{serial}"
+
+or simple create symlinks using tee
+echo "SUBSYSTEMS==\"usb\", ATTRS{product}==\"USB <-> 1Wire (MP00206)\", ATTRS{manufacturer}==\"MERA-PROJEKT\", SYMLINK+=\"geekhome/1wire/%s{serial}\"" | sudo tee --append /etc/udev/rules.d/51-geekhome-1wire.rules
+echo "SUBSYSTEMS==\"usb\", ATTRS{product}==\"USB <-> RS485 (MP01512A)\", ATTRS{manufacturer}==\"MERA-PROJEKT\", SYMLINK+=\"geekhome/extafree/%s{serial}\"" | sudo tee --append /etc/udev/rules.d/50-geekhome-extafree.rules
+echo "SUBSYSTEMS==\"usb\", ATTRS{product}==\"USB <-> RS485 (MP01501B)\", ATTRS{manufacturer}==\"MERA-PROJEKT\", SYMLINK+=\"geekhome/extafree/%s{serial}\"" | sudo tee --append /etc/udev/rules.d/50-geekhome-extafree.rules
+
+
+
+Enabling PiFace
+curl -s get.pi4j.com | sudo bash
+
+Creating port shortcut
+>sudo mkdir /dev/geekhome/extafree -p
+>sudo rm /dev/geekhome/extafree/rs485shield
+>sudo ln -s /dev/ttyAMA0 /dev/geekhome/extafree/rs485shield
+
+:JAVA (in case it's not included in lixux distribution)
+>sudo apt-get update && sudo apt-get install oracle-java8-jdk
+
+
+:GEEKHOME STARTUP SCRIPT:
+>sudo nano /etc/init.d/geekhome
+
+#!/bin/bash
+# /etc/init.d/geekhome
+
+### BEGIN INIT INFO
+# Provides:          geekhome
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: geekHOME server
+# Description:       This service is used to manage a GeekHOME Server
+### END INIT INFO
+
+
+case "$1" in
+    start)
+        echo "Starting geekhome"
+        cd /home/pi/geekhome
+        java -Dfile.encoding=UTF-8 -Dlog4j.configurationFile=/home/pi/geekhome/log4j2.xml -Djava.library.path=/usr/lib/jni -cp "/home/pi/geekhome/serverbin/*" com.geekhome.Main
+        ;;
+    stop)
+        echo "Stopping geekhome"
+        killall geekhome
+        ;;
+    *)
+        echo "Usage: /etc/init.d/geekhome start|stop"
+        exit 1
+        ;;
+esac
+
+exit 0
+
+>sudo chmod +x /etc/init.d/geekhome
+>sudo update-rc.d geekhome defaults
+
+
+:UPDATETOOL
+>sudo nano /etc/init.d/updatetool
+
+
+#!/bin/bash
+# /etc/init.d/updatetool
+
+### BEGIN INIT INFO
+# Provides:          updatetool
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: geekHOME Update Tool
+# Description:       This service is used to manage a GeekHOME Update Tool
+### END INIT INFO
+
+
+case "$1" in
+    start)
+        echo "Starting updatetool"
+        cd /home/pi/geekhome
+        java -Dfile.encoding=UTF-8 -cp "/home/pi/geekhome/updatebin/*" com.updatetool.Main
+        ;;
+    stop)
+        echo "Stopping updatetool"
+        killall updatetool
+        ;;
+    *)
+        echo "Usage: /etc/init.d/updatetool start|stop"
+        exit 1
+        ;;
+esac
+
+exit 0
+
+>sudo chmod +x /etc/init.d/updatetool
+>sudo update-rc.d updatetool defaults
+
+:DOCKER
+docker run -t -i --rm=true --privileged -v /dev/geekhome:/dev/geekhome -p 80:80 rxtx1:latest
