@@ -11,6 +11,7 @@ import com.geekhome.common.commands.Synchronizer;
 import com.geekhome.common.configuration.CorePortMapper;
 import com.geekhome.common.alerts.DashboardAlertService;
 import com.geekhome.common.automation.MasterAutomation;
+import com.geekhome.common.hardwaremanager.IHardwareManagerAdapter;
 import com.geekhome.common.hardwaremanager.IHardwareManagerAdapterFactory;
 import com.geekhome.common.localization.ResourceLocalizationProvider;
 import com.geekhome.common.settings.AutomationSettings;
@@ -70,6 +71,11 @@ public class HomeServerStarter {
             }
 
             hardwareManager.initialize(extractAdaptersFactories(modules));
+            JSONArrayList<IMonitorable> monitorables = extractMonitorables(modules);
+            for (IHardwareManagerAdapter adapter : hardwareManager.getAdapters()) {
+                monitorables.add(adapter);
+            }
+
             systemInfo.initialize(extractMonitorables(modules), extractAlertServices(modules));
             masterConfiguration.initialize(extractDependenciesCheckers(modules), extractCollectors(modules),
                     extractConfigurationValidators(modules));

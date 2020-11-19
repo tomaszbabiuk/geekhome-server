@@ -8,7 +8,7 @@
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: geekHOME server
-# Description:       This service is used to manage a GeekHOME Server
+# Description:       This service is used to manage GeekHOME Server
 ### END INIT INFO
 
 
@@ -16,7 +16,7 @@ case "$1" in
     start)
         echo "Starting geekhome"
         cd /home/pi/geekhome
-        java -Dfile.encoding=UTF-8 -Dlog4j.configurationFile=./log4j2.xml -Djava.library.path=/usr/lib/jni -jar final-geekhome-all.jar
+        java -Dfile.encoding=UTF-8 -Dlog4j.configurationFile=/home/pi/geekhome/log4j2.xml -Djava.library.path=/usr/lib/jni -jar final-geekhome-all.jar
         ;;
     stop)
         echo "Stopping geekhome"
