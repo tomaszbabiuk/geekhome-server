@@ -28,21 +28,21 @@ public class Main {
             modules.add(new CoreModule(localizationProvider, systemInfo, masterConfiguration, masterAutomation, hardwareManager,
                     automationSettings, synchronizer, dashboardAlertService, navigationTree));
             modules.add(new UsersModule(localizationProvider));
-            modules.add(new HardwareManagerModule(true, localizationProvider, hardwareManager));
+            modules.add(new HardwareManagerModule(false, localizationProvider, hardwareManager));
             modules.add(new LightsModule(localizationProvider, masterConfiguration, hardwareManager, automationSettings));
             modules.add(new AlarmModule(localizationProvider, masterConfiguration, masterAutomation, hardwareManager));
             modules.add(new CentralHeatingModule(localizationProvider, masterConfiguration, masterAutomation, hardwareManager, automationSettings));
-            modules.add(new ExtaFreeModule
-                    (localizationProvider, hardwareManager, masterConfiguration));
+//            modules.add(new ExtaFreeModule
+//                    (localizationProvider, hardwareManager, masterConfiguration));
             modules.add(new AutomationModule(localizationProvider, masterConfiguration, masterAutomation, hardwareManager, automationSettings));
             modules.add(new VentilationModule(localizationProvider, masterConfiguration, hardwareManager));
             modules.add(new OneWireModule(localizationProvider, hardwareManager, automationSettings));
-            modules.add(new EmailModule(localizationProvider, masterAutomation, automationSettings, commandsProcessor));
-            modules.add(new FirebaseModule(localizationProvider, automationSettings, synchronizer, masterAutomation));
+//            modules.add(new EmailModule(localizationProvider, masterAutomation, automationSettings, commandsProcessor));
+//            modules.add(new FirebaseModule(localizationProvider, automationSettings, synchronizer, masterAutomation));
 //            modules.add(new MqttModule(localizationProvider, hardwareManager, args));
 //            modules.add(new GreeModule(hardwareManager, localizationProvider));
 //            modules.add(new AforeModule(hardwareManager, localizationProvider));
-            modules.add(new ShellyModule(mqttBroker));
+//            modules.add(new ShellyModule(mqttBroker));
             return modules;
         });
     }

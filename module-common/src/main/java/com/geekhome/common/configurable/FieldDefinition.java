@@ -8,6 +8,8 @@ public abstract class FieldDefinition<T> {
     private Class<T> _valueClazz;
     private FieldBuilder<T> _builder;
     private Validator<T> _validator;
+    private int _maxSize;
+    private boolean _required;
 
     public String getName() {
         return _name;
@@ -29,39 +31,23 @@ public abstract class FieldDefinition<T> {
         return _builder;
     }
 
-    protected FieldDefinition(String name, Resource hint, Class<T> valueClazz, FieldBuilder<T> builder, Validator<T> validator) {
+
+    public int getMaxSize() {
+        return _maxSize;
+    }
+
+    public boolean isRequired() {
+        return _required;
+    }
+
+    protected FieldDefinition(String name, Resource hint, Class<T> valueClazz, FieldBuilder<T> builder,
+                              Validator<T> validator, boolean required, int maxSize) {
         _name = name;
         _hint = hint;
         _valueClazz = valueClazz;
         _builder = builder;
         _validator = validator;
+        _required = required;
+        _maxSize = maxSize;
     }
 }
-
-/*
-abstract class Field<T : Any>(
-    val name: String,
-    @StringRes val hint: Int,
-    val clazz: KClass<T>,
-    private val builder: FieldBuilder<T>,
-    val validator: Validator<T>? = null
-) {
-    var value : T? = null
-
-    fun toPersistableString() : String? {
-        if (value == null) {
-            return null
-        }
-
-        return builder.toPersistableString(value!!)
-    }
-
-    fun setValueFromString(valueAsString: String?) {
-        value = if (valueAsString == null) {
-            null
-        } else {
-            builder.fromPersistableString(valueAsString)
-        }
-    }
-}
- */

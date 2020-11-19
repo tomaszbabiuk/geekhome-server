@@ -51,13 +51,13 @@ public class HomeServerStarter {
             Synchronizer synchronizer = new Synchronizer(masterConfiguration, masterAutomation, automationSettings,
                     localizationProvider, systemInfo, commandsProcessor, dashboardAlertService);
 
-            final MoquetteBroker mqttBroker = new MoquetteBroker();
-            mqttBroker.start();
+//            final MoquetteBroker mqttBroker = new MoquetteBroker();
+//            mqttBroker.start();
 
             JSONArrayList<IModule> modules = buildModulesDelegate.buildModules(hardwareManager,
                     automationSettings, localizationProvider, systemInfo, masterConfiguration,
                     masterAutomation, synchronizer, commandsProcessor, dashboardAlertService,
-                    mqttBroker, navigationTree);
+                    null, navigationTree);
 
             navigationTree.setModules(modules);
 
