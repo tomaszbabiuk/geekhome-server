@@ -38,6 +38,7 @@ and manually select java 8
 Required only if you're using serial to 1-wire adapter or serial to RS485 adapter.
 ```bash
 sudo apt-get install librxtx-java
+sudo ./install_usb_rules.sh
 sudo reboot
 ```
 
@@ -54,12 +55,25 @@ cd geekhome-server
 ./build.sh
 ```
 
-# Running (in test mode)
+# First Run (checking if everything is ok)
 To run geekhome-server once you can use this script:
 ```bash
 cd geekhome-server
-./run.sh
+sudo ./run.sh
 ```
+
+Then open your web browser and enter this address: http://the.ip.address.of.raspberry.pi
+When prompted for username and password use: "user/user"
+
+# Starting on startup
+```bash
+cd geekhome-server
+sudo ./install_startup_script
+reboot
+```
+
+After reboot open your web browser and enter this address: http://the.ip.address.of.raspberry.pi
+When prompted for username and password use: "user/user"
 
 The long history of geekHOME
 ============================
