@@ -5,10 +5,9 @@ GeekHOME server is a complete home automation solution. The system can control l
 
 GeekHOME is an alternative to other automation systems like OpenHAB, Domoticz or HomeAssistant.
 
-The system consists of a web page that's hosted on Raspberry Pi in the local network. The devices that controls the house must be connected to Raspberry Pi via USB adapters (like 1-wire to USB, RS485 to USB, etc.). 
+The system can be configured and controller by a web page that's hosted on Raspberry Pi. The devices that controls the house must be connected to Raspberry Pi via USB adapters (like 1-wire to USB, RS485 to USB, etc.). 
 
-Installation on Raspberry Pi
-============================
+# Installation on Raspberry Pi
 GeekHOME Can run everywhere when java can be installed. The recommended board is Raspberry Pi Zero/Zero W.
 The setup below assumes you have a fresh installation of Raspbian/Ubuntu and you can connect to the board with SSH:
 ```bash
@@ -16,7 +15,7 @@ ssh pi@x.x.x.x
 ```
 Where x.x.x.x is IP number of your Pi.
 
-# Installing java
+### Installing java
 ```bash
 sudo apt update
 sudo apt install openjdk-8-jdk
@@ -35,30 +34,31 @@ sudo update-alternatives --config java
 ```
 and manually select java 8
 
-# Installing geekHOME
-```bash
-cd /home/pi
-mkdir geekhome
-cd geekhome
-wget https://github.com/tomaszbabiuk/geekhome-server/releases/download/v1.0.0/geekhome-server-1.0.0.tar.xz
-tar xf geekhome-server-1.0.0.tar.xz
-rm -rf geekhome-server-1.0.0.tar.xz
-sudo ./install_on_raspberry_pi.sh
-sudo reboot
-```
-
-# Optional installation steps
-## Installing RXTX drivers 
+### Installing RXTX drivers (optional)
 Required only if you're using serial to 1-wire adapter or serial to RS485 adapter.
 ```bash
 sudo apt-get install librxtx-java
 sudo reboot
 ```
 
-## Enabling PiFace
+### Enabling PiFace (optional)
 Required only if you're using PiFace attached to your Raspberry Pi.
 ```bash
 curl -s get.pi4j.com | sudo bash
+```
+
+
+# Building from source code
+```bash
+cd geekhome-server
+./build.sh
+```
+
+# Running (in test mode)
+To run geekhome-server once you can use this script:
+```bash
+cd geekhome-server
+./run.sh
 ```
 
 The long history of geekHOME
@@ -78,4 +78,8 @@ On 2013 Microsoft gave up on .NETMF and Raspberry Pi came up. The geekHOME has b
 The only things left was from previous solution was a microASP framework and "block automation" core that proved itself in the battle.
 
 The years 2014-2016 was filled with testing and stabilization. Most of the work related to Android application for controlling the house outside local network.
-In the meantime, "OpenHAB" and similar solutions become popular. People started to notice the market of DIY Home Automation.
+In the meantime, "OpenHAB" and similar solutions become popular and people started to notice the market of DIY Home Automation.
+
+The state of this project
+=========================
+This project is not longer maintained. The code from here is slowly transplated into "Automate everything" project.
