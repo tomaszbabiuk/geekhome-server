@@ -1,1 +1,1 @@
-cp scripts/etc/init.d/geekhome /etc/init.d
+cp scripts/geekhome /etc/init.d
