@@ -1,6 +1,15 @@
 plugins {
     id 'application'
     id 'com.github.johnrengelman.shadow' version '6.1.0'
+    id 'org.hidetake.ssh' version '2.10.1'
+}
+
+remotes {
+    raspberry {
+        host = '192.168.1.100'
+        user = 'pi'
+        password = 'raspberry'
+    }
 }
 
 dependencies {
@@ -31,4 +40,30 @@ mainClassName = 'com.geekhome.Main'
 
 application {
     mainClassName = 'com.geekhome.Main'
+}
+
+task deploy {
+    doLast {
+        ssh.run {
+            session(remotes.raspberry) {
+                execute 'sudo killall -9 java || true'
+                execute 'sudo rm -rf /home/pi/geekhome'
+                execute 'mkdir /home/pi/geekhome'
+                execute 'mkdir /home/pi/geekhome/logs'
+                put from: "${buildDir}/../../scripts/log4j2.xml.debug", into: '/home/pi/geekhome/log4j2.xml'
+                put from: "${buildDir}/../../scripts/geekhomerealm.properties", into: '/home/pi/geekhome'
+                put from: "${buildDir}/libs/final-geekhome-all.jar", into: '/home/pi/geekhome'
+            }
+        }
+    }
+}
+
+task startDebugAgent {
+    doLast {
+        ssh.run {
+            session(remotes.raspberry) {
+                execute 'sudo screen -dm java -Xdebug -Xrunjdwp:transport=dt_socket,address=9000,server=y,suspend=y -Dfile.encoding=UTF-8 -Dlog4j.configurationFile=./log4j2.xml -Djava.library.path=/usr/lib/jni -Duser.dir=/home/pi/geekhome -jar /home/pi/geekhome/final-geekhome-all.jar'
+            }
+        }
+    }
 }

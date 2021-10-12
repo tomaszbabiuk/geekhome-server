@@ -72,11 +72,9 @@ public class HomeServerStarter {
 
             hardwareManager.initialize(extractAdaptersFactories(modules));
             JSONArrayList<IMonitorable> monitorables = extractMonitorables(modules);
-            for (IHardwareManagerAdapter adapter : hardwareManager.getAdapters()) {
-                monitorables.add(adapter);
-            }
+            monitorables.addAll(hardwareManager.getAdapters());
 
-            systemInfo.initialize(extractMonitorables(modules), extractAlertServices(modules));
+            systemInfo.initialize(monitorables, extractAlertServices(modules));
             masterConfiguration.initialize(extractDependenciesCheckers(modules), extractCollectors(modules),
                     extractConfigurationValidators(modules));
             masterAutomation.initialize(extractAutomationModules(modules), extractAutomationHooks(modules));

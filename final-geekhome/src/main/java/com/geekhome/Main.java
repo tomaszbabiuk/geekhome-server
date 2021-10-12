@@ -33,8 +33,8 @@ public class Main {
             modules.add(new LightsModule(localizationProvider, masterConfiguration, hardwareManager, automationSettings));
             modules.add(new AlarmModule(localizationProvider, masterConfiguration, masterAutomation, hardwareManager));
             modules.add(new CentralHeatingModule(localizationProvider, masterConfiguration, masterAutomation, hardwareManager, automationSettings));
-            modules.add(new ExtaFreeModule
-                    (localizationProvider, hardwareManager, masterConfiguration));
+//            modules.add(new ExtaFreeModule
+//                    (localizationProvider, hardwareManager, masterConfiguration));
             modules.add(new AutomationModule(localizationProvider, masterConfiguration, masterAutomation, hardwareManager, automationSettings));
             modules.add(new VentilationModule(localizationProvider, masterConfiguration, hardwareManager));
             modules.add(new OneWireModule(localizationProvider, hardwareManager, automationSettings));
@@ -42,7 +42,6 @@ public class Main {
 //            modules.add(new FirebaseModule(localizationProvider, automationSettings, synchronizer, masterAutomation));
 //            modules.add(new MqttModule(localizationProvider, hardwareManager, args));
 //            modules.add(new GreeModule(hardwareManager, localizationProvider));
-            modules.add(new GreeModule(hardwareManager, localizationProvider));
 //            modules.add(new ShellyModule(mqttBroker));
             return modules;
         });

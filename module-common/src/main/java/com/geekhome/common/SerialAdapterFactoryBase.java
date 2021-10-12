@@ -15,7 +15,7 @@ public abstract class SerialAdapterFactoryBase implements IHardwareManagerAdapte
     public ArrayList<IHardwareManagerAdapter> createAdapters() {
         ArrayList<IHardwareManagerAdapter> result = new ArrayList<>();
 
-        String path = File.separator + "dev" + File.separator + "geekhome" + File.separator + getFactoryType();
+        String path = File.separator + "dev";
         _logger.info("Checking path: " + path);
         File directory = new File(path);
         if (directory.exists()) {
@@ -23,11 +23,12 @@ public abstract class SerialAdapterFactoryBase implements IHardwareManagerAdapte
                 File[] aliases = directory.listFiles();
                 if (aliases != null) {
                     for (File f : aliases) {
-                        _logger.info("Serial port alias found: " + f.getName() + " <-> " + f.getCanonicalPath());
-                        String adapterPort = f.getCanonicalPath();
-                        String adapterAlias = f.getName();
-                        IHardwareManagerAdapter adapter = createAdapter(adapterPort, adapterAlias);
-                        result.add(adapter);
+                        if (f.getName().startsWith("ttyU")) {
+                            String adapterPort = f.getAbsolutePath();
+                            _logger.info("A possible serial port alias found: " + f.getName());
+                            IHardwareManagerAdapter adapter = createAdapter(adapterPort, adapterPort);
+                            result.add(adapter);
+                        }
                     }
                 }
             } catch (Exception e) {
